@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,6 +62,16 @@ class Product
      * @ORM\Column(type="integer")
      */
     private $ProductMaxNumber;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductLife", mappedBy="product", orphanRemoval=true)
+     */
+    private $ProductLifes;
+
+    public function __construct()
+    {
+        $this->ProductLifes = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -227,6 +239,37 @@ class Product
     public function setProductMaxNumber(int $ProductMaxNumber): self
     {
         $this->ProductMaxNumber = $ProductMaxNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProductLife[]
+     */
+    public function getProductLifes(): Collection
+    {
+        return $this->ProductLifes;
+    }
+
+    public function addProductLife(ProductLife $productLife): self
+    {
+        if (!$this->ProductLifes->contains($productLife)) {
+            $this->ProductLifes[] = $productLife;
+            $productLife->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductLife(ProductLife $productLife): self
+    {
+        if ($this->ProductLifes->contains($productLife)) {
+            $this->ProductLifes->removeElement($productLife);
+            // set the owning side to null (unless already changed)
+            if ($productLife->getProduct() === $this) {
+                $productLife->setProduct(null);
+            }
+        }
 
         return $this;
     }
