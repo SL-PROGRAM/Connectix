@@ -55,6 +55,7 @@ class Product
 
     /**
      * @ORM\Column(type="integer")
+     * @see(type 1 = professional, type 2 = particular)
      */
     private $productSaleType;
 
@@ -215,6 +216,9 @@ class Product
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getProductSaleType(): ?int
     {
         return $this->productSaleType;
@@ -231,11 +235,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getProductMaxNumber(): ?int
     {
         return $this->ProductMaxNumber;
     }
 
+    /**
+     * @param int $ProductMaxNumber
+     * @return Product
+     */
     public function setProductMaxNumber(int $ProductMaxNumber): self
     {
         $this->ProductMaxNumber = $ProductMaxNumber;
@@ -251,6 +262,10 @@ class Product
         return $this->ProductLifes;
     }
 
+    /**
+     * @param ProductLife $productLife
+     * @return Product
+     */
     public function addProductLife(ProductLife $productLife): self
     {
         if (!$this->ProductLifes->contains($productLife)) {
@@ -261,6 +276,10 @@ class Product
         return $this;
     }
 
+    /**
+     * @param ProductLife $productLife
+     * @return Product
+     */
     public function removeProductLife(ProductLife $productLife): self
     {
         if ($this->ProductLifes->contains($productLife)) {

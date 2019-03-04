@@ -62,16 +62,26 @@ class ProductLife
      */
     private $product;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return int|null
+     */
     public function getCycleLifeNumber(): ?int
     {
         return $this->cycleLifeNumber;
     }
 
+    /**
+     * @param int $cycleLifeNumber
+     * @return ProductLife
+     */
     public function setCycleLifeNumber(int $cycleLifeNumber): self
     {
         $this->cycleLifeNumber = $cycleLifeNumber;
@@ -79,11 +89,18 @@ class ProductLife
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getProductCycleLifeNumberMax(): ?int
     {
         return $this->productCycleLifeNumberMax;
     }
 
+    /**
+     * @param int $productCycleLifeNumberMax
+     * @return ProductLife
+     */
     public function setProductCycleLifeNumberMax(int $productCycleLifeNumberMax): self
     {
         $this->productCycleLifeNumberMax = $productCycleLifeNumberMax;
@@ -91,11 +108,18 @@ class ProductLife
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getCycleDuration(): ?int
     {
         return $this->cycleDuration;
     }
 
+    /**
+     * @param int $cycleDuration
+     * @return ProductLife
+     */
     public function setCycleDuration(int $cycleDuration): self
     {
         $this->cycleDuration = $cycleDuration;
@@ -103,11 +127,18 @@ class ProductLife
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getPriceCoeficient(): ?int
     {
         return $this->priceCoeficient;
     }
 
+    /**
+     * @param int $priceCoeficient
+     * @return ProductLife
+     */
     public function setPriceCoeficient(int $priceCoeficient): self
     {
         $this->priceCoeficient = $priceCoeficient;
@@ -115,11 +146,18 @@ class ProductLife
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getPublicityCoeficient(): ?int
     {
         return $this->publicityCoeficient;
     }
 
+    /**
+     * @param int $publicityCoeficient
+     * @return ProductLife
+     */
     public function setPublicityCoeficient(int $publicityCoeficient): self
     {
         $this->publicityCoeficient = $publicityCoeficient;
@@ -127,11 +165,18 @@ class ProductLife
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getPriceMinPublicityImpact(): ?int
     {
         return $this->PriceMinPublicityImpact;
     }
 
+    /**
+     * @param int $PriceMinPublicityImpact
+     * @return ProductLife
+     */
     public function setPriceMinPublicityImpact(int $PriceMinPublicityImpact): self
     {
         $this->PriceMinPublicityImpact = $PriceMinPublicityImpact;
@@ -139,11 +184,18 @@ class ProductLife
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getPriceMaxPublicityImpact(): ?int
     {
         return $this->PriceMaxPublicityImpact;
     }
 
+    /**
+     * @param int $PriceMaxPublicityImpact
+     * @return ProductLife
+     */
     public function setPriceMaxPublicityImpact(int $PriceMaxPublicityImpact): self
     {
         $this->PriceMaxPublicityImpact = $PriceMaxPublicityImpact;
@@ -151,11 +203,18 @@ class ProductLife
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getQuality(): ?int
     {
         return $this->quality;
     }
 
+    /**
+     * @param int $quality
+     * @return ProductLife
+     */
     public function setQuality(int $quality): self
     {
         $this->quality = $quality;
@@ -163,11 +222,18 @@ class ProductLife
         return $this;
     }
 
+    /**
+     * @return Product|null
+     */
     public function getProduct(): ?Product
     {
         return $this->product;
     }
 
+    /**
+     * @param Product|null $product
+     * @return ProductLife
+     */
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
