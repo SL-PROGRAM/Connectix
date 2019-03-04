@@ -69,6 +69,16 @@ class Product
      */
     private $ProductLifes;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $priceDiscount;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $productAlreadySales;
+
     public function __construct()
     {
         $this->ProductLifes = new ArrayCollection();
@@ -255,6 +265,44 @@ class Product
     }
 
     /**
+     * @return int|null
+     */
+    public function getPriceDiscount(): ?int
+    {
+        return $this->priceDiscount;
+    }
+
+    /**
+     * @param int $priceDiscount
+     * @return Product
+     */
+    public function setPriceDiscount(int $priceDiscount): self
+    {
+        $this->priceDiscount = $priceDiscount;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getProductAlreadySales(): ?int
+    {
+        return $this->productAlreadySales;
+    }
+
+    /**
+     * @param int $productAlreadySales
+     * @return Product
+     */
+    public function setProductAlreadySales(int $productAlreadySales): self
+    {
+        $this->productAlreadySales = $productAlreadySales;
+
+        return $this;
+    }
+
+    /**
      * @return Collection|ProductLife[]
      */
     public function getProductLifes(): Collection
@@ -292,4 +340,6 @@ class Product
 
         return $this;
     }
+
+
 }
