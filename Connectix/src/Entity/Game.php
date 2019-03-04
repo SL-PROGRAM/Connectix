@@ -51,16 +51,26 @@ class Game
      */
     private $creatAt;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return Game
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -68,11 +78,18 @@ class Game
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getTva(): ?int
     {
         return $this->tva;
     }
 
+    /**
+     * @param int $tva
+     * @return Game
+     */
     public function setTva(int $tva): self
     {
         $this->tva = $tva;
@@ -80,11 +97,18 @@ class Game
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getMaxturn(): ?int
     {
         return $this->maxturn;
     }
 
+    /**
+     * @param int $maxturn
+     * @return Game
+     */
     public function setMaxturn(int $maxturn): self
     {
         $this->maxturn = $maxturn;
@@ -92,11 +116,18 @@ class Game
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getTurn(): ?int
     {
         return $this->turn;
     }
 
+    /**
+     * @param int $turn
+     * @return Game
+     */
     public function setTurn(int $turn): self
     {
         $this->turn = $turn;
@@ -104,11 +135,18 @@ class Game
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getSocityNumber(): ?int
     {
         return $this->socityNumber;
     }
 
+    /**
+     * @param int $socityNumber
+     * @return Game
+     */
     public function setSocityNumber(int $socityNumber): self
     {
         $this->socityNumber = $socityNumber;
@@ -116,11 +154,18 @@ class Game
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getSmic(): ?int
     {
         return $this->smic;
     }
 
+    /**
+     * @param int $smic
+     * @return Game
+     */
     public function setSmic(int $smic): self
     {
         $this->smic = $smic;
@@ -128,11 +173,18 @@ class Game
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getCreatAt(): ?\DateTimeInterface
     {
         return $this->creatAt;
     }
 
+    /**
+     * @param \DateTimeInterface $creatAt
+     * @return Game
+     */
     public function setCreatAt(\DateTimeInterface $creatAt): self
     {
         $this->creatAt = $creatAt;

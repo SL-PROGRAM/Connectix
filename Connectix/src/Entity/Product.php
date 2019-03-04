@@ -56,16 +56,31 @@ class Product
      */
     private $productSaleType;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $ProductMaxNumber;
+
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return Product
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -73,11 +88,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getTechnologicLevel(): ?int
     {
         return $this->technologicLevel;
     }
 
+    /**
+     * @param int $technologicLevel
+     * @return Product
+     */
     public function setTechnologicLevel(int $technologicLevel): self
     {
         $this->technologicLevel = $technologicLevel;
@@ -85,11 +107,19 @@ class Product
         return $this;
     }
 
+
+    /**
+     * @return int|null
+     */
     public function getBuyPrice(): ?int
     {
         return $this->buyPrice;
     }
 
+    /**
+     * @param int $buyPrice
+     * @return Product
+     */
     public function setBuyPrice(int $buyPrice): self
     {
         $this->buyPrice = $buyPrice;
@@ -97,11 +127,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getSalePrice(): ?int
     {
         return $this->salePrice;
     }
 
+    /**
+     * @param int $salePrice
+     * @return Product
+     */
     public function setSalePrice(int $salePrice): self
     {
         $this->salePrice = $salePrice;
@@ -109,11 +146,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getQuantityDiscount(): ?int
     {
         return $this->quantityDiscount;
     }
 
+    /**
+     * @param int $quantityDiscount
+     * @return Product
+     */
     public function setQuantityDiscount(int $quantityDiscount): self
     {
         $this->quantityDiscount = $quantityDiscount;
@@ -121,11 +165,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getProductiorActivityCost(): ?int
     {
         return $this->productiorActivityCost;
     }
 
+    /**
+     * @param int $productiorActivityCost
+     * @return Product
+     */
     public function setProductiorActivityCost(int $productiorActivityCost): self
     {
         $this->productiorActivityCost = $productiorActivityCost;
@@ -133,11 +184,18 @@ class Product
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getResearchCost(): ?int
     {
         return $this->researchCost;
     }
 
+    /**
+     * @param int $researchCost
+     * @return Product
+     */
     public function setResearchCost(int $researchCost): self
     {
         $this->researchCost = $researchCost;
@@ -150,9 +208,25 @@ class Product
         return $this->productSaleType;
     }
 
+    /**
+     * @param int $productSaleType
+     * @return Product
+     */
     public function setProductSaleType(int $productSaleType): self
     {
         $this->productSaleType = $productSaleType;
+
+        return $this;
+    }
+
+    public function getProductMaxNumber(): ?int
+    {
+        return $this->ProductMaxNumber;
+    }
+
+    public function setProductMaxNumber(int $ProductMaxNumber): self
+    {
+        $this->ProductMaxNumber = $ProductMaxNumber;
 
         return $this;
     }
