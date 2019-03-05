@@ -62,6 +62,7 @@ class ProductLife
      */
     private $product;
 
+
     /**
      * @return int|null
      */
