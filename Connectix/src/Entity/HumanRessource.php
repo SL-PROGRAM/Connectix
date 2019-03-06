@@ -46,6 +46,11 @@ abstract class HumanRessource
      */
     private $socity;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $coeficientSalary;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +124,18 @@ abstract class HumanRessource
     public function setSocity(?Socity $socity): self
     {
         $this->socity = $socity;
+
+        return $this;
+    }
+
+    public function getCoeficientSalary(): ?int
+    {
+        return $this->coeficientSalary;
+    }
+
+    public function setCoeficientSalary(int $coeficientSalary): self
+    {
+        $this->coeficientSalary = $coeficientSalary;
 
         return $this;
     }

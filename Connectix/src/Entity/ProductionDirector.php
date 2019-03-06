@@ -19,28 +19,11 @@ class ProductionDirector extends Production
     /**
      * @ORM\Column(type="integer")
      */
-    private $coeficientSalary;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $administrationActivity;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCoeficientSalary(): ?int
-    {
-        return $this->coeficientSalary;
-    }
-
-    public function setCoeficientSalary(int $coeficientSalary): self
-    {
-        $this->coeficientSalary = $coeficientSalary;
-
-        return $this;
     }
 
     public function getAdministrationActivity(): ?int

@@ -16,25 +16,10 @@ class WorkMan extends Production
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $coeficientSalary;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCoeficientSalary(): ?int
-    {
-        return $this->coeficientSalary;
-    }
-
-    public function setCoeficientSalary(int $coeficientSalary): self
-    {
-        $this->coeficientSalary = $coeficientSalary;
-
-        return $this;
-    }
 }
