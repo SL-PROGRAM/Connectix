@@ -59,11 +59,17 @@ class Game
     private $products;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Socity", mappedBy="game", orphanRemoval=true)
+     */
+    private $socities;
+
+    /**
      * Game constructor.
      */
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->socities = new ArrayCollection();
     }
 
     /**
@@ -240,6 +246,45 @@ class Game
             // set the owning side to null (unless already changed)
             if ($product->getGame() === $this) {
                 $product->setGame(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Socity[]
+     */
+    public function getSocities(): Collection
+    {
+        return $this->socities;
+    }
+
+    /**
+     * @param Socity $socity
+     * @return Game
+     */
+    public function addSocity(Socity $socity): self
+    {
+        if (!$this->socities->contains($socity)) {
+            $this->socities[] = $socity;
+            $socity->setGame($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Socity $socity
+     * @return Game
+     */
+    public function removeSocity(Socity $socity): self
+    {
+        if ($this->socities->contains($socity)) {
+            $this->socities->removeElement($socity);
+            // set the owning side to null (unless already changed)
+            if ($socity->getGame() === $this) {
+                $socity->setGame(null);
             }
         }
 

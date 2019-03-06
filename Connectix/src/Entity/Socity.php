@@ -37,6 +37,11 @@ class Socity
     private $priceMaxPublicityImpact;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="socities")
+     */
+    private $game;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -116,6 +121,25 @@ class Socity
     public function setPriceMaxPublicityImpact(int $priceMaxPublicityImpact): self
     {
         $this->priceMaxPublicityImpact = $priceMaxPublicityImpact;
+
+        return $this;
+    }
+
+    /**
+     * @return Game|null
+     */
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    /**
+     * @param Game|null $game
+     * @return Socity
+     */
+    public function setGame(?Game $game): self
+    {
+        $this->game = $game;
 
         return $this;
     }
