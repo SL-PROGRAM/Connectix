@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,6 +52,19 @@ class Game
      * @ORM\Column(type="datetime")
      */
     private $creatAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="game", orphanRemoval=true)
+     */
+    private $Products;
+
+    /**
+     * Game constructor.
+     */
+    public function __construct()
+    {
+        $this->Products = new ArrayCollection();
+    }
 
     /**
      * @return int|null
@@ -188,6 +203,45 @@ class Game
     public function setCreatAt(\DateTimeInterface $creatAt): self
     {
         $this->creatAt = $creatAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProducts(): Collection
+    {
+        return $this->Products;
+    }
+
+    /**
+     * @param Product $product
+     * @return Game
+     */
+    public function addProduct(Product $product): self
+    {
+        if (!$this->Products->contains($product)) {
+            $this->Products[] = $product;
+            $product->setGame($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Product $product
+     * @return Game
+     */
+    public function removeProduct(Product $product): self
+    {
+        if ($this->Products->contains($product)) {
+            $this->Products->removeElement($product);
+            // set the owning side to null (unless already changed)
+            if ($product->getGame() === $this) {
+                $product->setGame(null);
+            }
+        }
 
         return $this;
     }

@@ -79,6 +79,12 @@ class Product
      */
     private $productAlreadySales;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="Products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $game;
+
     public function __construct()
     {
         $this->ProductLifes = new ArrayCollection();
@@ -337,6 +343,18 @@ class Product
                 $productLife->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    public function setGame(?Game $game): self
+    {
+        $this->game = $game;
 
         return $this;
     }

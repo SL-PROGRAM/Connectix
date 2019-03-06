@@ -68,6 +68,8 @@ class MakeProductController extends AbstractController
                 $productSaleType = 1;
 
                 $product->setBuyPrice($buyPrice);
+
+
             }
 
             elseif ($i < 8) {
@@ -109,7 +111,7 @@ class MakeProductController extends AbstractController
                 $nameNumber = 4;
                 $salePrice = round(rand(3500, 5000));
                 $productionActivityCost = $salePrice / 10 + round(rand(0, 10));
-                $technologicLevel = 3;
+                $technologicLevel = 4;
                 $reseachCost = 1000;
                 $productMaxNumber = round(rand(100000, 200000), -3);
                 $quantityDiscount = $productMaxNumber / 100;
