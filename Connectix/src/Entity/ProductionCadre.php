@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProductionDirectorRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ProductionCadreRepository")
  */
-class ProductionDirector extends ProductionCadre
+class ProductionCadre
 {
     /**
      * @ORM\Id()
