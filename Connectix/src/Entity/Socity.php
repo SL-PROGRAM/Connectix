@@ -49,7 +49,7 @@ class Socity
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\HumanRessource", mappedBy="socity", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\HumanResource", mappedBy="socity", orphanRemoval=true)
      */
     private $humanRessourcies;
 
@@ -194,14 +194,14 @@ class Socity
     }
 
     /**
-     * @return Collection|HumanRessource[]
+     * @return Collection|HumanResource[]
      */
     public function getHumanRessourcies(): Collection
     {
         return $this->humanRessourcies;
     }
 
-    public function addHumanRessourcy(HumanRessource $humanRessourcy): self
+    public function addHumanRessourcy(HumanResource $humanRessourcy): self
     {
         if (!$this->humanRessourcies->contains($humanRessourcy)) {
             $this->humanRessourcies[] = $humanRessourcy;
@@ -211,7 +211,7 @@ class Socity
         return $this;
     }
 
-    public function removeHumanRessourcy(HumanRessource $humanRessourcy): self
+    public function removeHumanRessourcy(HumanResource $humanRessourcy): self
     {
         if ($this->humanRessourcies->contains($humanRessourcy)) {
             $this->humanRessourcies->removeElement($humanRessourcy);

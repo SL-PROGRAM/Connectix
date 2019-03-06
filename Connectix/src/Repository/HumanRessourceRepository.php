@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\HumanRessource;
+use App\Entity\HumanResource;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method HumanRessource|null find($id, $lockMode = null, $lockVersion = null)
- * @method HumanRessource|null findOneBy(array $criteria, array $orderBy = null)
- * @method HumanRessource[]    findAll()
- * @method HumanRessource[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method HumanResource|null find($id, $lockMode = null, $lockVersion = null)
+ * @method HumanResource|null findOneBy(array $criteria, array $orderBy = null)
+ * @method HumanResource[]    findAll()
+ * @method HumanResource[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class HumanRessourceRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, HumanRessource::class);
+        parent::__construct($registry, HumanResource::class);
     }
 
     // /**
-    //  * @return HumanRessource[] Returns an array of HumanRessource objects
+    //  * @return HumanResource[] Returns an array of HumanResource objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class HumanRessourceRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?HumanRessource
+    public function findOneBySomeField($value): ?HumanResource
     {
         return $this->createQueryBuilder('h')
             ->andWhere('h.exampleField = :val')

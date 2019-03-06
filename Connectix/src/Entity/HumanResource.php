@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HumanRessourceRepository")
  */
-abstract class HumanRessource
+abstract class HumanResource
 {
     /**
      * @ORM\Id()
@@ -42,14 +42,16 @@ abstract class HumanRessource
     private $administrationActivityCost;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $coeficientSalary;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Socity", inversedBy="humanRessourcies")
      */
     private $socity;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $coeficientSalary;
+
 
     public function getId(): ?int
     {
