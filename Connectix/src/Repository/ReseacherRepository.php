@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Reseacher;
+use App\Entity\Researcher;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Reseacher|null find($id, $lockMode = null, $lockVersion = null)
- * @method Reseacher|null findOneBy(array $criteria, array $orderBy = null)
- * @method Reseacher[]    findAll()
- * @method Reseacher[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Researcher|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Researcher|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Researcher[]    findAll()
+ * @method Researcher[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ReseacherRepository extends ServiceEntityRepository
+class ResearcherRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Reseacher::class);
+        parent::__construct($registry, Researcher::class);
     }
 
     // /**
