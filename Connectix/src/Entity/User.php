@@ -44,6 +44,11 @@ class User implements UserInterface
     private $lastName;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Socity", inversedBy="users")
+     */
+    private $socity;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -173,6 +178,18 @@ class User implements UserInterface
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getSocity(): ?Socity
+    {
+        return $this->socity;
+    }
+
+    public function setSocity(?Socity $socity): self
+    {
+        $this->socity = $socity;
 
         return $this;
     }
