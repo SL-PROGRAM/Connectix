@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\ProductionDirectorRepository")
+ */
+class ProductionDirector extends Production
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $coeficientSalary;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $administrationActivity;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getCoeficientSalary(): ?int
+    {
+        return $this->coeficientSalary;
+    }
+
+    public function setCoeficientSalary(int $coeficientSalary): self
+    {
+        $this->coeficientSalary = $coeficientSalary;
+
+        return $this;
+    }
+
+    public function getAdministrationActivity(): ?int
+    {
+        return $this->administrationActivity;
+    }
+
+    public function setAdministrationActivity(int $administrationActivity): self
+    {
+        $this->administrationActivity = $administrationActivity;
+
+        return $this;
+    }
+}
