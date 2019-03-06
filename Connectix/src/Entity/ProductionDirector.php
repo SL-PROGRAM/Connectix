@@ -16,25 +16,9 @@ class ProductionDirector extends ProductionCadre
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $administrationActivity;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getAdministrationActivity(): ?int
-    {
-        return $this->administrationActivity;
-    }
-
-    public function setAdministrationActivity(int $administrationActivity): self
-    {
-        $this->administrationActivity = $administrationActivity;
-
-        return $this;
     }
 }
