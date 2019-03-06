@@ -48,9 +48,15 @@ class Socity
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\HumanRessource", mappedBy="socity", orphanRemoval=true)
+     */
+    private $humanRessourcies;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->humanRessourcies = new ArrayCollection();
     }
 
     /**
@@ -181,6 +187,37 @@ class Socity
             // set the owning side to null (unless already changed)
             if ($user->getSocity() === $this) {
                 $user->setSocity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HumanRessource[]
+     */
+    public function getHumanRessourcies(): Collection
+    {
+        return $this->humanRessourcies;
+    }
+
+    public function addHumanRessourcy(HumanRessource $humanRessourcy): self
+    {
+        if (!$this->humanRessourcies->contains($humanRessourcy)) {
+            $this->humanRessourcies[] = $humanRessourcy;
+            $humanRessourcy->setSocity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHumanRessourcy(HumanRessource $humanRessourcy): self
+    {
+        if ($this->humanRessourcies->contains($humanRessourcy)) {
+            $this->humanRessourcies->removeElement($humanRessourcy);
+            // set the owning side to null (unless already changed)
+            if ($humanRessourcy->getSocity() === $this) {
+                $humanRessourcy->setSocity(null);
             }
         }
 

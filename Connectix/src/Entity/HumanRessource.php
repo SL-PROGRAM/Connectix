@@ -41,6 +41,11 @@ abstract class HumanRessource
      */
     private $administrationActivityCost;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Socity", inversedBy="humanRessourcies")
+     */
+    private $socity;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,18 @@ abstract class HumanRessource
     public function setAdministrationActivityCost(int $administrationActivityCost): self
     {
         $this->administrationActivityCost = $administrationActivityCost;
+
+        return $this;
+    }
+
+    public function getSocity(): ?Socity
+    {
+        return $this->socity;
+    }
+
+    public function setSocity(?Socity $socity): self
+    {
+        $this->socity = $socity;
 
         return $this;
     }
