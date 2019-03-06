@@ -44,12 +44,12 @@ class ProductLife
     /**
      * @ORM\Column(type="integer")
      */
-    private $PriceMinPublicityImpact;
+    private $priceMinPublicityImpact;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $PriceMaxPublicityImpact;
+    private $priceMaxPublicityImpact;
 
     /**
      * @ORM\Column(type="integer")
@@ -171,16 +171,16 @@ class ProductLife
      */
     public function getPriceMinPublicityImpact(): ?int
     {
-        return $this->PriceMinPublicityImpact;
+        return $this->priceMinPublicityImpact;
     }
 
     /**
-     * @param int $PriceMinPublicityImpact
+     * @param int $priceMinPublicityImpact
      * @return ProductLife
      */
-    public function setPriceMinPublicityImpact(int $PriceMinPublicityImpact): self
+    public function setPriceMinPublicityImpact(int $priceMinPublicityImpact): self
     {
-        $this->PriceMinPublicityImpact = $PriceMinPublicityImpact;
+        $this->priceMinPublicityImpact = $priceMinPublicityImpact;
 
         return $this;
     }
@@ -190,16 +190,16 @@ class ProductLife
      */
     public function getPriceMaxPublicityImpact(): ?int
     {
-        return $this->PriceMaxPublicityImpact;
+        return $this->priceMaxPublicityImpact;
     }
 
     /**
-     * @param int $PriceMaxPublicityImpact
+     * @param int $priceMaxPublicityImpact
      * @return ProductLife
      */
-    public function setPriceMaxPublicityImpact(int $PriceMaxPublicityImpact): self
+    public function setPriceMaxPublicityImpact(int $priceMaxPublicityImpact): self
     {
-        $this->PriceMaxPublicityImpact = $PriceMaxPublicityImpact;
+        $this->priceMaxPublicityImpact = $priceMaxPublicityImpact;
 
         return $this;
     }

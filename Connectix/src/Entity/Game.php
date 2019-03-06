@@ -56,14 +56,14 @@ class Game
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="game", orphanRemoval=true)
      */
-    private $Products;
+    private $products;
 
     /**
      * Game constructor.
      */
     public function __construct()
     {
-        $this->Products = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     /**
@@ -208,11 +208,11 @@ class Game
     }
 
     /**
-     * @return Collection|Product[]
+     * @return Collection|product[]
      */
     public function getProducts(): Collection
     {
-        return $this->Products;
+        return $this->products;
     }
 
     /**
@@ -221,8 +221,8 @@ class Game
      */
     public function addProduct(Product $product): self
     {
-        if (!$this->Products->contains($product)) {
-            $this->Products[] = $product;
+        if (!$this->products->contains($product)) {
+            $this->products[] = $product;
             $product->setGame($this);
         }
 
@@ -235,8 +235,8 @@ class Game
      */
     public function removeProduct(Product $product): self
     {
-        if ($this->Products->contains($product)) {
-            $this->Products->removeElement($product);
+        if ($this->products->contains($product)) {
+            $this->products->removeElement($product);
             // set the owning side to null (unless already changed)
             if ($product->getGame() === $this) {
                 $product->setGame(null);
