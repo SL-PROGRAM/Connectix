@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Game;
+use App\Entity\ProductionDirector;
 use App\Entity\Socity;
 use App\Entity\Technician;
 use App\Entity\HumanResource;
@@ -18,14 +19,16 @@ class HumanResourceController extends AbstractController
     public function index()
     {
         $this->makeGame();
-        $socity = $this->makeSocity();
-        $this->makeTechnician($socity);
+        $this->makeSocity();
 
         return $this->render('human_resource/index.html.twig', [
             'controller_name' => 'HumanResourceController',
         ]);
     }
 
+    /**
+     * @see function call to create a new game
+     */
     public function makeGame(){
         $entityManager = $this->getDoctrine()->getManager();
         $game = new Game();
@@ -42,6 +45,9 @@ class HumanResourceController extends AbstractController
     }
 
 
+    /**
+     * @see function call to create a new socity
+     */
     public function makeSocity(){
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -54,19 +60,18 @@ class HumanResourceController extends AbstractController
 
         $entityManager  ->persist($socity);
         $entityManager  ->flush();
-
-        return $socity;
     }
 
-    public function makeTechnician(Socity $socity, $administrationActivity, $productionActivity, $salary, $formation, $productivity, $experience, $administrationActivityCost, $coeficientSalary){
+    public function makeTechnician(Socity $socity, $administrationActivity, $productionActivity, $formation, $productivity, $experience, $administrationActivityCost, $coeficientSalary){
 
         $entityManager = $this->getDoctrine()->getManager();
 
+        $salary = $this->baseSalary()*$coeficientSalary;
 
         $technician = new Technician();
 
-        $technician     ->setProductionActivity($productionActivity)
-                        ->setAdministrationActivity($administrationActivity)
+        $technician     ->setAdministrationActivity($administrationActivity)
+                        ->setProductionActivity($productionActivity)
                         ->setSalary($salary)
                         ->setFormation($formation)
                         ->setProductivity($productivity)
@@ -103,6 +108,36 @@ class HumanResourceController extends AbstractController
 
     }
 
+    public function makeProductionDirector(Socity $socity, $administrationActivity, $productionActivity, $salary, $formation, $productivity, $experience, $administrationActivityCost, $coeficientSalary){
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+
+        $technician = new ProductionDirector();
+
+        $technician     ->setAdministrationActivity($administrationActivity)
+            ->setProductionActivity($productionActivity)
+            ->setSalary($salary)
+            ->setFormation($formation)
+            ->setProductivity($productivity)
+            ->setExprience($experience)
+            ->setAdministrationActivityCost($administrationActivityCost)
+            ->setCoeficientSalary($coeficientSalary)
+            ->setSocity($socity);
+
+
+        $entityManager  ->persist($technician);
+        $entityManager  ->flush();
+
+    }
+
+
+//    public function baseSalary(){
+//        $user = $this->getUser();
+//        $game = $user->getGame();
+//
+//        return $smic = $game->getSmic();
+//    }
 
 
 
