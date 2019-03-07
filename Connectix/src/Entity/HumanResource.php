@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\HumanRessourceRepository")
+ * @ORM\InheritanceType("JOINED")
  */
 abstract class HumanResource
 {
