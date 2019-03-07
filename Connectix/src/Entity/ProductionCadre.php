@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductionCadreRepository")
  */
-abstract class ProductionCadre
+abstract class ProductionCadre extends Production
 {
     /**
      * @ORM\Id()
