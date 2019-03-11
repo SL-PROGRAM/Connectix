@@ -1,0 +1,17 @@
+.adrec-btn{
+  background: orange;
+  color: $color-primary;
+
+  &:hover{
+    background: $orange-200;
+  }
+
+  &.adrec-large{
+    background: red;
+    padding: 1rem 2rem;
+
+    &:hover{
+      background: #2aff42;
+    }
+  }
+}

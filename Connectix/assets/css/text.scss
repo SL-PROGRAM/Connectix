@@ -1,0 +1,31 @@
+@font-face {
+  font-family: $title-font;
+  src:  url("#{$font-path}/folkard_.woff") format("woff2"),
+        url("#{$font-path}/folkard_.ttf") format("ttf");
+}
+
+//confortaa
+@font-face {
+  font-family: $text-font;
+  src: url("#{$font-path}/Comfortaa-Regular.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: $text-font;
+  font-weight: bold;
+  src: url("#{$font-path}/Comfortaa-Bold.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: $text-font;
+  font-weight: 300;
+  src: url("#{$font-path}/Comfortaa-Light.ttf") format("ttf");
+}
+
+.adrec-title{
+  font-family: $title-font;
+}
+
+.adrec-text{
+  font-family: $text-font;
+}
