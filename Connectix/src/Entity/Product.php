@@ -90,21 +90,10 @@ class Product
      */
     private $seasonality;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PurchaseOrder", mappedBy="product")
-     */
-    private $purchaseOrders;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SalesOrder", mappedBy="product")
-     */
-    private $salesOrders;
 
     public function __construct()
     {
         $this->ProductLifes = new ArrayCollection();
-        $this->purchaseOrders = new ArrayCollection();
-        $this->salesOrders = new ArrayCollection();
     }
 
     /**
@@ -387,68 +376,5 @@ class Product
 
         return $this;
     }
-
-    /**
-     * @return Collection|PurchaseOrder[]
-     */
-    public function getPurchaseOrders(): Collection
-    {
-        return $this->purchaseOrders;
-    }
-
-    public function addPurchaseOrder(PurchaseOrder $purchaseOrder): self
-    {
-        if (!$this->purchaseOrders->contains($purchaseOrder)) {
-            $this->purchaseOrders[] = $purchaseOrder;
-            $purchaseOrder->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removePurchaseOrder(PurchaseOrder $purchaseOrder): self
-    {
-        if ($this->purchaseOrders->contains($purchaseOrder)) {
-            $this->purchaseOrders->removeElement($purchaseOrder);
-            // set the owning side to null (unless already changed)
-            if ($purchaseOrder->getProduct() === $this) {
-                $purchaseOrder->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|SalesOrder[]
-     */
-    public function getSalesOrders(): Collection
-    {
-        return $this->salesOrders;
-    }
-
-    public function addSalesOrder(SalesOrder $salesOrder): self
-    {
-        if (!$this->salesOrders->contains($salesOrder)) {
-            $this->salesOrders[] = $salesOrder;
-            $salesOrder->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSalesOrder(SalesOrder $salesOrder): self
-    {
-        if ($this->salesOrders->contains($salesOrder)) {
-            $this->salesOrders->removeElement($salesOrder);
-            // set the owning side to null (unless already changed)
-            if ($salesOrder->getProduct() === $this) {
-                $salesOrder->setProduct(null);
-            }
-        }
-
-        return $this;
-    }
-
 
 }

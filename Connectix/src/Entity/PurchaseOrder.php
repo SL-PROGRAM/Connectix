@@ -48,10 +48,11 @@ class PurchaseOrder
     private $socity;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="purchaseOrders")
-     *  @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="App\Entity\Product", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
      */
     private $product;
+
 
     public function getId(): ?int
     {
@@ -135,10 +136,11 @@ class PurchaseOrder
         return $this->product;
     }
 
-    public function setProduct(?Product $product): self
+    public function setProduct(Product $product): self
     {
         $this->product = $product;
 
         return $this;
     }
+
 }
