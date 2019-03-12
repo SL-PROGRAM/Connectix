@@ -68,6 +68,11 @@ class Socity
      */
     private $balanceSheets;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PurchaseOrder", mappedBy="socity")
+     */
+    private $purchaseOrders;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -75,6 +80,7 @@ class Socity
         $this->ProductionUnits = new ArrayCollection();
         $this->Loans = new ArrayCollection();
         $this->balanceSheets = new ArrayCollection();
+        $this->purchaseOrders = new ArrayCollection();
     }
 
     /**
@@ -329,6 +335,37 @@ class Socity
             // set the owning side to null (unless already changed)
             if ($balanceSheet->getSocity() === $this) {
                 $balanceSheet->setSocity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PurchaseOrder[]
+     */
+    public function getPurchaseOrders(): Collection
+    {
+        return $this->purchaseOrders;
+    }
+
+    public function addPurchaseOrder(PurchaseOrder $purchaseOrder): self
+    {
+        if (!$this->purchaseOrders->contains($purchaseOrder)) {
+            $this->purchaseOrders[] = $purchaseOrder;
+            $purchaseOrder->setSocity($this);
+        }
+
+        return $this;
+    }
+
+    public function removePurchaseOrder(PurchaseOrder $purchaseOrder): self
+    {
+        if ($this->purchaseOrders->contains($purchaseOrder)) {
+            $this->purchaseOrders->removeElement($purchaseOrder);
+            // set the owning side to null (unless already changed)
+            if ($purchaseOrder->getSocity() === $this) {
+                $purchaseOrder->setSocity(null);
             }
         }
 

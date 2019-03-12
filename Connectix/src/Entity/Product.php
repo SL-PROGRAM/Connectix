@@ -90,9 +90,15 @@ class Product
      */
     private $seasonality;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PurchaseOrder", mappedBy="product")
+     */
+    private $purchaseOrders;
+
     public function __construct()
     {
         $this->ProductLifes = new ArrayCollection();
+        $this->purchaseOrders = new ArrayCollection();
     }
 
     /**
@@ -372,6 +378,37 @@ class Product
     public function setSeasonality(?Seasonality $seasonality): self
     {
         $this->seasonality = $seasonality;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PurchaseOrder[]
+     */
+    public function getPurchaseOrders(): Collection
+    {
+        return $this->purchaseOrders;
+    }
+
+    public function addPurchaseOrder(PurchaseOrder $purchaseOrder): self
+    {
+        if (!$this->purchaseOrders->contains($purchaseOrder)) {
+            $this->purchaseOrders[] = $purchaseOrder;
+            $purchaseOrder->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removePurchaseOrder(PurchaseOrder $purchaseOrder): self
+    {
+        if ($this->purchaseOrders->contains($purchaseOrder)) {
+            $this->purchaseOrders->removeElement($purchaseOrder);
+            // set the owning side to null (unless already changed)
+            if ($purchaseOrder->getProduct() === $this) {
+                $purchaseOrder->setProduct(null);
+            }
+        }
 
         return $this;
     }
