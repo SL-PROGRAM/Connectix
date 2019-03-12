@@ -49,6 +49,11 @@ class User implements UserInterface
     private $socity;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="users")
+     */
+    private $game;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -190,6 +195,18 @@ class User implements UserInterface
     public function setSocity(?Socity $socity): self
     {
         $this->socity = $socity;
+
+        return $this;
+    }
+
+    public function getGame(): ?Game
+    {
+        return $this->game;
+    }
+
+    public function setGame(?Game $game): self
+    {
+        $this->game = $game;
 
         return $this;
     }

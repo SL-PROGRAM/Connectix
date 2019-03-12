@@ -58,11 +58,17 @@ class Socity
      */
     private $ProductionUnits;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Loan", mappedBy="socity")
+     */
+    private $Loans;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->humanRessourcies = new ArrayCollection();
         $this->ProductionUnits = new ArrayCollection();
+        $this->Loans = new ArrayCollection();
     }
 
     /**
@@ -255,6 +261,37 @@ class Socity
             // set the owning side to null (unless already changed)
             if ($productionUnit->getSocity() === $this) {
                 $productionUnit->setSocity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Loan[]
+     */
+    public function getLoans(): Collection
+    {
+        return $this->Loans;
+    }
+
+    public function addLoan(Loan $loan): self
+    {
+        if (!$this->Loans->contains($loan)) {
+            $this->Loans[] = $loan;
+            $loan->setSocity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLoan(Loan $loan): self
+    {
+        if ($this->Loans->contains($loan)) {
+            $this->Loans->removeElement($loan);
+            // set the owning side to null (unless already changed)
+            if ($loan->getSocity() === $this) {
+                $loan->setSocity(null);
             }
         }
 
