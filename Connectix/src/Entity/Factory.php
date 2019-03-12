@@ -23,6 +23,12 @@ class Factory extends ProductionUnit
      */
     private $ProductionLign;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProductionUnit", inversedBy="factories")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $productionUnit;
+
     public function __construct()
     {
         $this->ProductionLign = new ArrayCollection();
@@ -60,6 +66,18 @@ class Factory extends ProductionUnit
                 $productionLign->setFactory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProductionUnit(): ?ProductionUnit
+    {
+        return $this->productionUnit;
+    }
+
+    public function setProductionUnit(?ProductionUnit $productionUnit): self
+    {
+        $this->productionUnit = $productionUnit;
 
         return $this;
     }
