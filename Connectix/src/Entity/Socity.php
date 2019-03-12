@@ -63,12 +63,18 @@ class Socity
      */
     private $Loans;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\BalanceSheet", mappedBy="socity")
+     */
+    private $balanceSheets;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->humanRessourcies = new ArrayCollection();
         $this->ProductionUnits = new ArrayCollection();
         $this->Loans = new ArrayCollection();
+        $this->balanceSheets = new ArrayCollection();
     }
 
     /**
@@ -292,6 +298,37 @@ class Socity
             // set the owning side to null (unless already changed)
             if ($loan->getSocity() === $this) {
                 $loan->setSocity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|BalanceSheet[]
+     */
+    public function getBalanceSheets(): Collection
+    {
+        return $this->balanceSheets;
+    }
+
+    public function addBalanceSheet(BalanceSheet $balanceSheet): self
+    {
+        if (!$this->balanceSheets->contains($balanceSheet)) {
+            $this->balanceSheets[] = $balanceSheet;
+            $balanceSheet->setSocity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBalanceSheet(BalanceSheet $balanceSheet): self
+    {
+        if ($this->balanceSheets->contains($balanceSheet)) {
+            $this->balanceSheets->removeElement($balanceSheet);
+            // set the owning side to null (unless already changed)
+            if ($balanceSheet->getSocity() === $this) {
+                $balanceSheet->setSocity(null);
             }
         }
 
