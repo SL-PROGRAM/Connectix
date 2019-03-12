@@ -78,6 +78,11 @@ class Socity
      */
     private $salesOrders;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ReseachOrder", mappedBy="socity", orphanRemoval=true)
+     */
+    private $reseachOrders;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -87,6 +92,7 @@ class Socity
         $this->balanceSheets = new ArrayCollection();
         $this->purchaseOrders = new ArrayCollection();
         $this->salesOrders = new ArrayCollection();
+        $this->reseachOrders = new ArrayCollection();
     }
 
     /**
@@ -403,6 +409,37 @@ class Socity
             // set the owning side to null (unless already changed)
             if ($salesOrder->getSocity() === $this) {
                 $salesOrder->setSocity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ReseachOrder[]
+     */
+    public function getReseachOrders(): Collection
+    {
+        return $this->reseachOrders;
+    }
+
+    public function addReseachOrder(ReseachOrder $reseachOrder): self
+    {
+        if (!$this->reseachOrders->contains($reseachOrder)) {
+            $this->reseachOrders[] = $reseachOrder;
+            $reseachOrder->setSocity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReseachOrder(ReseachOrder $reseachOrder): self
+    {
+        if ($this->reseachOrders->contains($reseachOrder)) {
+            $this->reseachOrders->removeElement($reseachOrder);
+            // set the owning side to null (unless already changed)
+            if ($reseachOrder->getSocity() === $this) {
+                $reseachOrder->setSocity(null);
             }
         }
 
