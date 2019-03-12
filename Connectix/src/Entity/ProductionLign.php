@@ -22,11 +22,6 @@ class ProductionLign extends ProductionUnit
      */
     private $factory;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ProductionUnit", inversedBy="productionLignes")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $productionUnit;
 
     public function getId(): ?int
     {
@@ -45,15 +40,4 @@ class ProductionLign extends ProductionUnit
         return $this;
     }
 
-    public function getProductionUnit(): ?ProductionUnit
-    {
-        return $this->productionUnit;
-    }
-
-    public function setProductionUnit(?ProductionUnit $productionUnit): self
-    {
-        $this->productionUnit = $productionUnit;
-
-        return $this;
-    }
 }

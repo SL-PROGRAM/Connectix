@@ -49,21 +49,6 @@ abstract class ProductionUnit
      */
     private $socity;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Factory", mappedBy="productionUnit", orphanRemoval=true)
-     */
-    private $factories;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductionLign", mappedBy="productionUnit", orphanRemoval=true)
-     */
-    private $productionLignes;
-
-    public function __construct()
-    {
-        $this->factories = new ArrayCollection();
-        $this->productionLignes = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -142,65 +127,4 @@ abstract class ProductionUnit
         return $this;
     }
 
-    /**
-     * @return Collection|Factory[]
-     */
-    public function getFactories(): Collection
-    {
-        return $this->factories;
-    }
-
-    public function addFactory(Factory $factory): self
-    {
-        if (!$this->factories->contains($factory)) {
-            $this->factories[] = $factory;
-            $factory->setProductionUnit($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFactory(Factory $factory): self
-    {
-        if ($this->factories->contains($factory)) {
-            $this->factories->removeElement($factory);
-            // set the owning side to null (unless already changed)
-            if ($factory->getProductionUnit() === $this) {
-                $factory->setProductionUnit(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|ProductionLign[]
-     */
-    public function getProductionLignes(): Collection
-    {
-        return $this->productionLignes;
-    }
-
-    public function addProductionLigne(ProductionLign $productionLigne): self
-    {
-        if (!$this->productionLignes->contains($productionLigne)) {
-            $this->productionLignes[] = $productionLigne;
-            $productionLigne->setProductionUnit($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProductionLigne(ProductionLign $productionLigne): self
-    {
-        if ($this->productionLignes->contains($productionLigne)) {
-            $this->productionLignes->removeElement($productionLigne);
-            // set the owning side to null (unless already changed)
-            if ($productionLigne->getProductionUnit() === $this) {
-                $productionLigne->setProductionUnit(null);
-            }
-        }
-
-        return $this;
-    }
 }
