@@ -85,6 +85,11 @@ class Product
      */
     private $game;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Seasonality", inversedBy="products")
+     */
+    private $seasonality;
+
     public function __construct()
     {
         $this->ProductLifes = new ArrayCollection();
@@ -355,6 +360,18 @@ class Product
     public function setGame(?Game $game): self
     {
         $this->game = $game;
+
+        return $this;
+    }
+
+    public function getSeasonality(): ?Seasonality
+    {
+        return $this->seasonality;
+    }
+
+    public function setSeasonality(?Seasonality $seasonality): self
+    {
+        $this->seasonality = $seasonality;
 
         return $this;
     }
