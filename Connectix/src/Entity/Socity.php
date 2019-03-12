@@ -53,10 +53,16 @@ class Socity
      */
     private $humanRessourcies;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductionUnit", mappedBy="socity")
+     */
+    private $ProductionUnits;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->humanRessourcies = new ArrayCollection();
+        $this->ProductionUnits = new ArrayCollection();
     }
 
     /**
@@ -218,6 +224,37 @@ class Socity
             // set the owning side to null (unless already changed)
             if ($humanRessourcy->getSocity() === $this) {
                 $humanRessourcy->setSocity(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProductionUnit[]
+     */
+    public function getProductionUnits(): Collection
+    {
+        return $this->ProductionUnits;
+    }
+
+    public function addProductionUnit(ProductionUnit $productionUnit): self
+    {
+        if (!$this->ProductionUnits->contains($productionUnit)) {
+            $this->ProductionUnits[] = $productionUnit;
+            $productionUnit->setSocity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductionUnit(ProductionUnit $productionUnit): self
+    {
+        if ($this->ProductionUnits->contains($productionUnit)) {
+            $this->ProductionUnits->removeElement($productionUnit);
+            // set the owning side to null (unless already changed)
+            if ($productionUnit->getSocity() === $this) {
+                $productionUnit->setSocity(null);
             }
         }
 

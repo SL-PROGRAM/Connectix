@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductionUnitRepository")
+ * @ORM\InheritanceType("JOINED")
  */
 abstract class ProductionUnit
 {
@@ -40,6 +41,11 @@ abstract class ProductionUnit
      * @ORM\Column(type="integer")
      */
     private $amortizationTurn;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Socity", inversedBy="ProductionUnits")
+     */
+    private $socity;
 
     public function getId(): ?int
     {
@@ -102,6 +108,18 @@ abstract class ProductionUnit
     public function setAmortizationTurn(int $amortizationTurn): self
     {
         $this->amortizationTurn = $amortizationTurn;
+
+        return $this;
+    }
+
+    public function getSocity(): ?Socity
+    {
+        return $this->socity;
+    }
+
+    public function setSocity(?Socity $socity): self
+    {
+        $this->socity = $socity;
 
         return $this;
     }
