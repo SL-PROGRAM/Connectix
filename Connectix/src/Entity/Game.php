@@ -224,12 +224,18 @@ class Game
     private $productQualityMaxCycleLife4;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="game")
+     */
+    private $users;
+
+    /**
      * Game constructor.
      */
     public function __construct()
     {
         $this->products = new ArrayCollection();
         $this->socities = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     /**
@@ -831,6 +837,37 @@ class Game
     public function setProductQualityMaxCycleLife4(int $productQualityMaxCycleLife4): self
     {
         $this->productQualityMaxCycleLife4 = $productQualityMaxCycleLife4;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setGame($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getGame() === $this) {
+                $user->setGame(null);
+            }
+        }
 
         return $this;
     }
