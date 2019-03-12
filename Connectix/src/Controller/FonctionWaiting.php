@@ -73,4 +73,177 @@ class FonctionWaiting
 
     }
 
+
+
+    //general financial calc
+
+    /**
+     * @param $borrowedAmount
+     * @param $annualInterestRate
+     * @param $termOfLoan
+     * @param $deferredFormLoan
+     * @return float|int
+     */
+    function totalLoanCost($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan ){
+        return $totalCost = $borrowedAmount*$annualInterestRate*($termOfLoan+$deferredFormLoan);
+    }
+
+
+    /**
+     * @param $borrowedAmount
+     * @param $monthlyDueDate
+     * @param $annualInterestRate
+     * @return float|int
+     */
+   function loanDuration($borrowedAmount, $monthlyDueDate, $annualInterestRate){
+            $loanDuration = 0;
+        while($borrowedAmount*-$annualInterestRate > (12*$monthlyDueDate) ){
+            $loanDuration += 12;
+            $borrowedAmount -= ($borrowedAmount*$annualInterestRate) - (12*$monthlyDueDate);
+        }
+            $loanDuration += ceil(($borrowedAmount*$annualInterestRate)/($monthlyDueDate));
+            return $loanDuration;
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // financial monthly calc
+
+    /**
+     * @param $borrowedAmount
+     * @param $annualInterestRate
+     * @param $termOfLoan
+     * @param int $deferredFormLoan
+     * @return float|int
+     */
+    function monthlyInterestRateCost($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan = 0){
+            return ($borrowedAmount*($annualInterestRate/12)*($termOfLoan+$deferredFormLoan)/100);
+    }
+
+
+    /**
+     * @param $borrowedAmount
+     * @param $dueDate
+     * @param $annualInterestRate
+     * @param $termOfLoan
+     * @param int $deferredFormLoan
+     * @return float|int
+     */
+    function monthlyBorrowedAmountRemain($borrowedAmount, $dueDate, $annualInterestRate, $termOfLoan, $deferredFormLoan = 0 ){
+        return $monthlyBorrowedAmountRemain = $borrowedAmount -
+            ($dueDate -
+                $this->monthlyInterestRateCost(
+                    $borrowedAmount,
+                    $annualInterestRate,
+                    $termOfLoan,
+                    $deferredFormLoan)
+            );
+    }
+
+    /**
+     * @param $borrowedAmount
+     * @param $annualInterestRate
+     * @param $termOfLoan
+     * @param $deferredFormLoan
+     * @return float|int
+     */
+    function monthlyDueDate($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan){
+        return $monthlyDueDate =
+            (
+                $borrowedAmount +
+                $this->totalLoanCost($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan)
+            )/(
+                $termOfLoan + $deferredFormLoan
+            ) /12;
+    }
+
+    // financial annual calc
+
+    /**
+     * @param $borrowedAmount
+     * @param $annualInterestRate
+     * @param $termOfLoan
+     * @param int $deferredFormLoan
+     * @return float|int
+     */
+    function AnnuallyInterestRateCost($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan = 0){
+        return ($borrowedAmount*($annualInterestRate)*($termOfLoan+$deferredFormLoan)/100);
+    }
+
+    /**
+     * @param $borrowedAmount
+     * @param $annualInterestRate
+     * @param $termOfLoan
+     * @param $deferredFormLoan
+     * @return float|int
+     */
+    function annuallyDueDate($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan){
+        return $monthlyDueDate =
+            (
+                $borrowedAmount +
+                $this->totalLoanCost($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan)
+            )/(
+                $termOfLoan + $deferredFormLoan
+            );
+    }
+
+    /**
+     * @param $borrowedAmount
+     * @param $dueDate
+     * @param $annualInterestRate
+     * @param $termOfLoan
+     * @param int $deferredFormLoan
+     * @return float|int
+     */
+    function annualyBorrowedAmountRemain($borrowedAmount, $dueDate, $annualInterestRate, $termOfLoan, $deferredFormLoan = 0 ){
+        return $monthlyBorrowedAmountRemain = $borrowedAmount -
+            ($dueDate -
+                $this->annuallyInterestRateCost(
+                    $borrowedAmount,
+                    $annualInterestRate,
+                    $termOfLoan,
+                    $deferredFormLoan)
+            );
+    }
+
+
+    /**
+     * @param int $quantityProduct
+     * @param int $salesPriceProduct
+     * @return float|int
+     */
+    function annualSalesProduct (int $quantityProduct,int $salesPriceProduct){
+        return $annualSalesProduct = $quantityProduct*$salesPriceProduct;
+    }
+
+    /**
+     * @param array $annualSalesProduct
+     * @return int|mixed
+     */
+    function annualSales(array $annualSalesProduct){
+            $annualSales = 0;
+        foreach ($annualSalesProduct as $value){
+            $annualSales += $value;
+        }
+            return $annualSales;
+    }
+
+
+
 }

@@ -132,12 +132,12 @@ class HumanResourceController extends AbstractController
     }
 
 
-//    public function baseSalary(){
-//        $user = $this->getUser();
-//        $game = $user->getGame();
-//
-//        return $smic = $game->getSmic();
-//    }
+    public function baseSalary(){
+        $user = $this->getUser();
+        $game = $user->getGame();
+
+        return $smic = $game->getSmic();
+    }
 
 
 
