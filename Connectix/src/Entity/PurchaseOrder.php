@@ -24,7 +24,7 @@ class PurchaseOrder
     /**
      * @ORM\Column(type="integer")
      */
-    private $productNumber;
+    private $productQuantityPurchase;
 
     /**
      * @ORM\Column(type="integer")
@@ -70,14 +70,14 @@ class PurchaseOrder
         return $this;
     }
 
-    public function getProductNumber(): ?int
+    public function getProductQuantityPurchase(): ?int
     {
-        return $this->productNumber;
+        return $this->productQuantityPurchase;
     }
 
-    public function setProductNumber(int $productNumber): self
+    public function setProductQuantityPurchase(int $productQuantityPurchase): self
     {
-        $this->productNumber = $productNumber;
+        $this->productQuantityPurchase = $productQuantityPurchase;
 
         return $this;
     }
