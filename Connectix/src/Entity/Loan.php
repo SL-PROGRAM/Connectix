@@ -41,6 +41,11 @@ class Loan
      */
     private $socity;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $DelayLoanRepayment;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,18 @@ class Loan
     public function setSocity(?Socity $socity): self
     {
         $this->socity = $socity;
+
+        return $this;
+    }
+
+    public function getDelayLoanRepayment(): ?int
+    {
+        return $this->DelayLoanRepayment;
+    }
+
+    public function setDelayLoanRepayment(int $DelayLoanRepayment): self
+    {
+        $this->DelayLoanRepayment = $DelayLoanRepayment;
 
         return $this;
     }
