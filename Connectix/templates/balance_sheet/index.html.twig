@@ -1,0 +1,713 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BalanceSheetController!{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">
+            <TABLE BORDER="05" CELLPADDING=2 align="center" >
+                <TR>
+                    <TD align="center" colspan="11">BILAN ACTIF</TD>
+                </TR>
+                <TR>
+                    <TD colspan="2">Désignation de l'entreprise : </TD>
+                    <TD colspan="3"></TD>
+                    <TD colspan="5" align="right">Durée de l'exercice exprimée en nombre de mois* :</TD>
+                    <TD colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="2">Adresse de l'entreprise :</TD>
+                    <TD colspan="3"></TD>
+                    <TD colspan="5" align="right">Durée de l'exercice précédent exprimée en nombre de mois* :</TD>
+                    <TD colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="2">Numéro SIRET* :</TD>
+                    <TD colspan="3"></TD>
+                    <TD colspan="5" align="right">Code APE :</TD>
+                    <TD colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="5" rowspan="2" class="rowspan" align="center">Déclaration souscrite en €</TD>
+                    <TD colspan="4" align="right">Exercice N, clos le : </TD>
+                    <TD class="col-année-n" colspan="1">31/12/20N</TD>
+                    <TD class="col-année-n-1" colspan="1">31/12/20N-1</TD>
+                </TR>
+                <TR>
+                    <TD align="center" colspan="2">Brut</TD>
+                    <TD colspan="2" align="center">Amortissements, provisions</TD>
+                    <TD class="col-année-n" colspan="1">Net</TD>
+                    <TD class="col-année-n-1" colspan="1">Net</TD>
+                </TR>
+                <TR>
+                    <TD colspan="5" align="center">Capital souscrit non appelé (I)</TD>
+                    <TD colspan="1" align="center">AA</TD>
+                    <TD class="col-interdit" colspan="2" align="center"></TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="1" rowspan="18" class="rowspan" valign="middle" align="center">ACTIF IMMOBILISÉ*</TD>
+                    <TD colspan="1" rowspan="6" class="rowspan" valign="middle" align="center"><div>IMMOBILISATIONS</div><div>INCORPORELLES</div> </TD>
+                    <TD colspan="3">Frais d'établissement*</TD>
+                    <TD colspan="1" align="center">AB</TD>
+                    <TD colspan="1" align="center">10000000</TD>
+                    <TD colspan="1" align="center">AC</TD>
+                    <TD colspan="1" align="center">10000000</TD>
+                    <TD class="col-année-n" colspan="1">10000000</TD>
+                    <TD class="col-année-n-1" colspan="1">10000000</TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Frais de recherche et de développement*</TD>
+                    <TD colspan="1" align="center">AD</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">AE</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Concession, brevets et droits similaire</TD>
+                    <TD colspan="1" align="center">AF</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">AG</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Fonds commercial (1)</TD>
+                    <TD colspan="1" align="center">AH</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">AI</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Autres immobilisations incorporelles</TD>
+                    <TD colspan="1" align="center">AJ</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">AK</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Avances et acomptes sur immobilisations incorporelles</TD>
+                    <TD colspan="1" align="center">AL</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">AM</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+
+                <TR>
+                    <TD colspan="1" rowspan="6" class="rowspan" valign="middle" align="center"><div>IMMOBILISATIONS</div><div>CORPORELLES</div> </TD>
+                    <TD colspan="3">Terrains</TD>
+                    <TD colspan="1" align="center">AN</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">AO</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Constructions</TD>
+                    <TD colspan="1" align="center">AP</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">AQ</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Installations techniques, matériels et outillage industriels</TD>
+                    <TD colspan="1" align="center">AR</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">AS</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Autres immobilisations corporelles</TD>
+                    <TD colspan="1" align="center">AT</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">AU</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Immobilisations en cours</TD>
+                    <TD colspan="1" align="center">AV</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">AW</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Avances et acomptes sur immobilisations corporelles</TD>
+                    <TD colspan="1" align="center">AX</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">AY</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="1" rowspan="6" class="rowspan" valign="middle" align="center"><div>IMMOBILISATIONS</div><div>FINANCIERES (2)</div>  </TD>
+                    <TD colspan="3">Participations évalués par mise en équivalence</TD>
+                    <TD colspan="1" align="center">CS</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">CT</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Autres participations</TD>
+                    <TD colspan="1" align="center">CU</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">CV</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Créances rattachées à des participations</TD>
+                    <TD colspan="1" align="center">BB</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">BC</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Autres titres immobilisés</TD>
+                    <TD colspan="1" align="center">BD</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">BE</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Prêts</TD>
+                    <TD colspan="1" align="center">BF</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">BG</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Autres immobilisations financières*</TD>
+                    <TD colspan="1" align="center">BH</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">BI</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <tr class="resultat">
+                    <td colspan="5" align="right">TOTAL (II)</td>
+                    <td colspan="1" align="center">BJ</td>
+                    <td colspan="1" align="center"></td>
+                    <td colspan="1" align="center">BK</td>
+                    <td colspan="1" align="center"></td>
+                    <td colspan="1"></td>
+                    <td colspan="1"></td>
+                </tr>
+
+
+
+                <TR>
+                    <TD colspan="1" rowspan="12" class="rowspan" valign="middle" align="center">ACTIF CIRCULANT*</TD>
+                    <TD colspan="1" rowspan="5" class="rowspan" valign="middle" align="center">STOCKS*</TD>
+                    <TD colspan="3">Matières premières, approvisionnements</TD>
+                    <TD colspan="1" align="center">BL</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">BM</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">En cours de production de biens/TD>
+                    <TD colspan="1" align="center">BN</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">BO</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">En cours de production de services</TD>
+                    <TD colspan="1" align="center">BP</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">BQ</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Produits intermédiaires et finis</TD>
+                    <TD colspan="1" align="center">BR</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">BS</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Marchandises</TD>
+                    <TD colspan="1" align="center">BT</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">BU</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+
+                <TR>
+                    <TD colspan="1" class="rowspan" valign="middle" align="center"></TD>
+                    <TD colspan="3">Avances et acomptes versés sur commandes</TD>
+                    <TD colspan="1" align="center">BV</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">BW</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+
+                <TR>
+                    <TD colspan="1" rowspan="3" class="rowspan" valign="middle" align="center">CREANCES</TD>
+                    <TD colspan="3">Clients et comptes rattachés* (3)</TD>
+                    <TD colspan="1" align="center">BX</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">BY</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Autres créances (3)</TD>
+                    <TD colspan="1" align="center">BZ</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">CA</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Capital souscrit et appelé, non versé</TD>
+                    <TD colspan="1" align="center">CB</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">CC</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+
+                <TR>
+                    <TD colspan="1" rowspan="3" class="rowspan" valign="middle" align="center">DIVERS</TD>
+                    <TD colspan="3">Valeurs mobilières de placement (dont actions propres)</TD>
+                    <TD colspan="1" align="center">CD</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">CE</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Banque</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Disponibilités</TD>
+                    <TD colspan="1" align="center">CF</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">CG</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+
+                <TR>
+                    <TD colspan="2" rowspan="6" class="rowspan" valign="middle" align="center"><div>COMPTES DE</div><div>REGULARISATION</div>  </TD>
+                    <TD colspan="3">Charges constatées d'avance* (3) (E)</TD>
+                    <TD colspan="1" align="center">CH</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">CI</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR class="resultat">
+                    <TD colspan="3">TOTAL (III)</TD>
+                    <TD colspan="1" align="center">CJ</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">CK</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1"></TD>
+                    <TD colspan="1"></TD>
+                </TR>
+
+                <TR>
+                    <TD colspan="3">Charges à répartir sur plusieurs exercices*                     (IV)</TD>
+                    <TD colspan="1" align="center">CL</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-interdit" colspan="1" align="center"></TD>
+                    <TD class="col-interdit" colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Primes de remboursement des obligations                     (V)</TD>
+                    <TD colspan="1" align="center">CL</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-interdit" colspan="1" align="center"></TD>
+                    <TD class="col-interdit" colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3">Ecarts de conversion actif*                                     (VI)</TD>
+                    <TD colspan="1" align="center">CL</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD class="col-interdit" colspan="1" align="center"></TD>
+                    <TD class="col-interdit" colspan="1" align="center"></TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR class="resultat">
+                    <TD colspan="3">TOTAL GÉNÉRAL(I a IV)</TD>
+                    <TD colspan="1" align="center">CJ</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">CK</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1"></TD>
+                    <TD colspan="1"></TD>
+                </TR>
+
+            </TABLE>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            <TABLE BORDER="05" CELLPADDING=2 align="center">
+                <TR>
+                    <TD align="center" colspan="11">BILAN PASSIF</TD>
+                </TR>
+                <TR>
+                    <TD colspan="2">Désignation de l'entreprise : </TD>
+                    <TD colspan="3"></TD>
+                    <TD colspan="5" align="right">Durée de l'exercice exprimée en nombre de mois* :</TD>
+                    <TD colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="2">Adresse de l'entreprise :</TD>
+                    <TD colspan="3"></TD>
+                    <TD colspan="5" align="right">Durée de l'exercice précédent exprimée en nombre de mois* :</TD>
+                    <TD colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="2">Numéro SIRET* :</TD>
+                    <TD colspan="3"></TD>
+                    <TD colspan="5" align="right">Code APE :</TD>
+                    <TD colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="8" align="center">(Ne pas reporter le montant des centimes)*</TD>
+                    <TD colspan="2">Exercice N</TD>
+                    <TD colspan="1">Exercice N-1</TD>
+                </TR>
+                <TR>
+                    <TD colspan="2" rowspan="12" class="rowspan" valign="middle" align="center"><div>CAPITAUX</div><div>PROPRES</div> </TD>
+                    <TD colspan="3"> Capital social ou individuel (1)* </TD>
+                    <TD colspan="1" align="right">(dont versé :</TD>
+                    <TD colspan="1" align="center">10000000</TD>
+                    <TD colspan="1">)</TD>
+                    <TD colspan="1" align="center">DA</TD>
+                    <TD class="col-année-n" colspan="1">10000000</TD>
+                    <TD class="col-année-n-1" colspan="1">10000000</TD>
+                </TR>
+                <TR>
+                    <TD colspan="6"> Primes d'émission, de fusion, d'apports, ……</TD>
+                    <TD colspan="1" align="center">DB</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3"> Ecarts de réévaluation (2)*  </TD>
+                    <TD colspan="1" align="right">(dont écart d'équivalence :</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1">)</TD>
+                    <TD colspan="1" align="center">DC</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6">Réserve légale (3)</TD>
+                    <TD colspan="1" align="center">DD</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6"> Réserves statutaires ou contractuelles</TD>
+                    <TD colspan="1" align="center">DE</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="3"> Réserves réglementées (3)*  </TD>
+                    <TD colspan="1" align="right">(Dont réserve spéciale des provisions pour fluctuations des cours :</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1">)</TD>
+                    <TD colspan="1" align="center">DF</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="2"> Autres réserves  </TD>
+                    <TD colspan="2" align="right">(Dont réserve relative à l'achat d'œuvres originales d'artistes vivants :</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1">)*</TD>
+                    <TD colspan="1" align="center">DG</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6">Report à nouveau</TD>
+                    <TD colspan="1" align="center">DH</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6">RÉSULTAT DE L'EXERCICE (bénéfice ou perte)</TD>
+                    <TD colspan="1" align="center">DI</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6">Subvention d'investissement</TD>
+                    <TD colspan="1" align="center">DJ</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6">Provisions réglementées*</TD>
+                    <TD colspan="1" align="center">DK</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR class="resultat">
+                    <TD colspan="6">TOTAL (I)</TD>
+                    <TD colspan="1" align="center">DL</TD>
+                    <TD colspan="1"></TD>
+                    <TD colspan="1"></TD>
+                </TR>
+
+                <TR>
+                    <TD colspan="2" rowspan="3" class="rowspan" valign="middle" align="center">
+                        <div>AUTRES</div>
+                        <div>FONDS</div>
+                        <div>PROPRES</div>  
+                    </TD>
+                    <TD colspan="6"> Produits des émissions de titres participatifs </TD>
+                    <TD colspan="1" align="center">DM</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6"> Avances conditionnées </TD>
+                    <TD colspan="1" align="center">DN</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR class="resultat">
+                    <TD colspan="6">TOTAL (II)</TD>
+                    <TD colspan="1" align="center">DO</TD>
+                    <TD colspan="1"></TD>
+                    <TD colspan="1"></TD>
+                </TR>
+
+
+                <TR>
+                    <TD colspan="2" rowspan="3" class="rowspan" valign="middle" align="center">
+                        <div>PROVISIONS</div>
+                        <div>POUR RISQUES</div>
+                        <div>ET CHARGES</div>  
+                    </TD>
+                    <TD colspan="6"> Provisions pour risques</TD>
+                    <TD colspan="1" align="center">DP</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6"> Provisions pour charges </TD>
+                    <TD colspan="1" align="center">DQ</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR class="resultat">
+                    <TD colspan="6">TOTAL (III)</TD>
+                    <TD colspan="1" align="center">DR</TD>
+                    <TD colspan="1"></TD>
+                    <TD colspan="1"></TD>
+                </TR>
+
+                <TR>
+                    <TD colspan="2" rowspan="9" class="rowspan" valign="middle" align="center">DETTES (4)</TD>
+                    <TD colspan="6"> Emprunts obligataires convertibles</TD>
+                    <TD colspan="1" align="center">DS</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6"> Autres emprunts obligataires</TD>
+                    <TD colspan="1" align="center">DT</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6">Emprunts et dettes auprès des établissements de crédit (5)</TD>
+                    <TD colspan="1" align="center">DU</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="2"> Emprunts et dettes financières diverses  </TD>
+                    <TD colspan="2" align="right">(Dont emprunts participatifs :</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1">)</TD>
+                    <TD colspan="1" align="center">DV</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6">Avances et acomptes reçus sur commandes en cours</TD>
+                    <TD colspan="1" align="center">DW</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6">Dettes fournisseurs et comptes rattachés</TD>
+                    <TD colspan="1" align="center">DX</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="2"> Dettes fiscales et sociales </TD>
+                    <TD colspan="2" align="right">(Dont IS :</TD>
+                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1">)</TD>
+                    <TD colspan="1" align="center">DY</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6">Dettes sur immobilisations et comptes rattachés</TD>
+                    <TD colspan="1" align="center">DZ</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="6">Autres dettes</TD>
+                    <TD colspan="1" align="center">EA</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="2">Compte régul.</TD>
+                    <TD colspan="6">Produits constatés d'avance (IV)</TD>
+                    <TD colspan="1" align="center">EB</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR class="resultat">
+                    <TD colspan="2"></TD>
+                    <TD colspan="6">TOTAL (III)</TD>
+                    <TD colspan="1" align="center">EC</TD>
+                    <TD colspan="1"></TD>
+                    <TD colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="2"></TD>
+                    <TD colspan="6">Ecarts de conversion passif* (V)</TD>
+                    <TD colspan="1" align="center">ED</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR class="resultat">
+                    <TD colspan="2"></TD>
+                    <TD colspan="6">TOTAL GÉNÉRAL (I à V)</TD>
+                    <TD colspan="1" align="center">EE</TD>
+                    <TD colspan="1"></TD>
+                    <TD colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="1" class="rowspan" rowspan="7">RENVOIS</TD>
+                    <TD colspan="1" >(1)</TD>
+                    <TD colspan="6">Ecart de réévaluation incorporé au capital</TD>
+                    <TD colspan="1" align="center" class="col-interdit">1B</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="1" rowspan="3">(2)</TD>
+                    <TD colspan="1" rowspan="3">dont</TD>
+                    <TD colspan="5">Réserve spéciale de réévaluation (1959)</TD>
+                    <TD colspan="1" align="center" class="col-interdit">1C</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="5">Ecart de réévaluation libre</TD>
+                    <TD colspan="1" align="center" class="col-interdit">1C</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="5">Réserve de réévaluation (1976)</TD>
+                    <TD colspan="1" align="center" class="col-interdit">1C</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="1" >(3)</TD>
+                    <TD colspan="6">Dont réserve réglementée des plus-values à long terme*</TD>
+                    <TD colspan="1" align="center" >EF</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="1" >(4)</TD>
+                    <TD colspan="6">Dettes et produits constatés d'avance à moins d'un an</TD>
+                    <TD colspan="1" align="center" >EG</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+                <TR>
+                    <TD colspan="1" >(5)</TD>
+                    <TD colspan="6">Dont concours bancaires courants et soldes créditeurs de banques et CCP</TD>
+                    <TD colspan="1" align="center" >EH</TD>
+                    <TD class="col-année-n" colspan="1"></TD>
+                    <TD class="col-année-n-1" colspan="1"></TD>
+                </TR>
+
+
+            </TABLE>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
