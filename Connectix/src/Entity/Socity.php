@@ -23,10 +23,6 @@ class Socity
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $moneyStart;
 
     /**
      * @ORM\Column(type="integer")
@@ -122,24 +118,6 @@ class Socity
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getMoneyStart(): ?int
-    {
-        return $this->moneyStart;
-    }
-
-    /**
-     * @param int $moneyStart
-     * @return Socity
-     */
-    public function setMoneyStart(int $moneyStart): self
-    {
-        $this->moneyStart = $moneyStart;
-
-        return $this;
-    }
 
     /**
      * @return int|null

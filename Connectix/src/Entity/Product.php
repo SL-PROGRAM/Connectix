@@ -46,7 +46,7 @@ class Product
     /**
      * @ORM\Column(type="integer")
      */
-    private $productiorActivityCost;
+    private $productionActivityCost;
 
     /**
      * @ORM\Column(type="integer")
@@ -89,6 +89,21 @@ class Product
      * @ORM\ManyToOne(targetEntity="App\Entity\Seasonality", inversedBy="products")
      */
     private $seasonality;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rowMaterialCost;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $manpowerCost;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $productiorTimeCost;
 
 
     public function __construct()
@@ -203,18 +218,18 @@ class Product
     /**
      * @return int|null
      */
-    public function getProductiorActivityCost(): ?int
+    public function getProductionActivityCost(): ?int
     {
-        return $this->productiorActivityCost;
+        return $this->productionActivityCost;
     }
 
     /**
-     * @param int $productiorActivityCost
+     * @param int $productionActivityCost
      * @return Product
      */
-    public function setProductiorActivityCost(int $productiorActivityCost): self
+    public function setProductionActivityCost(int $productionActivityCost): self
     {
-        $this->productiorActivityCost = $productiorActivityCost;
+        $this->productionActivityCost = $productionActivityCost;
 
         return $this;
     }
@@ -373,6 +388,42 @@ class Product
     public function setSeasonality(?Seasonality $seasonality): self
     {
         $this->seasonality = $seasonality;
+
+        return $this;
+    }
+
+    public function getRowMaterialCost(): ?int
+    {
+        return $this->rowMaterialCost;
+    }
+
+    public function setRowMaterialCost(int $rowMaterialCost): self
+    {
+        $this->rowMaterialCost = $rowMaterialCost;
+
+        return $this;
+    }
+
+    public function getManpowerCost(): ?int
+    {
+        return $this->manpowerCost;
+    }
+
+    public function setManpowerCost(int $manpowerCost): self
+    {
+        $this->manpowerCost = $manpowerCost;
+
+        return $this;
+    }
+
+    public function getProductiorTimeCost(): ?int
+    {
+        return $this->productiorTimeCost;
+    }
+
+    public function setProductiorTimeCost(int $productiorTimeCost): self
+    {
+        $this->productiorTimeCost = $productiorTimeCost;
 
         return $this;
     }
