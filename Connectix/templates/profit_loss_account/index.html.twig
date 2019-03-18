@@ -1,0 +1,274 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfitLossAccountController!{% endblock %}
+
+{% block body %}
+
+    <TABLE ALIGN="center" BORDER="05">
+        <CAPTION> COMPTE DE RESULTAT </CAPTION>
+
+        <TR>
+            <TH colspan="8" rowspan="2" align="left">Désignation de l'entreprise</TH>
+            <TD colspan="2" >Socity</TD>
+        </TR>
+
+        <TR>
+            <TD class="col-année-n" colspan="1">Exercice N</TD>
+            <TD class="col-année-n-1" colspan="1">Exercice N-1</TD>
+        </TR>
+        <TR>
+            <TD colspan="1" rowspan="9" class="rowspan" >Produits d'exploitation</TD>
+            <TD colspan="2">Ventes de marchandises</TD>
+            <TD colspan="1">FA</TD>
+            <TD colspan="1"></TD>
+            <TD colspan="1">FB</TD>
+            <TD colspan="1"></TD>
+            <TD colspan="1">FC</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="2">Production vendue : Biens</TD>
+            <TD colspan="1">FD</TD>
+            <TD colspan="1"></TD>
+            <TD colspan="1">FE</TD>
+            <TD colspan="1"></TD>
+            <TD colspan="1">FF</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="2">Production vendu : Services</TD>
+            <TD colspan="1">FG</TD>
+            <TD colspan="1"></TD>
+            <TD colspan="1">FH</TD>
+            <TD colspan="1"></TD>
+            <TD colspan="1">FI</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="2">Chiffre d'affaires nets</TD>
+            <TD colspan="1">FJ</TD>
+            <TD colspan="1"></TD>
+            <TD colspan="1">FK</TD>
+            <TD colspan="1"></TD>
+            <TD colspan="1">FL</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6">Production stockée</TD>
+            <TD colspan="1">FM</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6">Subvention d'exploitation</TD>
+            <TD colspan="1">FN</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6">Reprises sur amortissements et provisions, transfert de charges* (9)</TD>
+            <TD colspan="1">FO</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6">Autres produits (1) (11)</TD>
+            <TD colspan="1">FP</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6" align="right" class="total-intermediaire">Total des produits d'exploitations (I) </TD>
+            <TD colspan="1">FQ</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+
+        <TR>
+            <TD colspan="1" rowspan="14" class="rowspan">Charges d'exploitation</TD>
+            <TD colspan="6">Achats de marchandises (y compris droits de douane)*</TD>
+            <TD colspan="1">FR</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6">Variation de stock (marchandises)*</TD>
+            <TD colspan="1">FS</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6">Achats de matières premières et autres approvisionnements ( y compris droits de douane)*</TD>
+            <TD colspan="1">FT</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6">Variation de stock (matières premières et approvisionnements)*</TD>
+            <TD colspan="1">FU</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6">Autres achats et charges externes (3) (6bis)*</TD>
+            <TD colspan="1">FV</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6">Impôts, taxes, versements assimilés*</TD>
+            <TD colspan="1">FW</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6">Salaires et traitements*</TD>
+            <TD colspan="1">FX</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6">Charges sociales (10)/TD>
+            <TD colspan="1">FY</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="1" rowspan="4">Dotations d'exploitation</TD>
+            <TD colspan="1" rowspan="2">sur immobilisation</TD>
+            <TD colspan="4">- dotations aux amortissements*</TD>
+            <TD colspan="1">FZ</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="4">- dotations aux provisions *</TD>
+            <TD colspan="1">GA</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="5"> - sur actif circulant : dotations aux provisions</TD>
+            <TD colspan="1">GB</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="5"> - Pour risques et charges : dotations aux provisions</TD>
+            <TD colspan="1">GC</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6">Autres charges (12)</TD>
+            <TD colspan="1">GD</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6" align="right" class="total-intermediaire">Total des charges d'exploitation (4) (II)</TD>
+            <TD colspan="1">GE</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR class="resultat">
+            <TH colspan="7" align="left">1 - RÉSULTAT D'EXPLOITATION (I - II)</TH>
+            <TD colspan="1">GG</TD>
+            <TD colspan="1"></TD>
+            <TD colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="1" rowspan="2"></TD>
+            <TD colspan="6" align="left">Autres intérêts et produits assimilés (5)</TD>
+            <TD colspan="1">GL</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6" align="right" class="total-intermediaire">Total des produits financiers (V)</TD>
+            <TD colspan="1">GP</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="1" rowspan="2"></TD>
+            <TD colspan="6" align="left">Intérêts et charges assimilées (6)</TD>
+            <TD colspan="1">GR</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6" align="right" class="total-intermediaire">Total des charges financières (VI)</TD>
+            <TD colspan="1">GU</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR class="resultat">
+            <TH colspan="7" align="left"> 2 - RÉSULTAT FINANCIER (V - VI)</TH>
+            <TD colspan="1">GV</TD>
+            <TD colspan="1"></TD>
+            <TD colspan="1"></TD>
+        </TR>
+        <TR class="resultat">
+            <TH colspan="7" align="left">3 - RÉSULTAT COURANT AVANT IMPÔTS (I-II+III-IV +V - VI)</TH>
+            <TD colspan="1">GW</TD>
+            <TD colspan="1"></TD>
+            <TD colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="1" rowspan="2"></TD>
+            <TD colspan="6" align="left">Produits exceptionnels sur opérations en capital            VII</TD>
+            <TD colspan="1">HB</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6" align="right" class="total-intermediaire">Charges exceptionnelles sur opérations en capital*        VIII</TD>
+            <TD colspan="1">HF</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR class="resultat">
+            <TH colspan="7" align="left"> 4  -  RÉSULTAT EXCEPTIONNEL (VII - VIII)</TH>
+            <TD colspan="1">HI</TD>
+            <TD colspan="1"></TD>
+            <TD colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="1" rowspan="2"></TD>
+            <TD colspan="6" align="left">  Participation des salariés aux résultats de l'entreprise       (IX)</TD>
+            <TD colspan="1">HJ</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="6" align="right" class="total-intermediaire">  Impôts sur les bénéfices*                                   (X)</TD>
+            <TD colspan="1">HK</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="3" rowspan="2"></TD>
+            <TD colspan="4" align="left" class="total-intermediaire-benefice">      TOTAL DES PRODUITS (I+V+VII)</TD>
+            <TD colspan="1">HL</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR>
+            <TD colspan="4" align="left" class="total-intermediaire-benefice">   TOTAL DES CHARGES (II+VI+VIII+IX+X)</TD>
+            <TD colspan="1">HM</TD>
+            <TD class="col-année-n" colspan="1"></TD>
+            <TD  class="col-année-n-1" colspan="1"></TD>
+        </TR>
+        <TR class="resultat">
+            <TH colspan="7" align="left"> 5 - BÉNÉFICE OU PERTE (Total des produits - total des charges)</TH>
+            <TD colspan="1">HN</TD>
+            <TD colspan="1"></TD>
+            <TD colspan="1"></TD>
+        </TR>
+    </TABLE>
+{% endblock %}
