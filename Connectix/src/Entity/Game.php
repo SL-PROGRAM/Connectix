@@ -26,27 +26,27 @@ class Game
     /**
      * @ORM\Column(type="integer")
      */
-    private $tva;
+    private $tva = 20;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $maxturn;
+    private $maxturn = 20;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $turn;
+    private $turn = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $socityNumber;
+    private $socityNumber = 5;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
-    private $smic;
+    private $smic = 1521.25 ;
 
     /**
      * @ORM\Column(type="datetime")
@@ -71,11 +71,6 @@ class Game
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesPriceMaxLvl1;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
     private $salesPriceMinLvl2;
 
     /**
@@ -87,6 +82,11 @@ class Game
      * @ORM\Column(type="integer")
      */
     private $salesPriceMinLvl4;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $salesPriceMaxLvl1;
 
     /**
      * @ORM\Column(type="integer")
@@ -227,6 +227,96 @@ class Game
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="game")
      */
     private $users;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $taxTurnover = 2;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $employerContributions = 40;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $payTax = 3;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $variableExternalCharges = 8;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rowMaterialCost = 10;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rawMaterialMin;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rawMaterialMax;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $manPowerMin = 2;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $manPowerMax = 10;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $productionTimeMin = 2;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $productionTimeMax = 10 ;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $taxRate = 28;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $employeeParticipation = 5;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $socityStartShareCapital = 400000;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $socityStartLoanAmount = 400000;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $socityStartLoanDuration = 5;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $socityStartLoanInterestRate = 2;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $annualHoursWork = 1607;
 
     /**
      * Game constructor.
@@ -868,6 +958,222 @@ class Game
                 $user->setGame(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTaxTurnover(): ?int
+    {
+        return $this->taxTurnover;
+    }
+
+    public function setTaxTurnover(int $taxTurnover): self
+    {
+        $this->taxTurnover = $taxTurnover;
+
+        return $this;
+    }
+
+    public function getEmployerContributions(): ?int
+    {
+        return $this->employerContributions;
+    }
+
+    public function setEmployerContributions(int $employerContributions): self
+    {
+        $this->employerContributions = $employerContributions;
+
+        return $this;
+    }
+
+    public function getPayTax(): ?int
+    {
+        return $this->payTax;
+    }
+
+    public function setPayTax(int $payTax): self
+    {
+        $this->payTax = $payTax;
+
+        return $this;
+    }
+
+    public function getVariableExternalCharges(): ?int
+    {
+        return $this->variableExternalCharges;
+    }
+
+    public function setVariableExternalCharges(int $variableExternalCharges): self
+    {
+        $this->variableExternalCharges = $variableExternalCharges;
+
+        return $this;
+    }
+
+    public function getRowMaterialCost(): ?int
+    {
+        return $this->rowMaterialCost;
+    }
+
+    public function setRowMaterialCost(int $rowMaterialCost): self
+    {
+        $this->rowMaterialCost = $rowMaterialCost;
+
+        return $this;
+    }
+
+    public function getRawMaterialMin(): ?int
+    {
+        return $this->rawMaterialMin;
+    }
+
+    public function setRawMaterialMin(int $rawMaterialMin): self
+    {
+        $this->rawMaterialMin = $rawMaterialMin;
+
+        return $this;
+    }
+
+    public function getRawMaterialMax(): ?int
+    {
+        return $this->rawMaterialMax;
+    }
+
+    public function setRawMaterialMax(int $rawMaterialMax): self
+    {
+        $this->rawMaterialMax = $rawMaterialMax;
+
+        return $this;
+    }
+
+    public function getManPowerMin(): ?int
+    {
+        return $this->manPowerMin;
+    }
+
+    public function setManPowerMin(int $manPowerMin): self
+    {
+        $this->manPowerMin = $manPowerMin;
+
+        return $this;
+    }
+
+    public function getManPowerMax(): ?int
+    {
+        return $this->manPowerMax;
+    }
+
+    public function setManPowerMax(int $manPowerMax): self
+    {
+        $this->manPowerMax = $manPowerMax;
+
+        return $this;
+    }
+
+    public function getProductionTimeMin(): ?int
+    {
+        return $this->productionTimeMin;
+    }
+
+    public function setProductionTimeMin(int $productionTimeMin): self
+    {
+        $this->productionTimeMin = $productionTimeMin;
+
+        return $this;
+    }
+
+    public function getProductionTimeMax(): ?int
+    {
+        return $this->productionTimeMax;
+    }
+
+    public function setProductionTimeMax(int $productionTimeMax): self
+    {
+        $this->productionTimeMax = $productionTimeMax;
+
+        return $this;
+    }
+
+    public function getTaxRate(): ?int
+    {
+        return $this->taxRate;
+    }
+
+    public function setTaxRate(int $taxRate): self
+    {
+        $this->taxRate = $taxRate;
+
+        return $this;
+    }
+
+    public function getEmployeeParticipation(): ?int
+    {
+        return $this->employeeParticipation;
+    }
+
+    public function setEmployeeParticipation(int $employeeParticipation): self
+    {
+        $this->employeeParticipation = $employeeParticipation;
+
+        return $this;
+    }
+
+    public function getSocityStartShareCapital(): ?int
+    {
+        return $this->socityStartShareCapital;
+    }
+
+    public function setSocityStartShareCapital(int $socityStartShareCapital): self
+    {
+        $this->socityStartShareCapital = $socityStartShareCapital;
+
+        return $this;
+    }
+
+    public function getSocityStartLoanAmount(): ?int
+    {
+        return $this->socityStartLoanAmount;
+    }
+
+    public function setSocityStartLoanAmount(int $socityStartLoanAmount): self
+    {
+        $this->socityStartLoanAmount = $socityStartLoanAmount;
+
+        return $this;
+    }
+
+    public function getSocityStartLoanDuration(): ?int
+    {
+        return $this->socityStartLoanDuration;
+    }
+
+    public function setSocityStartLoanDuration(int $socityStartLoanDuration): self
+    {
+        $this->socityStartLoanDuration = $socityStartLoanDuration;
+
+        return $this;
+    }
+
+    public function getSocityStartLoanInterestRate(): ?int
+    {
+        return $this->socityStartLoanInterestRate;
+    }
+
+    public function setSocityStartLoanInterestRate(int $socityStartLoanInterestRate): self
+    {
+        $this->socityStartLoanInterestRate = $socityStartLoanInterestRate;
+
+        return $this;
+    }
+
+    public function getAnnualHoursWork(): ?int
+    {
+        return $this->annualHoursWork;
+    }
+
+    public function setAnnualHoursWork(int $annualHoursWork): self
+    {
+        $this->annualHoursWork = $annualHoursWork;
 
         return $this;
     }
