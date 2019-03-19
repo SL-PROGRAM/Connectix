@@ -21,16 +21,37 @@ class ProfitLossAccountController extends AbstractController
         $socity = $user->getSocity();
         $game = $user->getGame();
 
+        $actualYear = $this->actualYear();
+
 
 
 
         return $this->render('profit_loss_account/index.html.twig', [
             'controller_name' => 'ProfitLossAccountController',
+            'actualYear' => $actualYear,
+
         ]);
     }
 
     private function actualYear(){
         //TODO return a table to index
+        $goodsSale = 0;
+        $productionSoldGoods = 0;
+        $productionSoldServices = 0;
+
+        $netSales = $this->netSales($goodsSale, $productionSoldGoods, $productionSoldServices);
+
+
+         return $actualYear = [
+            "goodsSale" => $goodsSale,
+            "productionSoldGoods" => $productionSoldGoods,
+            "productionSoldServices" => $productionSoldServices,
+            "netSales" => $netSales,
+
+
+        ];
+
+
     }
 
     private function lastYear(){
@@ -276,6 +297,9 @@ class ProfitLossAccountController extends AbstractController
         return $goodsPurchases = 0;
     }
 
+    private function netSales($goodsSale, $productionSoldGoods, $productionSoldServices){
+        return $netSales = $goodsSale + $productionSoldGoods + $productionSoldServices;
+    }
     //TODO ALL FUNCTION IN "produit d'exploitation"
 
 
