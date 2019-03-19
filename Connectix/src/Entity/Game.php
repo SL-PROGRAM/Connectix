@@ -66,162 +66,162 @@ class Game
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesPriceMinLvl1;
+    private $salesPriceMinLvl1 = 1000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesPriceMinLvl2;
+    private $salesPriceMinLvl2 = 1000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesPriceMinLvl3;
+    private $salesPriceMinLvl3 = 1000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesPriceMinLvl4;
+    private $salesPriceMinLvl4 = 1000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesPriceMaxLvl1;
+    private $salesPriceMaxLvl1 = 2000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesPriceMaxLvl2;
+    private $salesPriceMaxLvl2 = 2000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesPriceMaxLvl3;
+    private $salesPriceMaxLvl3 = 2000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesPriceMaxLvl4;
+    private $salesPriceMaxLvl4 = 2000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productNumberMinLvl1;
+    private $productNumberMinLvl1 = 10000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productNumberMinLvl2;
+    private $productNumberMinLvl2 = 10000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productNumberMinLvl3;
+    private $productNumberMinLvl3  = 10000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productNumberMinLvl4;
+    private $productNumberMinLvl4 = 10000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productNumberMaxLvl1;
+    private $productNumberMaxLvl1  = 20000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productNumberMaxLvl2;
+    private $productNumberMaxLvl2 = 20000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productNumberMaxLvl3;
+    private $productNumberMaxLvl3 = 20000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productNumberMaxLvl4;
+    private $productNumberMaxLvl4 = 20000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $percentProductAvailableMinCycleLife1;
+    private $percentProductAvailableMinCycleLife1 = 25;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $percentProductAvailableMinCycleLife2;
+    private $percentProductAvailableMinCycleLife2 = 45;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $percentProductAvailableMinCycleLife3;
+    private $percentProductAvailableMinCycleLife3 = 65;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $percentProductAvailableMinCycleLife4;
+    private $percentProductAvailableMinCycleLife4 = 80;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $percentProductAvailableMaxCycleLife1;
+    private $percentProductAvailableMaxCycleLife1 = 45;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $percentProductAvailableMaxCycleLife2;
+    private $percentProductAvailableMaxCycleLife2 = 65;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $percentProductAvailableMaxCycleLife3;
+    private $percentProductAvailableMaxCycleLife3 = 80;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $percentProductAvailableMaxCycleLife4;
+    private $percentProductAvailableMaxCycleLife4 = 90;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productQualityMinCycleLife1;
+    private $productQualityMinCycleLife1 = 96;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productQualityMinCycleLife2;
+    private $productQualityMinCycleLife2 = 97;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productQualityMinCycleLife3;
+    private $productQualityMinCycleLife3 = 97;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productQualityMinCycleLife4;
+    private $productQualityMinCycleLife4 = 97;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productQualityMaxCycleLife1;
+    private $productQualityMaxCycleLife1 = 99;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productQualityMaxCycleLife2;
+    private $productQualityMaxCycleLife2 = 100;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productQualityMaxCycleLife3;
+    private $productQualityMaxCycleLife3 = 99;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productQualityMaxCycleLife4;
+    private $productQualityMaxCycleLife4 = 98;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="game")
@@ -1176,5 +1176,10 @@ class Game
         $this->annualHoursWork = $annualHoursWork;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }
