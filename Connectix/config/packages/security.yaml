@@ -16,6 +16,12 @@ security:
             security: false
         main:
             anonymous: true
+            logout:
+                path: app_home
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+
 
             # activate different ways to authenticate
 

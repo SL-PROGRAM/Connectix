@@ -80,7 +80,7 @@ class Product
     private $productAlreadySales;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="Products")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Game", inversedBy="products")
      * @ORM\JoinColumn(nullable=false)
      */
     private $game;
