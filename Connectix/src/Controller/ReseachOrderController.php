@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/reseach/order")
+ * @Route("/reseachorder")
  */
 class ReseachOrderController extends AbstractController
 {
