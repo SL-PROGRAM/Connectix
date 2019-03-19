@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Socity index{% endblock %}
+
+{% block body %}
+    <h1>Socity index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>PriceMinPublicicyImpact</th>
+                <th>PriceMaxPublicityImpact</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for socity in socities %}
+            <tr>
+                <td>{{ socity.id }}</td>
+                <td>{{ socity.name }}</td>
+                <td>{{ socity.priceMinPublicicyImpact }}</td>
+                <td>{{ socity.priceMaxPublicityImpact }}</td>
+                <td>
+                    <a href="{{ path('socity_show', {'id': socity.id}) }}">show</a>
+                    <a href="{{ path('socity_edit', {'id': socity.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('socity_new') }}">Create new</a>
+{% endblock %}
