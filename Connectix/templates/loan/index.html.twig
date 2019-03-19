@@ -1,151 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LoanController!{% endblock %}
+{% block title %}Loan index{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-md-6 col-6-lg">
-            <TABLE ALIGN="center" BORDER="05">
-                <CAPTION> Définir le crédit par la durée </CAPTION>
+    <h1>Loan index</h1>
 
-                <TR>
-                    <TH>Montant emprunté :</TH>
-                    <TD><input type="number"></TD>
-                </TR>
-                <TR>
-                    <TH>Durée en année :</TH>
-                    <TD><input type="number"></TD>
-                </TR>
-                <TR>
-                    <TH>Dont différé (en années) :</TH>
-                    <TD><input type="number"></TD>
-                </TR>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>BorrowAmount</th>
+                <th>BankInterest</th>
+                <th>MonthlyDueDate</th>
+                <th>LoanDuration</th>
+                <th>DelayLoanRepayment</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for loan in loans %}
+            <tr>
+                <td>{{ loan.id }}</td>
+                <td>{{ loan.borrowAmount }}</td>
+                <td>{{ loan.bankInterest }}</td>
+                <td>{{ loan.monthlyDueDate }}</td>
+                <td>{{ loan.loanDuration }}</td>
+                <td>{{ loan.DelayLoanRepayment }}</td>
+                <td>
+                    <a href="{{ path('loan_show', {'id': loan.id}) }}">show</a>
+                    <a href="{{ path('loan_edit', {'id': loan.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-            </TABLE>
-            <div>
-                <button>Valider</button>
-            </div>
-
-        </div>
-        <div class="col-md-6 col-6-lg">
-            <TABLE ALIGN="center" BORDER="05">
-                <CAPTION> Définir le crédit par le remboursement </CAPTION>
-
-                <TR>
-                    <TH>Montant emprunté :</TH>
-                    <TD><input type="number"></TD>
-                </TR>
-                <TR>
-                    <TH>Montant payer par mois :</TH>
-                    <TD><input type="number"></TD>
-                </TR>
-                <TR>
-                    <TH>Dont différé (en années) :</TH>
-                    <TD><input type="number"></TD>
-                </TR>
-
-            </TABLE>
-            <div>
-                <button>Valider</button>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row m-4 p-4">
-        <div class="col-md-4">
-            <TABLE ALIGN="center" BORDER="05">
-                <CAPTION> Caractéristiques du crédit </CAPTION>
-
-                <TR>
-                    <TH>Montant emprunté :</TH>
-                    <TD></TD>
-                </TR>
-                <TR>
-                    <TH>Taux d'interet annuel :</TH>
-                    <TD></TD>
-                </TR>
-                <TR>
-                    <TH>Montant payer par mois :</TH>
-                    <TD></TD>
-                </TR>
-                <TR>
-                    <TH>Dont différé (en années) :</TH>
-                    <TD></TD>
-                </TR>
-                <TR>
-                    <TH>Date de déblocage :</TH>
-                    <TD></TD>
-                </TR>
-            </TABLE>
-        </div>
-
-
-        <div class="col-md-4">
-            <TABLE ALIGN="center" BORDER="05">
-                <CAPTION> Caractéristique mensuel du crédit </CAPTION>
-                <TR>
-                    <TH>Montant mensualisé :</TH>
-                    <TD></TD>
-                </TR>
-                <TR>
-                    <TH>Coût total du crédit :</TH>
-                    <TD></TD>
-                </TR>
-                <TR>
-                    <TH>Capital Remboursé :</TH>
-                    <TD></TD>
-                </TR>
-                <TR>
-                    <TH>Capital à rembourser :</TH>
-                    <TD></TD>
-                </TR>
-            </TABLE>
-        </div>
-        <div class="col-md-4">
-            <TABLE ALIGN="center" BORDER="05">
-                <CAPTION> Durée du crédit du crédit </CAPTION>
-                <TR>
-                    <TH>Nombre total d'echéance :</TH>
-                    <TD></TD>
-                </TR>
-                <TR>
-                    <TD> - dont différé :</TD>
-                    <TD></TD>
-                </TR>
-                <TR>
-                    <TD>- dont ammortissement :</TD>
-                    <TD></TD>
-                </TR>
-                <TR>
-                    <TH>Taux périodique :</TH>
-                    <TD></TD>
-                </TR>
-            </TABLE>
-        </div>
-    </div>
-    <div class="row m-4">
-        <TABLE ALIGN="center" BORDER="05">
-            <CAPTION> Tableau d'amortissement </CAPTION>
-            <TR>
-                <TH>Période :</TH>
-                <TH>Date :</TH>
-                <TH>Restant dû :</TH>
-                <TH>Interêts :</TH>
-                <TH>Capital restant :</TH>
-                <TH>Capital amorti :</TH>
-                <TH>Échéance :</TH>
-            </TR>
-            <TR>
-                <TD> 0</TD>
-                <TD></TD>
-                <TD></TD>
-                <TD></TD>
-                <TD></TD>
-                <TD></TD>
-                <TD></TD>
-            </TR>
-
-        </TABLE>
-    </div>
+    <a href="{{ path('loan_new_duration') }}">Create new loan by duration</a>
+    <a href="{{ path('loan_new_duedate') }}">Create new loan by due date</a>
 {% endblock %}
