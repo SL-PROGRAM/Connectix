@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SalesOrder index{% endblock %}
+
+{% block body %}
+    <h1>SalesOrder index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Turn</th>
+                <th>Status</th>
+                <th>SalesPrice</th>
+                <th>ProductQuantitySales</th>
+                <th>SalesActivityCost</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sales_order in sales_orders %}
+            <tr>
+                <td>{{ sales_order.id }}</td>
+                <td>{{ sales_order.turn }}</td>
+                <td>{{ sales_order.status }}</td>
+                <td>{{ sales_order.salesPrice }}</td>
+                <td>{{ sales_order.productQuantitySales }}</td>
+                <td>{{ sales_order.salesActivityCost }}</td>
+                <td>
+                    <a href="{{ path('sales_order_show', {'id': sales_order.id}) }}">show</a>
+                    <a href="{{ path('sales_order_edit', {'id': sales_order.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('sales_order_new') }}">Create new</a>
+{% endblock %}
