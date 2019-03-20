@@ -49,9 +49,11 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $password = $user->getFirstName().'-'.$user->getPassword().'-'.$user->getLastName().'-1';
+
             $user->setPassword($this->passwordEncoder->encodePassword(
                 $user,
-                $user->getPassword()
+                $password
                 ));
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -86,6 +88,13 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $password = $user->getFirstName().'-'.$user->getPassword().'-'.$user->getLastName().'-1';
+            $user->setPassword($this->passwordEncoder->encodePassword(
+                $user,
+                $password
+            ));
+
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_index', [
