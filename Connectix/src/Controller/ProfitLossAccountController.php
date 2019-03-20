@@ -3,16 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Game;
-use App\Entity\ProductionLign;
 use App\Entity\Socity;
-use App\Repository\GameRepository;
-use App\Repository\SocityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ProfitLossAccountController extends AbstractController
 {
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/profitlossaccount", name="profit_loss_account")
      */
     public function index()
@@ -21,7 +20,8 @@ class ProfitLossAccountController extends AbstractController
         $socity = $user->getSocity();
         $game = $user->getGame();
 
-        $actualYear = $this->actualYear();
+        $actualYear = $this->actualYear($socity, $game);
+        $lastYear = $this->lastYear($socity, $game);
 
 
 
@@ -29,33 +29,272 @@ class ProfitLossAccountController extends AbstractController
         return $this->render('profit_loss_account/index.html.twig', [
             'controller_name' => 'ProfitLossAccountController',
             'actualYear' => $actualYear,
+            'lastYear' => $lastYear,
 
         ]);
     }
 
-    private function actualYear(){
+    private function actualYear(Socity $socity, Game $game){
         //TODO return a table to index
-        $goodsSale = 0;
-        $productionSoldGoods = 0;
-        $productionSoldServices = 0;
 
-        $netSales = $this->netSales($goodsSale, $productionSoldGoods, $productionSoldServices);
+        //TODO Parameter must create in entity BalanceSheet
+        //TODO change value buy GET PARAMETER
+
+        $frenchGoodsSale = 1200;
+        $internationalGoodsSale = 1200;
+        $frenchProductionSoldGoods = 1500;
+        $internationalProductionSoldGoods = 1500;
+        $frenchProductionSoldServices = 2000;
+        $internationalProductionSoldServices = 2000;
+        $stockedProduction = 100;
+        $operatingGrant = 1000;
+        $repaymentOnDepreciationAndProvisions = 1250;
+        $otherProduct = 100;
+        $goodsPurchases = 1000;
+        $changeInStock = 10000;
+        $purchasesOfRawMaterialsAndSupplies = 2000;
+        $InventoryChange = 3000;
+        $otherPurchaseAndExternalCharges = 10;
+        $payRoll = $this->payRoll($socity); //TODO change position of function too
+        $depreciationAndAmortization = 550;
+        $provisions = 05252;
+        $provisionOnCurrentAsset = 10;
+        $provisionForRiskAndCharge = 25000;
+        $otherExpenses= 20;
+        $capitalExceptionalOperatingProduct = 20;
+        $capitalExceptionalExpense = 10;
+        $intestAndSimilarExpenses = 50;
+        $intestAndSimilarProduct = 600;
 
 
-         return $actualYear = [
-            "goodsSale" => $goodsSale,
-            "productionSoldGoods" => $productionSoldGoods,
-            "productionSoldServices" => $productionSoldServices,
-            "netSales" => $netSales,
 
 
-        ];
+        return $actualYear = $this->profitLosAccountCalculator(
+            $frenchGoodsSale,
+            $internationalGoodsSale,
+            $frenchProductionSoldGoods,
+            $internationalProductionSoldGoods,
+            $frenchProductionSoldServices,
+            $internationalProductionSoldServices,
+            $stockedProduction,
+            $operatingGrant,
+            $repaymentOnDepreciationAndProvisions,
+            $otherProduct,
+            $goodsPurchases,
+            $changeInStock,
+            $purchasesOfRawMaterialsAndSupplies,
+            $InventoryChange,
+            $otherPurchaseAndExternalCharges,
+            $payRoll,
+            $depreciationAndAmortization,
+            $provisions,
+            $provisionOnCurrentAsset,
+            $provisionForRiskAndCharge,
+            $otherExpenses,
+            $capitalExceptionalOperatingProduct,
+            $capitalExceptionalExpense,
+            $intestAndSimilarExpenses,
+            $intestAndSimilarProduct,
+            $game
+        );
 
 
     }
 
-    private function lastYear(){
+    private function lastYear(Socity $socity, Game $game){
         //TODO return a table to index
+
+        //TODO Parameter must create in entity BalanceSheet
+        //TODO change value buy GET PARAMETER
+        $frenchGoodsSale = 1200;
+        $internationalGoodsSale = 1200;
+        $frenchProductionSoldGoods = 1500;
+        $internationalProductionSoldGoods = 1500;
+        $frenchProductionSoldServices = 2000;
+        $internationalProductionSoldServices = 2000;
+        $stockedProduction = 100;
+        $operatingGrant = 1000;
+        $repaymentOnDepreciationAndProvisions = 1250;
+        $otherProduct = 100;
+        $goodsPurchases = 1000;
+        $changeInStock = 10000;
+        $purchasesOfRawMaterialsAndSupplies = 2000;
+        $InventoryChange = 3000;
+        $otherPurchaseAndExternalCharges = 10;
+        $payRoll = $this->payRoll($socity); //TODO change position of function too
+        $depreciationAndAmortization = 550;
+        $provisions = 05252;
+        $provisionOnCurrentAsset = 10;
+        $provisionForRiskAndCharge = 25000;
+        $otherExpenses= 20;
+        $capitalExceptionalOperatingProduct = 20;
+        $capitalExceptionalExpense = 10;
+        $intestAndSimilarExpenses = 50;
+        $intestAndSimilarProduct = 600;
+        return $lastYear = $this->profitLosAccountCalculator(
+            $frenchGoodsSale,
+            $internationalGoodsSale,
+            $frenchProductionSoldGoods,
+            $internationalProductionSoldGoods,
+            $frenchProductionSoldServices,
+            $internationalProductionSoldServices,
+            $stockedProduction,
+            $operatingGrant,
+            $repaymentOnDepreciationAndProvisions,
+            $otherProduct,
+            $goodsPurchases,
+            $changeInStock,
+            $purchasesOfRawMaterialsAndSupplies,
+            $InventoryChange,
+            $otherPurchaseAndExternalCharges,
+            $payRoll,
+            $depreciationAndAmortization,
+            $provisions,
+            $provisionOnCurrentAsset,
+            $provisionForRiskAndCharge,
+            $otherExpenses,
+            $capitalExceptionalOperatingProduct,
+            $capitalExceptionalExpense,
+            $intestAndSimilarExpenses,
+            $intestAndSimilarProduct,
+            $game
+        );
+    }
+
+
+    private function profitLosAccountCalculator(
+        $frenchGoodsSale,
+        $internationalGoodsSale,
+        $frenchProductionSoldGoods,
+        $internationalProductionSoldGoods,
+        $frenchProductionSoldServices,
+        $internationalProductionSoldServices,
+        $stockedProduction,
+        $operatingGrant,
+        $repaymentOnDepreciationAndProvisions,
+        $otherProduct,
+        $goodsPurchases,
+        $changeInStock,
+        $purchasesOfRawMaterialsAndSupplies,
+        $InventoryChange,
+        $otherPurchaseAndExternalCharges,
+        $payRoll,
+        $depreciationAndAmortization,
+        $provisions,
+        $provisionOnCurrentAsset,
+        $provisionForRiskAndCharge,
+        $otherExpenses,
+        $capitalExceptionalOperatingProduct,
+        $capitalExceptionalExpense,
+        $intestAndSimilarExpenses,
+        $intestAndSimilarProduct,
+        Game $game
+    ){
+        $frenchNetSales = $this->frenchNetSales(
+            $frenchProductionSoldGoods,
+            $frenchGoodsSale,
+            $frenchProductionSoldServices
+        );
+        $internationalNetSales = $this->internationalNetSales(
+            $internationalGoodsSale,
+            $internationalProductionSoldGoods,
+            $internationalProductionSoldServices
+        );
+        $netSales = $this->netSales($frenchNetSales, $internationalNetSales);
+        $totalOperatingRevenue = $this->totalOperatingRevenue($netSales,
+            $stockedProduction,
+            $operatingGrant,
+            $repaymentOnDepreciationAndProvisions,
+            $otherProduct);
+        $socialCharges = round($this->socialCharges($payRoll, $game), 2);
+        $salariesAndTreatments = round($this->salariesAndTreatments($payRoll, $socialCharges),2);
+        $taxesAndSimilarPayment = $this->taxesAndSimilarPayment($netSales, $game, $salariesAndTreatments);
+        $totalOperatingExpenses = $this->totalOperatingExpenses(
+            $goodsPurchases,
+            $changeInStock,
+            $purchasesOfRawMaterialsAndSupplies,
+            $InventoryChange,
+            $otherPurchaseAndExternalCharges,
+            $taxesAndSimilarPayment,
+            $salariesAndTreatments,
+            $socialCharges,
+            $depreciationAndAmortization,
+            $provisions,
+            $provisionOnCurrentAsset,
+            $provisionForRiskAndCharge,
+            $otherExpenses
+        );
+        $totalFinanceExpenses = $this->totalFinanceExpenses($intestAndSimilarExpenses);
+        $operatingResult = $this->operatingResult($totalOperatingRevenue, $totalOperatingExpenses);
+        $totalFinancialProduct = $this->totalFinancialProduct($intestAndSimilarProduct);
+        $exceptionalResult = $this->exceptionalResult($capitalExceptionalOperatingProduct, $capitalExceptionalExpense);
+        $totalProduct = $this->totalProduct($totalOperatingRevenue,
+            $totalFinancialProduct,
+            $capitalExceptionalOperatingProduct);
+        $financialResult = $this->financialResult($totalFinanceExpenses, $totalFinancialProduct);
+        $resultBeforeTax = $this->resultBeforeTax($operatingResult, $financialResult );
+        $profitTax = $this->profitTax($resultBeforeTax, $exceptionalResult, $game);
+        $employeesParticipation = $this->employeesParticipation($resultBeforeTax, $exceptionalResult, $game);
+
+        $totalExpenses = $this->totalexpenses(
+            $totalOperatingExpenses,
+            $totalFinanceExpenses,
+            $totalFinancialProduct,
+            $employeesParticipation,
+            $profitTax);
+        $profitLoss = $this->profitLoss($totalProduct, $totalExpenses);
+
+
+        return $profitLosAccountCalculator = [
+            "frenchGoodsSale" => $frenchGoodsSale,
+            "internationalGoodsSale" => $internationalGoodsSale,
+            "goodsSale" => ($internationalGoodsSale+$frenchGoodsSale),
+            "frenchProductionSoldGoods" => $frenchProductionSoldGoods,
+            "internationalProductionSoldGoods" => $internationalProductionSoldGoods,
+            "productionSoldGoods" => ($internationalProductionSoldGoods+$frenchProductionSoldGoods),
+            "frenchProductionSoldServices" => $frenchProductionSoldServices,
+            "internationalProductionSoldServices" => $internationalProductionSoldServices,
+            "productionSoldServices" => ($internationalProductionSoldServices + $frenchProductionSoldServices),
+            "frenchNetSales" => $frenchNetSales,
+            "internationalNetSales" => $internationalNetSales,
+            "netSales" => $netSales,
+            "stockedProduction" => $stockedProduction,
+            "operatingGrant" => $operatingGrant,
+            "repaymentOnDepreciationAndProvisions" =>$repaymentOnDepreciationAndProvisions,
+            "otherProduct" => $otherProduct,
+            "totalOperatingRevenue" => $totalOperatingRevenue,
+            "goodsPurchases" => $goodsPurchases,
+            "changeInStock" => $changeInStock,
+            "purchasesOfRawMaterialsAndSupplies" => $purchasesOfRawMaterialsAndSupplies,
+            "InventoryChange" => $InventoryChange,
+            "otherPurchaseAndExternalCharges" => $otherPurchaseAndExternalCharges,
+            "taxesAndSimilarPayment" => $taxesAndSimilarPayment,
+            "salariesAndTreatments" => $salariesAndTreatments,
+            "socialCharges" => $socialCharges,
+            "depreciationAndAmortization" => $depreciationAndAmortization,
+            "provisions" => $provisions,
+            "provisionOnCurrentAsset" => $provisionOnCurrentAsset,
+            "provisionForRiskAndCharge" => $provisionForRiskAndCharge,
+            "otherExpenses" => $otherExpenses,
+            "totalOperatingExpenses" => $totalOperatingExpenses,
+            "operatingResult" => $operatingResult,
+            "interestAndSimilarProduct" => $intestAndSimilarProduct,
+            "totalFinancialProduct" => $totalFinancialProduct,
+            "interestAndSimilarExpenses" => $intestAndSimilarExpenses,
+            "totalFinanceExpenses" => $totalFinanceExpenses,
+            "financialResult" => $financialResult,
+            "capitalExceptionalOperatingProduct" => $capitalExceptionalOperatingProduct,
+            "capitalExceptionalExpense" => $capitalExceptionalExpense,
+            "exceptionalResult" => $exceptionalResult,
+            "resultBeforeTax" => $resultBeforeTax,
+            "profitTax" => $profitTax,
+            "employeesParticipation" => $employeesParticipation,
+            "totalExpenses" => $totalExpenses,
+            "profitLoss" => $profitLoss,
+
+
+            "totalProduct" => $totalProduct,
+        ];
     }
 
     /**
@@ -90,22 +329,22 @@ class ProfitLossAccountController extends AbstractController
             $totalOperatingExpense;
     }
 
-    /**
-     * @param $totalFinancialProduct
-     * @param $capitalExceptionalOperatingProduct
-     * @param $operatingProduct
-     * @return mixed
-     */
-    private function totalProduct($totalFinancialProduct, $capitalExceptionalOperatingProduct, $operatingProduct){
-        return $totalProduct = $totalFinancialProduct+$capitalExceptionalOperatingProduct+$operatingProduct;
+
+    private function totalProduct(
+        $totalOperatingRevenue,
+        $totalFinancialProduct,
+        $capitalExceptionalOperatingProduct){
+                return $totalProduct =
+                    $totalFinancialProduct+
+                    $capitalExceptionalOperatingProduct+
+                    $totalOperatingRevenue;
     }
 
 
-    private function profitTax($resultBeforeTax, $exceptionalResult){
+    private function profitTax($resultBeforeTax, $exceptionalResult, Game $game){
 
         if (($resultBeforeTax + $exceptionalResult) >= 0){
-            //TODO change 0.28 by tax rate in Game entity
-            return $profitTax = ($exceptionalResult + $resultBeforeTax)*0.28;
+            return $profitTax = ($exceptionalResult + $resultBeforeTax)*$game->getTaxRate();
         }
 
         else{
@@ -113,10 +352,15 @@ class ProfitLossAccountController extends AbstractController
         }
     }
 
-    private function employeesParticipation($resultBeforeTax, $exceptionalResult){
+    private function employeesParticipation($resultBeforeTax, $exceptionalResult, Game $game){
 
-        //TODO change 0.05 by emploiesParticipation rate in game entity
-        return $employeesParticipation = ($resultBeforeTax + $exceptionalResult)*0.05;
+        $employeesParticipation = ($resultBeforeTax + $exceptionalResult)*$game->getEmployeeParticipation();
+        if($employeesParticipation > 0){
+            return $employeesParticipation;
+        }
+        else{
+          return 0;
+        }
     }
 
     /**
@@ -128,19 +372,8 @@ class ProfitLossAccountController extends AbstractController
         return $exceptionalResult = $capitalExceptionalExpense + $capitalExceptionalOperatingProduct;
     }
 
-    private function capitalExceptionalOperatingProduct(){
-        return $capitalExceptionalOperatingProduct = 0;
-        //TODO find calculation
-    }
-
-
-    private function capitalExceptionalExpense(){
-        return $capitalExceptionalExpense = 0;
-        //TODO find calculation
-    }
-
-    private function resultBeforeTax($operatngResult, $financialResult ){
-        return $resultBeforeTax =  $operatngResult + $financialResult;
+    private function resultBeforeTax($operatingResult, $financialResult ){
+        return $resultBeforeTax =  $operatingResult + $financialResult;
     }
 
     private function financialResult($totalFinanceExpenses, $totalFinancialProduct){
@@ -151,16 +384,12 @@ class ProfitLossAccountController extends AbstractController
         return $intestAndSimilarExpenses;
     }
 
-    private function intestAndSimilarExpenses(){
-        //TODO
-    }
-
     private function totalFinancialProduct($intestAndSimilarProduct){
         return $intestAndSimilarProduct;
     }
 
-    private function operatingResult($totalOperatingProduct, $totalOperatingExpenses){
-        $operatingResult = $totalOperatingProduct - $totalOperatingExpenses;
+    private function operatingResult($totalOperatingRevenue, $totalOperatingExpenses){
+        return $operatingResult = $totalOperatingRevenue - $totalOperatingExpenses;
     }
 
     private function totalOperatingExpenses(
@@ -169,8 +398,8 @@ class ProfitLossAccountController extends AbstractController
         $purchasesOfRawMaterialsAndSupplies,
         $InventoryChange,
         $otherPurchaseAndExternalCharges,
-        $taxesAndSimilarPayement,
-        $salariesAndTretments,
+        $taxesAndSimilarPayment,
+        $salariesAndTreatments,
         $socialCharges,
         $depreciationAndAmortization,
         $provisions,
@@ -184,8 +413,8 @@ class ProfitLossAccountController extends AbstractController
                 $purchasesOfRawMaterialsAndSupplies +
                 $InventoryChange +
                 $otherPurchaseAndExternalCharges +
-                $taxesAndSimilarPayement +
-                $salariesAndTretments +
+                $taxesAndSimilarPayment +
+                $salariesAndTreatments +
                 $socialCharges +
                 $depreciationAndAmortization +
                 $provisions +
@@ -194,57 +423,13 @@ class ProfitLossAccountController extends AbstractController
                 $otherExpenses;
     }
 
-    private function provision(){
-
-
-    }
-
-    public function amortizationProductionLign(){
-        //TODO Get array with productLign
-
-        $amortization = 0;
-        //TODO GET nombre machine de la société
-        $productLigns = [];
-
-        foreach ($productLigns as $productLign ){
-            $creatAT = $productLign->getTurnCreation();
-            $salesPrice = $productLign->getCreationCost();
-
-
-
-        }
-        return $amortization;
-    }
-
-    public function amortizationFactory(){
-        //TODO Get array with factory
-
-        $amortization = 0;
-        //TODO GET nombre factory de la société
-        $factories = [];
-
-        foreach ($factories as $factory ){
-            $creatAT = $factory->getTurnCreation();
-            $salesPrice = $factory->getCreationCost();
-
-            //TODO get turn in game entity
-
-        }
-        return $amortization;
-    }
 
     private function socialCharges($payRoll, Game $game){
-
         $employerContributions = $game->getEmployerContributions();
-        //TODO add employerContributions in Game Entity
-
-        return $socialCharges = $payRoll*$employerContributions/(1+$employerContributions);
+        return $socialCharges = $payRoll*$employerContributions/100;
     }
 
-    private function salariesAndTreatments(Socity $socity, Game $game){
-        $salariesAndTreatments = 0;
-        $payRoll = $this->payRoll($socity);
-        $socialCharges = $this->socialCharges($payRoll, $game);
+    private function salariesAndTreatments($payRoll, $socialCharges){
         return $salariesAndTreatments = $payRoll-$socialCharges;
     }
 
@@ -254,53 +439,42 @@ class ProfitLossAccountController extends AbstractController
         foreach ($employees as $employee){
             $payRoll += $employee->getSalary();
         }
-        return $payRoll;
+        return round($payRoll, 2);
     }
 
-    private function taxesAndSimilarPayement($netTurnover, Game $game, $salariesAndTreatments){
+    private function taxesAndSimilarPayment($netTurnover, Game $game, $salariesAndTreatments){
         $taxeTurnover = $game->getTaxTurnOver();
         $payTax = $game->getPayTax();
 
-        return $taxesAndSimilarPayement = $taxeTurnover*$netTurnover + $salariesAndTreatments*$payTax;
+        return $taxesAndSimilarPayment = $taxeTurnover*$netTurnover + $salariesAndTreatments*$payTax;
     }
 
-    private function otherPurchasesAndExternalCharges(Game $game, $netTurnover){
-        $brandAdvertisement = 0; //TODO get brandAdvertisement
-        $productAdvertisement =0;//TODO get productAdvertisement
-        $quality = 0;//TODO get quality
-        $variableExternalCharges = $game->getVariableExternalCharges();
-
-        return $otherPurchasesAndExternalCharges =
-            $brandAdvertisement +
-            $productAdvertisement +
-            $quality +
-            $netTurnover*$variableExternalCharges;
+    private function frenchNetSales($goodsSale, $productionSoldGoods, $productionSoldServices){
+        return $frenchNetSales = $goodsSale + $productionSoldGoods + $productionSoldServices;
     }
 
-    private function inventoryChange(){
-        //function not use already in the program
-        return $inventoryChange = 0;
+    private function internationalNetSales($goodsSale, $productionSoldGoods, $productionSoldServices){
+        return $internationalNetSales = $goodsSale + $productionSoldGoods + $productionSoldServices;
     }
 
-    private function purchasesOfRawMaterialsAndSupplies(){
-        //TODO
-        return $purchasesRawMaterialsAndOtherSupplies = 0;
+    private function netSales($frenchNetSales, $internationalNetSales){
+        return $netSales = $frenchNetSales + $internationalNetSales;
     }
 
-    private function changeInStock(){
-        //TODO
-        return $changeInStock = 0;
+    private function totalOperatingRevenue($netSales,
+                                           $stockedProduction,
+                                           $operatingGrant,
+                                           $repaymentOnDepreciationAndProvisions,
+                                           $otherProduct){
+        return $totalOperatingRevenue=     $netSales +
+                                           $stockedProduction+
+                                           $operatingGrant+
+                                           $repaymentOnDepreciationAndProvisions+
+                                           $otherProduct;
+
     }
 
-    private function goodsPurchases(){
-        //TODO
-        return $goodsPurchases = 0;
-    }
 
-    private function netSales($goodsSale, $productionSoldGoods, $productionSoldServices){
-        return $netSales = $goodsSale + $productionSoldGoods + $productionSoldServices;
-    }
-    //TODO ALL FUNCTION IN "produit d'exploitation"
 
 
 }

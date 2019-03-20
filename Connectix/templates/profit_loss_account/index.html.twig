@@ -21,255 +21,257 @@
             <TD colspan="1" rowspan="9" class="rowspan" >Produits d'exploitation</TD>
             <TD colspan="2">Ventes de marchandises</TD>
             <TD colspan="1">FA</TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1" align="center">{{ actualYear.frenchGoodsSale }}</TD>
             <TD colspan="1">FB</TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1" align="center">{{ actualYear.internationalGoodsSale }}</TD>
             <TD colspan="1">FC</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.goodsSale }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.goodsSale }}</TD>
         </TR>
         <TR>
             <TD colspan="2">Production vendue : Biens</TD>
             <TD colspan="1">FD</TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1" align="center">{{ actualYear.frenchProductionSoldGoods }}</TD>
             <TD colspan="1">FE</TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1" align="center">{{ actualYear.internationalProductionSoldGoods }}</TD>
             <TD colspan="1">FF</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.productionSoldGoods }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.productionSoldGoods }}</TD>
         </TR>
         <TR>
             <TD colspan="2">Production vendu : Services</TD>
             <TD colspan="1">FG</TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1" align="center">{{ actualYear.frenchProductionSoldServices }}</TD>
             <TD colspan="1">FH</TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1" align="center">{{ actualYear.internationalProductionSoldServices }}</TD>
             <TD colspan="1">FI</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.productionSoldServices }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.productionSoldServices }}</TD>
         </TR>
         <TR>
             <TD colspan="2">Chiffre d'affaires nets</TD>
             <TD colspan="1">FJ</TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1" align="center">{{ actualYear.frenchNetSales }}</TD>
             <TD colspan="1">FK</TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1" align="center">{{ actualYear.internationalNetSales }}</TD>
             <TD colspan="1">FL</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.netSales }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.netSales }}</TD>
         </TR>
         <TR>
             <TD colspan="6">Production stockée</TD>
             <TD colspan="1">FM</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.stockedProduction }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.stockedProduction }}</TD>
         </TR>
         <TR>
             <TD colspan="6">Subvention d'exploitation</TD>
             <TD colspan="1">FN</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.operatingGrant }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.operatingGrant }}</TD>
         </TR>
         <TR>
             <TD colspan="6">Reprises sur amortissements et provisions, transfert de charges* (9)</TD>
             <TD colspan="1">FO</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">
+                {{ actualYear.repaymentOnDepreciationAndProvisions }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">
+                {{ lastYear.repaymentOnDepreciationAndProvisions }}</TD>
         </TR>
         <TR>
             <TD colspan="6">Autres produits (1) (11)</TD>
             <TD colspan="1">FP</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
-        </TR>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.otherProduct }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.otherProduct }}</TD>
+        </TR>otherProduct
         <TR>
             <TD colspan="6" align="right" class="total-intermediaire">Total des produits d'exploitations (I) </TD>
             <TD colspan="1">FQ</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.totalOperatingRevenue }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.totalOperatingRevenue }}</TD>
         </TR>
 
         <TR>
             <TD colspan="1" rowspan="14" class="rowspan">Charges d'exploitation</TD>
             <TD colspan="6">Achats de marchandises (y compris droits de douane)*</TD>
             <TD colspan="1">FR</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.goodsPurchases }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.goodsPurchases }}</TD>
         </TR>
         <TR>
             <TD colspan="6">Variation de stock (marchandises)*</TD>
             <TD colspan="1">FS</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.changeInStock }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.changeInStock }}</TD>
         </TR>
         <TR>
-            <TD colspan="6">Achats de matières premières et autres approvisionnements ( y compris droits de douane)*</TD>
+            <TD colspan="6">Achats de matières premières et autres approvisionnements (y compris droits de douane)*</TD>
             <TD colspan="1">FT</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.purchasesOfRawMaterialsAndSupplies}}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.purchasesOfRawMaterialsAndSupplies }}</TD>
         </TR>
         <TR>
             <TD colspan="6">Variation de stock (matières premières et approvisionnements)*</TD>
             <TD colspan="1">FU</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1"  align="center">{{ actualYear.InventoryChange }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.InventoryChange }}</TD>
         </TR>
         <TR>
             <TD colspan="6">Autres achats et charges externes (3) (6bis)*</TD>
             <TD colspan="1">FV</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1"  align="center">{{ actualYear.otherPurchaseAndExternalCharges }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.otherPurchaseAndExternalCharges }}</TD>
         </TR>
         <TR>
             <TD colspan="6">Impôts, taxes, versements assimilés*</TD>
             <TD colspan="1">FW</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.taxesAndSimilarPayment }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.taxesAndSimilarPayment }}</TD>
         </TR>
         <TR>
             <TD colspan="6">Salaires et traitements*</TD>
             <TD colspan="1">FX</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.salariesAndTreatments }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.salariesAndTreatments }}</TD>
         </TR>
         <TR>
-            <TD colspan="6">Charges sociales (10)/TD>
+            <TD colspan="6">Charges sociales (10)</TD>
             <TD colspan="1">FY</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1"  align="center">{{ actualYear.socialCharges }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.socialCharges }}</TD>
         </TR>
         <TR>
             <TD colspan="1" rowspan="4">Dotations d'exploitation</TD>
             <TD colspan="1" rowspan="2">sur immobilisation</TD>
             <TD colspan="4">- dotations aux amortissements*</TD>
             <TD colspan="1">FZ</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1"  align="center">{{ actualYear.depreciationAndAmortization }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.depreciationAndAmortization }}</TD>
         </TR>
         <TR>
             <TD colspan="4">- dotations aux provisions *</TD>
             <TD colspan="1">GA</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1"  align="center">{{ actualYear.provisions }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.provisions }}</TD>
         </TR>
         <TR>
             <TD colspan="5"> - sur actif circulant : dotations aux provisions</TD>
             <TD colspan="1">GB</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1"  align="center">{{ actualYear.provisionOnCurrentAsset }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.provisionOnCurrentAsset }}</TD>
         </TR>
         <TR>
             <TD colspan="5"> - Pour risques et charges : dotations aux provisions</TD>
             <TD colspan="1">GC</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1"  align="center">{{ actualYear.provisionForRiskAndCharge }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.provisionForRiskAndCharge }}</TD>
         </TR>
         <TR>
             <TD colspan="6">Autres charges (12)</TD>
             <TD colspan="1">GD</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1"  align="center">{{ actualYear.otherExpenses }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.otherExpenses }}</TD>
         </TR>
         <TR>
             <TD colspan="6" align="right" class="total-intermediaire">Total des charges d'exploitation (4) (II)</TD>
             <TD colspan="1">GE</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1"  align="center">{{ actualYear.totalOperatingExpenses }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.totalOperatingExpenses }}</TD>
         </TR>
         <TR class="resultat">
             <TH colspan="7" align="left">1 - RÉSULTAT D'EXPLOITATION (I - II)</TH>
             <TD colspan="1">GG</TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1" align="center">{{ actualYear.operatingResult }}</TD>
+            <TD colspan="1" align="center">{{ lastYear.operatingResult }}</TD>
         </TR>
         <TR>
             <TD colspan="1" rowspan="2"></TD>
             <TD colspan="6" align="left">Autres intérêts et produits assimilés (5)</TD>
             <TD colspan="1">GL</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.interestAndSimilarProduct }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.interestAndSimilarProduct }}</TD>
         </TR>
         <TR>
             <TD colspan="6" align="right" class="total-intermediaire">Total des produits financiers (V)</TD>
             <TD colspan="1">GP</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.totalFinancialProduct }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.totalFinancialProduct }}</TD>
         </TR>
         <TR>
             <TD colspan="1" rowspan="2"></TD>
             <TD colspan="6" align="left">Intérêts et charges assimilées (6)</TD>
             <TD colspan="1">GR</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.interestAndSimilarExpenses }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.interestAndSimilarExpenses }}</TD>
         </TR>
         <TR>
             <TD colspan="6" align="right" class="total-intermediaire">Total des charges financières (VI)</TD>
             <TD colspan="1">GU</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.totalFinanceExpenses }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.totalFinanceExpenses }}</TD>
         </TR>
         <TR class="resultat">
             <TH colspan="7" align="left"> 2 - RÉSULTAT FINANCIER (V - VI)</TH>
             <TD colspan="1">GV</TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1" align="center">{{ actualYear.financialResult }}</TD>
+            <TD colspan="1" align="center">{{ lastYear.financialResult }}</TD>
         </TR>
         <TR class="resultat">
             <TH colspan="7" align="left">3 - RÉSULTAT COURANT AVANT IMPÔTS (I-II+III-IV +V - VI)</TH>
             <TD colspan="1">GW</TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1" align="center">{{ actualYear.resultBeforeTax }}</TD>
+            <TD colspan="1" align="center">{{ lastYear.resultBeforeTax }}</TD>
         </TR>
         <TR>
             <TD colspan="1" rowspan="2"></TD>
             <TD colspan="6" align="left">Produits exceptionnels sur opérations en capital            VII</TD>
             <TD colspan="1">HB</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.capitalExceptionalOperatingProduct }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.capitalExceptionalOperatingProduct }}</TD>
         </TR>
         <TR>
-            <TD colspan="6" align="right" class="total-intermediaire">Charges exceptionnelles sur opérations en capital*        VIII</TD>
+            <TD colspan="6" align="left">Charges exceptionnelles sur opérations en capital*        VIII</TD>
             <TD colspan="1">HF</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1"  align="center">{{ actualYear.capitalExceptionalExpense }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.capitalExceptionalExpense }}</TD>
         </TR>
         <TR class="resultat">
             <TH colspan="7" align="left"> 4  -  RÉSULTAT EXCEPTIONNEL (VII - VIII)</TH>
             <TD colspan="1">HI</TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1" align="center">{{ actualYear.exceptionalResult }}</TD>
+            <TD colspan="1" align="center">{{ lastYear.exceptionalResult }}</TD>
         </TR>
         <TR>
             <TD colspan="1" rowspan="2"></TD>
             <TD colspan="6" align="left">  Participation des salariés aux résultats de l'entreprise       (IX)</TD>
             <TD colspan="1">HJ</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.employeesParticipation }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.employeesParticipation }}</TD>
         </TR>
         <TR>
             <TD colspan="6" align="right" class="total-intermediaire">  Impôts sur les bénéfices*                                   (X)</TD>
             <TD colspan="1">HK</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.profitTax }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.profitTax }}</TD>
         </TR>
         <TR>
             <TD colspan="3" rowspan="2"></TD>
             <TD colspan="4" align="left" class="total-intermediaire-benefice">      TOTAL DES PRODUITS (I+V+VII)</TD>
             <TD colspan="1">HL</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1" align="center">{{ actualYear.totalProduct }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.totalProduct }}</TD>
         </TR>
         <TR>
             <TD colspan="4" align="left" class="total-intermediaire-benefice">   TOTAL DES CHARGES (II+VI+VIII+IX+X)</TD>
             <TD colspan="1">HM</TD>
-            <TD class="col-année-n" colspan="1"></TD>
-            <TD  class="col-année-n-1" colspan="1"></TD>
+            <TD class="col-année-n" colspan="1"  align="center">{{ actualYear.totalExpenses }}</TD>
+            <TD  class="col-année-n-1" colspan="1" align="center">{{ lastYear.totalExpenses }}</TD>
         </TR>
         <TR class="resultat">
             <TH colspan="7" align="left"> 5 - BÉNÉFICE OU PERTE (Total des produits - total des charges)</TH>
             <TD colspan="1">HN</TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1"  align="center">{{ actualYear.profitLoss }}</TD>
+            <TD colspan="1" align="center">{{ lastYear.profitLoss }}</TD>
         </TR>
     </TABLE>
 {% endblock %}
