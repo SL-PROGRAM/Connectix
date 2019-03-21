@@ -40,7 +40,6 @@ class ProfitLossAccountController extends AbstractController
      * @return array
      */
     private function actualYear(Socity $socity, Game $game){
-        //TODO return a table to index
 
         //TODO Parameter must create in entity BalanceSheet
         //TODO change value buy GET PARAMETER
@@ -110,7 +109,6 @@ class ProfitLossAccountController extends AbstractController
      * @return array
      */
     private function lastYear(Socity $socity, Game $game){
-        //TODO return a table to index
 
         //TODO Parameter must create in entity BalanceSheet
         //TODO change value buy GET PARAMETER
