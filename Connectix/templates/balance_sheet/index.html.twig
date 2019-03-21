@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{%  dump %}
 
 {% block title %}Hello BalanceSheetController!{% endblock %}
 
@@ -42,186 +43,186 @@
                 <TR>
                     <TD colspan="5" align="center">Capital souscrit non appelé (I)</TD>
                     <TD colspan="1" align="center">AA</TD>
-                    <TD class="col-interdit" colspan="2" align="center"></TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.subscribedCapitalNotCall }}</TD>
+                    <TD colspan="2" class="col-interdit" align="center"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.subscribedCapitalNotCall }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.subscribedCapitalNotCall }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="1" rowspan="18" class="rowspan" valign="middle" align="center">ACTIF IMMOBILISÉ*</TD>
                     <TD colspan="1" rowspan="6" class="rowspan" valign="middle" align="center"><div>IMMOBILISATIONS</div><div>INCORPORELLES</div> </TD>
                     <TD colspan="3">Frais d'établissement*</TD>
                     <TD colspan="1" align="center">AB</TD>
-                    <TD colspan="1" align="center">10000000</TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.administrationFees }}</TD>
                     <TD colspan="1" align="center">AC</TD>
-                    <TD colspan="1" align="center">10000000</TD>
-                    <TD class="col-année-n" colspan="1">10000000</TD>
-                    <TD class="col-année-n-1" colspan="1">10000000</TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.administrationFees }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.administrationFees }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.administrationFees }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Frais de recherche et de développement*</TD>
                     <TD colspan="1" align="center">AD</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.researchAndDevelopmentCost }}</TD>
                     <TD colspan="1" align="center">AE</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.researchAndDevelopmentCost }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.researchAndDevelopmentCost }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.researchAndDevelopmentCost }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Concession, brevets et droits similaire</TD>
                     <TD colspan="1" align="center">AF</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.concessionPatentsAndSimilar }}</TD>
                     <TD colspan="1" align="center">AG</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.concessionPatentsAndSimilar }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.concessionPatentsAndSimilar }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.concessionPatentsAndSimilar }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Fonds commercial (1)</TD>
                     <TD colspan="1" align="center">AH</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.commercialFund }}</TD>
                     <TD colspan="1" align="center">AI</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.commercialFund }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.commercialFund }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.commercialFund }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Autres immobilisations incorporelles</TD>
                     <TD colspan="1" align="center">AJ</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.otherIntangibleAsset }}</TD>
                     <TD colspan="1" align="center">AK</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.otherIntangibleAsset }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.otherIntangibleAsset }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.otherIntangibleAsset }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Avances et acomptes sur immobilisations incorporelles</TD>
                     <TD colspan="1" align="center">AL</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.advancesAndDownPaymentOnIntangibleAssets }}</TD>
                     <TD colspan="1" align="center">AM</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.advancesAndDownPaymentOnIntangibleAssets }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.advancesAndDownPaymentOnIntangibleAssets }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.advancesAndDownPaymentOnIntangibleAssets }}</TD>
                 </TR>
 
                 <TR>
                     <TD colspan="1" rowspan="6" class="rowspan" valign="middle" align="center"><div>IMMOBILISATIONS</div><div>CORPORELLES</div> </TD>
                     <TD colspan="3">Terrains</TD>
                     <TD colspan="1" align="center">AN</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.grounds }}</TD>
                     <TD colspan="1" align="center">AO</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.grounds }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.grounds }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.grounds }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Constructions</TD>
                     <TD colspan="1" align="center">AP</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.constructions }}</TD>
                     <TD colspan="1" align="center">AQ</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.constructions }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.constructions }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.constructions }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Installations techniques, matériels et outillage industriels</TD>
                     <TD colspan="1" align="center">AR</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.technicalInstallationsEquipment }}</TD>
                     <TD colspan="1" align="center">AS</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.technicalInstallationsEquipment }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.technicalInstallationsEquipment }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.technicalInstallationsEquipment }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Autres immobilisations corporelles</TD>
                     <TD colspan="1" align="center">AT</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.otherTangibleFixedAssets }}</TD>
                     <TD colspan="1" align="center">AU</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.otherTangibleFixedAssets }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.otherTangibleFixedAssets }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.otherTangibleFixedAssets }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Immobilisations en cours</TD>
                     <TD colspan="1" align="center">AV</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.assetInProgress }}</TD>
                     <TD colspan="1" align="center">AW</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.assetInProgress }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.assetInProgress }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.assetInProgress }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Avances et acomptes sur immobilisations corporelles</TD>
                     <TD colspan="1" align="center">AX</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.advancesAndDownPaymentOnTangibleAssets }}</TD>
                     <TD colspan="1" align="center">AY</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.advancesAndDownPaymentOnTangibleAssets }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.advancesAndDownPaymentOnTangibleAssets }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.advancesAndDownPaymentOnTangibleAssets }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="1" rowspan="6" class="rowspan" valign="middle" align="center"><div>IMMOBILISATIONS</div><div>FINANCIERES (2)</div>  </TD>
                     <TD colspan="3">Participations évalués par mise en équivalence</TD>
                     <TD colspan="1" align="center">CS</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.investmentsAccountedForEquityMethod }}</TD>
                     <TD colspan="1" align="center">CT</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.investmentsAccountedForEquityMethod }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.investmentsAccountedForEquityMethod }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.investmentsAccountedForEquityMethod }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Autres participations</TD>
                     <TD colspan="1" align="center">CU</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.otherParticipations }}</TD>
                     <TD colspan="1" align="center">CV</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.otherParticipations }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.otherParticipations }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.otherParticipations }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Créances rattachées à des participations</TD>
                     <TD colspan="1" align="center">BB</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.receivablesRelatedEquityInvestments }}</TD>
                     <TD colspan="1" align="center">BC</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.receivablesRelatedEquityInvestments }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.receivablesRelatedEquityInvestments }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.receivablesRelatedEquityInvestments }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Autres titres immobilisés</TD>
                     <TD colspan="1" align="center">BD</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.otherLockedSecurities }}</TD>
                     <TD colspan="1" align="center">BE</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.otherLockedSecurities }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.otherLockedSecurities }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.otherLockedSecurities }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Prêts</TD>
                     <TD colspan="1" align="center">BF</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.loans }}</TD>
                     <TD colspan="1" align="center">BG</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.loans }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.loans }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.loans }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Autres immobilisations financières*</TD>
                     <TD colspan="1" align="center">BH</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.otherFinancialAssets }}</TD>
                     <TD colspan="1" align="center">BI</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.otherFinancialAssets }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.otherFinancialAssets }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.otherFinancialAssets }}</TD>
                 </TR>
                 <tr class="resultat">
                     <td colspan="5" align="right">TOTAL (II)</td>
                     <td colspan="1" align="center">BJ</td>
-                    <td colspan="1" align="center"></td>
-                    <td colspan="1" align="center">BK</td>
-                    <td colspan="1" align="center"></td>
-                    <td colspan="1"></td>
-                    <td colspan="1"></td>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.totalFixedAsset }}</TD>
+                    <TD colspan="1" align="center">BK</TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.totalFixedAsset }}</TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.totalFixedAsset }}</TD>
+                    <TD colspan="1" align="center">{{ lastYearActiveBalanceSheet.totalFixedAsset }}</TD>
                 </tr>
 
 
@@ -231,173 +232,173 @@
                     <TD colspan="1" rowspan="5" class="rowspan" valign="middle" align="center">STOCKS*</TD>
                     <TD colspan="3">Matières premières, approvisionnements</TD>
                     <TD colspan="1" align="center">BL</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.rowMaterialsSupplies }}</TD>
                     <TD colspan="1" align="center">BM</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.rowMaterialsSupplies }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.rowMaterialsSupplies }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.rowMaterialsSupplies }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">En cours de production de biens/TD>
                     <TD colspan="1" align="center">BN</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.outstandingProducingGoods }}</TD>
                     <TD colspan="1" align="center">BO</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.outstandingProducingGoods }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.outstandingProducingGoods }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.outstandingProducingGoods }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">En cours de production de services</TD>
                     <TD colspan="1" align="center">BP</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.outstandingServices }}</TD>
                     <TD colspan="1" align="center">BQ</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.outstandingServices }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.outstandingServices }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.outstandingServices }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Produits intermédiaires et finis</TD>
                     <TD colspan="1" align="center">BR</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.intermediateAndFinishProduct }}</TD>
                     <TD colspan="1" align="center">BS</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.intermediateAndFinishProduct }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.intermediateAndFinishProduct }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.intermediateAndFinishProduct }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Marchandises</TD>
                     <TD colspan="1" align="center">BT</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.merchandise }}</TD>
                     <TD colspan="1" align="center">BU</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.merchandise }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.merchandise }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.merchandise }}</TD>
                 </TR>
 
                 <TR>
                     <TD colspan="1" class="rowspan" valign="middle" align="center"></TD>
                     <TD colspan="3">Avances et acomptes versés sur commandes</TD>
                     <TD colspan="1" align="center">BV</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.advancesAndPrepaymentOrders }}</TD>
                     <TD colspan="1" align="center">BW</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.advancesAndPrepaymentOrders }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.advancesAndPrepaymentOrders }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.advancesAndPrepaymentOrders }}</TD>
                 </TR>
 
                 <TR>
                     <TD colspan="1" rowspan="3" class="rowspan" valign="middle" align="center">CREANCES</TD>
                     <TD colspan="3">Clients et comptes rattachés* (3)</TD>
                     <TD colspan="1" align="center">BX</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.customersAndRelatedAccounts }}</TD>
                     <TD colspan="1" align="center">BY</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.customersAndRelatedAccounts }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.customersAndRelatedAccounts }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.customersAndRelatedAccounts }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Autres créances (3)</TD>
                     <TD colspan="1" align="center">BZ</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.otherReceivables }}</TD>
                     <TD colspan="1" align="center">CA</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.otherReceivables }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.otherReceivables }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.otherReceivables }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Capital souscrit et appelé, non versé</TD>
                     <TD colspan="1" align="center">CB</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.subscribedAndCallCapitalUnpaid }}</TD>
                     <TD colspan="1" align="center">CC</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.subscribedAndCallCapitalUnpaid }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.subscribedAndCallCapitalUnpaid }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.subscribedAndCallCapitalUnpaid }}</TD>
                 </TR>
 
                 <TR>
                     <TD colspan="1" rowspan="3" class="rowspan" valign="middle" align="center">DIVERS</TD>
                     <TD colspan="3">Valeurs mobilières de placement (dont actions propres)</TD>
                     <TD colspan="1" align="center">CD</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.marketableSecurities }}</TD>
                     <TD colspan="1" align="center">CE</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.marketableSecurities }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.marketableSecurities }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.marketableSecurities }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Banque</TD>
                     <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.bank }}</TD>
                     <TD colspan="1" align="center"></TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.bank }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.bank }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.bank }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Disponibilités</TD>
                     <TD colspan="1" align="center">CF</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.availability }}</TD>
                     <TD colspan="1" align="center">CG</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.availability }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.availability }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.availability }}</TD>
                 </TR>
 
                 <TR>
                     <TD colspan="2" rowspan="6" class="rowspan" valign="middle" align="center"><div>COMPTES DE</div><div>REGULARISATION</div>  </TD>
                     <TD colspan="3">Charges constatées d'avance* (3) (E)</TD>
                     <TD colspan="1" align="center">CH</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.prepaidExpenses }}</TD>
                     <TD colspan="1" align="center">CI</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.prepaidExpenses }}</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.prepaidExpenses }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.prepaidExpenses }}</TD>
                 </TR>
                 <TR class="resultat">
                     <TD colspan="3">TOTAL (III)</TD>
                     <TD colspan="1" align="center">CJ</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.totalActiveCirculating }}</TD>
                     <TD colspan="1" align="center">CK</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD colspan="1"></TD>
-                    <TD colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.totalActiveCirculating }}</TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.totalActiveCirculating }}</TD>
+                    <TD colspan="1" align="center">{{ lastYearActiveBalanceSheet.totalActiveCirculating }}</TD>
                 </TR>
 
                 <TR>
                     <TD colspan="3">Charges à répartir sur plusieurs exercices*                     (IV)</TD>
                     <TD colspan="1" align="center">CL</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.expensesSpreadOverSeveralFinancialYears }}</TD>
                     <TD class="col-interdit" colspan="1" align="center"></TD>
                     <TD class="col-interdit" colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.expensesSpreadOverSeveralFinancialYears }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.expensesSpreadOverSeveralFinancialYears }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Primes de remboursement des obligations                     (V)</TD>
                     <TD colspan="1" align="center">CL</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.bondRepaymentPremiums }}</TD>
                     <TD class="col-interdit" colspan="1" align="center"></TD>
                     <TD class="col-interdit" colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.bondRepaymentPremiums }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.bondRepaymentPremiums }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3">Ecarts de conversion actif*                                     (VI)</TD>
                     <TD colspan="1" align="center">CL</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.activeConversionDifferences }}</TD>
                     <TD class="col-interdit" colspan="1" align="center"></TD>
                     <TD class="col-interdit" colspan="1" align="center"></TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.activeConversionDifferences }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.activeConversionDifferences }}</TD>
                 </TR>
                 <TR class="resultat">
                     <TD colspan="3">TOTAL GÉNÉRAL(I a IV)</TD>
                     <TD colspan="1" align="center">CJ</TD>
-                    <TD colspan="1" align="center"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.totalGeneralActiveBalanceSheet }}</TD>
                     <TD colspan="1" align="center">CK</TD>
-                    <TD colspan="1" align="center"></TD>
-                    <TD colspan="1"></TD>
-                    <TD colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.totalGeneralActiveBalanceSheet }}</TD>
+                    <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.totalGeneralActiveBalanceSheet }}</TD>
+                    <TD colspan="1" align="center">{{ lastYearActiveBalanceSheet.totalGeneralActiveBalanceSheet }}</TD>
                 </TR>
 
             </TABLE>
