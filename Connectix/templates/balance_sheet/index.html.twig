@@ -375,7 +375,7 @@
                 </TR>
                 <TR>
                     <TD colspan="3">Primes de remboursement des obligations                     (V)</TD>
-                    <TD colspan="1" align="center">CL</TD>
+                    <TD colspan="1" align="center">CM</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.bondRepaymentPremiums }}</TD>
                     <TD class="col-interdit" colspan="1" align="center"></TD>
                     <TD class="col-interdit" colspan="1" align="center"></TD>
@@ -384,7 +384,7 @@
                 </TR>
                 <TR>
                     <TD colspan="3">Ecarts de conversion actif*                                     (VI)</TD>
-                    <TD colspan="1" align="center">CL</TD>
+                    <TD colspan="1" align="center">CN</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.activeConversionDifferences }}</TD>
                     <TD class="col-interdit" colspan="1" align="center"></TD>
                     <TD class="col-interdit" colspan="1" align="center"></TD>
@@ -393,9 +393,9 @@
                 </TR>
                 <TR class="resultat">
                     <TD colspan="3">TOTAL GÉNÉRAL(I a IV)</TD>
-                    <TD colspan="1" align="center">CJ</TD>
+                    <TD colspan="1" align="center">CO</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.totalGeneralActiveBalanceSheet }}</TD>
-                    <TD colspan="1" align="center">CK</TD>
+                    <TD colspan="1" align="center">1A</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetDepreciationProvision.totalGeneralActiveBalanceSheet }}</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetNet.totalGeneralActiveBalanceSheet }}</TD>
                     <TD colspan="1" align="center">{{ lastYearActiveBalanceSheet.totalGeneralActiveBalanceSheet }}</TD>
@@ -438,14 +438,14 @@
                     <TD colspan="1" align="center">10000000</TD>
                     <TD colspan="1">)</TD>
                     <TD colspan="1" align="center">DA</TD>
-                    <TD class="col-année-n" colspan="1">10000000</TD>
-                    <TD class="col-année-n-1" colspan="1">10000000</TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.shareCapitalOrIndividual }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.shareCapitalOrIndividual }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6"> Primes d'émission, de fusion, d'apports, ……</TD>
                     <TD colspan="1" align="center">DB</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.premiumIssueMergerContribution }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.premiumIssueMergerContribution }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3"> Ecarts de réévaluation (2)*  </TD>
@@ -453,20 +453,20 @@
                     <TD colspan="1" align="center"></TD>
                     <TD colspan="1">)</TD>
                     <TD colspan="1" align="center">DC</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.revaluationDifferences }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.revaluationDifferences }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6">Réserve légale (3)</TD>
                     <TD colspan="1" align="center">DD</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.legalReserve }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.legalReserve }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6"> Réserves statutaires ou contractuelles</TD>
                     <TD colspan="1" align="center">DE</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.statutoryOrContractualReserves }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.statutoryOrContractualReserves }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="3"> Réserves réglementées (3)*  </TD>
@@ -474,8 +474,8 @@
                     <TD colspan="1" align="center"></TD>
                     <TD colspan="1">)</TD>
                     <TD colspan="1" align="center">DF</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.regulatedReserves }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.regulatedReserves }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="2"> Autres réserves  </TD>
@@ -483,38 +483,38 @@
                     <TD colspan="1" align="center"></TD>
                     <TD colspan="1">)*</TD>
                     <TD colspan="1" align="center">DG</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.otherReserves }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.otherReserves }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6">Report à nouveau</TD>
                     <TD colspan="1" align="center">DH</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.reportAgain }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.reportAgain }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6">RÉSULTAT DE L'EXERCICE (bénéfice ou perte)</TD>
                     <TD colspan="1" align="center">DI</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.yearProfit }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.yearProfit }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6">Subvention d'investissement</TD>
                     <TD colspan="1" align="center">DJ</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.investmentGrant }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.investmentGrant }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6">Provisions réglementées*</TD>
                     <TD colspan="1" align="center">DK</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.regulatedProvisions }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.regulatedProvisions }}</TD>
                 </TR>
                 <TR class="resultat">
                     <TD colspan="6">TOTAL (I)</TD>
                     <TD colspan="1" align="center">DL</TD>
-                    <TD colspan="1"></TD>
-                    <TD colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearPassiveBalanceSheet.totalOwnCapital }}</TD>
+                    <TD colspan="1" align="center">{{ lastYearPassiveBalanceSheet.totalOwnCapital }}</TD>
                 </TR>
 
                 <TR>
@@ -525,20 +525,20 @@
                     </TD>
                     <TD colspan="6"> Produits des émissions de titres participatifs </TD>
                     <TD colspan="1" align="center">DM</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearPassiveBalanceSheet.proceedsFromEquitySecuritiesIssues }}</TD>
+                    <TD colspan="1" align="center">{{ lastYearPassiveBalanceSheet.proceedsFromEquitySecuritiesIssues }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6"> Avances conditionnées </TD>
                     <TD colspan="1" align="center">DN</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearPassiveBalanceSheet.conditionedAdvances }}</TD>
+                    <TD colspan="1" align="center">{{ lastYearPassiveBalanceSheet.conditionedAdvances }}</TD>
                 </TR>
                 <TR class="resultat">
                     <TD colspan="6">TOTAL (II)</TD>
                     <TD colspan="1" align="center">DO</TD>
-                    <TD colspan="1"></TD>
-                    <TD colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.totalOtherOwnCapital }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.totalOtherOwnCapital }}</TD>
                 </TR>
 
 
@@ -550,40 +550,40 @@
                     </TD>
                     <TD colspan="6"> Provisions pour risques</TD>
                     <TD colspan="1" align="center">DP</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.riskProvision }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.riskProvision }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6"> Provisions pour charges </TD>
                     <TD colspan="1" align="center">DQ</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.expensesProvision }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.expensesProvision }}</TD>
                 </TR>
                 <TR class="resultat">
                     <TD colspan="6">TOTAL (III)</TD>
                     <TD colspan="1" align="center">DR</TD>
-                    <TD colspan="1"></TD>
-                    <TD colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearPassiveBalanceSheet.totalProvisionForRiskAndCharges }}</TD>
+                    <TD colspan="1" align="center">{{ lastYearPassiveBalanceSheet.totalProvisionForRiskAndCharges }}</TD>
                 </TR>
 
                 <TR>
                     <TD colspan="2" rowspan="9" class="rowspan" valign="middle" align="center">DETTES (4)</TD>
                     <TD colspan="6"> Emprunts obligataires convertibles</TD>
                     <TD colspan="1" align="center">DS</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.convertibleBonds }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.convertibleBonds }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6"> Autres emprunts obligataires</TD>
                     <TD colspan="1" align="center">DT</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.otherBonds }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.otherBonds }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6">Emprunts et dettes auprès des établissements de crédit (5)</TD>
                     <TD colspan="1" align="center">DU</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.loanAndDebtsWihCreditInstitutions }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.loanAndDebtsWihCreditInstitutions }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="2"> Emprunts et dettes financières diverses  </TD>
@@ -591,20 +591,20 @@
                     <TD colspan="1" align="center"></TD>
                     <TD colspan="1">)</TD>
                     <TD colspan="1" align="center">DV</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.borrowingAndOtherFinancialDebts }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.borrowingAndOtherFinancialDebts }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6">Avances et acomptes reçus sur commandes en cours</TD>
                     <TD colspan="1" align="center">DW</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.AdvancesAndDownPaymentReceived }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.AdvancesAndDownPaymentReceived }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6">Dettes fournisseurs et comptes rattachés</TD>
                     <TD colspan="1" align="center">DX</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.tradePayableAndRelatedAccounts }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.tradePayableAndRelatedAccounts }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="2"> Dettes fiscales et sociales </TD>
@@ -612,48 +612,48 @@
                     <TD colspan="1" align="center"></TD>
                     <TD colspan="1">)</TD>
                     <TD colspan="1" align="center">DY</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.taxAndSocialDebts }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.taxAndSocialDebts }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6">Dettes sur immobilisations et comptes rattachés</TD>
                     <TD colspan="1" align="center">DZ</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.debtsOnFixedAssetsAndRelatedAccount }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.debtsOnFixedAssetsAndRelatedAccount }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="6">Autres dettes</TD>
                     <TD colspan="1" align="center">EA</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.otherDebts }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.otherDebts }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="2">Compte régul.</TD>
                     <TD colspan="6">Produits constatés d'avance (IV)</TD>
                     <TD colspan="1" align="center">EB</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.prepaidIncome }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.prepaidIncome }}</TD>
                 </TR>
                 <TR class="resultat">
                     <TD colspan="2"></TD>
                     <TD colspan="6">TOTAL (III)</TD>
                     <TD colspan="1" align="center">EC</TD>
-                    <TD colspan="1"></TD>
-                    <TD colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearPassiveBalanceSheet.totalDebts }}</TD>
+                    <TD colspan="1" align="center">{{ lastYearPassiveBalanceSheet.totalDebts }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="2"></TD>
                     <TD colspan="6">Ecarts de conversion passif* (V)</TD>
                     <TD colspan="1" align="center">ED</TD>
-                    <TD class="col-année-n" colspan="1"></TD>
-                    <TD class="col-année-n-1" colspan="1"></TD>
+                    <TD class="col-année-n" colspan="1" align="center">{{ actualYearPassiveBalanceSheet.liabilitiesTranslationDifferences }}</TD>
+                    <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearPassiveBalanceSheet.liabilitiesTranslationDifferences }}</TD>
                 </TR>
                 <TR class="resultat">
                     <TD colspan="2"></TD>
                     <TD colspan="6">TOTAL GÉNÉRAL (I à V)</TD>
                     <TD colspan="1" align="center">EE</TD>
-                    <TD colspan="1"></TD>
-                    <TD colspan="1"></TD>
+                    <TD colspan="1" align="center">{{ actualYearPassiveBalanceSheet.totalGeneralPassiveBalanceSheet }}</TD>
+                    <TD colspan="1" align="center">{{ lastYearPassiveBalanceSheet.totalGeneralPassiveBalanceSheet }}</TD>
                 </TR>
                 <TR>
                     <TD colspan="1" class="rowspan" rowspan="7">RENVOIS</TD>

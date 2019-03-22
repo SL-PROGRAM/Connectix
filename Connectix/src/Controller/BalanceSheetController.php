@@ -482,32 +482,32 @@ class BalanceSheetController extends AbstractController
     private function lastYearPassiveBalanceSheet(){
         //TODO RETURN TABLE TO INDEX
         //TODO GET PARAMETER AND GIVE THEM TO calculationPassiveBalanceSheet
-        $shareCapitalOrIndividual = 0;
-        $convertibleBonds = 0;
-        $otherBonds = 0;
-        $loanAndDebtsWihCreditInstitutions = 0;
-        $borrowingAndOtherFinancialDebts = 0;
-        $AdvancesAndDownPaymentReceived = 0;
-        $tradePayableAndRelatedAccounts = 0;
-        $taxAndSocialDebts = 0;
-        $debtsOnFixedAssetsAndRelatedAccount = 0;
-        $otherDebts = 0;
-        $prepaidIncome = 0;
-        $premiumIssueMergerContribution = 0;
-        $revaluationDifferences = 0;
-        $legalReserve = 0;
-        $statutoryOrContractualReserves = 0;
-        $regulatedReserves = 0;
+        $shareCapitalOrIndividual = 250;
+        $convertibleBonds = 240;
+        $otherBonds = 230;
+        $loanAndDebtsWihCreditInstitutions = 220;
+        $borrowingAndOtherFinancialDebts = 210;
+        $AdvancesAndDownPaymentReceived = 200;
+        $tradePayableAndRelatedAccounts = 190;
+        $taxAndSocialDebts = 180;
+        $debtsOnFixedAssetsAndRelatedAccount = 170;
+        $otherDebts = 160;
+        $prepaidIncome = 150;
+        $premiumIssueMergerContribution = 140;
+        $revaluationDifferences = 130;
+        $legalReserve = 120;
+        $statutoryOrContractualReserves = 110;
+        $regulatedReserves = 100;
         $otherReserves = 0;
-        $reportAgain = 0;
-        $yearProfit = 0;
-        $investmentGrant = 0;
-        $regulatedProvisions = 0;
-        $proceedsFromEquitySecuritiesIssues = 0;
-        $conditionedAdvances = 0;
-        $riskProvision = 0;
-        $expensesProvision = 0;
-        $liabilitiesTranslationDifferences = 0;
+        $reportAgain = 90;
+        $yearProfit = 80;
+        $investmentGrant = 70;
+        $regulatedProvisions = 60;
+        $proceedsFromEquitySecuritiesIssues = 50;
+        $conditionedAdvances = 40;
+        $riskProvision = 30;
+        $expensesProvision = 20;
+        $liabilitiesTranslationDifferences = 10;
 
         return $lastYearPassiveBalanceSheet = $this->calculationPassiveBalanceSheet($shareCapitalOrIndividual,
                                                                                     $premiumIssueMergerContribution,
@@ -619,7 +619,7 @@ class BalanceSheetController extends AbstractController
             "loanAndDebtsWihCreditInstitutions" => $loanAndDebtsWihCreditInstitutions,
             "borrowingAndOtherFinancialDebts" => $borrowingAndOtherFinancialDebts,
             "AdvancesAndDownPaymentReceived" => $AdvancesAndDownPaymentReceived,
-            "tradePayableAndRelatedAccounts" > $tradePayableAndRelatedAccounts,
+            "tradePayableAndRelatedAccounts" => $tradePayableAndRelatedAccounts,
             "taxAndSocialDebts" => $taxAndSocialDebts,
             "debtsOnFixedAssetsAndRelatedAccount" => $debtsOnFixedAssetsAndRelatedAccount,
             "otherDebts" => $otherDebts,
