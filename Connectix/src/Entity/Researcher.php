@@ -5,33 +5,22 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ReseacherRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ResearcherRepository")
  */
 class Researcher extends HumanResource
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="integer")
      */
     private $researchActivity;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getReseachActivity(): ?int
+    public function getResearchActivity(): ?int
     {
         return $this->researchActivity;
     }
 
-    public function setReseachActivity(int $researchActivity): self
+    public function setResearchActivity(int $researchActivity): self
     {
         $this->researchActivity = $researchActivity;
 

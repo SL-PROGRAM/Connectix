@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProductionLign{% endblock %}
+
+{% block body %}
+    <h1>ProductionLign</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ production_lign.id }}</td>
+            </tr>
+            <tr>
+                <th>TurnCreation</th>
+                <td>{{ production_lign.turnCreation }}</td>
+            </tr>
+            <tr>
+                <th>CreationCost</th>
+                <td>{{ production_lign.creationCost }}</td>
+            </tr>
+            <tr>
+                <th>MaintenanceCost</th>
+                <td>{{ production_lign.maintenanceCost }}</td>
+            </tr>
+            <tr>
+                <th>AdministrationCost</th>
+                <td>{{ production_lign.administrationCost }}</td>
+            </tr>
+            <tr>
+                <th>AmortizationTurn</th>
+                <td>{{ production_lign.amortizationTurn }}</td>
+            </tr>
+            <tr>
+                <th>AnnualProductTime</th>
+                <td>{{ production_lign.annualProductTime }}</td>
+            </tr>
+            <tr>
+                <th>TotalLifeProductTime</th>
+                <td>{{ production_lign.totalLifeProductTime }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('production_lign_index') }}">back to list</a>
+
+    <a href="{{ path('production_lign_edit', {'id': production_lign.id}) }}">edit</a>
+
+    {{ include('production_lign/_delete_form.html.twig') }}
+{% endblock %}

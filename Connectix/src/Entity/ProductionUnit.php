@@ -46,6 +46,7 @@ abstract class ProductionUnit
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Socity", inversedBy="ProductionUnits")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $socity;
 

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProductionDirector{% endblock %}
+
+{% block body %}
+    <h1>ProductionDirector</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ production_director.id }}</td>
+            </tr>
+            <tr>
+                <th>Salary</th>
+                <td>{{ production_director.salary }}</td>
+            </tr>
+            <tr>
+                <th>Formation</th>
+                <td>{{ production_director.formation }}</td>
+            </tr>
+            <tr>
+                <th>Exprience</th>
+                <td>{{ production_director.exprience }}</td>
+            </tr>
+            <tr>
+                <th>Productivity</th>
+                <td>{{ production_director.productivity }}</td>
+            </tr>
+            <tr>
+                <th>AdministrationActivityCost</th>
+                <td>{{ production_director.administrationActivityCost }}</td>
+            </tr>
+            <tr>
+                <th>CoeficientSalary</th>
+                <td>{{ production_director.coeficientSalary }}</td>
+            </tr>
+            <tr>
+                <th>ProductionActivity</th>
+                <td>{{ production_director.productionActivity }}</td>
+            </tr>
+            <tr>
+                <th>AdministrationActivity</th>
+                <td>{{ production_director.administrationActivity }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('production_director_index') }}">back to list</a>
+
+    <a href="{{ path('production_director_edit', {'id': production_director.id}) }}">edit</a>
+
+    {{ include('production_director/_delete_form.html.twig') }}
+{% endblock %}

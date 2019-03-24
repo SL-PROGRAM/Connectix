@@ -11,12 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProductionLign extends ProductionUnit
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Factory", inversedBy="ProductionLign")
@@ -24,21 +19,17 @@ class ProductionLign extends ProductionUnit
      */
     private $factory;
 
+
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductionOrder", mappedBy="productionLign", orphanRemoval=true)
+     * @ORM\Column(type="integer")
      */
-    private $productionOrders;
+    private $annualProductTime;
 
-    public function __construct()
-    {
-        $this->productionOrders = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $totalLifeProductTime;
 
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getFactory(): ?Factory
     {
@@ -52,35 +43,29 @@ class ProductionLign extends ProductionUnit
         return $this;
     }
 
-    /**
-     * @return Collection|ProductionOrder[]
-     */
-    public function getProductionOrders(): Collection
+    public function getAnnualProductTime(): ?int
     {
-        return $this->productionOrders;
+        return $this->annualProductTime;
     }
 
-    public function addProductionOrder(ProductionOrder $productionOrder): self
+    public function setAnnualProductTime(int $annualProductTime): self
     {
-        if (!$this->productionOrders->contains($productionOrder)) {
-            $this->productionOrders[] = $productionOrder;
-            $productionOrder->setProductionLign($this);
-        }
+        $this->annualProductTime = $annualProductTime;
 
         return $this;
     }
 
-    public function removeProductionOrder(ProductionOrder $productionOrder): self
+    public function getTotalLifeProductTime(): ?int
     {
-        if ($this->productionOrders->contains($productionOrder)) {
-            $this->productionOrders->removeElement($productionOrder);
-            // set the owning side to null (unless already changed)
-            if ($productionOrder->getProductionLign() === $this) {
-                $productionOrder->setProductionLign(null);
-            }
-        }
+        return $this->totalLifeProductTime;
+    }
+
+    public function setTotalLifeProductTime(int $totalLifeProductTime): self
+    {
+        $this->totalLifeProductTime = $totalLifeProductTime;
 
         return $this;
     }
+
 
 }

@@ -9,22 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class Production extends HumanResource
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="integer")
      */
     private $productionActivity;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getProductionActivity(): ?int
     {

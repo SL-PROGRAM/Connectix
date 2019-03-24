@@ -9,14 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class SalesMan extends HumanResource
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
+       /**
      * @ORM\Column(type="integer")
      */
     private $commission;
@@ -25,11 +18,6 @@ abstract class SalesMan extends HumanResource
      * @ORM\Column(type="integer")
      */
     private $salesActivity;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getCommission(): ?int
     {

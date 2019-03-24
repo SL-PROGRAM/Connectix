@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ProductionDirector{% endblock %}
+
+{% block body %}
+    <h1>Create new ProductionDirector</h1>
+
+    {{ include('production_director/_form.html.twig') }}
+
+    <a href="{{ path('production_director_index') }}">back to list</a>
+{% endblock %}

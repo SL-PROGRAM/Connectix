@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Administration{% endblock %}
+
+{% block body %}
+    <h1>Edit Administration</h1>
+
+    {{ include('administration/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('administration_index') }}">back to list</a>
+
+    {{ include('administration/_delete_form.html.twig') }}
+{% endblock %}

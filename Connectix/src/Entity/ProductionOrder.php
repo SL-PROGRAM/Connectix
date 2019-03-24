@@ -52,12 +52,6 @@ class ProductionOrder
     private $rowMaterialCost;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ProductionLign", inversedBy="productionOrders")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $productionLign;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Product", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -152,17 +146,6 @@ class ProductionOrder
         return $this;
     }
 
-    public function getProductionLign(): ?ProductionLign
-    {
-        return $this->productionLign;
-    }
-
-    public function setProductionLign(?ProductionLign $productionLign): self
-    {
-        $this->productionLign = $productionLign;
-
-        return $this;
-    }
 
     public function getProduct(): ?Product
     {

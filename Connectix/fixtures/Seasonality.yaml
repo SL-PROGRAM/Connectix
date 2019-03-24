@@ -13,3 +13,4 @@ App\entity\Seasonality:
     november: randomFloat(1, 0, 2)
     december: randomFloat(1, 0, 2)
     products: randomFloat(1, 0, 2)
+

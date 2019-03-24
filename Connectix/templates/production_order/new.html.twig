@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ProductionOrder{% endblock %}
+
+{% block body %}
+    <h1>Create new ProductionOrder</h1>
+
+    {{ include('production_order/_form.html.twig') }}
+
+    <a href="{{ path('production_order_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SalesManProfessional{% endblock %}
+
+{% block body %}
+    <h1>Create new SalesManProfessional</h1>
+
+    {{ include('sales_man_professional/_form.html.twig') }}
+
+    <a href="{{ path('sales_man_professional_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SalesManParticular index{% endblock %}
+
+{% block body %}
+    <h1>SalesManParticular index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Salary</th>
+                <th>Formation</th>
+                <th>Exprience</th>
+                <th>Productivity</th>
+                <th>AdministrationActivityCost</th>
+                <th>CoeficientSalary</th>
+                <th>Commission</th>
+                <th>SalesActivity</th>
+                <th>SalesActivityParticular</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sales_man_particular in sales_man_particulars %}
+            <tr>
+                <td>{{ sales_man_particular.id }}</td>
+                <td>{{ sales_man_particular.salary }}</td>
+                <td>{{ sales_man_particular.formation }}</td>
+                <td>{{ sales_man_particular.exprience }}</td>
+                <td>{{ sales_man_particular.productivity }}</td>
+                <td>{{ sales_man_particular.administrationActivityCost }}</td>
+                <td>{{ sales_man_particular.coeficientSalary }}</td>
+                <td>{{ sales_man_particular.commission }}</td>
+                <td>{{ sales_man_particular.salesActivity }}</td>
+                <td>{{ sales_man_particular.salesActivityParticular }}</td>
+                <td>
+                    <a href="{{ path('sales_man_particular_show', {'id': sales_man_particular.id}) }}">show</a>
+                    <a href="{{ path('sales_man_particular_edit', {'id': sales_man_particular.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('sales_man_particular_new') }}">Create new</a>
+{% endblock %}

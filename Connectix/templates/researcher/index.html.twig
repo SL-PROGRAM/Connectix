@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Researcher index{% endblock %}
+
+{% block body %}
+    <h1>Researcher index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Salary</th>
+                <th>Formation</th>
+                <th>Exprience</th>
+                <th>Productivity</th>
+                <th>AdministrationActivityCost</th>
+                <th>CoeficientSalary</th>
+                <th>ResearchActivity</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for researcher in researchers %}
+            <tr>
+                <td>{{ researcher.id }}</td>
+                <td>{{ researcher.salary }}</td>
+                <td>{{ researcher.formation }}</td>
+                <td>{{ researcher.exprience }}</td>
+                <td>{{ researcher.productivity }}</td>
+                <td>{{ researcher.administrationActivityCost }}</td>
+                <td>{{ researcher.coeficientSalary }}</td>
+                <td>{{ researcher.researchActivity }}</td>
+                <td>
+                    <a href="{{ path('researcher_show', {'id': researcher.id}) }}">show</a>
+                    <a href="{{ path('researcher_edit', {'id': researcher.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('researcher_new') }}">Create new</a>
+{% endblock %}

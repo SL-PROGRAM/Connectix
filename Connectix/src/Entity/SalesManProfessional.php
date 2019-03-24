@@ -9,22 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class SalesManProfessional extends SalesMan
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="integer")
      */
     private $salesActivityProfessional;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getSalesActivityProfessional(): ?int
     {

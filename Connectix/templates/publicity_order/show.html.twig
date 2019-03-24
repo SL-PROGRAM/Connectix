@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PublicityOrder{% endblock %}
+
+{% block body %}
+    <h1>PublicityOrder</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ publicity_order.id }}</td>
+            </tr>
+            <tr>
+                <th>Turn</th>
+                <td>{{ publicity_order.turn }}</td>
+            </tr>
+            <tr>
+                <th>PublicityPrice</th>
+                <td>{{ publicity_order.publicityPrice }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('publicity_order_index') }}">back to list</a>
+
+    <a href="{{ path('publicity_order_edit', {'id': publicity_order.id}) }}">edit</a>
+
+    {{ include('publicity_order/_delete_form.html.twig') }}
+{% endblock %}

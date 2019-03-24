@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Technician index{% endblock %}
+
+{% block body %}
+    <h1>Technician index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Salary</th>
+                <th>Formation</th>
+                <th>Exprience</th>
+                <th>Productivity</th>
+                <th>AdministrationActivityCost</th>
+                <th>CoeficientSalary</th>
+                <th>ProductionActivity</th>
+                <th>AdministrationActivity</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for technician in technicians %}
+            <tr>
+                <td>{{ technician.id }}</td>
+                <td>{{ technician.salary }}</td>
+                <td>{{ technician.formation }}</td>
+                <td>{{ technician.exprience }}</td>
+                <td>{{ technician.productivity }}</td>
+                <td>{{ technician.administrationActivityCost }}</td>
+                <td>{{ technician.coeficientSalary }}</td>
+                <td>{{ technician.productionActivity }}</td>
+                <td>{{ technician.administrationActivity }}</td>
+                <td>
+                    <a href="{{ path('technician_show', {'id': technician.id}) }}">show</a>
+                    <a href="{{ path('technician_edit', {'id': technician.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('technician_new') }}">Create new</a>
+{% endblock %}

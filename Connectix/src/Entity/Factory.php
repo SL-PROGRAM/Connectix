@@ -8,20 +8,20 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FactoryRepository")
+ *
  */
 class Factory extends ProductionUnit
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ProductionLign", mappedBy="factory", orphanRemoval=true)
      */
     private $ProductionLign;
+
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $name;
 
 
     public function __construct()
@@ -29,10 +29,6 @@ class Factory extends ProductionUnit
         $this->ProductionLign = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     /**
      * @return Collection|ProductionLign[]
@@ -65,4 +61,20 @@ class Factory extends ProductionUnit
         return $this;
     }
 
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 }

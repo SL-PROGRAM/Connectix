@@ -73,6 +73,9 @@ class PurchaseOrderController extends AbstractController
     }
 
 
+    /**
+     * @Route("/{id}/edit", name="purchase_order_edit", methods={"GET","POST"})
+     */
     public function edit(Request $request, PurchaseOrder $purchaseOrder): Response
     {
         $form = $this->createForm(PurchaseOrderType::class, $purchaseOrder);

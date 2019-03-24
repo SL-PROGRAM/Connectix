@@ -9,22 +9,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class ProductionCadre extends Production
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
     /**
      * @ORM\Column(type="integer")
      */
     private $administrationActivity;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getAdministrationActivity(): ?int
     {
