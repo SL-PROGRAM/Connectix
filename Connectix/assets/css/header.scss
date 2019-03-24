@@ -3,8 +3,17 @@ header{
   padding-top: 5px;
   padding-bottom: 5px;
 
+  .elem-center{
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    justify-self: center;
+  }
+
   img{
-    width: 100%;
+    width:100%;
+    display: flex;
+    align-self: center;
   }
 
   img:after{
