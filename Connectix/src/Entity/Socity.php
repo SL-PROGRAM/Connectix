@@ -79,6 +79,11 @@ class Socity
      */
     private $reseachOrders;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PublicityOrder", mappedBy="socity", orphanRemoval=true)
+     */
+    private $publicityOrders;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -89,6 +94,7 @@ class Socity
         $this->purchaseOrders = new ArrayCollection();
         $this->salesOrders = new ArrayCollection();
         $this->reseachOrders = new ArrayCollection();
+        $this->publicityOrders = new ArrayCollection();
     }
 
     /**
@@ -427,5 +433,36 @@ class Socity
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return Collection|PublicityOrder[]
+     */
+    public function getPublicityOrders(): Collection
+    {
+        return $this->publicityOrders;
+    }
+
+    public function addPublicityOrder(PublicityOrder $publicityOrder): self
+    {
+        if (!$this->publicityOrders->contains($publicityOrder)) {
+            $this->publicityOrders[] = $publicityOrder;
+            $publicityOrder->setSocity($this);
+        }
+
+        return $this;
+    }
+
+    public function removePublicityOrder(PublicityOrder $publicityOrder): self
+    {
+        if ($this->publicityOrders->contains($publicityOrder)) {
+            $this->publicityOrders->removeElement($publicityOrder);
+            // set the owning side to null (unless already changed)
+            if ($publicityOrder->getSocity() === $this) {
+                $publicityOrder->setSocity(null);
+            }
+        }
+
+        return $this;
     }
 }

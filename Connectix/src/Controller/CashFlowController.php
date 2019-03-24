@@ -43,7 +43,18 @@ class CashFlowController extends AbstractController
         $repaymentOfLoan = 0;
 
 
+
     }
+
+    private function cashingSales(){
+
+    }
+
+    private function monthlyCaluclation(){
+
+    }
+
+
 
     //TODO validation $vatCredit
     private function totalCashInclude($cashingSales,

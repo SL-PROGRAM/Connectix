@@ -56,6 +56,7 @@ class BalanceSheet
      */
     private $productionActivityCapacity;
 
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Socity", inversedBy="balanceSheets")
      */
