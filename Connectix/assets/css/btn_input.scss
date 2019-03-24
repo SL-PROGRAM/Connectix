@@ -1,17 +1,22 @@
-.adrec-btn{
-  background: orange;
-  color: $color-primary;
+.btn {
+  background: silver;
+  border: black 5px solid;
+  border-radius: 10px;
+  transition: 1s;
+}
 
-  &:hover{
-    background: $orange-200;
-  }
+.btn:hover{
+  background: gray;
+  font-weight: bold;
+  color: white;
+  border: white 5px solid;
+}
 
-  &.adrec-large{
-    background: red;
-    padding: 1rem 2rem;
 
-    &:hover{
-      background: #2aff42;
-    }
+footer{
+  .btn{
+    height: 100px;
   }
 }
+
+

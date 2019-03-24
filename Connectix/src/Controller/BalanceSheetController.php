@@ -37,6 +37,7 @@ class BalanceSheetController extends AbstractController
             'lastYearActiveBalanceSheet' => $lastYearActiveBalanceSheet,
             'actualYearPassiveBalanceSheet' => $actualYearPassiveBalanceSheet,
             'lastYearPassiveBalanceSheet' => $lastYearPassiveBalanceSheet,
+            'controller_name' => 'BalanceSheetController',
 
         ]);
     }
