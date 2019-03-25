@@ -18,10 +18,6 @@ class PurchaseOrderType extends AbstractType
         $builder
             ->add('productQuantityPurchase', IntegerType::class)
             ->add('purchasePrice', IntegerType::class)
-            ->add('product'
-                , EntityType::class, [
-                'class' => Product::class,
-                ])
         ;
     }
 

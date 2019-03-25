@@ -12,14 +12,8 @@ class SalesOrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('turn')
-            ->add('status')
-            ->add('salesPrice')
             ->add('productQuantitySales')
-            ->add('salesActivityCost')
-            ->add('socity')
-            ->add('product')
-        ;
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

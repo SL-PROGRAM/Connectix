@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Entity\PurchaseOrder;
 use App\Form\PurchaseOrderType;
+use App\Repository\ProductRepository;
 use App\Repository\PurchaseOrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +30,7 @@ class PurchaseOrderController extends AbstractController
     /**
      * @Route("/new", name="purchase_order_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request,ProductRepository $productRepository): Response
     {
         $purchaseOrder = new PurchaseOrder();
         $form = $this->createForm(PurchaseOrderType::class, $purchaseOrder);
@@ -37,23 +39,28 @@ class PurchaseOrderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $purchaseOrder->setStatus(0);
 
-            $game = $this->getUser()->getGame();
-            $turn = $game->getTurn();
+            $turn = $this->getUser()->getGame()->getTurn();
             $purchaseOrder->setTurn($turn);
 
             $socity = $this->getUser()->getSocity();
             $purchaseOrder->setSocity($socity);
 
-            $productActivityCost = $purchaseOrder->getProduct()->getProductionActivityCost();
+            $product = $productRepository->findOneBy(["id" => $_GET["id"]]);
+            $purchaseOrder->setProduct($product);
+
+            $productActivityCost = 10; // $purchaseOrder->getProduct()->getProductionActivityCost();
             $quantity = $purchaseOrder->getProductQuantityPurchase();
+
             $productionActivityCost = $quantity*$productActivityCost;
             $purchaseOrder->setPurchaseActivityCost($productionActivityCost);
+
+
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($purchaseOrder);
             $entityManager->flush();
 
-            return $this->redirectToRoute('purchase_order_index');
+            return $this->redirectToRoute('player_sales');
         }
 
         return $this->render('purchase_order/new.html.twig', [
@@ -62,15 +69,15 @@ class PurchaseOrderController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="purchase_order_show", methods={"GET"})
-     */
-    public function show(PurchaseOrder $purchaseOrder): Response
-    {
-        return $this->render('purchase_order/show.html.twig', [
-            'purchase_order' => $purchaseOrder,
-        ]);
-    }
+//    /**
+//     * @Route("/{id}", name="purchase_order_show", methods={"GET"})
+//     */
+//    public function show(PurchaseOrder $purchaseOrder): Response
+//    {
+//        return $this->render('purchase_order/show.html.twig', [
+//            'purchase_order' => $purchaseOrder,
+//        ]);
+//    }
 
 
     /**
@@ -84,7 +91,7 @@ class PurchaseOrderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('purchase_order_index', [
+            return $this->redirectToRoute('player_sales', [
                 'id' => $purchaseOrder->getId(),
             ]);
         }
@@ -106,6 +113,6 @@ class PurchaseOrderController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('purchase_order_index');
+        return $this->redirectToRoute('player_sales');
     }
 }

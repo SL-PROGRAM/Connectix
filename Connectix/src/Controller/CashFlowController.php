@@ -13,16 +13,24 @@ class CashFlowController extends AbstractController
      */
     public function index()
     {
+        $game = $this->getUser()->getGame();
+
+        $monthlyValue = $this->monthlyValue($game);
+
+
         return $this->render('cash_flow/index.html.twig', [
             'controller_name' => 'CashFlowController',
+            'monthlyValue' => $monthlyValue,
         ]);
+
+
     }
 
 
     private function monthlyValue(Game $game){
         //VAT CALCULATION
-        $monthlyRowMaterialPurchase = 0;
-        $monthlyMerchandisePurchase = 0;
+        $monthlyRowMaterialTTCPurchase = 0;
+        $monthlyMerchandiseTTCPurchase = 0;
         $monthlyBillingProductSales = 0;
         $monthlyOtherCharge = 0;
         $monthlyImmobilization = 0;
@@ -42,6 +50,65 @@ class CashFlowController extends AbstractController
         $tangibleInvestments = 0;
         $repaymentOfLoan = 0;
 
+        $monthlyVATCalculation =$this->monthlyVATCalculation($game,
+                                           $monthlyRowMaterialTTCPurchase,
+                                           $monthlyMerchandiseTTCPurchase,
+                                           $monthlyBillingProductSales,
+                                           $monthlyOtherCharge,
+                                           $monthlyImmobilization);
+
+        $vatCredit = $monthlyVATCalculation["vatCredit"];
+        $vatToPay = $monthlyVATCalculation["vatToPay"];
+
+
+        $totalCashInclude = $this->totalCashInclude($cashingSales,
+            $vatCredit,
+            $capitalContribution,
+            $mediumAndLongLoan,
+            $discountBillOfExchange,
+            $transferOfCapital);
+
+        $totalDisbursement = $this->totalDisbursement($monthlyRowMaterialTTCPurchase,
+            $monthlyMerchandiseTTCPurchase,
+            $externalCharges,
+            $dueAndTaxes,
+            $personnelCost,
+            $financialExpenses,
+            $vatToPay,
+            $tangibleInvestments,
+            $repaymentOfLoan);
+
+        $balanceOfTheMonth = $this->balanceOfTheMonth($totalCashInclude, $totalDisbursement);
+
+
+        $monthlyValue = [
+            "monthlyRowMaterialTTCPurchase" => $monthlyRowMaterialTTCPurchase,
+            "monthlyMerchandiseTTCPurchase" => $monthlyMerchandiseTTCPurchase,
+            "monthlyBillingProductSales" => $monthlyBillingProductSales,
+            "monthlyOtherCharge" => $monthlyOtherCharge,
+            "monthlyImmobilization" => $monthlyImmobilization,
+            "cashingSales" => $cashingSales,
+            "capitalContribution" => $capitalContribution,
+            "mediumAndLongLoan" => $mediumAndLongLoan,
+            "discountBillOfExchange" => $discountBillOfExchange,
+            "transferOfCapital" => $transferOfCapital,
+            "externalCharges" => $externalCharges,
+            "dueAndTaxes" => $dueAndTaxes,
+            "personnelCost" => $personnelCost,
+            "financialExpenses" => $financialExpenses,
+            "tangibleInvestments" => $tangibleInvestments,
+            "repaymentOfLoan" => $repaymentOfLoan,
+            "vatCredit" => $vatCredit,
+            "totalCashInclude" => $totalCashInclude,
+            "totalDisbursement" => $totalDisbursement,
+            "balanceOfTheMonth" => $balanceOfTheMonth,
+            ];
+
+        return array_merge($monthlyValue, $monthlyVATCalculation);
+
+
+
+
 
 
     }
@@ -51,6 +118,8 @@ class CashFlowController extends AbstractController
     }
 
     private function monthlyCaluclation(){
+
+
 
     }
 
@@ -96,8 +165,8 @@ class CashFlowController extends AbstractController
     }
 
 
-    private function balanceOfTheMonth($totalCashInclude, $totalDibursement){
-        return $balanceOfTheMonth = $totalCashInclude + $totalDibursement;
+    private function balanceOfTheMonth($totalCashInclude, $totalDisbursement){
+        return $balanceOfTheMonth = $totalCashInclude + $totalDisbursement;
     }
 
     private function balanceEndOfMonth($balanceOfTheMonth){
@@ -133,6 +202,20 @@ class CashFlowController extends AbstractController
                                                             $monthlyDeductibleVATOnRowMaterial);
         $vatCredit = $this->vatCredit($monthlyCollectedVAT, $monthlyDeductibleVAT );
         $vatToPay = $this->vatToPay($monthlyCollectedVAT, $monthlyDeductibleVAT );
+
+        return $monthlyVATCalculation = [
+            "monthlyCollectedVAT" => $monthlyCollectedVAT,
+            "monthlyHTPurchase" => $monthlyHTPurchase,
+            "monthlyRowMaterialTTCPurchase" => $monthlyRowMaterialTTCPurchase,
+            "monthlyDeductibleVATOnRowMaterial" => $monthlyDeductibleVATOnRowMaterial,
+            "monthlyDeductibleVATOnMerchandise" => $monthlyDeductibleVATOnMerchandise,
+            "monthlyDeductibleVATOnOtherCharge" => $monthlyDeductibleVATOnOtherCharge,
+            "monthlyDeductibleVATOnImmobilization" => $monthlyDeductibleVATOnImmobilization,
+            "monthlyDeductibleVAT" => $monthlyDeductibleVAT,
+            "vatCredit" => $vatCredit,
+            "vatToPay" => $vatToPay
+        ];
+
     }
 
     /**

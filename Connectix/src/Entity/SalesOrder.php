@@ -53,6 +53,11 @@ class SalesOrder
      */
     private $product;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $salesType;
+
 
     public function getId(): ?int
     {
@@ -139,6 +144,18 @@ class SalesOrder
     public function setProduct(Product $product): self
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    public function getSalesType(): ?int
+    {
+        return $this->salesType;
+    }
+
+    public function setSalesType(int $salesType): self
+    {
+        $this->salesType = $salesType;
 
         return $this;
     }
