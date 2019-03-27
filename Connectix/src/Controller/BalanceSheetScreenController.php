@@ -12,7 +12,7 @@ use Symfony\Component\Yaml\Yaml;
  *
  * @IsGranted("ROLE_USER")
  */
-class BalanceSheetController extends AbstractController
+class BalanceSheetScreenController extends AbstractController
 {
     /**
      * @Route("/balancesheet", name="balance_sheet")
@@ -30,7 +30,7 @@ class BalanceSheetController extends AbstractController
         $lastYearPassiveBalanceSheet = $this->lastYearPassiveBalanceSheet();
 
 
-        return $this->render('balance_sheet/index.html.twig', [
+        return $this->render('balance_sheet_screen/index.html.twig', [
             'actualYearActiveBalanceSheetBrut' => $actualYearActiveBalanceSheetBrut,
             'actualYearActiveBalanceSheetDepreciationProvision' => $actualYearActiveBalanceSheetDepreciationProvision,
             'actualYearActiveBalanceSheetNet' => $actualYearActiveBalanceSheetNet,

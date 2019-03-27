@@ -241,6 +241,16 @@ class BalanceSheet
      */
     private $socity;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $professionalSalesPart;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $particularSalesPart;
+
 
     public function getId(): ?int
     {
@@ -783,6 +793,30 @@ class BalanceSheet
     public function setOtherDebts(int $otherDebts): self
     {
         $this->otherDebts = $otherDebts;
+
+        return $this;
+    }
+
+    public function getProfessionalSalesPart(): ?int
+    {
+        return $this->professionalSalesPart;
+    }
+
+    public function setProfessionalSalesPart(int $professionalSalesPart): self
+    {
+        $this->professionalSalesPart = $professionalSalesPart;
+
+        return $this;
+    }
+
+    public function getParticularSalesPart(): ?int
+    {
+        return $this->particularSalesPart;
+    }
+
+    public function setParticularSalesPart(int $particularSalesPart): self
+    {
+        $this->particularSalesPart = $particularSalesPart;
 
         return $this;
     }

@@ -66,14 +66,14 @@
                     <td>{{ product.salesPrice }}</td>
                     <td>{{ product.stock }}</td>
                     <td>{{ product.purchaseCost }}</td>
-                    <td>{{ product.quantity }}</td>
-                    <td>{{ product.quantity }}</td>
+                    <td>{{ product.quantityParticular }}</td>
+                    <td>{{ product.quantityProfessional }}</td>
                     <td>{{ product.quantity }}</td>
                     <td>
                         {%  if product.quantity == 0 %}
-                            <a href="{{ path('purchase_order_new', {'id': product.id}) }}">Commander</a>
+                            <a href="{{ path('sales_order_new', {'id': product.id}) }}">Commander</a>
                         {% else %}
-                            <a href="{{ path('purchase_order_edit', {'id': product.PurchaseOrderId}) }}">Modifier la commande</a>
+                            <a href="{{ path('sales_order_edit', {'id': product.SalesOrderId}) }}">Modifier la commande</a>
                         {% endif %}
 
                     </td>

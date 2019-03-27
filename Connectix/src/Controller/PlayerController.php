@@ -24,19 +24,12 @@ class PlayerController extends AbstractController
                           PurchaseOrderRepository $purchaseOrderRepository)
     {
         $socity = $this->getUser()->getSocity();
-
-        $productPurchables = $this->productPurchables($productRepository);
-
         $productPurchasePrint = $this->productPurchasePrint($productRepository, $purchaseOrderRepository, $socity);
         $productSalesPrint = $this->productSalesPrint( $productRepository,
                                         $salesOrderRepository,
                                         $reseachOrderRepository,
                                         $purchaseOrderRepository,
                                         $socity);
-
-
-
-
 
         return $this->render('player/sales.html.twig', [
             'controller_name' => 'PlayerSales page',
@@ -46,11 +39,138 @@ class PlayerController extends AbstractController
     }
 
     private function productPurchasePrint(ProductRepository $productRepository, PurchaseOrderRepository $purchaseOrderRepository, Socity $socity){
-        $productPurchasePrint = [];
+
         $productPurchaseOrders = $this->productPurchaseOrders($purchaseOrderRepository, $socity);
         $productPurchables = $this->productPurchables($productRepository);
 
 
+        return $productPurchasePrint = $this->productPurchase($productPurchables, $productPurchaseOrders);
+
+    }
+
+    private function productPurchables(ProductRepository $productRepository){
+        return $productLvl1 = $productRepository->findBy(["technologicLevel" => 1]);
+    }
+
+
+    private function productPurchaseOrders(PurchaseOrderRepository $purchaseOrderRepository, Socity $socity)
+    {
+        $turn = $this->getUser()->getGame()->getTurn();
+         return $productPurchaseOrders = $purchaseOrderRepository->findBy(["socity" => $socity, "turn" => $turn]);
+
+    }
+
+
+
+    private function productSalesPrint(ProductRepository $productRepository,
+                                       SalesOrderRepository $salesOrderRepository,
+                                       ReseachOrderRepository $reseachOrderRepository,
+                                       PurchaseOrderRepository $purchaseOrderRepository,
+                                       Socity $socity)
+    {
+        $productSalePrint = [];
+        $productSalesOrders = $this->productSalesOrders($salesOrderRepository, $socity);
+        $productPurchaseOrders = $this->productPurchaseOrders($purchaseOrderRepository, $socity);
+        $productSalable = $this->productSalable( $reseachOrderRepository, $productRepository, $socity);
+
+        dump($productSalable);
+        //TODO add differentiation salesType
+
+        foreach ($productSalable as $product){
+            $quantityProfessional = 0;
+            $quantityParticular = 0;
+            $quantity = 0;
+            $salesOrderId = null;
+            $stock = 0;
+
+            $id = $product->getId();
+            $name = $product->getName();
+            $salesPrice = $product->getSalePrice();
+            $purchaseCost = $this->purchaseCost($product);
+            $cycleLife = $product->getProductLifes(); //TODO modify to select productLifeCycle
+
+            foreach ($productPurchaseOrders as $productPurchaseOrder){
+                $stock += $productPurchaseOrder->getProductQuantityPurchase();
+            }
+
+
+            foreach ($productSalesOrders as $productSalesOrder) {
+                if ($productSalesOrder->getProduct()->getName() === $product->getName()) {
+                    $quantity = $productSalesOrder->getProductQuantitySales();
+                    $quantityProfessional = $this->quantityProfessional($quantity);
+                    $quantityParticular = $this->quantityParticular($quantity);
+                    $salesOrderId = $productSalesOrder->getId();
+                }
+            }
+             $productPrint = [
+                "id" => $id,
+                "name" => $name,
+                "salesPrice" => $salesPrice,
+                "stock" => $stock,
+                 "cycleLife" => $cycleLife,
+                 "purchaseCost" => $purchaseCost,
+                "quantityProfessional" => $quantityProfessional,
+                "quantityParticular" => $quantityParticular,
+                "quantity" => $quantity,
+                "SalesOrderId" => $salesOrderId,
+            ];
+            array_push($productSalePrint, $productPrint);
+
+        }
+        return $productSalePrint;
+    }
+
+    private function quantityProfessional($quantity){
+//        $proCoeficient = $this->getUser()->getSocity()->getBalanceSheets()->getProfessionalSalesPart();
+
+//        if($proCoeficient === 0 or $proCoeficient == null){
+            $quantityProfessional = $quantity*0.5;
+//        }
+//        else{
+//            $quantityProfessional = $quantity*$proCoeficient;
+//        }
+
+        return $quantityProfessional;
+    }
+
+    private function quantityParticular($quantity){
+//        $proCoeficient = $this->getUser()->getSocity()->getBalanceSheets()->getParticularSalesPart();
+
+//        if($proCoeficient === 0 or $proCoeficient == null){
+            $quantityParticular = $quantity*0.5;
+//        }
+//        else{
+//            $quantityParticular = $quantity*$proCoeficient;
+//        }
+
+        return $quantityParticular;
+    }
+
+    private function purchaseCost($product){
+            if ($product->getTechnologicLevel() === 1){
+                return $product->getBuyPrice();
+            }
+            else{
+                return 100;
+                //TODO change value by calculation
+            }
+    }
+
+    private function productSalesOrders(SalesOrderRepository $salesOrderRepository, Socity $socity)
+    {
+        $turn = $this->getUser()->getGame()->getTurn();
+        return $productPurchaseOrders = $salesOrderRepository->findBy(["socity" => $socity, "turn" => $turn]);
+    }
+
+
+    private function productResearchOrder($Product, ReseachOrderRepository $reseachOrderRepository, Socity $socity){
+        return $productReseachOrders = $reseachOrderRepository->findBy(["socity" => $socity, "product" => $Product]);
+    }
+
+
+
+    private function productPurchase($productPurchables, $productPurchaseOrders){
+        $productPurchasePrint =  [];
         foreach ($productPurchables as $productPurchable){
             $quantity = 0;
             $PurchaseOrderId = null;
@@ -77,103 +197,6 @@ class PlayerController extends AbstractController
         return $productPurchasePrint;
     }
 
-    private function productPurchables(ProductRepository $productRepository){
-        return $productLvl1 = $productRepository->findBy(["technologicLevel" => 1]);
-    }
-
-
-    private function productPurchaseOrders(PurchaseOrderRepository $purchaseOrderRepository, Socity $socity)
-    {
-        $turn = $this->getUser()->getGame()->getTurn();
-         return $productPurchaseOrders = $purchaseOrderRepository->findBy(["socity" => $socity, "turn" => $turn]);
-
-    }
-
-
-
-    private function productSalesPrint(ProductRepository $productRepository,
-                                       SalesOrderRepository $salesOrderRepository,
-                                       ReseachOrderRepository $reseachOrderRepository,
-                                       PurchaseOrderRepository $purchaseOrderRepository,
-                                       Socity $socity)
-    {
-        $productSalePrint = [];
-        $productSalesOrders = $this->productSalesOrders($salesOrderRepository, $socity);
-        $productPurchaseOrders = $this->productPurchaseOrders($purchaseOrderRepository, $socity);
-
-        $products = $productRepository->findAll();
-
-
-        //TODO add differentiation salesType
-
-        foreach ($products as $product){
-            $quantity = 0;
-            $salesOrderId = null;
-            $research = 0;
-            $stock = 0;
-            $productResearchOrders = $this->productResearchOrder($product, $reseachOrderRepository, $socity);
-            foreach ($productResearchOrders as $productResearchOrder){
-                $research += $productResearchOrder->getReseachDo();
-            }
-            if($research >= $product->getResearchCost() or $product->getTechnologicLevel() === 1 ){
-                $id = $product->getId();
-                $name = $product->getName();
-                $salesPrice = $product->getSalePrice();
-                $purchaseCost = $this->purchaseCost($products);
-                $cycleLife = $product->getProductLifes();
-                foreach ($productPurchaseOrders as $productPurchaseOrder){
-                    $stock += $productPurchaseOrder->getProductQuantityPurchase();
-                }
-                foreach ($productSalesOrders as $productSalesOrder){
-                    if($productSalesOrder->getProduct()->getName() === $product->getName()){
-                        $quantity = $productSalesOrder->getProductQuantitySales();
-                        $salesOrderId = $productSalesOrder->getId();
-                    }
-                }
-
-             $productPrint = [
-                "id" => $id,
-                "name" => $name,
-                "salesPrice" => $salesPrice,
-                "stock" => $stock,
-                 "cycleLife" => $cycleLife,
-                 "purchaseCost" => $purchaseCost,
-                "quantity" => $quantity,
-                "SalesOrderId" => $salesOrderId,
-            ];
-            array_push($productSalePrint, $productPrint);
-            }
-        }
-        return $productSalePrint;
-    }
-
-    private function purchaseCost($products){
-        foreach ($products as $product){
-            if ($product->getTechnologicLevel() === 1){
-                return $product->getBuyPrice();
-            }
-            else{
-                return 100;
-                //TODO change value by calculation
-            }
-        }
-    }
-
-    private function productSalesOrders(SalesOrderRepository $salesOrderRepository, Socity $socity)
-    {
-        $turn = $this->getUser()->getGame()->getTurn();
-        return $productPurchaseOrders = $salesOrderRepository->findBy(["socity" => $socity, "turn" => $turn]);
-    }
-
-
-    private function productResearchOrder($Product, ReseachOrderRepository $reseachOrderRepository, Socity $socity){
-        return $productReseachOrders = $reseachOrderRepository->findBy(["socity" => $socity, "product" => $Product]);
-    }
-
-
-
-
-
 
 
 
@@ -192,10 +215,30 @@ class PlayerController extends AbstractController
 
 
 
-        return $this->render('player/index.html.twig', [
+        return $this->render('player/publicity.html.twig', [
             'controller_name' => 'PlayerController',
         ]);
     }
+
+
+    private function productSalable (ReseachOrderRepository $reseachOrderRepository,ProductRepository $productRepository, Socity $socity ){
+        $productSalable = [];
+        $products = $productRepository->findAll();
+        foreach ($products as $product){
+            $research = 0;
+            $productResearchOrders = $this->productResearchOrder($product, $reseachOrderRepository, $socity);
+            foreach ($productResearchOrders as $productResearchOrder){
+                $research += $productResearchOrder->getReseachDo();
+            }
+
+
+            if($research >= $product->getResearchCost() or $product->getTechnologicLevel() === 1 ){
+                array_push($productSalable, $product);
+            }
+        }
+        return $productSalable;
+    }
+
 
     /**
      * @Route("/production", name="player_production")
@@ -205,7 +248,7 @@ class PlayerController extends AbstractController
 
 
 
-        return $this->render('player/index.html.twig', [
+        return $this->render('player/production.html.twig', [
             'controller_name' => 'PlayerController',
         ]);
     }
@@ -218,7 +261,7 @@ class PlayerController extends AbstractController
 
 
 
-        return $this->render('player/index.html.twig', [
+        return $this->render('player/human.html.twig', [
             'controller_name' => 'PlayerController',
         ]);
     }
@@ -231,7 +274,7 @@ class PlayerController extends AbstractController
 
 
 
-        return $this->render('player/index.html.twig', [
+        return $this->render('player/financial.html.twig', [
             'controller_name' => 'PlayerController',
         ]);
     }
@@ -244,7 +287,7 @@ class PlayerController extends AbstractController
 
 
 
-        return $this->render('player/index.html.twig', [
+        return $this->render('player/information.html.twig', [
             'controller_name' => 'PlayerController',
         ]);
     }

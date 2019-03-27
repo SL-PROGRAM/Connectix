@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\SalesOrder;
 use App\Form\SalesOrderType;
+use App\Repository\ProductRepository;
 use App\Repository\SalesOrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,13 +29,28 @@ class SalesOrderController extends AbstractController
     /**
      * @Route("/new", name="sales_order_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ProductRepository $productRepository): Response
     {
         $salesOrder = new SalesOrder();
         $form = $this->createForm(SalesOrderType::class, $salesOrder);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $turn = $this->getUser()->getGame()->getTurn();
+            $salesActivityCost = 10*$salesOrder->getProductQuantitySales();
+            $socity = $this->getUser()->getSocity();
+            $product = $productRepository->findOneBy(["id" => $_GET["id"]]);
+
+
+            $salesOrder->setTurn($turn)
+                        ->setStatus(0)
+                        ->setSalesActivityCost($salesActivityCost)
+                        ->setSocity($socity)
+                        ->setProduct($product);
+
+
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($salesOrder);
             $entityManager->flush();
