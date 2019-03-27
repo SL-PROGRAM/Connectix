@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BalanceSheet index{% endblock %}
+
+{% block body %}
+    <h1>BalanceSheet index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Turn</th>
+                <th>Status</th>
+                <th>AdministationActivityCapacity</th>
+                <th>SalesActivityCapacity</th>
+                <th>ResearchActivityCapacity</th>
+                <th>SalesActivityProfessionalCapacity</th>
+                <th>SalesActivityParticularCapacity</th>
+                <th>ProductionActivityCapacity</th>
+                <th>MarchendiseSales</th>
+                <th>ProductionSales</th>
+                <th>ProductionStock</th>
+                <th>MerchandiseStock</th>
+                <th>TotalSalary</th>
+                <th>RawPurchase</th>
+                <th>MarchendisePurchase</th>
+                <th>OtherPurchase</th>
+                <th>DepreciationAmortization</th>
+                <th>Taxes</th>
+                <th>RepaymentOnDepreciationAndProvisions</th>
+                <th>Provisions</th>
+                <th>ProvisionOnCurrentAsset</th>
+                <th>OtherExpenses</th>
+                <th>InterestAndSimilarProduct</th>
+                <th>InterestAndSimilarExpenses</th>
+                <th>CapitalExceptionalOperatingProduct</th>
+                <th>CapitalExceptionalExpense</th>
+                <th>ResearchAndDevelopmentCost</th>
+                <th>ConcessionPatentsAndSimilar</th>
+                <th>Grounds</th>
+                <th>Constructions</th>
+                <th>TechnicalInstallationsEquipment</th>
+                <th>CustomersAndRelatedAccounts</th>
+                <th>OtherReceivables</th>
+                <th>Availability</th>
+                <th>ShareCapitalOrIndividual</th>
+                <th>PremiumIssueMergerContribution</th>
+                <th>LegalReserve</th>
+                <th>StatutoryOrContractualReserves</th>
+                <th>OtherReserves</th>
+                <th>ReportAgain</th>
+                <th>LoanAndDebtsWihCreditInstitutions</th>
+                <th>TradePayableAndRelatedAccounts</th>
+                <th>TaxAndSocialDebts</th>
+                <th>OtherDebts</th>
+                <th>ProfessionalSalesPart</th>
+                <th>ParticularSalesPart</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for balance_sheet in balance_sheets %}
+            <tr>
+                <td>{{ balance_sheet.id }}</td>
+                <td>{{ balance_sheet.turn }}</td>
+                <td>{{ balance_sheet.status }}</td>
+                <td>{{ balance_sheet.administationActivityCapacity }}</td>
+                <td>{{ balance_sheet.salesActivityCapacity }}</td>
+                <td>{{ balance_sheet.researchActivityCapacity }}</td>
+                <td>{{ balance_sheet.salesActivityProfessionalCapacity }}</td>
+                <td>{{ balance_sheet.salesActivityParticularCapacity }}</td>
+                <td>{{ balance_sheet.productionActivityCapacity }}</td>
+                <td>{{ balance_sheet.marchendiseSales }}</td>
+                <td>{{ balance_sheet.productionSales }}</td>
+                <td>{{ balance_sheet.productionStock }}</td>
+                <td>{{ balance_sheet.merchandiseStock }}</td>
+                <td>{{ balance_sheet.totalSalary }}</td>
+                <td>{{ balance_sheet.rawPurchase }}</td>
+                <td>{{ balance_sheet.marchendisePurchase }}</td>
+                <td>{{ balance_sheet.otherPurchase }}</td>
+                <td>{{ balance_sheet.depreciationAmortization }}</td>
+                <td>{{ balance_sheet.taxes }}</td>
+                <td>{{ balance_sheet.repaymentOnDepreciationAndProvisions }}</td>
+                <td>{{ balance_sheet.provisions }}</td>
+                <td>{{ balance_sheet.provisionOnCurrentAsset }}</td>
+                <td>{{ balance_sheet.otherExpenses }}</td>
+                <td>{{ balance_sheet.interestAndSimilarProduct }}</td>
+                <td>{{ balance_sheet.interestAndSimilarExpenses }}</td>
+                <td>{{ balance_sheet.capitalExceptionalOperatingProduct }}</td>
+                <td>{{ balance_sheet.capitalExceptionalExpense }}</td>
+                <td>{{ balance_sheet.researchAndDevelopmentCost }}</td>
+                <td>{{ balance_sheet.concessionPatentsAndSimilar }}</td>
+                <td>{{ balance_sheet.grounds }}</td>
+                <td>{{ balance_sheet.constructions }}</td>
+                <td>{{ balance_sheet.technicalInstallationsEquipment }}</td>
+                <td>{{ balance_sheet.customersAndRelatedAccounts }}</td>
+                <td>{{ balance_sheet.otherReceivables }}</td>
+                <td>{{ balance_sheet.availability }}</td>
+                <td>{{ balance_sheet.shareCapitalOrIndividual }}</td>
+                <td>{{ balance_sheet.premiumIssueMergerContribution }}</td>
+                <td>{{ balance_sheet.legalReserve }}</td>
+                <td>{{ balance_sheet.statutoryOrContractualReserves }}</td>
+                <td>{{ balance_sheet.otherReserves }}</td>
+                <td>{{ balance_sheet.reportAgain }}</td>
+                <td>{{ balance_sheet.loanAndDebtsWihCreditInstitutions }}</td>
+                <td>{{ balance_sheet.tradePayableAndRelatedAccounts }}</td>
+                <td>{{ balance_sheet.taxAndSocialDebts }}</td>
+                <td>{{ balance_sheet.otherDebts }}</td>
+                <td>{{ balance_sheet.professionalSalesPart }}</td>
+                <td>{{ balance_sheet.particularSalesPart }}</td>
+                <td>
+                    <a href="{{ path('balance_sheet_show', {'id': balance_sheet.id}) }}">show</a>
+                    <a href="{{ path('balance_sheet_edit', {'id': balance_sheet.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="48">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('balance_sheet_new') }}">Create new</a>
+{% endblock %}
