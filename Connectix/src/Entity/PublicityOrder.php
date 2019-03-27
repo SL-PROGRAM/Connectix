@@ -26,17 +26,19 @@ class PublicityOrder
      */
     private $publicityPrice;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Product", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $product;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\socity", inversedBy="publicityOrders")
      * @ORM\JoinColumn(nullable=false)
      */
     private $socity;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $product;
 
     public function getId(): ?int
     {
@@ -67,17 +69,7 @@ class PublicityOrder
         return $this;
     }
 
-    public function getProduct(): ?Product
-    {
-        return $this->product;
-    }
 
-    public function setProduct(Product $product): self
-    {
-        $this->product = $product;
-
-        return $this;
-    }
 
     public function getSocity(): ?socity
     {
@@ -87,6 +79,18 @@ class PublicityOrder
     public function setSocity(?socity $socity): self
     {
         $this->socity = $socity;
+
+        return $this;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): self
+    {
+        $this->product = $product;
 
         return $this;
     }

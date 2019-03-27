@@ -52,10 +52,18 @@ class ProductionOrder
     private $rowMaterialCost;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Product", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Product")
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Socity", inversedBy="productionOrders")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $socity;
+
+
 
     public function getId(): ?int
     {
@@ -146,15 +154,26 @@ class ProductionOrder
         return $this;
     }
 
-
     public function getProduct(): ?Product
     {
         return $this->product;
     }
 
-    public function setProduct(Product $product): self
+    public function setProduct(?Product $product): self
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    public function getSocity(): ?Socity
+    {
+        return $this->socity;
+    }
+
+    public function setSocity(?Socity $socity): self
+    {
+        $this->socity = $socity;
 
         return $this;
     }

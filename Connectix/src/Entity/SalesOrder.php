@@ -47,12 +47,6 @@ class SalesOrder
      */
     private $socity;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Product", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $product;
-
 
 
     public function getId(): ?int
