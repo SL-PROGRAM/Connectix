@@ -56,11 +56,191 @@ class BalanceSheet
      */
     private $productionActivityCapacity;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $marchendiseSales;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $productionSales;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $productionStock;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $merchandiseStock;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $totalSalary;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $rawPurchase;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $marchendisePurchase;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $otherPurchase;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $depreciationAmortization;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $taxes;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $repaymentOnDepreciationAndProvisions;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $provisions;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $provisionOnCurrentAsset;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $otherExpenses;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $interestAndSimilarProduct;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $interestAndSimilarExpenses;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $capitalExceptionalOperatingProduct;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $capitalExceptionalExpense;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $researchAndDevelopmentCost;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $concessionPatentsAndSimilar;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $grounds;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $constructions;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $technicalInstallationsEquipment;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $customersAndRelatedAccounts;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $otherReceivables;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $availability;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $shareCapitalOrIndividual;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $premiumIssueMergerContribution;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $legalReserve;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $statutoryOrContractualReserves;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $otherReserves;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $reportAgain;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $loanAndDebtsWihCreditInstitutions;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $tradePayableAndRelatedAccounts;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $taxAndSocialDebts;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $otherDebts;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Socity", inversedBy="balanceSheets")
      */
     private $socity;
+
 
     public function getId(): ?int
     {
@@ -174,4 +354,438 @@ class BalanceSheet
 
         return $this;
     }
+
+    public function getMarchendiseSales(): ?int
+    {
+        return $this->marchendiseSales;
+    }
+
+    public function setMarchendiseSales(int $marchendiseSales): self
+    {
+        $this->marchendiseSales = $marchendiseSales;
+
+        return $this;
+    }
+
+    public function getProductionSales(): ?int
+    {
+        return $this->productionSales;
+    }
+
+    public function setProductionSales(int $productionSales): self
+    {
+        $this->productionSales = $productionSales;
+
+        return $this;
+    }
+
+    public function getProductionStock(): ?int
+    {
+        return $this->productionStock;
+    }
+
+    public function setProductionStock(int $productionStock): self
+    {
+        $this->productionStock = $productionStock;
+
+        return $this;
+    }
+
+    public function getMerchandiseStock(): ?int
+    {
+        return $this->merchandiseStock;
+    }
+
+    public function setMerchandiseStock(int $merchandiseStock): self
+    {
+        $this->merchandiseStock = $merchandiseStock;
+
+        return $this;
+    }
+
+    public function getTotalSalary(): ?int
+    {
+        return $this->totalSalary;
+    }
+
+    public function setTotalSalary(int $totalSalary): self
+    {
+        $this->totalSalary = $totalSalary;
+
+        return $this;
+    }
+
+    public function getRawPurchase(): ?int
+    {
+        return $this->rawPurchase;
+    }
+
+    public function setRawPurchase(int $rawPurchase): self
+    {
+        $this->rawPurchase = $rawPurchase;
+
+        return $this;
+    }
+
+    public function getMarchendisePurchase(): ?int
+    {
+        return $this->marchendisePurchase;
+    }
+
+    public function setMarchendisePurchase(int $marchendisePurchase): self
+    {
+        $this->marchendisePurchase = $marchendisePurchase;
+
+        return $this;
+    }
+
+    public function getOtherPurchase(): ?int
+    {
+        return $this->otherPurchase;
+    }
+
+    public function setOtherPurchase(int $otherPurchase): self
+    {
+        $this->otherPurchase = $otherPurchase;
+
+        return $this;
+    }
+
+    public function getDepreciationAmortization(): ?int
+    {
+        return $this->depreciationAmortization;
+    }
+
+    public function setDepreciationAmortization(int $depreciationAmortization): self
+    {
+        $this->depreciationAmortization = $depreciationAmortization;
+
+        return $this;
+    }
+
+    public function getTaxes(): ?int
+    {
+        return $this->taxes;
+    }
+
+    public function setTaxes(int $taxes): self
+    {
+        $this->taxes = $taxes;
+
+        return $this;
+    }
+
+    public function getRepaymentOnDepreciationAndProvisions(): ?int
+    {
+        return $this->repaymentOnDepreciationAndProvisions;
+    }
+
+    public function setRepaymentOnDepreciationAndProvisions(int $repaymentOnDepreciationAndProvisions): self
+    {
+        $this->repaymentOnDepreciationAndProvisions = $repaymentOnDepreciationAndProvisions;
+
+        return $this;
+    }
+
+    public function getProvisions(): ?int
+    {
+        return $this->provisions;
+    }
+
+    public function setProvisions(int $provisions): self
+    {
+        $this->provisions = $provisions;
+
+        return $this;
+    }
+
+    public function getProvisionOnCurrentAsset(): ?int
+    {
+        return $this->provisionOnCurrentAsset;
+    }
+
+    public function setProvisionOnCurrentAsset(int $provisionOnCurrentAsset): self
+    {
+        $this->provisionOnCurrentAsset = $provisionOnCurrentAsset;
+
+        return $this;
+    }
+
+    public function getOtherExpenses(): ?int
+    {
+        return $this->otherExpenses;
+    }
+
+    public function setOtherExpenses(int $otherExpenses): self
+    {
+        $this->otherExpenses = $otherExpenses;
+
+        return $this;
+    }
+
+    public function getInterestAndSimilarProduct(): ?int
+    {
+        return $this->interestAndSimilarProduct;
+    }
+
+    public function setInterestAndSimilarProduct(int $interestAndSimilarProduct): self
+    {
+        $this->interestAndSimilarProduct = $interestAndSimilarProduct;
+
+        return $this;
+    }
+
+    public function getInterestAndSimilarExpenses(): ?int
+    {
+        return $this->interestAndSimilarExpenses;
+    }
+
+    public function setInterestAndSimilarExpenses(int $interestAndSimilarExpenses): self
+    {
+        $this->interestAndSimilarExpenses = $interestAndSimilarExpenses;
+
+        return $this;
+    }
+
+    public function getCapitalExceptionalOperatingProduct(): ?int
+    {
+        return $this->capitalExceptionalOperatingProduct;
+    }
+
+    public function setCapitalExceptionalOperatingProduct(int $capitalExceptionalOperatingProduct): self
+    {
+        $this->capitalExceptionalOperatingProduct = $capitalExceptionalOperatingProduct;
+
+        return $this;
+    }
+
+    public function getCapitalExceptionalExpense(): ?int
+    {
+        return $this->capitalExceptionalExpense;
+    }
+
+    public function setCapitalExceptionalExpense(int $capitalExceptionalExpense): self
+    {
+        $this->capitalExceptionalExpense = $capitalExceptionalExpense;
+
+        return $this;
+    }
+
+    public function getResearchAndDevelopmentCost(): ?int
+    {
+        return $this->researchAndDevelopmentCost;
+    }
+
+    public function setResearchAndDevelopmentCost(int $researchAndDevelopmentCost): self
+    {
+        $this->researchAndDevelopmentCost = $researchAndDevelopmentCost;
+
+        return $this;
+    }
+
+    public function getConcessionPatentsAndSimilar(): ?int
+    {
+        return $this->concessionPatentsAndSimilar;
+    }
+
+    public function setConcessionPatentsAndSimilar(int $concessionPatentsAndSimilar): self
+    {
+        $this->concessionPatentsAndSimilar = $concessionPatentsAndSimilar;
+
+        return $this;
+    }
+
+    public function getGrounds(): ?int
+    {
+        return $this->grounds;
+    }
+
+    public function setGrounds(int $grounds): self
+    {
+        $this->grounds = $grounds;
+
+        return $this;
+    }
+
+    public function getConstructions(): ?int
+    {
+        return $this->constructions;
+    }
+
+    public function setConstructions(int $constructions): self
+    {
+        $this->constructions = $constructions;
+
+        return $this;
+    }
+
+    public function getTechnicalInstallationsEquipment(): ?int
+    {
+        return $this->technicalInstallationsEquipment;
+    }
+
+    public function setTechnicalInstallationsEquipment(int $technicalInstallationsEquipment): self
+    {
+        $this->technicalInstallationsEquipment = $technicalInstallationsEquipment;
+
+        return $this;
+    }
+
+    public function getCustomersAndRelatedAccounts(): ?int
+    {
+        return $this->customersAndRelatedAccounts;
+    }
+
+    public function setCustomersAndRelatedAccounts(int $customersAndRelatedAccounts): self
+    {
+        $this->customersAndRelatedAccounts = $customersAndRelatedAccounts;
+
+        return $this;
+    }
+
+    public function getOtherReceivables(): ?int
+    {
+        return $this->otherReceivables;
+    }
+
+    public function setOtherReceivables(int $otherReceivables): self
+    {
+        $this->otherReceivables = $otherReceivables;
+
+        return $this;
+    }
+
+    public function getAvailability(): ?int
+    {
+        return $this->availability;
+    }
+
+    public function setAvailability(int $availability): self
+    {
+        $this->availability = $availability;
+
+        return $this;
+    }
+
+    public function getShareCapitalOrIndividual(): ?int
+    {
+        return $this->shareCapitalOrIndividual;
+    }
+
+    public function setShareCapitalOrIndividual(int $shareCapitalOrIndividual): self
+    {
+        $this->shareCapitalOrIndividual = $shareCapitalOrIndividual;
+
+        return $this;
+    }
+
+    public function getPremiumIssueMergerContribution(): ?int
+    {
+        return $this->premiumIssueMergerContribution;
+    }
+
+    public function setPremiumIssueMergerContribution(int $premiumIssueMergerContribution): self
+    {
+        $this->premiumIssueMergerContribution = $premiumIssueMergerContribution;
+
+        return $this;
+    }
+
+    public function getLegalReserve(): ?int
+    {
+        return $this->legalReserve;
+    }
+
+    public function setLegalReserve(int $legalReserve): self
+    {
+        $this->legalReserve = $legalReserve;
+
+        return $this;
+    }
+
+    public function getStatutoryOrContractualReserves(): ?int
+    {
+        return $this->statutoryOrContractualReserves;
+    }
+
+    public function setStatutoryOrContractualReserves(int $statutoryOrContractualReserves): self
+    {
+        $this->statutoryOrContractualReserves = $statutoryOrContractualReserves;
+
+        return $this;
+    }
+
+    public function getOtherReserves(): ?int
+    {
+        return $this->otherReserves;
+    }
+
+    public function setOtherReserves(int $otherReserves): self
+    {
+        $this->otherReserves = $otherReserves;
+
+        return $this;
+    }
+
+    public function getReportAgain(): ?int
+    {
+        return $this->reportAgain;
+    }
+
+    public function setReportAgain(int $reportAgain): self
+    {
+        $this->reportAgain = $reportAgain;
+
+        return $this;
+    }
+
+    public function getLoanAndDebtsWihCreditInstitutions(): ?int
+    {
+        return $this->loanAndDebtsWihCreditInstitutions;
+    }
+
+    public function setLoanAndDebtsWihCreditInstitutions(int $loanAndDebtsWihCreditInstitutions): self
+    {
+        $this->loanAndDebtsWihCreditInstitutions = $loanAndDebtsWihCreditInstitutions;
+
+        return $this;
+    }
+
+    public function getTradePayableAndRelatedAccounts(): ?int
+    {
+        return $this->tradePayableAndRelatedAccounts;
+    }
+
+    public function setTradePayableAndRelatedAccounts(int $tradePayableAndRelatedAccounts): self
+    {
+        $this->tradePayableAndRelatedAccounts = $tradePayableAndRelatedAccounts;
+
+        return $this;
+    }
+
+    public function getTaxAndSocialDebts(): ?int
+    {
+        return $this->taxAndSocialDebts;
+    }
+
+    public function setTaxAndSocialDebts(int $taxAndSocialDebts): self
+    {
+        $this->taxAndSocialDebts = $taxAndSocialDebts;
+
+        return $this;
+    }
+
+    public function getOtherDebts(): ?int
+    {
+        return $this->otherDebts;
+    }
+
+    public function setOtherDebts(int $otherDebts): self
+    {
+        $this->otherDebts = $otherDebts;
+
+        return $this;
+    }
+
+
 }
