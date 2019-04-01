@@ -12,13 +12,7 @@ class FactoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('turnCreation')
-            ->add('creationCost')
-            ->add('maintenanceCost')
-            ->add('administrationCost')
-            ->add('amortizationTurn')
             ->add('name')
-            ->add('socity')
         ;
     }
 

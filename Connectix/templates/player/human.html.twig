@@ -5,18 +5,247 @@
 {% block title %}Hello PlayerController!{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-    </style>
+    <div class="row">
+        <section class="col-md-6">
+            <h1>Service administratif</h1>
+            <div class="row">
+                <div  class="table col-md-8">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Total des salaires</th>
+                            <th>Productivité moyenne</th>
+                            <th>Coût licenciement</th>
+                            <th>Nombre salarié année</th>
+                            <th>Recruter</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ administrationPrint.totalSalarie }}</td>
+                            <td>{{ administrationPrint.ProductivityAvg }}</td>
+                            <td>{{ administrationPrint.dismissAvg }}</td>
+                            <td>{{ administrationPrint.numberEmployeesTotal }}</td>
+                            <td>
+                                <a href="{{ path('administration_new') }}">Recruter</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-    <div class="example-wrapper">
-        <h1>Hello {{ controller_name }}! ✅</h1>
+                <div class="col-md-4">
+                    <div class="card m-2" style="width: 18rem;">
+                        <div class="card-header">
+                            Augmentation de salaire
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="number" step="0.1" required>
+                                <button>Valider</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card m-2" style="width: 18rem;">
+                        <div class="card-header">
+                            Formation
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="number" step="0.1" required>
+                                <button>Valider</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at <code><a href="{{ '/home/sl/Symfony/Connectix/Connectix/src/Controller/PlayerController.php'|file_link(0) }}">src/Controller/PlayerController.php</a></code></li>
-            <li>Your template at <code><a href="{{ '/home/sl/Symfony/Connectix/Connectix/templates/player/index.html.twig'|file_link(0) }}">templates/player/index.html.twig</a></code></li>
-        </ul>
+
+        </section>
+        <section  class="col-md-6">
+            <h1>Service Production</h1>
+            <div class="row">
+                <div  class="table col-md-8">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Total des salaires</th>
+                            <th>Productivité moyenne</th>
+                            <th>Coût licenciement</th>
+                            <th>Nombre salarié année</th>
+                            <th>Recruter</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ productionPrint.totalSalarie }}</td>
+                            <td>{{ productionPrint.ProductivityAvg }}</td>
+                            <td>{{ productionPrint.dismissAvg }}</td>
+                            <td>{{ productionPrint.numberEmployeesTotal }}</td>
+                            <td>
+                                <a href="{{ path('work_man_new') }}">Recruter</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card m-2" style="width: 18rem;">
+                        <div class="card-header">
+                            Augmentation de salaire
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="number" step="0.1" required>
+                                <button>Valider</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card m-2" style="width: 18rem;">
+                        <div class="card-header">
+                            Formation
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="number" step="0.1" required>
+                                <button>Valider</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <div class="row">
+        <section class="col-md-6">
+            <h1>Service Recherche et Développement</h1>
+            <div class="row">
+                <div  class="table col-md-8">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Total des salaires</th>
+                                    <th>Productivité moyenne</th>
+                                    <th>Coût licenciement</th>
+                                    <th>Nombre salarié année</th>
+                                    <th>Recruter</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{ researchPrint.totalSalarie }}</td>
+                                <td>{{ researchPrint.ProductivityAvg }}</td>
+                                <td>{{ researchPrint.dismissAvg }}</td>
+                                <td>{{ researchPrint.numberEmployeesTotal }}</td>
+                                <td>
+                                    <a href="{{ path('researcher_new') }}">Recruter</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card m-2" style="width: 18rem;">
+                        <div class="card-header">
+                            Augmentation de salaire
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="number" step="0.1" required>
+                                <button>Valider</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card m-2" style="width: 18rem;">
+                        <div class="card-header">
+                            Formation
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="number" step="0.1" required>
+                                <button>Valider</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="col-md-6">
+            <h1>Service force de vente</h1>
+            <div class="row">
+                <div  class="table col-md-8">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Total des salaires</th>
+                            <th>Productivité moyenne</th>
+                            <th>Coût licenciement</th>
+                            <th>Nombre salarié année</th>
+                            <th>Recruter</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ salesManPrint.totalSalarie }}</td>
+                            <td>{{ salesManPrint.ProductivityAvg }}</td>
+                            <td>{{ salesManPrint.dismissAvg }}</td>
+                            <td>{{ salesManPrint.numberEmployeesTotal }}</td>
+                            <td>
+                                <div>
+                                    <a href="{{ path('sales_man_particular_new') }}">Recruter vendeur pour particlier</a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('sales_man_professional_new') }}">Recruter vendeur pour Professionnel</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card m-2" style="width: 18rem;">
+                        <div class="card-header">
+                            Augmentation de salaire
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="number" step="0.1" required>
+                                <button>Valider</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card m-2" style="width: 18rem;">
+                        <div class="card-header">
+                            Formation
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="number" step="0.1" required>
+                                <button>Valider</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card m-2" style="width: 18rem;">
+                        <div class="card-header">
+                            Commission sur vente
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <input type="number" step="0.1" required>
+                                <button>Valider</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
 {% endblock %}

@@ -12,10 +12,7 @@ class PublicityOrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('turn')
             ->add('publicityPrice')
-            ->add('product')
-            ->add('socity')
         ;
     }
 

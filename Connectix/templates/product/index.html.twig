@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product index{% endblock %}
+
+{% block body %}
+    <h1>Product index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>TechnologicLevel</th>
+                <th>BuyPrice</th>
+                <th>SalePrice</th>
+                <th>QuantityDiscount</th>
+                <th>ProductionActivityCost</th>
+                <th>ResearchCost</th>
+                <th>ProductSaleType</th>
+                <th>ProductMaxNumber</th>
+                <th>PriceDiscount</th>
+                <th>ProductAlreadySales</th>
+                <th>RowMaterialCost</th>
+                <th>ManpowerCost</th>
+                <th>ProductiorTimeCost</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.technologicLevel }}</td>
+                <td>{{ product.buyPrice }}</td>
+                <td>{{ product.salePrice }}</td>
+                <td>{{ product.quantityDiscount }}</td>
+                <td>{{ product.productionActivityCost }}</td>
+                <td>{{ product.researchCost }}</td>
+                <td>{{ product.productSaleType }}</td>
+                <td>{{ product.ProductMaxNumber }}</td>
+                <td>{{ product.priceDiscount }}</td>
+                <td>{{ product.productAlreadySales }}</td>
+                <td>{{ product.rowMaterialCost }}</td>
+                <td>{{ product.manpowerCost }}</td>
+                <td>{{ product.productiorTimeCost }}</td>
+                <td>
+                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
+                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="16">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('product_new') }}">Create new</a>
+{% endblock %}

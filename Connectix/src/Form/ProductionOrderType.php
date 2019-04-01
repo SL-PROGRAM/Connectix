@@ -20,6 +20,7 @@ class ProductionOrderType extends AbstractType
             ->add('productionTime')
             ->add('rowMaterialCost')
             ->add('product')
+            ->add('socity')
         ;
     }
 

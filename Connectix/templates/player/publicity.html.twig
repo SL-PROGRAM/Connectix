@@ -11,52 +11,78 @@
             <tr>
                 <th>Produit</th>
                 <th>Cycle de vie</th>
-                <th>Montant N-1</th>
                 <th>Montant N</th>
+                <th>Montant N-1</th>
                 <th>Variation</th>
                 <th>ratio Pub/CA N-1</th>
                 <th>commande</th>
             </tr>
             </thead>
             <tbody>
-            {#{% for product in productPurchasePrint %}#}
-                {#<tr>#}
-                    {#<td>{{ product.name }}</td>#}
-                    {#<td>{{ product.purchasePrice }}</td>#}
-                    {#<td>{{ product.quantity }}</td>#}
-                    {#<td>{{ product.quantityDiscount }}</td>#}
-                    {#<td>#}
-                        {#{%  if product.quantity == 0 %}#}
-                            {#<a href="{{ path('purchase_order_new', {'id': product.id}) }}">Commander</a>#}
-                        {#{% else %}#}
-                            {#<a href="{{ path('purchase_order_edit', {'id': product.PurchaseOrderId}) }}">Modifier la commande</a>#}
-                        {#{% endif %}#}
+            {% for product in productPublicityPrint %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.variationPublicity }}</td>
+                    <td>{{ product.publicityTurn }}</td>
+                    <td>{{ product.publicityLastTurn }}</td>
+                    <td>{{ product.variationPublicity }} %</td>
+                    <td>{{ product.percentPublicityLastTurn }} %</td>
+                    <td>
+                        {%  if product.publicityTurn == 0 %}
+                            <a href="{{ path('publicity_order_new', {'id': product.id}) }}">Commander</a>
+                        {% else %}
+                            <a href="{{ path('publicity_order_edit', {'id': product.idPublicityOrderTurn}) }}">Modifier la commande</a>
+                        {% endif %}
 
-                    {#</td>#}
+                    </td>
 
-                {#</tr>#}
-            {#{% else %}#}
-                {#<tr>#}
-                    {#<td colspan="7">no records found</td>#}
-                {#</tr>#}
-            {#{% endfor %}#}
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </section>
     <section>
-        <h1>Publicité de manque</h1>
+        {#TODO finish front#}
+        <h1>Publicité de marque</h1>
         <table class="table">
             <thead>
             <tr>
-                <th>Produit</th>
+                <th>Axe de publicité</th>
                 <th>Montant N-1</th>
                 <th>Montant N</th>
                 <th>Variation</th>
-                <th>ratio Pub/CA N-1</th>
-                <th>commande</th>
             </tr>
             </thead>
             <tbody>
+            <tr>
+                <td>Design</td>
+                <td><input type="number" required> </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Ergonomie</td>
+                <td><input type="number" required> </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Technicité</td>
+                <td><input type="number" required> </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Fonctionnalité</td>
+                <td><input type="number" required> </td>
+                <td></td>
+                <td></td>
+            </tr>
+
             {#{% for product in productPurchasePrint %}#}
             {#<tr>#}
             {#<td>{{ product.name }}</td>#}
@@ -80,5 +106,26 @@
             {#{% endfor %}#}
             </tbody>
         </table>
+        <button>Valider</button>
+    </section>
+    <section>
+        <h1>Circuit de distribution</h1>
+        <tr>
+            <td>Professionnal</td>
+            <td><input type="number" required> </td>
+            <td>Particulier</td>
+            <td><input type="number" required> </td>
+            <td><button>Valider</button></td>
+            {#<td>#}
+                {#{%  if product.publicityTurn == 0 %}#}
+                    {#<a href="{{ path('publicity_order_new', {'id': product.id}) }}">Commander</a>#}
+                {#{% else %}#}
+                    {#<a href="{{ path('publicity_order_edit', {'id': product.idPublicityOrderTurn}) }}">Modifier la commande</a>#}
+                {#{% endif %}#}
+
+            {#</td>#}
+
+        </tr>
+
     </section>
 {% endblock %}

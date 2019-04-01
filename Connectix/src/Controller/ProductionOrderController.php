@@ -9,9 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 /**
  * @Route("/productionorder")
+ * @ISGranted("ROLE_USER")
  */
 class ProductionOrderController extends AbstractController
 {
@@ -39,7 +42,7 @@ class ProductionOrderController extends AbstractController
             $entityManager->persist($productionOrder);
             $entityManager->flush();
 
-            return $this->redirectToRoute('production_order_index');
+            return $this->redirectToRoute('player_production');
         }
 
         return $this->render('production_order/new.html.twig', [
@@ -69,7 +72,7 @@ class ProductionOrderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('production_order_index', [
+            return $this->redirectToRoute('player_production', [
                 'id' => $productionOrder->getId(),
             ]);
         }
@@ -91,6 +94,6 @@ class ProductionOrderController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('production_order_index');
+        return $this->redirectToRoute('player_production');
     }
 }

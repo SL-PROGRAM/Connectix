@@ -22,8 +22,12 @@ class LoanController extends AbstractController
      */
     public function index(LoanRepository $loanRepository): Response
     {
+        $turn = $this->getUser()->getGame()->getTurn();
+
         return $this->render('loan/index.html.twig', [
             'loans' => $loanRepository->findAll(),
+            'turn' => $turn,
+
         ]);
     }
 
@@ -41,20 +45,22 @@ class LoanController extends AbstractController
             $loanDuration = 0;
             //TODO add get to bankInterest
             $bankInterest = 0;
+            $turn = $this->getUser()->getGame()->getTurn();
 
             $socity = $this->getUser()->getSocity();
 
 
             $loan   ->setSocity($socity)
                 ->setBankInterest($bankInterest)
-                ->setLoanDuration($loanDuration);
+                ->setLoanDuration($loanDuration)
+                ->setTurn($turn);
 
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($loan);
             $entityManager->flush();
 
-            return $this->redirectToRoute('loan_index');
+            return $this->redirectToRoute('player_financial');
         }
 
         return $this->render('loan/new.html.twig', [
@@ -63,29 +69,6 @@ class LoanController extends AbstractController
         ]);
     }
 
-
-//    /**
-//     * @Route("/new", name="loan_new", methods={"GET","POST"})
-//     */
-//    public function new(Request $request): Response
-//    {
-//        $loan = new Loan();
-//        $form = $this->createForm(LoanType::class, $loan);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $entityManager = $this->getDoctrine()->getManager();
-//            $entityManager->persist($loan);
-//            $entityManager->flush();
-//
-//            return $this->redirectToRoute('loan_index');
-//        }
-//
-//        return $this->render('loan/new.html.twig', [
-//            'loan' => $loan,
-//            'form' => $form->createView(),
-//        ]);
-//    }
 
     /**
      * @Route("/newduration", name="loan_new_duration", methods={"GET","POST"})
@@ -114,7 +97,7 @@ class LoanController extends AbstractController
             $entityManager->persist($loan);
             $entityManager->flush();
 
-            return $this->redirectToRoute('loan_index');
+            return $this->redirectToRoute('player_financial');
         }
 
         return $this->render('loan/new.html.twig', [
@@ -123,28 +106,50 @@ class LoanController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="loan_show", methods={"GET"})
-     */
-    public function show(Loan $loan): Response
-    {
-        return $this->render('loan/show.html.twig', [
-            'loan' => $loan,
-        ]);
-    }
+//    /**
+//     * @Route("/{id}", name="loan_show", methods={"GET"})
+//     */
+//    public function show(Loan $loan): Response
+//    {
+//        return $this->render('loan/show.html.twig', [
+//            'loan' => $loan,
+//        ]);
+//    }
 
     /**
-     * @Route("/{id}/edit", name="loan_edit", methods={"GET","POST"})
+     * @Route("/{id}/editduedate", name="loan_edit_duedate", methods={"GET","POST"})
      */
-    public function edit(Request $request, Loan $loan): Response
+    public function editDueDate(Request $request, Loan $loan): Response
     {
-        $form = $this->createForm(LoanType::class, $loan);
+        $form = $this->createForm(LoanByDueDateType::class, $loan);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('loan_index', [
+            return $this->redirectToRoute('player_financial', [
+                'id' => $loan->getId(),
+            ]);
+        }
+
+        return $this->render('loan/edit.html.twig', [
+            'loan' => $loan,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/editduration", name="loan_edit_duration", methods={"GET","POST"})
+     */
+    public function editDuration(Request $request, Loan $loan): Response
+    {
+        $form = $this->createForm(LoanByDurationType::class, $loan);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('player_financial', [
                 'id' => $loan->getId(),
             ]);
         }

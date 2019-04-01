@@ -1,10 +1,9 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block title %}Loan index{% endblock %}
+{#{% block title %}Loan index{% endblock %}#}
 
 {% block body %}
-    <h1>Loan index</h1>
-
+    {% dump %}
     <table class="table">
         <thead>
             <tr>
@@ -27,8 +26,16 @@
                 <td>{{ loan.loanDuration }}</td>
                 <td>{{ loan.DelayLoanRepayment }}</td>
                 <td>
-                    <a href="{{ path('loan_show', {'id': loan.id}) }}">show</a>
-                    <a href="{{ path('loan_edit', {'id': loan.id}) }}">edit</a>
+                    {#<a href="{{ path('loan_show', {'id': loan.id}) }}">show</a>#}
+                    {% if loan.turn == turn %}
+                        <div>
+                            <a href="{{ path('loan_edit_duration', {'id': loan.id}) }}">edit by duration</a>
+                        </div>
+                        <div>
+                            <a href="{{ path('loan_edit_duedate', {'id': loan.id}) }}">edit by dueDate</a>
+                        </div>
+
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -39,6 +46,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('loan_new_duration') }}">Create new loan by duration</a>
-    <a href="{{ path('loan_new_duedate') }}">Create new loan by due date</a>
+    {#<a href="{{ path('loan_new_duration') }}">Create new loan by duration</a>#}
+    {#<a href="{{ path('loan_new_duedate') }}">Create new loan by due date</a>#}
 {% endblock %}

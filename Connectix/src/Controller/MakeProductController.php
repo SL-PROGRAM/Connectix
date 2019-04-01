@@ -15,7 +15,7 @@ class MakeProductController extends AbstractController
 
 
     /**
-     * @Route("/product", name="product")
+     * @Route("/productGenerate", name="product")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index()

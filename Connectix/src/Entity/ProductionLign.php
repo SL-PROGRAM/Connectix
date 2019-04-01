@@ -30,6 +30,11 @@ class ProductionLign extends ProductionUnit
      */
     private $totalLifeProductTime;
 
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $name;
+
 
     public function getFactory(): ?Factory
     {
@@ -63,6 +68,18 @@ class ProductionLign extends ProductionUnit
     public function setTotalLifeProductTime(int $totalLifeProductTime): self
     {
         $this->totalLifeProductTime = $totalLifeProductTime;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

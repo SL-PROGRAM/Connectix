@@ -15,7 +15,7 @@ use Symfony\Component\Yaml\Yaml;
 class BalanceSheetScreenController extends AbstractController
 {
     /**
-     * @Route("/balancesheet", name="balance_sheet")
+     * @Route("/balancesheetscreen", name="balance_sheet")
      */
     public function index()
     {

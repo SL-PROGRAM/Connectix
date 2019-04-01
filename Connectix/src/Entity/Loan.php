@@ -46,6 +46,11 @@ class Loan
      */
     private $DelayLoanRepayment;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $turn;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +124,18 @@ class Loan
     public function setDelayLoanRepayment(int $DelayLoanRepayment): self
     {
         $this->DelayLoanRepayment = $DelayLoanRepayment;
+
+        return $this;
+    }
+
+    public function getTurn(): ?int
+    {
+        return $this->turn;
+    }
+
+    public function setTurn(int $turn): self
+    {
+        $this->turn = $turn;
 
         return $this;
     }

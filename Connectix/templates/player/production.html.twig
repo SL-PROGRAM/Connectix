@@ -1,0 +1,165 @@
+{% extends 'base.html.twig' %}
+{%  dump %}
+
+
+{% block title %}Hello PlayerController!{% endblock %}
+
+{% block body %}
+    <section>
+        <h1>Unité de production</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Usine</th>
+                <th>Date de création</th>
+                <th>Unité de production</th>
+                <th>Vendre</th>
+                <th> <a href="{{ path('factory_new') }}">achété une usine</a></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for factory in userFactories %}
+                <tr>
+                    <td>{{ factory.name }}</td>
+                    <td>{{ factory.turnCreation }}</td>
+                    <td></td>
+                    <td>
+                            <a href="{{ path('factory_delete', {'id': factory.id}) }}">Delete</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('production_lign_new', {'id': factory.id}) }}">acheter une ligne de production</a>
+                    </td>
+
+                    {%  for productionLign in userProductionLigns %}
+                        {% if factory.name == productionLign.factory.name %}
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="1" align="center" class="productionLignColor">{{ productionLign.name }}</td>
+                                <td>
+                                    <a href="{{ path('production_lign_delete', {'id': productionLign.id}) }}">Delete</a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% else %}
+                        <tr>
+                            <td colspan="3">no records found</td>
+                        </tr>
+                    {% endfor %}
+
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h1>Global production</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Total heure machine</th>
+                <th>Total utilisé</th>
+                <th>Taux d'activité</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+            <td>{{ globalProductionPrint.totalProductionTimeCapacity }}</td>
+            <td>{{ globalProductionPrint.totalTimeUse }}</td>
+            <td>{{ globalProductionPrint.totalActivity }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+
+    <section>
+        <h1>Recherche et développement</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Produit</th>
+                <th>temps de recherche nécéssaire</th>
+                <th>recherche effectuée</th>
+                <th>Recherche prévu</th>
+                <th>Faire une recherche</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in researchOrderPrint %}
+            <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.researchCost }}</td>
+            <td>{{ product.researchDo }}</td>
+            <td>{{ product.researchOrder }}</td>
+            <td>
+                {% if product.researchCost == product.researchDo  %}
+                Recherche Terminée
+                {%  else %}
+                    {%  if product.researchOrder == 0 %}
+                    <a href="{{ path('reseach_order_new') }}">Commander</a>
+                    {% else %}
+                    <a href="{{ path('reseach_order_edit', {'id': product.researchOrderId}) }}">Modifier la commande</a>
+                    {% endif %}
+                {% endif %}
+
+            </td>
+
+            </tr>
+            {% else %}
+            <tr>
+            <td colspan="7">no records found</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h1>Production</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>coût unitaire</th>
+                <th>temps de prod unitaire</th>
+                <th>qté créer</th>
+                <th>coût total</th>
+                <th>temps de prod total</th>
+                <th>fabriquer</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in productionOrderPrint %}
+            <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.rowMaterialCost }}</td>
+            <td>{{ product.productiorTimeCost }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.rowMaterialTotalCost }}</td>
+            <td>{{ product.productiorTimeTotalCost }}</td>
+            <td>
+            {%  if product.quantity == 0 %}
+            <a href="{{ path('production_order_new') }}">Commander</a>
+            {% else %}
+            <a href="{{ path('production_order_edit', {'id': product.researchOrderId}) }}">Modifier la commande</a>
+            {% endif %}
+
+            </td>
+
+            </tr>
+            {% else %}
+            <tr>
+            <td colspan="7">no records found</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+{% endblock %}

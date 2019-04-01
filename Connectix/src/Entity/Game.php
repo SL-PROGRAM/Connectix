@@ -319,6 +319,56 @@ class Game
     private $annualHoursWork = 1607;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $factoryCreationCost = 2500000;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $factoryMaintenanceCost = 10000;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $factoryAdministrationCost = 100;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $factoryAmortizationTurn = 15;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $productionLignCreationCost = 15000;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $productionLignMaintenanceCost = 1500;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $productionLignAdministrationCost = 50;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $productionLignAmortizationTurn = 5;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $productionLignAnnualProductTime;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $productionLignTotalLifeProductTime;
+
+    /**
      * Game constructor.
      */
     public function __construct()
@@ -1181,5 +1231,125 @@ class Game
     public function __toString()
     {
         return $this->getName();
+    }
+
+    public function getFactoryCreationCost(): ?int
+    {
+        return $this->factoryCreationCost;
+    }
+
+    public function setFactoryCreationCost(int $factoryCreationCost): self
+    {
+        $this->factoryCreationCost = $factoryCreationCost;
+
+        return $this;
+    }
+
+    public function getFactoryMaintenanceCost(): ?int
+    {
+        return $this->factoryMaintenanceCost;
+    }
+
+    public function setFactoryMaintenanceCost(int $factoryMaintenanceCost): self
+    {
+        $this->factoryMaintenanceCost = $factoryMaintenanceCost;
+
+        return $this;
+    }
+
+    public function getFactoryAdministrationCost(): ?int
+    {
+        return $this->factoryAdministrationCost;
+    }
+
+    public function setFactoryAdministrationCost(int $factoryAdministrationCost): self
+    {
+        $this->factoryAdministrationCost = $factoryAdministrationCost;
+
+        return $this;
+    }
+
+    public function getFactoryAmortizationTurn(): ?int
+    {
+        return $this->factoryAmortizationTurn;
+    }
+
+    public function setFactoryAmortizationTurn(int $factoryAmortizationTurn): self
+    {
+        $this->factoryAmortizationTurn = $factoryAmortizationTurn;
+
+        return $this;
+    }
+
+    public function getProductionLignCreationCost(): ?int
+    {
+        return $this->productionLignCreationCost;
+    }
+
+    public function setProductionLignCreationCost(int $productionLignCreationCost): self
+    {
+        $this->productionLignCreationCost = $productionLignCreationCost;
+
+        return $this;
+    }
+
+    public function getProductionLignMaintenanceCost(): ?int
+    {
+        return $this->productionLignMaintenanceCost;
+    }
+
+    public function setProductionLignMaintenanceCost(int $productionLignMaintenanceCost): self
+    {
+        $this->productionLignMaintenanceCost = $productionLignMaintenanceCost;
+
+        return $this;
+    }
+
+    public function getProductionLignAdministrationCost(): ?int
+    {
+        return $this->productionLignAdministrationCost;
+    }
+
+    public function setProductionLignAdministrationCost(int $productionLignAdministrationCost): self
+    {
+        $this->productionLignAdministrationCost = $productionLignAdministrationCost;
+
+        return $this;
+    }
+
+    public function getProductionLignAmortizationTurn(): ?int
+    {
+        return $this->productionLignAmortizationTurn;
+    }
+
+    public function setProductionLignAmortizationTurn(int $productionLignAmortizationTurn): self
+    {
+        $this->productionLignAmortizationTurn = $productionLignAmortizationTurn;
+
+        return $this;
+    }
+
+    public function getProductionLignAnnualProductTime(): ?int
+    {
+        return $this->productionLignAnnualProductTime;
+    }
+
+    public function setProductionLignAnnualProductTime(int $productionLignAnnualProductTime): self
+    {
+        $this->productionLignAnnualProductTime = $productionLignAnnualProductTime;
+
+        return $this;
+    }
+
+    public function getProductionLignTotalLifeProductTime(): ?int
+    {
+        return $this->productionLignTotalLifeProductTime;
+    }
+
+    public function setProductionLignTotalLifeProductTime(int $productionLignTotalLifeProductTime): self
+    {
+        $this->productionLignTotalLifeProductTime = $productionLignTotalLifeProductTime;
+
+        return $this;
     }
 }

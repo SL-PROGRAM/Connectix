@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ProductionLign;
 use App\Form\ProductionLignType;
+use App\Repository\FactoryRepository;
 use App\Repository\ProductionLignRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,18 +29,42 @@ class ProductionLignController extends AbstractController
     /**
      * @Route("/new", name="production_lign_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, FactoryRepository $factoryRepository): Response
     {
         $productionLign = new ProductionLign();
         $form = $this->createForm(ProductionLignType::class, $productionLign);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $socity = $this->getUser()->getSocity();
+            $turn = $this->getUser()->getGame()->getTurn();
+            $creationCost = $this->getUser()->getGame()->getProductionLignCreationCost();
+            $maintenanceCost = $this->getUser()->getGame()->getProductionLignMaintenanceCost();
+            $administrationCost = $this->getUser()->getGame()->getProductionLignAdministrationCost();
+            $amortizationTurn = $this->getUser()->getGame()->getProductionLignAmortizationTurn();
+            $annualProductTime = $this->getUser()->getGame()->getProductionLignAnnualProductTime();
+            $totalLifeProductTime = $this->getUser()->getGame()->getProductionLignTotalLifeProductTime();
+            $factory = $factoryRepository->findOneBy(["id" => $_GET["id"]]);
+
+
+            $productionLign
+                ->setAnnualProductTime($annualProductTime)
+                ->setFactory($factory)
+                ->setTotalLifeProductTime($totalLifeProductTime)
+                ->setAdministrationCost($administrationCost)
+                ->setAmortizationTurn($amortizationTurn)
+                ->setCreationCost($creationCost)
+                ->setTurnCreation($turn)
+                ->setSocity($socity)
+                ->setMaintenanceCost($maintenanceCost)
+            ;
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($productionLign);
             $entityManager->flush();
 
-            return $this->redirectToRoute('production_lign_index');
+            return $this->redirectToRoute('player_production');
         }
 
         return $this->render('production_lign/new.html.twig', [
@@ -69,7 +94,7 @@ class ProductionLignController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('production_lign_index', [
+            return $this->redirectToRoute('player_production', [
                 'id' => $productionLign->getId(),
             ]);
         }
@@ -91,6 +116,6 @@ class ProductionLignController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('production_lign_index');
+        return $this->redirectToRoute('player_production');
     }
 }

@@ -69,6 +69,16 @@ class GameType extends AbstractType
             ->add('socityStartLoanDuration')
             ->add('socityStartLoanInterestRate')
             ->add('annualHoursWork')
+            ->add('factoryCreationCost')
+            ->add('factoryMaintenanceCost')
+            ->add('factoryAdministrationCost')
+            ->add('factoryAmortizationTurn')
+            ->add('productionLignCreationCost')
+            ->add('productionLignMaintenanceCost')
+            ->add('productionLignAdministrationCost')
+            ->add('productionLignAmortizationTurn')
+            ->add('productionLignAnnualProductTime')
+            ->add('productionLignTotalLifeProductTime')
         ;
     }
 

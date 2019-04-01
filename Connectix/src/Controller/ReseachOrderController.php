@@ -9,9 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 /**
  * @Route("/reseachorder")
+ * @ISGranted("ROLE_USER")
  */
 class ReseachOrderController extends AbstractController
 {
@@ -35,6 +38,8 @@ class ReseachOrderController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $turn = $this->getUser()->getGame()->getTurn();
+            $reseachOrder->setTurn($turn);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($reseachOrder);
             $entityManager->flush();

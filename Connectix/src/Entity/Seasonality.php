@@ -267,4 +267,9 @@ class Seasonality
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return "Season ".$this->getId();
+    }
 }

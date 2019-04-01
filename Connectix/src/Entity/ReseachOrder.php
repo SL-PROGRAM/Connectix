@@ -43,6 +43,11 @@ class ReseachOrder
      */
     private $product;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $turn;
+
 
 
     public function getId(): ?int
@@ -106,6 +111,18 @@ class ReseachOrder
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    public function getTurn(): ?int
+    {
+        return $this->turn;
+    }
+
+    public function setTurn(int $turn): self
+    {
+        $this->turn = $turn;
 
         return $this;
     }

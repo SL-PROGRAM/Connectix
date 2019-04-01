@@ -12,15 +12,7 @@ class ProductionLignType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('turnCreation')
-            ->add('creationCost')
-            ->add('maintenanceCost')
-            ->add('administrationCost')
-            ->add('amortizationTurn')
-            ->add('annualProductTime')
-            ->add('totalLifeProductTime')
-            ->add('socity')
-            ->add('factory')
+            ->add('name')
         ;
     }
 

@@ -9,21 +9,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 /**
  * @Route("/factory")
+ * @ISGranted("ROLE_USER")
  */
 class FactoryController extends AbstractController
 {
-    /**
-     * @Route("/", name="factory_index", methods={"GET"})
-     */
-    public function index(FactoryRepository $factoryRepository): Response
-    {
-        return $this->render('factory/index.html.twig', [
-            'factories' => $factoryRepository->findAll(),
-        ]);
-    }
+//    /**
+//     * @Route("/", name="factory_index", methods={"GET"})
+//     */
+//    public function index(FactoryRepository $factoryRepository): Response
+//    {
+//        return $this->render('factory/index.html.twig', [
+//            'factories' => $factoryRepository->findAll(),
+//        ]);
+//    }
 
     /**
      * @Route("/new", name="factory_new", methods={"GET","POST"})
@@ -35,11 +38,26 @@ class FactoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $socity = $this->getUser()->getSocity();
+            $turn = $this->getUser()->getGame()->getTurn();
+            $creationCost = $this->getUser()->getGame()->getFactoryCreationCost();
+            $maintenanceCost = $this->getUser()->getGame()->getFactoryMaintenanceCost();
+            $administrationCost = $this->getUser()->getGame()->getFactoryAdministrationCost();
+            $amortizationTurn = $this->getUser()->getGame()->getFactoryAmortizationTurn();
+
+            $factory->setAdministrationCost($administrationCost)
+                ->setAmortizationTurn($amortizationTurn)
+                ->setCreationCost($creationCost)
+                ->setTurnCreation($turn)
+                ->setSocity($socity)
+                ->setMaintenanceCost($maintenanceCost);
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($factory);
             $entityManager->flush();
 
-            return $this->redirectToRoute('factory_index');
+            return $this->redirectToRoute('player_production');
         }
 
         return $this->render('factory/new.html.twig', [
@@ -48,15 +66,15 @@ class FactoryController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="factory_show", methods={"GET"})
-     */
-    public function show(Factory $factory): Response
-    {
-        return $this->render('factory/show.html.twig', [
-            'factory' => $factory,
-        ]);
-    }
+//    /**
+//     * @Route("/{id}", name="factory_show", methods={"GET"})
+//     */
+//    public function show(Factory $factory): Response
+//    {
+//        return $this->render('factory/show.html.twig', [
+//            'factory' => $factory,
+//        ]);
+//    }
 
     /**
      * @Route("/{id}/edit", name="factory_edit", methods={"GET","POST"})
@@ -69,7 +87,7 @@ class FactoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('factory_index', [
+            return $this->redirectToRoute('player_production', [
                 'id' => $factory->getId(),
             ]);
         }
@@ -91,6 +109,6 @@ class FactoryController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('factory_index');
+        return $this->redirectToRoute('player_production');
     }
 }

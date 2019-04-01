@@ -55,7 +55,7 @@ class SalesOrderController extends AbstractController
             $entityManager->persist($salesOrder);
             $entityManager->flush();
 
-            return $this->redirectToRoute('sales_order_index');
+            return $this->redirectToRoute('player_sales');
         }
 
         return $this->render('sales_order/new.html.twig', [
@@ -85,7 +85,7 @@ class SalesOrderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('sales_order_index', [
+            return $this->redirectToRoute('player_sales', [
                 'id' => $salesOrder->getId(),
             ]);
         }
@@ -107,6 +107,6 @@ class SalesOrderController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('sales_order_index');
+        return $this->redirectToRoute('player_sales');
     }
 }

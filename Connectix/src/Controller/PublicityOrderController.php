@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\PublicityOrder;
 use App\Form\PublicityOrderType;
+use App\Repository\ProductRepository;
 use App\Repository\PublicityOrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,18 +29,26 @@ class PublicityOrderController extends AbstractController
     /**
      * @Route("/new", name="publicity_order_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ProductRepository $productRepository): Response
     {
         $publicityOrder = new PublicityOrder();
         $form = $this->createForm(PublicityOrderType::class, $publicityOrder);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $turn = $this->getUser()->getGame()->getTurn();
+            $socity = $this->getUser()->getSocity();
+            $product = $productRepository->findOneBy(["id" => $_GET["id"]]);
+
+            $publicityOrder ->setTurn($turn)
+                            ->setSocity($socity)
+                            ->setProduct($product);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($publicityOrder);
             $entityManager->flush();
 
-            return $this->redirectToRoute('publicity_order_index');
+            return $this->redirectToRoute('player_publicity');
         }
 
         return $this->render('publicity_order/new.html.twig', [
@@ -69,7 +78,7 @@ class PublicityOrderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('publicity_order_index', [
+            return $this->redirectToRoute('player_publicity', [
                 'id' => $publicityOrder->getId(),
             ]);
         }
@@ -91,6 +100,6 @@ class PublicityOrderController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('publicity_order_index');
+        return $this->redirectToRoute('player_publicity');
     }
 }

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190324193407 extends AbstractMigration
+final class Version20190329103409 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,13 +22,12 @@ final class Version20190324193407 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE production_unit CHANGE socity_id socity_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE user CHANGE socity_id socity_id INT DEFAULT NULL, CHANGE game_id game_id INT DEFAULT NULL, CHANGE roles roles JSON NOT NULL');
         $this->addSql('ALTER TABLE socity CHANGE game_id game_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE human_resource CHANGE socity_id socity_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE product CHANGE seasonality_id seasonality_id INT DEFAULT NULL, CHANGE buy_price buy_price INT DEFAULT NULL');
         $this->addSql('ALTER TABLE balance_sheet CHANGE socity_id socity_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE loan CHANGE socity_id socity_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE loan ADD turn INT NOT NULL, CHANGE socity_id socity_id INT DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -38,9 +37,8 @@ final class Version20190324193407 extends AbstractMigration
 
         $this->addSql('ALTER TABLE balance_sheet CHANGE socity_id socity_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE human_resource CHANGE socity_id socity_id INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE loan CHANGE socity_id socity_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE loan DROP turn, CHANGE socity_id socity_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE product CHANGE seasonality_id seasonality_id INT DEFAULT NULL, CHANGE buy_price buy_price INT DEFAULT NULL');
-        $this->addSql('ALTER TABLE production_unit CHANGE socity_id socity_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE socity CHANGE game_id game_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE user CHANGE socity_id socity_id INT DEFAULT NULL, CHANGE game_id game_id INT DEFAULT NULL, CHANGE roles roles LONGTEXT NOT NULL COLLATE utf8mb4_bin');
     }
