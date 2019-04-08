@@ -22,10 +22,10 @@ class UserController extends AbstractController
      */
     private $passwordEncoder;
 
-     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
-     {
-         $this->passwordEncoder = $passwordEncoder;
-     }
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
 
 
     /**
@@ -48,7 +48,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $password = $user->getFirstName().'-'.$user->getPassword().'-'.$user->getLastName().'-1';
 
             $user->setPassword($this->passwordEncoder->encodePassword(

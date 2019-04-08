@@ -29,7 +29,8 @@ class HumanResourceController extends AbstractController
     /**
      * @see function call to create a new game
      */
-    public function makeGame(){
+    public function makeGame()
+    {
         $entityManager = $this->getDoctrine()->getManager();
         $game = new Game();
 
@@ -48,7 +49,8 @@ class HumanResourceController extends AbstractController
     /**
      * @see function call to create a new socity
      */
-    public function makeSocity(){
+    public function makeSocity()
+    {
         $entityManager = $this->getDoctrine()->getManager();
 
         $socity = new Socity();
@@ -62,8 +64,8 @@ class HumanResourceController extends AbstractController
         $entityManager  ->flush();
     }
 
-    public function makeTechnician(Socity $socity, $administrationActivity, $productionActivity, $formation, $productivity, $experience, $administrationActivityCost, $coeficientSalary){
-
+    public function makeTechnician(Socity $socity, $administrationActivity, $productionActivity, $formation, $productivity, $experience, $administrationActivityCost, $coeficientSalary)
+    {
         $entityManager = $this->getDoctrine()->getManager();
 
         $salary = $this->baseSalary()*$coeficientSalary;
@@ -83,11 +85,10 @@ class HumanResourceController extends AbstractController
 
         $entityManager  ->persist($technician);
         $entityManager  ->flush();
-
     }
 
-    public function makeWorMan(Socity $socity, $productionActivity, $salary, $formation, $productivity, $experience, $administrationActivityCost, $coeficientSalary){
-
+    public function makeWorMan(Socity $socity, $productionActivity, $salary, $formation, $productivity, $experience, $administrationActivityCost, $coeficientSalary)
+    {
         $entityManager = $this->getDoctrine()->getManager();
 
 
@@ -105,11 +106,10 @@ class HumanResourceController extends AbstractController
 
         $entityManager  ->persist($technician);
         $entityManager  ->flush();
-
     }
 
-    public function makeProductionDirector(Socity $socity, $administrationActivity, $productionActivity, $salary, $formation, $productivity, $experience, $administrationActivityCost, $coeficientSalary){
-
+    public function makeProductionDirector(Socity $socity, $administrationActivity, $productionActivity, $salary, $formation, $productivity, $experience, $administrationActivityCost, $coeficientSalary)
+    {
         $entityManager = $this->getDoctrine()->getManager();
 
 
@@ -128,19 +128,14 @@ class HumanResourceController extends AbstractController
 
         $entityManager  ->persist($technician);
         $entityManager  ->flush();
-
     }
 
 
-    public function baseSalary(){
+    public function baseSalary()
+    {
         $user = $this->getUser();
         $game = $user->getGame();
 
         return $smic = $game->getSmic();
     }
-
-
-
 }
-
-

@@ -8,8 +8,6 @@ use App\Entity\ProductLife;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-
 class MakeProductController extends AbstractController
 {
 
@@ -29,8 +27,8 @@ class MakeProductController extends AbstractController
     }
 
 
-    public function makeProduct(){
-
+    public function makeProduct()
+    {
         $entityManager = $this->getDoctrine()->getManager();
 
         /*
@@ -44,7 +42,7 @@ class MakeProductController extends AbstractController
         $name = 'A';
 
 
-        for ($i=0; $i<$nbProduct; $i++){
+        for ($i=0; $i<$nbProduct; $i++) {
             $product = new Product();
 
 
@@ -55,7 +53,6 @@ class MakeProductController extends AbstractController
              * creation of base product
              */
             if ($i < 4) {
-
                 $nameNumber = 1;
                 $salePrice = round(rand(1500, 1900));
                 $buyPrice = $salePrice * round((rand(70, 90) / 100), 2);
@@ -68,12 +65,8 @@ class MakeProductController extends AbstractController
                 $productSaleType = 1;
 
                 $product->setBuyPrice($buyPrice);
-
-
-            }
-
-            elseif ($i < 8) {
-                if($i === 4){
+            } elseif ($i < 8) {
+                if ($i === 4) {
                     $name = 'A';
                 }
 
@@ -85,12 +78,8 @@ class MakeProductController extends AbstractController
                 $productMaxNumber = round(rand(100000, 200000), -3);
                 $quantityDiscount = $productMaxNumber / 100;
                 $productSaleType = 1;
-
-
-            }
-
-            elseif ($i < 12) {
-                if($i === 8){
+            } elseif ($i < 12) {
+                if ($i === 8) {
                     $name = 'A';
                 }
                 $nameNumber = 3;
@@ -101,10 +90,8 @@ class MakeProductController extends AbstractController
                 $productMaxNumber = round(rand(100000, 200000), -3);
                 $quantityDiscount = $productMaxNumber / 100;
                 $productSaleType = 1;
-            }
-
-            elseif ($i < 16) {
-                if($i === 12){
+            } elseif ($i < 16) {
+                if ($i === 12) {
                     $name = 'A';
                 }
 
@@ -119,10 +106,10 @@ class MakeProductController extends AbstractController
             }
 
 
-                /*
-                 * set the product
-                 */
-                $product    ->setName('Product ' .$name .$nameNumber)
+            /*
+             * set the product
+             */
+            $product    ->setName('Product ' .$name .$nameNumber)
                             ->setTechnologicLevel($technologicLevel)
                             ->setSalePrice($salePrice)
                             ->setQuantityDiscount($quantityDiscount)
@@ -133,23 +120,18 @@ class MakeProductController extends AbstractController
                             ->setProductAlreadySales($productAlreadySales)
                             ->setProductSaleType($productSaleType);
 
-                /*
-                 * creation of cycleLife for the product
-                 */
+            /*
+             * creation of cycleLife for the product
+             */
 
-                for ($j = 1 ; $j < 5 ; $j++){
-                    $cycleLife = $this-> makeCycleLife($j, $product);
-                    $product ->addProductLife($cycleLife);
-                }
-                $entityManager  ->persist($product);
-                $entityManager  ->flush();
-                $name++;
+            for ($j = 1 ; $j < 5 ; $j++) {
+                $cycleLife = $this-> makeCycleLife($j, $product);
+                $product ->addProductLife($cycleLife);
+            }
+            $entityManager  ->persist($product);
+            $entityManager  ->flush();
+            $name++;
         }
-
-
-
-
-
     }
 
     /**
@@ -157,8 +139,8 @@ class MakeProductController extends AbstractController
      * @param Product $product
      * @return ProductLife
      */
-    public function makeCycleLife($cyclelifeNumber,Product $product){
-
+    public function makeCycleLife($cyclelifeNumber, Product $product)
+    {
         $productCycle = new ProductLife();
         $cycleDuration = round(rand(1, 3));
         $publicityCoeficient = 100; // value change for calculation at the turn end
@@ -166,53 +148,45 @@ class MakeProductController extends AbstractController
         $priceProduct = $product->getSalePrice();
 
 
-    /*
-     * Define First lifeProduct
-     */
-        if($cyclelifeNumber === 1){
-
-            $productCycleMaxNumber = $maxProduct*round((rand(25,45)/100),2);
+        /*
+         * Define First lifeProduct
+         */
+        if ($cyclelifeNumber === 1) {
+            $productCycleMaxNumber = $maxProduct*round((rand(25, 45)/100), 2);
             $priceCoeficient = 130;
             $minPublicityImpact = $priceProduct*10;
             $maxPublicityImpact = $priceProduct*40;
-            $quality = round(rand(95,99));
-
+            $quality = round(rand(95, 99));
         }
 
-        if($cyclelifeNumber === 2){
-
+        if ($cyclelifeNumber === 2) {
             $cycleDuration = $this->getCycleduration($product, $cyclelifeNumber, $cycleDuration);
 
-            $productCycleMaxNumber = $maxProduct*round((rand(45,60)/100),2);
+            $productCycleMaxNumber = $maxProduct*round((rand(45, 60)/100), 2);
             $priceCoeficient = 120;
             $minPublicityImpact = $priceProduct*15;
             $maxPublicityImpact = $priceProduct*50;
-            $quality = round(rand(97,100));
-
+            $quality = round(rand(97, 100));
         }
 
-        if($cyclelifeNumber === 3){
-
+        if ($cyclelifeNumber === 3) {
             $cycleDuration = $this->getCycleduration($product, $cyclelifeNumber, $cycleDuration);
 
-            $productCycleMaxNumber = $maxProduct*round((rand(60,90)/100),2);
+            $productCycleMaxNumber = $maxProduct*round((rand(60, 90)/100), 2);
             $priceCoeficient = 110;
             $minPublicityImpact = $priceProduct*15;
             $maxPublicityImpact = $priceProduct*60;
-            $quality = round(rand(98,100));
-
+            $quality = round(rand(98, 100));
         }
 
-        if($cyclelifeNumber === 4){
-
+        if ($cyclelifeNumber === 4) {
             $cycleDuration = $this->getCycleduration($product, $cyclelifeNumber, $cycleDuration);
 
             $productCycleMaxNumber = $maxProduct;
             $priceCoeficient = 100;
             $minPublicityImpact = $priceProduct*20;
             $maxPublicityImpact = $priceProduct*70;
-            $quality = round(rand(97,99));
-
+            $quality = round(rand(97, 99));
         }
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -238,21 +212,17 @@ class MakeProductController extends AbstractController
      * @param $cycleDuration
      * @return int|null
      */
-    public function getCycleDuration(Product $product, $cycleLifeNumber, $cycleDuration){
+    public function getCycleDuration(Product $product, $cycleLifeNumber, $cycleDuration)
+    {
         $cycleLifeNumber = $cycleLifeNumber-1;
 
         $productLifes = $product->getProductLifes();
-        foreach ($productLifes as $productlife){
-            if( $cycleLifeNumber === $productlife->getCycleLifeNumber()){
+        foreach ($productLifes as $productlife) {
+            if ($cycleLifeNumber === $productlife->getCycleLifeNumber()) {
                 $cycleDuration += $productlife->getCycleDuration();
             };
-
         }
 
         return $cycleDuration;
     }
-
-
-
-
 }

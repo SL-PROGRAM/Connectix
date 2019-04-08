@@ -1,0 +1,22 @@
+App\entity\User:
+  Admin_User:
+    email: admin@admin.admin
+    roles: [ROLE_ADMIN];
+    password: \$argon2i\$v=19\$m=1024,t=2,p=2\$QklzM1J6b2JVTW9mRk1mTw\$FeOqUItUzHMedQKBMlt8yNajyTLofBAOT2hm5ZIqOvQ
+    firstName: Admin
+    lastName: Role
+    socity: @socity
+    game: @game
+
+  Production_User:
+    email: prod@prod.prod
+    roles: [TECHNIC_DIRECTOR];
+    password: \$argon2i\$v=19\$m=1024,t=2,p=2\$QklzM1J6b2JVTW9mRk1mTw\$FeOqUItUzHMedQKBMlt8yNajyTLofBAOT2hm5ZIqOvQ
+    firstName: TECHNIC_DIRECTOR
+    lastName: Role
+    socity: @socity
+    game: @game
+
+
+
+

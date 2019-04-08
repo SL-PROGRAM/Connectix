@@ -126,6 +126,4 @@ class ReseachOrder
 
         return $this;
     }
-
-
 }

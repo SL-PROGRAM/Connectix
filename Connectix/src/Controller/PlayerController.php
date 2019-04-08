@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Product;
-use App\Entity\PublicityOrder;
 use App\Entity\Socity;
 use App\Repository\AdministrationRepository;
 use App\Repository\BalanceSheetRepository;
@@ -15,7 +14,6 @@ use App\Repository\ProductRepository;
 use App\Repository\PublicityOrderRepository;
 use App\Repository\PurchaseOrderRepository;
 use App\Repository\ReseachOrderRepository;
-use App\Repository\ResearcherDirectorRepository;
 use App\Repository\ResearcherRepository;
 use App\Repository\SalesManRepository;
 use App\Repository\SalesOrderRepository;
@@ -33,21 +31,30 @@ class PlayerController extends AbstractController
 {
     /**
      * @Route("/sales", name="player_sales")
+     * @param ProductRepository $productRepository
+     * @param ReseachOrderRepository $reseachOrderRepository
+     * @param SalesOrderRepository $salesOrderRepository
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @param PurchaseOrderRepository $purchaseOrderRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function sales(ProductRepository $productRepository,
-                          ReseachOrderRepository $reseachOrderRepository,
-                          SalesOrderRepository $salesOrderRepository,
-                          BalanceSheetRepository $balanceSheetRepository,
-                          PurchaseOrderRepository $purchaseOrderRepository)
-    {
+    public function sales(
+        ProductRepository $productRepository,
+        ReseachOrderRepository $reseachOrderRepository,
+        SalesOrderRepository $salesOrderRepository,
+        BalanceSheetRepository $balanceSheetRepository,
+        PurchaseOrderRepository $purchaseOrderRepository
+    ) {
         $socity = $this->getUser()->getSocity();
         $productPurchasePrint = $this->productPurchasePrint($productRepository, $purchaseOrderRepository, $socity);
-        $productSalesPrint = $this->productSalesPrint( $productRepository,
-                                        $salesOrderRepository,
-                                        $reseachOrderRepository,
-                                        $purchaseOrderRepository,
-                                        $balanceSheetRepository,
-                                        $socity);
+        $productSalesPrint = $this->productSalesPrint(
+            $productRepository,
+            $salesOrderRepository,
+            $reseachOrderRepository,
+            $purchaseOrderRepository,
+            $balanceSheetRepository,
+            $socity
+        );
 
         return $this->render('player/sales.html.twig', [
             'controller_name' => 'PlayerSales page',
@@ -60,19 +67,23 @@ class PlayerController extends AbstractController
 
     /**
      * @Route("/publicity", name="player_publicity")
+     * @param ReseachOrderRepository $reseachOrderRepository
+     * @param PublicityOrderRepository $publicityOrderRepository
+     * @param ProductRepository $productRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function publicity(ReseachOrderRepository $reseachOrderRepository,
-                              PublicityOrderRepository $publicityOrderRepository,
-                              ProductRepository $productRepository,
-                              BalanceSheetRepository $balanceSheetRepository)
-    {
-
+    public function publicity(
+        ReseachOrderRepository $reseachOrderRepository,
+        PublicityOrderRepository $publicityOrderRepository,
+        ProductRepository $productRepository
+    ) {
         $socity = $this->getUser()->getSocity();
-        $productPublicityPrint = $this->productPublicityPrint( $reseachOrderRepository,
-                                            $publicityOrderRepository,
-                                            $productRepository,
-                                            $balanceSheetRepository,
-                                            $socity);
+        $productPublicityPrint = $this->productPublicityPrint(
+            $reseachOrderRepository,
+            $publicityOrderRepository,
+            $productRepository,
+            $socity
+        );
 
 
         return $this->render('player/publicity.html.twig', [
@@ -85,19 +96,31 @@ class PlayerController extends AbstractController
 
     /**
      * @Route("/production", name="player_production")
+     * @param FactoryRepository $factoryRepository
+     * @param ReseachOrderRepository $reseachOrderRepository
+     * @param ProductionOrderRepository $productionOrderRepository
+     * @param ProductRepository $productRepository
+     * @param ProductionLignRepository $productionLignRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function production(FactoryRepository $factoryRepository,
-                               ReseachOrderRepository $reseachOrderRepository,
-                               ProductionOrderRepository $productionOrderRepository,
-                               ProductRepository $productRepository,
-                               ProductionLignRepository  $productionLignRepository)
-    {
+    public function production(
+        FactoryRepository $factoryRepository,
+        ReseachOrderRepository $reseachOrderRepository,
+        ProductionOrderRepository $productionOrderRepository,
+        ProductRepository $productRepository,
+        ProductionLignRepository  $productionLignRepository
+    ) {
         $socity = $this->getUser()->getSocity();
         $turn = $this->getUser()->getGame()->getTurn();
-        $userFactories = $this->userFactories ($factoryRepository, $socity);
+        $userFactories = $this->userFactories($factoryRepository, $socity);
         $userProductionLigns = $this->userProductionLigns($productionLignRepository, $socity);
-        $productionOrderPrint = $this->productionOrderPrint( $productionOrderRepository,$reseachOrderRepository,
-                                                            $productRepository, $socity, $turn);
+        $productionOrderPrint = $this->productionOrderPrint(
+            $productionOrderRepository,
+            $reseachOrderRepository,
+            $productRepository,
+            $socity,
+            $turn
+        );
 
         $researchOrderPrint = $this->researchOrderPrint($productRepository, $reseachOrderRepository, $socity, $turn);
         $globalProductionPrint = $this->globalProductionPrint($productionOrderPrint, $productionLignRepository, $socity);
@@ -115,20 +138,26 @@ class PlayerController extends AbstractController
 
     /**
      * @Route("/human", name="player_human_ressourcies")
+     * @param AdministrationRepository $administrationRepository
+     * @param SalesManRepository $salesManRepository
+     * @param ResearcherRepository $researcherRepository
+     * @param ProductionRepository $productionRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function humanRessources(AdministrationRepository $administrationRepository,
-                                    SalesManRepository $salesManRepository,
-                                    ResearcherRepository $researcherRepository,
-                                    ProductionRepository $productionRepository)
-    {
+    public function humanRessources(
+        AdministrationRepository $administrationRepository,
+        SalesManRepository $salesManRepository,
+        ResearcherRepository $researcherRepository,
+        ProductionRepository $productionRepository
+    ) {
         $socity = $this->getUser()->getSocity();
         $administrationPrint = $this->administrationPrint($administrationRepository, $socity);
 
-        $reseachPrint = $this->reseachPrint( $researcherRepository, $socity);
+        $reseachPrint = $this->reseachPrint($researcherRepository, $socity);
 
-        $salesManPrint = $this->salesManPrint( $salesManRepository, $socity);
+        $salesManPrint = $this->salesManPrint($salesManRepository, $socity);
 
-        $productionPrint = $this->productionPrint($productionRepository , $socity);
+        $productionPrint = $this->productionPrint($productionRepository, $socity);
 
         return $this->render('player/human.html.twig', [
             'controller_name' => 'PlayerController',
@@ -158,9 +187,6 @@ class PlayerController extends AbstractController
      */
     public function information()
     {
-
-
-
         return $this->render('player/information.html.twig', [
             'controller_name' => 'PlayerController',
         ]);
@@ -168,32 +194,31 @@ class PlayerController extends AbstractController
 
 
     //Function use to return array for sales twig
-    private function productPurchasePrint(ProductRepository $productRepository, PurchaseOrderRepository $purchaseOrderRepository, Socity $socity){
-
+    private function productPurchasePrint(ProductRepository $productRepository, PurchaseOrderRepository $purchaseOrderRepository, Socity $socity)
+    {
         $productPurchaseOrders = $this->productPurchaseOrders($purchaseOrderRepository, $socity);
         $productPurchables = $this->productPurchables($productRepository);
 
 
         return $productPurchasePrint = $this->productPurchase($productPurchables, $productPurchaseOrders);
-
     }
 
-    private function productSalesPrint(ProductRepository $productRepository,
-                                       SalesOrderRepository $salesOrderRepository,
-                                       ReseachOrderRepository $reseachOrderRepository,
-                                       PurchaseOrderRepository $purchaseOrderRepository,
-                                       BalanceSheetRepository $balanceSheetRepository,
-                                       Socity $socity)
-    {
+    private function productSalesPrint(
+        ProductRepository $productRepository,
+        SalesOrderRepository $salesOrderRepository,
+        ReseachOrderRepository $reseachOrderRepository,
+        PurchaseOrderRepository $purchaseOrderRepository,
+        BalanceSheetRepository $balanceSheetRepository,
+        Socity $socity
+    ) {
         $productSalePrint = [];
         $productSalesOrders = $this->productSalesOrders($salesOrderRepository, $socity);
         $productPurchaseOrders = $this->productPurchaseOrders($purchaseOrderRepository, $socity);
-        $productSalable = $this->productSalable( $reseachOrderRepository, $productRepository, $socity);
+        $productSalable = $this->productSalable($reseachOrderRepository, $productRepository, $socity);
 
-        dump($productSalable);
         //TODO add differentiation salesType
 
-        foreach ($productSalable as $product){
+        foreach ($productSalable as $product) {
             $quantityProfessional = 0;
             $quantityParticular = 0;
             $quantity = 0;
@@ -206,7 +231,7 @@ class PlayerController extends AbstractController
             $purchaseCost = $this->purchaseCost($product);
             $cycleLife = $product->getProductLifes(); //TODO modify to select productLifeCycle
 
-            foreach ($productPurchaseOrders as $productPurchaseOrder){
+            foreach ($productPurchaseOrders as $productPurchaseOrder) {
                 $stock += $productPurchaseOrder->getProductQuantityPurchase();
             }
 
@@ -232,28 +257,28 @@ class PlayerController extends AbstractController
                 "SalesOrderId" => $salesOrderId,
             ];
             array_push($productSalePrint, $productPrint);
-
         }
         return $productSalePrint;
     }
 
-    private function productPublicityPrint(ReseachOrderRepository $reseachOrderRepository,
-                                           PublicityOrderRepository $publicityOrderRepository,
-                                           ProductRepository $productRepository,
-                                           BalanceSheetRepository $balanceSheetRepository,
-                                           Socity $socity){
-
+    private function productPublicityPrint(
+        ReseachOrderRepository $reseachOrderRepository,
+        PublicityOrderRepository $publicityOrderRepository,
+        ProductRepository $productRepository,
+        Socity $socity
+    ) {
         $productPublicityPrint = [];
         $turn = $this->getUser()->getGame()->getTurn();
 
-        $productSalable = $this->productSalable ( $reseachOrderRepository,
-                                                  $productRepository,
-                                                  $socity);
+        $productSalable = $this->productSalable(
+            $reseachOrderRepository,
+            $productRepository,
+            $socity
+        );
 
-        foreach ($productSalable as $product){
+        foreach ($productSalable as $product) {
             $publicityOrderTurn = $this->productPublicityOrder($product, $publicityOrderRepository, $turn, $socity);
             $publicityOrderLastTurn = $this->productPublicityOrder($product, $publicityOrderRepository, $turn-1, $socity);
-            $balancesheetTurn = $this->balanceSheetTurn($balanceSheetRepository, $turn);
 
             $name = $product->getName();
             $id = $product->getId();
@@ -261,17 +286,17 @@ class PlayerController extends AbstractController
 
             dump($publicityOrderTurn);
 
-            if($publicityOrderTurn !== null){
+            if ($publicityOrderTurn !== null) {
                 $productPublicityTurn = $publicityOrderTurn->getPublicityPrice();
                 $idPublicityOrderTurn = $publicityOrderTurn->getId();
-            } else{
+            } else {
                 $productPublicityTurn = 0;
                 $idPublicityOrderTurn = null;
             }
 
-            if($publicityOrderLastTurn !== null){
+            if ($publicityOrderLastTurn !== null) {
                 $productPublicityLastTurn = $publicityOrderLastTurn->getPublicityPrice();
-            } else{
+            } else {
                 $productPublicityLastTurn = 0;
             }
             $variationPublicity = $this->variationPublicity($productPublicityTurn, $productPublicityLastTurn);
@@ -294,37 +319,34 @@ class PlayerController extends AbstractController
         }
 
         return $productPublicityPrint;
-
     }
 
 
-    private function variationPublicity($productPublicityTurn, $productPublicityLastTurn){
-        if($productPublicityTurn === 0){
+    private function variationPublicity($productPublicityTurn, $productPublicityLastTurn)
+    {
+        if ($productPublicityTurn === 0) {
             return "no publicity";
-        }
-        else{
+        } else {
             return $variationPublicity = ($productPublicityTurn-$productPublicityLastTurn)/($productPublicityTurn)*100;
         }
     }
 
-    private function percentPublicityLastTurn($netSales, $productPublicityLastTurn){
-
-        if($netSales === 0){
+    private function percentPublicityLastTurn($netSales, $productPublicityLastTurn)
+    {
+        if ($netSales === 0) {
             return "no publicity";
-        }
-        else{
+        } else {
             return $percentPublicityLastTurn = (($netSales+$productPublicityLastTurn)- $netSales)/$netSales*100;
         }
     }
 
-    private function socityPublicityPrint(){}
-
-    private function productPublicityOrder(Product $product, PublicityOrderRepository $publicityOrderRepository, $turn, $socity){
-
+    private function productPublicityOrder(Product $product, PublicityOrderRepository $publicityOrderRepository, $turn, $socity)
+    {
         return $productPublicityOrder = $publicityOrderRepository->findOneBy(["socity" =>$socity, "turn" => $turn, "product" => $product]);
     }
 
-    private function productPurchables(ProductRepository $productRepository){
+    private function productPurchables(ProductRepository $productRepository)
+    {
         return $productLvl1 = $productRepository->findBy(["technologicLevel" => 1]);
     }
 
@@ -332,24 +354,21 @@ class PlayerController extends AbstractController
     {
         $turn = $this->getUser()->getGame()->getTurn();
         return $productPurchaseOrders = $purchaseOrderRepository->findBy(["socity" => $socity, "turn" => $turn]);
-
     }
 
     private function productProductionOrders(ProductionOrderRepository $productionOrderRepository, Socity $socity, $turn)
     {
         return $productPurchaseOrders = $productionOrderRepository->findBy(["socity" => $socity, "turn" => $turn]);
-
     }
 
-    private function quantityProfessional($quantity, BalanceSheetRepository $balanceSheetRepository){
-
+    private function quantityProfessional($quantity, BalanceSheetRepository $balanceSheetRepository)
+    {
         $turn = $this->getUser()->getGame()->getTurn();
         $balanceSheetTurn = $this->balanceSheetTurn($balanceSheetRepository, $turn);
 
-        if($balanceSheetTurn == null){
+        if ($balanceSheetTurn == null) {
             $quantityProfessional = $quantity*0.5;
-        }
-        else{
+        } else {
             $proCoeficient = $balanceSheetTurn->getParticularSalesPart();
             $quantityProfessional = $quantity*$proCoeficient;
         }
@@ -357,24 +376,24 @@ class PlayerController extends AbstractController
         return $quantityProfessional;
     }
 
-    private function balanceSheetTurn(BalanceSheetRepository $balanceSheetRepository, $turn){
+    private function balanceSheetTurn(BalanceSheetRepository $balanceSheetRepository, $turn)
+    {
         $socity = $this->getUser()->getSocity();
         $balanceSheetTurn = $balanceSheetRepository->findOneBy(["turn" => $turn, "socity" => $socity]);
 
         return $balanceSheetTurn;
-
     }
 
-    private function quantityParticular($quantity, $quantityProfessional){
-
+    private function quantityParticular($quantity, $quantityProfessional)
+    {
         return $quantityParticular = $quantity - $quantityProfessional;
     }
 
-    private function purchaseCost(Product $product){
-        if ($product->getTechnologicLevel() === 1){
+    private function purchaseCost(Product $product)
+    {
+        if ($product->getTechnologicLevel() === 1) {
             return $product->getBuyPrice();
-        }
-        else{
+        } else {
             return 100;
             //TODO change value by calculation
         }
@@ -386,21 +405,23 @@ class PlayerController extends AbstractController
         return $productPurchaseOrders = $salesOrderRepository->findBy(["socity" => $socity, "turn" => $turn]);
     }
 
-    private function productResearchOrder($Product, ReseachOrderRepository $reseachOrderRepository, Socity $socity){
+    private function productResearchOrder($Product, ReseachOrderRepository $reseachOrderRepository, Socity $socity)
+    {
         return $productReseachOrders = $reseachOrderRepository->findBy(["socity" => $socity, "product" => $Product]);
     }
 
-    private function productPurchase($productPurchables, $productPurchaseOrders){
+    private function productPurchase($productPurchables, $productPurchaseOrders)
+    {
         $productPurchasePrint =  [];
-        foreach ($productPurchables as $productPurchable){
+        foreach ($productPurchables as $productPurchable) {
             $quantity = 0;
             $PurchaseOrderId = null;
             $id = $productPurchable->getId();
             $name = $productPurchable->getName();
             $purchasePrice = $productPurchable->getBuyPrice();
             $quantityDiscount = $productPurchable->getQuantityDiscount();
-            foreach ($productPurchaseOrders as $productPurchaseOrder){
-                if($productPurchaseOrder->getProduct()->getName() === $productPurchable->getName()){
+            foreach ($productPurchaseOrders as $productPurchaseOrder) {
+                if ($productPurchaseOrder->getProduct()->getName() === $productPurchable->getName()) {
                     $quantity = $productPurchaseOrder->getProductQuantityPurchase();
                     $PurchaseOrderId = $productPurchaseOrder->getId();
                 }
@@ -418,59 +439,66 @@ class PlayerController extends AbstractController
         return $productPurchasePrint;
     }
 
-    private function productSalable (ReseachOrderRepository $reseachOrderRepository,
-                                     ProductRepository $productRepository,
-                                     Socity $socity ){
+    private function productSalable(
+        ReseachOrderRepository $reseachOrderRepository,
+        ProductRepository $productRepository,
+        Socity $socity
+    ) {
         $productSalable = [];
         $products = $productRepository->findAll();
-        foreach ($products as $product){
+        foreach ($products as $product) {
             $research = 0;
             $productResearchOrders = $this->productResearchOrder($product, $reseachOrderRepository, $socity);
-            foreach ($productResearchOrders as $productResearchOrder){
+            foreach ($productResearchOrders as $productResearchOrder) {
                 $research += $productResearchOrder->getReseachDo();
             }
 
 
-            if($research >= $product->getResearchCost() or $product->getTechnologicLevel() === 1 ){
+            if ($research >= $product->getResearchCost() or $product->getTechnologicLevel() === 1) {
                 array_push($productSalable, $product);
             }
         }
         return $productSalable;
     }
 
-    private function userFactories (FactoryRepository $factoryRepository, Socity $socity){
+    private function userFactories(FactoryRepository $factoryRepository, Socity $socity)
+    {
         return $userFactories = $factoryRepository->findBy(["socity" => $socity]);
     }
 
-    private function userProductionLigns(ProductionLignRepository $productionLignRepository, Socity $socity){
+    private function userProductionLigns(ProductionLignRepository $productionLignRepository, Socity $socity)
+    {
         return $userProductionLigns = $productionLignRepository->findBy(["socity" => $socity]);
     }
 
-    private function productionOrderPrint(ProductionOrderRepository $productionOrderRepository,
-                                     ReseachOrderRepository $reseachOrderRepository,
-                                     ProductRepository $productRepository,
-                                     Socity $socity, $turn){
+    private function productionOrderPrint(
+        ProductionOrderRepository $productionOrderRepository,
+        ReseachOrderRepository $reseachOrderRepository,
+        ProductRepository $productRepository,
+        Socity $socity,
+        $turn
+    ) {
         $productProductionOrders = $this->productProductionOrders($productionOrderRepository, $socity, $turn);
-        $productSalable = $this->productSalable($reseachOrderRepository,$productRepository, $socity );
+        $productSalable = $this->productSalable($reseachOrderRepository, $productRepository, $socity);
 
         $productionOrderPrint =[];
         foreach ($productSalable as $product) {
-                $quantity = 0;
-                $researchOrderId = null;
-                $id = $product->getId();
-                $name = $product->getName();
-                $rowMaterialCost = $product->getRowMaterialCost();
-                $productionTimeCost = $product->getProductiorTimeCost();
+            $quantity = 0;
+            $researchOrderId = null;
+            $id = $product->getId();
+            $name = $product->getName();
+            $rowMaterialCost = $product->getRowMaterialCost();
+            $productionTimeCost = $product->getProductiorTimeCost();
 
 
-                foreach ($productProductionOrders as $productProductionOrder) {
-                    if($productProductionOrder->getProduct()->getName() === $product->getName()){
-                        $quantity += $productProductionOrder->getQuantityProductCreat();
-                        $researchOrderId = $productProductionOrder->getId();
-                    }
+            foreach ($productProductionOrders as $productProductionOrder) {
+                if ($productProductionOrder->getProduct()->getName() === $product->getName()) {
+                    $quantity += $productProductionOrder->getQuantityProductCreat();
+                    $researchOrderId = $productProductionOrder->getId();
                 }
+            }
 
-                $productionPrint = [
+            $productionPrint = [
                     "id" => $id,
                     "name" => $name,
                     'rowMaterialCost' => $rowMaterialCost,
@@ -481,17 +509,17 @@ class PlayerController extends AbstractController
                     'researchOrderId' => $researchOrderId
 
                 ];
-                array_push($productionOrderPrint, $productionPrint);
+            array_push($productionOrderPrint, $productionPrint);
         }
         return $productionOrderPrint;
-
     }
 
-    private function researchOrderPrint(ProductRepository $productRepository, ReseachOrderRepository $reseachOrderRepository, $socity, $turn){
+    private function researchOrderPrint(ProductRepository $productRepository, ReseachOrderRepository $reseachOrderRepository, $socity, $turn)
+    {
         //TODO voir comment limiter les recherches en fonctions des lvl et produit déja recherché
         $products = $productRepository->findBy([]);
         $researchOrderPrint = [];
-        foreach ($products as $product){
+        foreach ($products as $product) {
             if ($product->getTechnologicLevel() != 1) {
                 $productId = $product->getId();
                 $name = $product->getName();
@@ -523,25 +551,25 @@ class PlayerController extends AbstractController
         return $researchOrderPrint;
     }
 
-    private function globalProductionPrint($productionOrderPrint,ProductionLignRepository $productionLignRepository, Socity $socity){
+    private function globalProductionPrint($productionOrderPrint, ProductionLignRepository $productionLignRepository, Socity $socity)
+    {
         $totalProductionTimeCapacity = 0;
         $totalTime = 0;
         dump($productionOrderPrint);
-        foreach ($productionOrderPrint as $values){
-           foreach ($values as $key => $value){
-               if ($key == "productiorTimeTotalCost"){
-                   $totalTime += $value;
-               }
-           }
+        foreach ($productionOrderPrint as $values) {
+            foreach ($values as $key => $value) {
+                if ($key == "productiorTimeTotalCost") {
+                    $totalTime += $value;
+                }
+            }
         }
-        $userProductionLigns = $this->userProductionLigns( $productionLignRepository,  $socity);
-        foreach ($userProductionLigns as $productionLign){
+        $userProductionLigns = $this->userProductionLigns($productionLignRepository, $socity);
+        foreach ($userProductionLigns as $productionLign) {
             $totalProductionTimeCapacity += $productionLign->getAnnualProductTime();
         }
-        if($totalTime === 0){
+        if ($totalTime === 0) {
             $totalActivity = "No activity";
-        }
-        else{
+        } else {
             $totalActivity = round(($totalProductionTimeCapacity -($totalProductionTimeCapacity - $totalTime))*100/$totalProductionTimeCapacity, 2);
         }
 
@@ -552,36 +580,40 @@ class PlayerController extends AbstractController
         ];
     }
 
-    private function administrationPrint(AdministrationRepository $administrationRepository, Socity $socity){
-
+    private function administrationPrint(AdministrationRepository $administrationRepository, Socity $socity)
+    {
         $employees = $administrationRepository->findBy(["socity" => $socity]);
         return $employees = $this->employees($employees);
     }
 
-    private function reseachPrint(ResearcherRepository $researcherRepository, Socity $socity){
+    private function reseachPrint(ResearcherRepository $researcherRepository, Socity $socity)
+    {
         $employees = $researcherRepository->findBy(["socity" => $socity]);
         return $employees = $this->employees($employees);
     }
 
-    private function salesManPrint(SalesManRepository $salesManRepository, Socity $socity){
+    private function salesManPrint(SalesManRepository $salesManRepository, Socity $socity)
+    {
         $employees = $salesManRepository->findBy(["socity" => $socity]);
         return $employees = $this->employees($employees);
     }
 
-    private function productionPrint(ProductionRepository $productionRepository , Socity $socity){
+    private function productionPrint(ProductionRepository $productionRepository, Socity $socity)
+    {
         $employees = $productionRepository->findBy(["socity" => $socity]);
         return $employees = $this->employees($employees);
     }
 
 
-    private function employees($employees){
+    private function employees($employees)
+    {
         $totalSalarie = 0;
         $totalFormation = 0;
         $totalExperience = 0;
         $totalProductivity = 0;
         $numberEmployeesTotal = 0;
 
-        foreach ($employees as $employee){
+        foreach ($employees as $employee) {
             $totalSalarie += $employee->getSalary();
             $totalFormation +=$employee->getFormation();
             $totalExperience += $employee->getExprience();
@@ -600,24 +632,22 @@ class PlayerController extends AbstractController
         ];
     }
 
-    private function productivityAvg($totalProductivity, $numberEmployeesTotal){
-        if($numberEmployeesTotal === 0){
+    private function productivityAvg($totalProductivity, $numberEmployeesTotal)
+    {
+        if ($numberEmployeesTotal === 0) {
             return $productivityAvg = "no employee";
+        } else {
+            return $productivityAvg = round($totalProductivity/$numberEmployeesTotal, 2);
         }
-        else{
-            return $productivityAvg = round($totalProductivity/$numberEmployeesTotal,2);
-        }
-
     }
 
-    private function dismissAvg($totalSalarie, $numberEmployeesTotal, $totalExperience){
-        if($numberEmployeesTotal === 0){
+    private function dismissAvg($totalSalarie, $numberEmployeesTotal, $totalExperience)
+    {
+        if ($numberEmployeesTotal === 0) {
             return $productivityAvg = "no employee";
-        }
-        else {
+        } else {
             return $dismissAvg =
                 round($totalSalarie/($numberEmployeesTotal * 12)*$totalExperience/$numberEmployeesTotal, 2);
         }
     }
-
 }

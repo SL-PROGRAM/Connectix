@@ -144,6 +144,4 @@ class PurchaseOrder
 
         return $this;
     }
-
-
 }

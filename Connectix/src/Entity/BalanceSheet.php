@@ -820,6 +820,4 @@ class BalanceSheet
 
         return $this;
     }
-
-
 }

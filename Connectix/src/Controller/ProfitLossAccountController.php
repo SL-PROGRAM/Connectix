@@ -39,7 +39,8 @@ class ProfitLossAccountController extends AbstractController
      * @param Game $game
      * @return array
      */
-    private function actualYear(Socity $socity, Game $game){
+    private function actualYear(Socity $socity, Game $game)
+    {
 
         //TODO Parameter must create in entity BalanceSheet
         //TODO change value buy GET PARAMETER
@@ -108,7 +109,8 @@ class ProfitLossAccountController extends AbstractController
      * @param Game $game
      * @return array
      */
-    private function lastYear(Socity $socity, Game $game){
+    private function lastYear(Socity $socity, Game $game)
+    {
 
         //TODO Parameter must create in entity BalanceSheet
         //TODO change value buy GET PARAMETER
@@ -224,7 +226,7 @@ class ProfitLossAccountController extends AbstractController
         $intestAndSimilarExpenses,
         $intestAndSimilarProduct,
         Game $game
-    ){
+    ) {
         $frenchNetSales = $this->frenchNetSales(
             $frenchProductionSoldGoods,
             $frenchGoodsSale,
@@ -236,13 +238,15 @@ class ProfitLossAccountController extends AbstractController
             $internationalProductionSoldServices
         );
         $netSales = $this->netSales($frenchNetSales, $internationalNetSales);
-        $totalOperatingRevenue = $this->totalOperatingRevenue($netSales,
+        $totalOperatingRevenue = $this->totalOperatingRevenue(
+            $netSales,
             $stockedProduction,
             $operatingGrant,
             $repaymentOnDepreciationAndProvisions,
-            $otherProduct);
+            $otherProduct
+        );
         $socialCharges = round($this->socialCharges($payRoll, $game), 2);
-        $salariesAndTreatments = round($this->salariesAndTreatments($payRoll, $socialCharges),2);
+        $salariesAndTreatments = round($this->salariesAndTreatments($payRoll, $socialCharges), 2);
         $taxesAndSimilarPayment = $this->taxesAndSimilarPayment($netSales, $game, $salariesAndTreatments);
         $totalOperatingExpenses = $this->totalOperatingExpenses(
             $goodsPurchases,
@@ -263,11 +267,13 @@ class ProfitLossAccountController extends AbstractController
         $operatingResult = $this->operatingResult($totalOperatingRevenue, $totalOperatingExpenses);
         $totalFinancialProduct = $this->totalFinancialProduct($intestAndSimilarProduct);
         $exceptionalResult = $this->exceptionalResult($capitalExceptionalOperatingProduct, $capitalExceptionalExpense);
-        $totalProduct = $this->totalProduct($totalOperatingRevenue,
+        $totalProduct = $this->totalProduct(
+            $totalOperatingRevenue,
             $totalFinancialProduct,
-            $capitalExceptionalOperatingProduct);
+            $capitalExceptionalOperatingProduct
+        );
         $financialResult = $this->financialResult($totalFinanceExpenses, $totalFinancialProduct);
-        $resultBeforeTax = $this->resultBeforeTax($operatingResult, $financialResult );
+        $resultBeforeTax = $this->resultBeforeTax($operatingResult, $financialResult);
         $profitTax = $this->profitTax($resultBeforeTax, $exceptionalResult, $game);
         $employeesParticipation = $this->employeesParticipation($resultBeforeTax, $exceptionalResult, $game);
 
@@ -276,7 +282,8 @@ class ProfitLossAccountController extends AbstractController
             $totalFinanceExpenses,
             $totalFinancialProduct,
             $employeesParticipation,
-            $profitTax);
+            $profitTax
+        );
         $profitLoss = $this->profitLoss($totalProduct, $totalExpenses);
 
 
@@ -337,7 +344,8 @@ class ProfitLossAccountController extends AbstractController
      * @param $totalExpenses
      * @return mixed
      */
-    private function profitLoss($totalProduct, $totalExpenses){
+    private function profitLoss($totalProduct, $totalExpenses)
+    {
         return $profitLoss = $totalProduct - $totalExpenses;
     }
 
@@ -354,8 +362,8 @@ class ProfitLossAccountController extends AbstractController
         $totalFinancialExpenses,
         $capitalExceptionalExpense,
         $salariesParticipation,
-        $profitTax){
-
+        $profitTax
+    ) {
         return $totalExpenses =
             $totalFinancialExpenses +
             $capitalExceptionalExpense+
@@ -374,8 +382,9 @@ class ProfitLossAccountController extends AbstractController
     private function totalProduct(
         $totalOperatingRevenue,
         $totalFinancialProduct,
-        $capitalExceptionalOperatingProduct){
-                return $totalProduct =
+        $capitalExceptionalOperatingProduct
+    ) {
+        return $totalProduct =
                     $totalFinancialProduct+
                     $capitalExceptionalOperatingProduct+
                     $totalOperatingRevenue;
@@ -388,13 +397,11 @@ class ProfitLossAccountController extends AbstractController
      * @param Game $game
      * @return float|int
      */
-    private function profitTax($resultBeforeTax, $exceptionalResult, Game $game){
-
-        if (($resultBeforeTax + $exceptionalResult) >= 0){
+    private function profitTax($resultBeforeTax, $exceptionalResult, Game $game)
+    {
+        if (($resultBeforeTax + $exceptionalResult) >= 0) {
             return $profitTax = (($exceptionalResult + $resultBeforeTax)*$game->getTaxRate())/100;
-        }
-
-        else{
+        } else {
             return $profitTax = 0;
         }
     }
@@ -405,14 +412,13 @@ class ProfitLossAccountController extends AbstractController
      * @param Game $game
      * @return float|int
      */
-    private function employeesParticipation($resultBeforeTax, $exceptionalResult, Game $game){
-
+    private function employeesParticipation($resultBeforeTax, $exceptionalResult, Game $game)
+    {
         $employeesParticipation = (($resultBeforeTax + $exceptionalResult)*$game->getEmployeeParticipation())/100;
-        if($employeesParticipation > 0){
+        if ($employeesParticipation > 0) {
             return $employeesParticipation;
-        }
-        else{
-          return 0;
+        } else {
+            return 0;
         }
     }
 
@@ -421,7 +427,8 @@ class ProfitLossAccountController extends AbstractController
      * @param $capitalExceptionalExpense
      * @return mixed
      */
-    private function exceptionalResult($capitalExceptionalOperatingProduct, $capitalExceptionalExpense){
+    private function exceptionalResult($capitalExceptionalOperatingProduct, $capitalExceptionalExpense)
+    {
         return $exceptionalResult = $capitalExceptionalExpense + $capitalExceptionalOperatingProduct;
     }
 
@@ -430,7 +437,8 @@ class ProfitLossAccountController extends AbstractController
      * @param $financialResult
      * @return mixed
      */
-    private function resultBeforeTax($operatingResult, $financialResult ){
+    private function resultBeforeTax($operatingResult, $financialResult)
+    {
         return $resultBeforeTax =  $operatingResult + $financialResult;
     }
 
@@ -439,7 +447,8 @@ class ProfitLossAccountController extends AbstractController
      * @param $totalFinancialProduct
      * @return mixed
      */
-    private function financialResult($totalFinanceExpenses, $totalFinancialProduct){
+    private function financialResult($totalFinanceExpenses, $totalFinancialProduct)
+    {
         return $financialResult = $totalFinanceExpenses + $totalFinancialProduct;
     }
 
@@ -447,7 +456,8 @@ class ProfitLossAccountController extends AbstractController
      * @param $intestAndSimilarExpenses
      * @return mixed
      */
-    private function totalFinanceExpenses($intestAndSimilarExpenses){
+    private function totalFinanceExpenses($intestAndSimilarExpenses)
+    {
         return $intestAndSimilarExpenses;
     }
 
@@ -455,7 +465,8 @@ class ProfitLossAccountController extends AbstractController
      * @param $intestAndSimilarProduct
      * @return mixed
      */
-    private function totalFinancialProduct($intestAndSimilarProduct){
+    private function totalFinancialProduct($intestAndSimilarProduct)
+    {
         return $intestAndSimilarProduct;
     }
 
@@ -464,7 +475,8 @@ class ProfitLossAccountController extends AbstractController
      * @param $totalOperatingExpenses
      * @return mixed
      */
-    private function operatingResult($totalOperatingRevenue, $totalOperatingExpenses){
+    private function operatingResult($totalOperatingRevenue, $totalOperatingExpenses)
+    {
         return $operatingResult = $totalOperatingRevenue - $totalOperatingExpenses;
     }
 
@@ -498,8 +510,8 @@ class ProfitLossAccountController extends AbstractController
         $provisionOnCurrentAsset,
         $provisionForRiskAndCharge,
         $otherExpenses
-        ){
-            return $totalOperatingExpenses =
+        ) {
+        return $totalOperatingExpenses =
                 $goodsPurchases +
                 $changeInStock +
                 $purchasesOfRawMaterialsAndSupplies +
@@ -521,7 +533,8 @@ class ProfitLossAccountController extends AbstractController
      * @param Game $game
      * @return float|int
      */
-    private function socialCharges($payRoll, Game $game){
+    private function socialCharges($payRoll, Game $game)
+    {
         $employerContributions = $game->getEmployerContributions();
         return $socialCharges = $payRoll*$employerContributions/100;
     }
@@ -531,7 +544,8 @@ class ProfitLossAccountController extends AbstractController
      * @param $socialCharges
      * @return mixed
      */
-    private function salariesAndTreatments($payRoll, $socialCharges){
+    private function salariesAndTreatments($payRoll, $socialCharges)
+    {
         return $salariesAndTreatments = $payRoll-$socialCharges;
     }
 
@@ -539,10 +553,11 @@ class ProfitLossAccountController extends AbstractController
      * @param Socity $socity
      * @return float
      */
-    private function payRoll(Socity $socity){
+    private function payRoll(Socity $socity)
+    {
         $payRoll = 0;
         $employees = $socity->getHumanRessourcies();
-        foreach ($employees as $employee){
+        foreach ($employees as $employee) {
             $payRoll += $employee->getSalary();
         }
         return round($payRoll, 2);
@@ -554,7 +569,8 @@ class ProfitLossAccountController extends AbstractController
      * @param $salariesAndTreatments
      * @return float|int
      */
-    private function taxesAndSimilarPayment($netTurnover, Game $game, $salariesAndTreatments){
+    private function taxesAndSimilarPayment($netTurnover, Game $game, $salariesAndTreatments)
+    {
         $taxeTurnover = $game->getTaxTurnOver();
         $payTax = $game->getPayTax();
 
@@ -567,7 +583,8 @@ class ProfitLossAccountController extends AbstractController
      * @param $productionSoldServices
      * @return mixed
      */
-    private function frenchNetSales($goodsSale, $productionSoldGoods, $productionSoldServices){
+    private function frenchNetSales($goodsSale, $productionSoldGoods, $productionSoldServices)
+    {
         return $frenchNetSales = $goodsSale + $productionSoldGoods + $productionSoldServices;
     }
 
@@ -577,7 +594,8 @@ class ProfitLossAccountController extends AbstractController
      * @param $productionSoldServices
      * @return mixed
      */
-    private function internationalNetSales($goodsSale, $productionSoldGoods, $productionSoldServices){
+    private function internationalNetSales($goodsSale, $productionSoldGoods, $productionSoldServices)
+    {
         return $internationalNetSales = $goodsSale + $productionSoldGoods + $productionSoldServices;
     }
 
@@ -586,7 +604,8 @@ class ProfitLossAccountController extends AbstractController
      * @param $internationalNetSales
      * @return mixed
      */
-    private function netSales($frenchNetSales, $internationalNetSales){
+    private function netSales($frenchNetSales, $internationalNetSales)
+    {
         return $netSales = $frenchNetSales + $internationalNetSales;
     }
 
@@ -598,20 +617,17 @@ class ProfitLossAccountController extends AbstractController
      * @param $otherProduct
      * @return mixed
      */
-    private function totalOperatingRevenue($netSales,
-                                           $stockedProduction,
-                                           $operatingGrant,
-                                           $repaymentOnDepreciationAndProvisions,
-                                           $otherProduct){
+    private function totalOperatingRevenue(
+        $netSales,
+        $stockedProduction,
+        $operatingGrant,
+        $repaymentOnDepreciationAndProvisions,
+        $otherProduct
+    ) {
         return $totalOperatingRevenue=     $netSales +
                                            $stockedProduction+
                                            $operatingGrant+
                                            $repaymentOnDepreciationAndProvisions+
                                            $otherProduct;
-
     }
-
-
-
-
 }

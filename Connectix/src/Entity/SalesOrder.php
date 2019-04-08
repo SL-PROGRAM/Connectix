@@ -143,7 +143,4 @@ class SalesOrder
 
         return $this;
     }
-
-
-
 }

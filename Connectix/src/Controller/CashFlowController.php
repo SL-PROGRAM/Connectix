@@ -22,12 +22,11 @@ class CashFlowController extends AbstractController
             'controller_name' => 'CashFlowController',
             'monthlyValue' => $monthlyValue,
         ]);
-
-
     }
 
 
-    private function monthlyValue(Game $game){
+    private function monthlyValue(Game $game)
+    {
         //VAT CALCULATION
         $monthlyRowMaterialTTCPurchase = 0;
         $monthlyMerchandiseTTCPurchase = 0;
@@ -50,25 +49,30 @@ class CashFlowController extends AbstractController
         $tangibleInvestments = 0;
         $repaymentOfLoan = 0;
 
-        $monthlyVATCalculation =$this->monthlyVATCalculation($game,
-                                           $monthlyRowMaterialTTCPurchase,
-                                           $monthlyMerchandiseTTCPurchase,
-                                           $monthlyBillingProductSales,
-                                           $monthlyOtherCharge,
-                                           $monthlyImmobilization);
+        $monthlyVATCalculation =$this->monthlyVATCalculation(
+            $game,
+            $monthlyRowMaterialTTCPurchase,
+            $monthlyMerchandiseTTCPurchase,
+            $monthlyBillingProductSales,
+            $monthlyOtherCharge,
+            $monthlyImmobilization
+        );
 
         $vatCredit = $monthlyVATCalculation["vatCredit"];
         $vatToPay = $monthlyVATCalculation["vatToPay"];
 
 
-        $totalCashInclude = $this->totalCashInclude($cashingSales,
+        $totalCashInclude = $this->totalCashInclude(
+            $cashingSales,
             $vatCredit,
             $capitalContribution,
             $mediumAndLongLoan,
             $discountBillOfExchange,
-            $transferOfCapital);
+            $transferOfCapital
+        );
 
-        $totalDisbursement = $this->totalDisbursement($monthlyRowMaterialTTCPurchase,
+        $totalDisbursement = $this->totalDisbursement(
+            $monthlyRowMaterialTTCPurchase,
             $monthlyMerchandiseTTCPurchase,
             $externalCharges,
             $dueAndTaxes,
@@ -76,7 +80,8 @@ class CashFlowController extends AbstractController
             $financialExpenses,
             $vatToPay,
             $tangibleInvestments,
-            $repaymentOfLoan);
+            $repaymentOfLoan
+        );
 
         $balanceOfTheMonth = $this->balanceOfTheMonth($totalCashInclude, $totalDisbursement);
 
@@ -105,34 +110,27 @@ class CashFlowController extends AbstractController
             ];
 
         return array_merge($monthlyValue, $monthlyVATCalculation);
-
-
-
-
-
-
     }
 
-    private function cashingSales(){
-
+    private function cashingSales()
+    {
     }
 
-    private function monthlyCaluclation(){
-
-
-
+    private function monthlyCaluclation()
+    {
     }
 
 
 
     //TODO validation $vatCredit
-    private function totalCashInclude($cashingSales,
-                                      $vatCredit,
-                                      $capitalContribution,
-                                      $mediumAndLongLoan,
-                                      $discountBillOfExchange,
-                                      $transferOfCapital){
-
+    private function totalCashInclude(
+        $cashingSales,
+        $vatCredit,
+        $capitalContribution,
+        $mediumAndLongLoan,
+        $discountBillOfExchange,
+        $transferOfCapital
+    ) {
         return $totalCashInclude =    $cashingSales+
                                       $vatCredit+
                                       $capitalContribution+
@@ -141,16 +139,17 @@ class CashFlowController extends AbstractController
                                       $transferOfCapital;
     }
 
-    private function totalDisbursement($monthlyRowMaterialTTCPurchase,
-                                      $monthlyMerchandiseTTCPurchase,
-                                      $externalCharges,
-                                      $dueAndTaxes,
-                                      $personnelCost,
-                                      $financialExpenses,
-                                      $VatToPay,
-                                      $tangibleInvestments,
-                                      $repaymentOfLoan){
-
+    private function totalDisbursement(
+        $monthlyRowMaterialTTCPurchase,
+        $monthlyMerchandiseTTCPurchase,
+        $externalCharges,
+        $dueAndTaxes,
+        $personnelCost,
+        $financialExpenses,
+        $VatToPay,
+        $tangibleInvestments,
+        $repaymentOfLoan
+    ) {
         return $totalDisbursement =       $monthlyRowMaterialTTCPurchase+
                                           $monthlyMerchandiseTTCPurchase+
                                           $externalCharges+
@@ -160,16 +159,16 @@ class CashFlowController extends AbstractController
                                           $VatToPay+
                                           $tangibleInvestments+
                                           $repaymentOfLoan;
-
-
     }
 
 
-    private function balanceOfTheMonth($totalCashInclude, $totalDisbursement){
+    private function balanceOfTheMonth($totalCashInclude, $totalDisbursement)
+    {
         return $balanceOfTheMonth = $totalCashInclude + $totalDisbursement;
     }
 
-    private function balanceEndOfMonth($balanceOfTheMonth){
+    private function balanceEndOfMonth($balanceOfTheMonth)
+    {
         //TODO ADD balanceEndOfMonth of LAST MONTH
         return $balanceEndOfMonth = $balanceOfTheMonth;
     }
@@ -181,27 +180,31 @@ class CashFlowController extends AbstractController
 
     //Function use to calcul VAT
 
-    private function monthlyVATCalculation(Game $game,
-                                           $monthlyRowMaterialPurchase,
-                                           $monthlyMerchandisePurchase,
-                                           $monthlyBillingProductSales,
-                                           $monthlyOtherCharge,
-                                           $monthlyImmobilization){
+    private function monthlyVATCalculation(
+        Game $game,
+        $monthlyRowMaterialPurchase,
+        $monthlyMerchandisePurchase,
+        $monthlyBillingProductSales,
+        $monthlyOtherCharge,
+        $monthlyImmobilization
+    ) {
         //TODO CHANGE POSITION OF INCOMING VALUE
 
         $monthlyCollectedVAT = $this->monthlyCollectedVAT($monthlyBillingProductSales, $game);
-        $monthlyHTPurchase = $this->monthlyHTPurchase($monthlyBillingProductSales,$game);
+        $monthlyHTPurchase = $this->monthlyHTPurchase($monthlyBillingProductSales, $game);
         $monthlyRowMaterialTTCPurchase = $this->monthlyTTCPurchase($monthlyRowMaterialPurchase, $game);
         $monthlyDeductibleVATOnRowMaterial = $this->monthlyDeductibleVATOnRowMaterial($monthlyRowMaterialPurchase, $game);
         $monthlyDeductibleVATOnMerchandise = $this->monthlyDeductibleVATOnMerchandise($monthlyMerchandisePurchase, $game);
         $monthlyDeductibleVATOnOtherCharge = $this->monthlyDeductibleVATOnOtherCharge($monthlyOtherCharge, $game);
         $monthlyDeductibleVATOnImmobilization = $this->monthlyDeductibleVATOnImmobilization($monthlyImmobilization, $game);
-        $monthlyDeductibleVAT = $this->monthlyDeductibleVAT($monthlyDeductibleVATOnImmobilization,
-                                                            $monthlyDeductibleVATOnOtherCharge,
-                                                            $monthlyDeductibleVATOnMerchandise,
-                                                            $monthlyDeductibleVATOnRowMaterial);
-        $vatCredit = $this->vatCredit($monthlyCollectedVAT, $monthlyDeductibleVAT );
-        $vatToPay = $this->vatToPay($monthlyCollectedVAT, $monthlyDeductibleVAT );
+        $monthlyDeductibleVAT = $this->monthlyDeductibleVAT(
+            $monthlyDeductibleVATOnImmobilization,
+            $monthlyDeductibleVATOnOtherCharge,
+            $monthlyDeductibleVATOnMerchandise,
+            $monthlyDeductibleVATOnRowMaterial
+        );
+        $vatCredit = $this->vatCredit($monthlyCollectedVAT, $monthlyDeductibleVAT);
+        $vatToPay = $this->vatToPay($monthlyCollectedVAT, $monthlyDeductibleVAT);
 
         return $monthlyVATCalculation = [
             "monthlyCollectedVAT" => $monthlyCollectedVAT,
@@ -215,7 +218,6 @@ class CashFlowController extends AbstractController
             "vatCredit" => $vatCredit,
             "vatToPay" => $vatToPay
         ];
-
     }
 
     /**
@@ -223,7 +225,8 @@ class CashFlowController extends AbstractController
      * @param Game $game
      * @return float|int
      */
-    private function monthlyCollectedVAT($monthlyBillingProductSales,Game $game){
+    private function monthlyCollectedVAT($monthlyBillingProductSales, Game $game)
+    {
         return $monthlyCollectedVAT = $monthlyBillingProductSales/100*$game->getTva();
     }
 
@@ -232,7 +235,8 @@ class CashFlowController extends AbstractController
      * @param Game $game
      * @return float|int
      */
-    private function monthlyHTPurchase($monthlyBillingProductSales,Game $game){
+    private function monthlyHTPurchase($monthlyBillingProductSales, Game $game)
+    {
         return $htSales = $monthlyBillingProductSales/(100 - $game->getTva());
     }
 
@@ -242,7 +246,8 @@ class CashFlowController extends AbstractController
      * @param Game $game
      * @return float|int
      */
-    private function monthlyTTCPurchase($monthlyRowMaterialPurchase, Game $game){
+    private function monthlyTTCPurchase($monthlyRowMaterialPurchase, Game $game)
+    {
         return $monthlyTTCPurchase = $monthlyRowMaterialPurchase + ($monthlyRowMaterialPurchase/100 * $game->getTva());
     }
 
@@ -251,7 +256,8 @@ class CashFlowController extends AbstractController
      * @param Game $game
      * @return float|int
      */
-    private function monthlyDeductibleVATOnRowMaterial($monthlyRowMaterialPurchase, Game $game){
+    private function monthlyDeductibleVATOnRowMaterial($monthlyRowMaterialPurchase, Game $game)
+    {
         return $monthlyDeductibleVATOnRowMaterial = $monthlyRowMaterialPurchase/100 * $game->getTva();
     }
 
@@ -260,7 +266,8 @@ class CashFlowController extends AbstractController
      * @param Game $game
      * @return float|int
      */
-    private function monthlyDeductibleVATOnMerchandise($monthlyMerchandisePurchase, Game $game){
+    private function monthlyDeductibleVATOnMerchandise($monthlyMerchandisePurchase, Game $game)
+    {
         return $monthlyDeductibleVATOnMerchandise = $monthlyMerchandisePurchase/100 * $game->getTva();
     }
 
@@ -269,7 +276,8 @@ class CashFlowController extends AbstractController
      * @param Game $game
      * @return float|int
      */
-    private function monthlyDeductibleVATOnOtherCharge($monthlyOtherCharge, Game $game){
+    private function monthlyDeductibleVATOnOtherCharge($monthlyOtherCharge, Game $game)
+    {
         return $monthlyDeductibleVATOnOtherCharge = $monthlyOtherCharge/100 * $game->getTva();
     }
 
@@ -278,9 +286,9 @@ class CashFlowController extends AbstractController
      * @param Game $game
      * @return float|int
      */
-    private function monthlyDeductibleVATOnImmobilization($monthlyImmobilization, Game $game){
+    private function monthlyDeductibleVATOnImmobilization($monthlyImmobilization, Game $game)
+    {
         return $monthlyDeductibleVATOnImmobilization = $monthlyImmobilization/100 * $game->getTva();
-
     }
 
     /**
@@ -290,11 +298,12 @@ class CashFlowController extends AbstractController
      * @param $monthlyDeductibleVATOnRowMaterial
      * @return mixed
      */
-    private function monthlyDeductibleVAT($monthlyDeductibleVATOnImmobilization,
-                                          $monthlyDeductibleVATOnOtherCharge,
-                                          $monthlyDeductibleVATOnMerchandise,
-                                          $monthlyDeductibleVATOnRowMaterial){
-
+    private function monthlyDeductibleVAT(
+        $monthlyDeductibleVATOnImmobilization,
+        $monthlyDeductibleVATOnOtherCharge,
+        $monthlyDeductibleVATOnMerchandise,
+        $monthlyDeductibleVATOnRowMaterial
+    ) {
         return $monthlyDeductibleVAT =    $monthlyDeductibleVATOnImmobilization+
                                           $monthlyDeductibleVATOnOtherCharge+
                                           $monthlyDeductibleVATOnMerchandise+
@@ -306,12 +315,12 @@ class CashFlowController extends AbstractController
      * @param $monthlyDeductibleVAT
      * @return int
      */
-    private function vatCredit($monthlyCollectedVAT, $monthlyDeductibleVAT ){
+    private function vatCredit($monthlyCollectedVAT, $monthlyDeductibleVAT)
+    {
         $vatCredit = $monthlyCollectedVAT - $monthlyDeductibleVAT;
-        if($vatCredit > 0){
+        if ($vatCredit > 0) {
             return $vatCredit;
-        }
-        else{
+        } else {
             return 0;
         }
     }
@@ -321,12 +330,12 @@ class CashFlowController extends AbstractController
      * @param $monthlyDeductibleVAT
      * @return int
      */
-    private function vatToPay($monthlyCollectedVAT, $monthlyDeductibleVAT ){
+    private function vatToPay($monthlyCollectedVAT, $monthlyDeductibleVAT)
+    {
         $vatCredit = $monthlyCollectedVAT - $monthlyDeductibleVAT;
-        if($vatCredit > 0){
+        if ($vatCredit > 0) {
             return 0;
-        }
-        else{
+        } else {
             return $vatCredit;
         }
     }

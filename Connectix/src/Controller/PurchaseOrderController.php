@@ -30,7 +30,7 @@ class PurchaseOrderController extends AbstractController
     /**
      * @Route("/new", name="purchase_order_new", methods={"GET","POST"})
      */
-    public function new(Request $request,ProductRepository $productRepository): Response
+    public function new(Request $request, ProductRepository $productRepository): Response
     {
         $purchaseOrder = new PurchaseOrder();
         $form = $this->createForm(PurchaseOrderType::class, $purchaseOrder);

@@ -1,5 +1,5 @@
 App\entity\Seasonality:
-  Seasonality{0..16}:
+  Seasonality{0..50}:
     january: randomFloat(1, 0, 2)
     february: randomFloat(1, 0, 2)
     march: randomFloat(1, 0, 2)

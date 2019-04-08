@@ -19,12 +19,12 @@ class BalanceSheetScreenController extends AbstractController
      */
     public function index()
     {
-
         $actualYearActiveBalanceSheetBrut = $this->actualYearActiveBalanceSheetBrut();
         $actualYearActiveBalanceSheetDepreciationProvision = $this->actualYearActiveBalanceSheetDepreciationProvision();
         $actualYearActiveBalanceSheetNet = $this->actualYearActiveBalanceSheetNet(
             $actualYearActiveBalanceSheetBrut,
-            $actualYearActiveBalanceSheetDepreciationProvision);
+            $actualYearActiveBalanceSheetDepreciationProvision
+        );
         $lastYearActiveBalanceSheet = $this->lastYearActiveBalanceSheet();
         $actualYearPassiveBalanceSheet = $this->actualYearPassiveBalanceSheet();
         $lastYearPassiveBalanceSheet = $this->lastYearPassiveBalanceSheet();
@@ -38,13 +38,13 @@ class BalanceSheetScreenController extends AbstractController
             'actualYearPassiveBalanceSheet' => $actualYearPassiveBalanceSheet,
             'lastYearPassiveBalanceSheet' => $lastYearPassiveBalanceSheet,
             'controller_name' => 'BalanceSheetController',
-
         ]);
     }
 
 
 
-    private function actualYearActiveBalanceSheetBrut(){
+    private function actualYearActiveBalanceSheetBrut()
+    {
         //TODO RETURN TABLE TO INDEX
         //TODO GET PARAMETER AND GIVE THEM TO calculationActiveBalanceSheet
         $administrationFees = 1000;
@@ -123,7 +123,8 @@ class BalanceSheetScreenController extends AbstractController
         );
     }
 
-    private function actualYearActiveBalanceSheetDepreciationProvision(){
+    private function actualYearActiveBalanceSheetDepreciationProvision()
+    {
         //TODO RETURN TABLE TO INDEX
         //TODO GET PARAMETER AND GIVE THEM TO calculationActiveBalanceSheet
         $administrationFees = 100;
@@ -203,12 +204,13 @@ class BalanceSheetScreenController extends AbstractController
     }
 
     private function actualYearActiveBalanceSheetNet(
-                                                    array $actualYearActiveBalanceSheetBrut,
-                                                    array $actualYearActiveBalanceSheetDepreciationProvision){
+        array $actualYearActiveBalanceSheetBrut,
+        array $actualYearActiveBalanceSheetDepreciationProvision
+    ) {
         $actualYearActiveBalanceSheetNet = [];
-        foreach ($actualYearActiveBalanceSheetBrut as $keyBrut => $elemBrut){
-            foreach ($actualYearActiveBalanceSheetDepreciationProvision as $keyDepreciationProvision => $elemDepreciationProvision){
-                if ($keyBrut === $keyDepreciationProvision){
+        foreach ($actualYearActiveBalanceSheetBrut as $keyBrut => $elemBrut) {
+            foreach ($actualYearActiveBalanceSheetDepreciationProvision as $keyDepreciationProvision => $elemDepreciationProvision) {
+                if ($keyBrut === $keyDepreciationProvision) {
                     $actualYearActiveBalanceSheetNet[$keyBrut] = ($elemBrut - $elemDepreciationProvision);
                 }
             }
@@ -216,7 +218,8 @@ class BalanceSheetScreenController extends AbstractController
         return $actualYearActiveBalanceSheetNet;
     }
 
-    private function lastYearActiveBalanceSheet(){
+    private function lastYearActiveBalanceSheet()
+    {
         //TODO RETURN TABLE TO INDEX
         //TODO GET PARAMETER AND GIVE THEM TO calculationActiveBalanceSheet
         $administrationFees = 0;
@@ -293,7 +296,6 @@ class BalanceSheetScreenController extends AbstractController
             $bondRepaymentPremiums,
             $activeConversionDifferences
         );
-
     }
 
     private function calculationActiveBalanceSheet(
@@ -332,10 +334,11 @@ class BalanceSheetScreenController extends AbstractController
         $expensesSpreadOverSeveralFinancialYears,
         $bondRepaymentPremiums,
         $activeConversionDifferences
-    ){
+    ) {
         //TODO RETURN CALCULATION TABLE TO actualYearActiveBalanceSheet
         //TODO RETURN CALCULATION TABLE TO lastYearActiveBalanceSheet
-        $totalFixedAsset = $this->totalFixedAsset(  $administrationFees,
+        $totalFixedAsset = $this->totalFixedAsset(
+            $administrationFees,
             $researchAndDevelopmentCost,
             $concessionPatentsAndSimilar,
             $commercialFund,
@@ -354,7 +357,8 @@ class BalanceSheetScreenController extends AbstractController
             $otherFinancialAssets
         );
 
-        $totalActiveCirculating = $this->totalActiveCirculating(    $rowMaterialsSupplies,
+        $totalActiveCirculating = $this->totalActiveCirculating(
+            $rowMaterialsSupplies,
             $outstandingProducingGoods,
             $outstandingServices,
             $intermediateAndFinishProduct,
@@ -369,7 +373,8 @@ class BalanceSheetScreenController extends AbstractController
             $prepaidExpenses
         );
 
-        $totalGeneralActiveBalanceSheet = $this->totalGeneralActiveBalanceSheet($subscribedCapitalNotCall,
+        $totalGeneralActiveBalanceSheet = $this->totalGeneralActiveBalanceSheet(
+            $subscribedCapitalNotCall,
             $totalFixedAsset,
             $totalActiveCirculating,
             $expensesSpreadOverSeveralFinancialYears,
@@ -419,7 +424,8 @@ class BalanceSheetScreenController extends AbstractController
         ];
     }
 
-    private function actualYearPassiveBalanceSheet(){
+    private function actualYearPassiveBalanceSheet()
+    {
 
         //TODO RETURN TABLE TO INDEX
         //TODO GET PARAMETER AND GIVE THEM TO calculationPassiveBalanceSheet
@@ -450,7 +456,8 @@ class BalanceSheetScreenController extends AbstractController
         $expensesProvision = 0;
         $liabilitiesTranslationDifferences = 0;
 
-        return $actualYearPassiveBalanceSheet = $this->calculationPassiveBalanceSheet($shareCapitalOrIndividual,
+        return $actualYearPassiveBalanceSheet = $this->calculationPassiveBalanceSheet(
+            $shareCapitalOrIndividual,
             $premiumIssueMergerContribution,
             $revaluationDifferences,
             $legalReserve,
@@ -475,12 +482,13 @@ class BalanceSheetScreenController extends AbstractController
             $debtsOnFixedAssetsAndRelatedAccount,
             $otherDebts,
             $prepaidIncome,
-            $liabilitiesTranslationDifferences);
-
+            $liabilitiesTranslationDifferences
+        );
     }
 
 
-    private function lastYearPassiveBalanceSheet(){
+    private function lastYearPassiveBalanceSheet()
+    {
         //TODO RETURN TABLE TO INDEX
         //TODO GET PARAMETER AND GIVE THEM TO calculationPassiveBalanceSheet
         $shareCapitalOrIndividual = 250;
@@ -510,94 +518,102 @@ class BalanceSheetScreenController extends AbstractController
         $expensesProvision = 20;
         $liabilitiesTranslationDifferences = 10;
 
-        return $lastYearPassiveBalanceSheet = $this->calculationPassiveBalanceSheet($shareCapitalOrIndividual,
-                                                                                    $premiumIssueMergerContribution,
-                                                                                    $revaluationDifferences,
-                                                                                    $legalReserve,
-                                                                                    $statutoryOrContractualReserves,
-                                                                                    $regulatedReserves,
-                                                                                    $otherReserves,
-                                                                                    $reportAgain,
-                                                                                    $yearProfit,
-                                                                                    $investmentGrant,
-                                                                                    $regulatedProvisions,
-                                                                                    $proceedsFromEquitySecuritiesIssues,
-                                                                                    $conditionedAdvances,
-                                                                                    $riskProvision,
-                                                                                    $expensesProvision,
-                                                                                    $convertibleBonds,
-                                                                                    $otherBonds,
-                                                                                    $loanAndDebtsWihCreditInstitutions,
-                                                                                    $borrowingAndOtherFinancialDebts,
-                                                                                    $AdvancesAndDownPaymentReceived,
-                                                                                    $tradePayableAndRelatedAccounts,
-                                                                                    $taxAndSocialDebts,
-                                                                                    $debtsOnFixedAssetsAndRelatedAccount,
-                                                                                    $otherDebts,
-                                                                                    $prepaidIncome,
-                                                                                    $liabilitiesTranslationDifferences);
-
-
+        return $lastYearPassiveBalanceSheet = $this->calculationPassiveBalanceSheet(
+            $shareCapitalOrIndividual,
+            $premiumIssueMergerContribution,
+            $revaluationDifferences,
+            $legalReserve,
+            $statutoryOrContractualReserves,
+            $regulatedReserves,
+            $otherReserves,
+            $reportAgain,
+            $yearProfit,
+            $investmentGrant,
+            $regulatedProvisions,
+            $proceedsFromEquitySecuritiesIssues,
+            $conditionedAdvances,
+            $riskProvision,
+            $expensesProvision,
+            $convertibleBonds,
+            $otherBonds,
+            $loanAndDebtsWihCreditInstitutions,
+            $borrowingAndOtherFinancialDebts,
+            $AdvancesAndDownPaymentReceived,
+            $tradePayableAndRelatedAccounts,
+            $taxAndSocialDebts,
+            $debtsOnFixedAssetsAndRelatedAccount,
+            $otherDebts,
+            $prepaidIncome,
+            $liabilitiesTranslationDifferences
+        );
     }
 
 
-    private function calculationPassiveBalanceSheet($shareCapitalOrIndividual,
-                                                    $premiumIssueMergerContribution,
-                                                    $revaluationDifferences,
-                                                    $legalReserve,
-                                                    $statutoryOrContractualReserves,
-                                                    $regulatedReserves,
-                                                    $otherReserves,
-                                                    $reportAgain,
-                                                    $yearProfit,
-                                                    $investmentGrant,
-                                                    $regulatedProvisions,
-                                                    $proceedsFromEquitySecuritiesIssues,
-                                                    $conditionedAdvances,
-                                                    $riskProvision,
-                                                    $expensesProvision,
-                                                    $convertibleBonds,
-                                                    $otherBonds,
-                                                    $loanAndDebtsWihCreditInstitutions,
-                                                    $borrowingAndOtherFinancialDebts,
-                                                    $AdvancesAndDownPaymentReceived,
-                                                    $tradePayableAndRelatedAccounts,
-                                                    $taxAndSocialDebts,
-                                                    $debtsOnFixedAssetsAndRelatedAccount,
-                                                    $otherDebts,
-                                                    $prepaidIncome,
-                                                    $liabilitiesTranslationDifferences){
+    private function calculationPassiveBalanceSheet(
+        $shareCapitalOrIndividual,
+        $premiumIssueMergerContribution,
+        $revaluationDifferences,
+        $legalReserve,
+        $statutoryOrContractualReserves,
+        $regulatedReserves,
+        $otherReserves,
+        $reportAgain,
+        $yearProfit,
+        $investmentGrant,
+        $regulatedProvisions,
+        $proceedsFromEquitySecuritiesIssues,
+        $conditionedAdvances,
+        $riskProvision,
+        $expensesProvision,
+        $convertibleBonds,
+        $otherBonds,
+        $loanAndDebtsWihCreditInstitutions,
+        $borrowingAndOtherFinancialDebts,
+        $AdvancesAndDownPaymentReceived,
+        $tradePayableAndRelatedAccounts,
+        $taxAndSocialDebts,
+        $debtsOnFixedAssetsAndRelatedAccount,
+        $otherDebts,
+        $prepaidIncome,
+        $liabilitiesTranslationDifferences
+    ) {
         //TODO RETURN CALCULATION TABLE TO actualYearPassiveBalanceSheet
         //TODO RETURN CALCULATION TABLE TO lastYearPassiveBalanceSheet
 
-        $totalOwnCapital = $this->totalOwnCapital(  $shareCapitalOrIndividual,
-                                                    $premiumIssueMergerContribution,
-                                                    $revaluationDifferences,
-                                                    $legalReserve,
-                                                    $statutoryOrContractualReserves,
-                                                    $regulatedReserves,
-                                                    $otherReserves,
-                                                    $reportAgain,
-                                                    $yearProfit,
-                                                    $investmentGrant,
-                                                    $regulatedProvisions);
-        $totalOtherOwnCapital = $this->totalOtherOwnCapital($proceedsFromEquitySecuritiesIssues, $conditionedAdvances );
+        $totalOwnCapital = $this->totalOwnCapital(
+            $shareCapitalOrIndividual,
+            $premiumIssueMergerContribution,
+            $revaluationDifferences,
+            $legalReserve,
+            $statutoryOrContractualReserves,
+            $regulatedReserves,
+            $otherReserves,
+            $reportAgain,
+            $yearProfit,
+            $investmentGrant,
+            $regulatedProvisions
+        );
+        $totalOtherOwnCapital = $this->totalOtherOwnCapital($proceedsFromEquitySecuritiesIssues, $conditionedAdvances);
         $totalProvisionForRiskAndCharges = $this->totalProvisionForRiskAndCharges($riskProvision, $expensesProvision);
-        $totalDebts = $this->totalDebts($convertibleBonds,
-                                        $otherBonds,
-                                        $loanAndDebtsWihCreditInstitutions,
-                                        $borrowingAndOtherFinancialDebts,
-                                        $AdvancesAndDownPaymentReceived,
-                                        $tradePayableAndRelatedAccounts,
-                                        $taxAndSocialDebts,
-                                        $debtsOnFixedAssetsAndRelatedAccount,
-                                        $otherDebts,
-                                        $prepaidIncome);
-        $totalGeneralPassiveBalanceSheet = $this->totalGeneralPassiveBalanceSheet(  $totalOwnCapital,
-                                                                                    $totalOtherOwnCapital,
-                                                                                    $totalProvisionForRiskAndCharges,
-                                                                                    $totalDebts,
-                                                                                    $liabilitiesTranslationDifferences);
+        $totalDebts = $this->totalDebts(
+            $convertibleBonds,
+            $otherBonds,
+            $loanAndDebtsWihCreditInstitutions,
+            $borrowingAndOtherFinancialDebts,
+            $AdvancesAndDownPaymentReceived,
+            $tradePayableAndRelatedAccounts,
+            $taxAndSocialDebts,
+            $debtsOnFixedAssetsAndRelatedAccount,
+            $otherDebts,
+            $prepaidIncome
+        );
+        $totalGeneralPassiveBalanceSheet = $this->totalGeneralPassiveBalanceSheet(
+            $totalOwnCapital,
+            $totalOtherOwnCapital,
+            $totalProvisionForRiskAndCharges,
+            $totalDebts,
+            $liabilitiesTranslationDifferences
+        );
 
         return $calculationPassiveBalanceSheet =[
             "shareCapitalOrIndividual" => $shareCapitalOrIndividual,
@@ -632,32 +648,31 @@ class BalanceSheetScreenController extends AbstractController
             "totalDebts" => $totalDebts,
             "totalGeneralPassiveBalanceSheet" => $totalGeneralPassiveBalanceSheet
             ];
-
-
     }
 
 
     //function use by calculationActiveBalanceSheet
 
 
-    private function totalFixedAsset(   $administrationFees,
-                                        $researchAndDevelopmentCost,
-                                        $concessionPatentsAndSimilar,
-                                        $commercialFund,
-                                        $otherIntangibleAsset,
-                                        $advancesAndDownPaymentOnIntangibleAssets,
-                                        $grounds,
-                                        $constructions,
-                                        $technicalInstallationsEquipment,
-                                        $otherTangibleFixedAssets,
-                                        $advancesAndDownPaymentOnTangibleAssets,
-                                        $investmentsAccountedForEquityMethod,
-                                        $otherParticipations,
-                                        $receivablesRelatedEquityInvestments,
-                                        $otherLockedSecurities,
-                                        $loans,
-                                        $otherFinancialAssets
-                                        ){
+    private function totalFixedAsset(
+        $administrationFees,
+        $researchAndDevelopmentCost,
+        $concessionPatentsAndSimilar,
+        $commercialFund,
+        $otherIntangibleAsset,
+        $advancesAndDownPaymentOnIntangibleAssets,
+        $grounds,
+        $constructions,
+        $technicalInstallationsEquipment,
+        $otherTangibleFixedAssets,
+        $advancesAndDownPaymentOnTangibleAssets,
+        $investmentsAccountedForEquityMethod,
+        $otherParticipations,
+        $receivablesRelatedEquityInvestments,
+        $otherLockedSecurities,
+        $loans,
+        $otherFinancialAssets
+                                        ) {
         return $totalFixedAsset =
                         $administrationFees +
                         $researchAndDevelopmentCost +
@@ -678,20 +693,21 @@ class BalanceSheetScreenController extends AbstractController
                         $otherFinancialAssets;
     }
 
-    private function totalActiveCirculating( $rowMaterialsSupplies,
-                                            $outstandingProducingGoods,
-                                            $outstandingServices,
-                                            $intermediateAndFinishProduct,
-                                            $merchandise,
-                                            $advancesAndPrepaymentOrders,
-                                            $customersAndRelatedAccounts,
-                                            $otherReceivables,
-                                            $subscribedAndCallCapitalUnpaid,
-                                            $marketableSecurities,
-                                            $bank,
-                                            $availability,
-                                            $prepaidExpenses
-                                            ){
+    private function totalActiveCirculating(
+        $rowMaterialsSupplies,
+        $outstandingProducingGoods,
+        $outstandingServices,
+        $intermediateAndFinishProduct,
+        $merchandise,
+        $advancesAndPrepaymentOrders,
+        $customersAndRelatedAccounts,
+        $otherReceivables,
+        $subscribedAndCallCapitalUnpaid,
+        $marketableSecurities,
+        $bank,
+        $availability,
+        $prepaidExpenses
+                                            ) {
         return $totalActiveCirculating = $rowMaterialsSupplies +
                                             $outstandingProducingGoods +
                                             $outstandingServices+
@@ -705,17 +721,17 @@ class BalanceSheetScreenController extends AbstractController
                                             $bank+
                                             $availability+
                                             $prepaidExpenses;
-
     }
 
 
-    private function totalGeneralActiveBalanceSheet($subscribedCapitalNotCall,
-                                                    $totalFixedAsset,
-                                                    $totalActiveCirculating,
-                                                    $expensesSpreadOverSeveralFinancialYears,
-                                                    $bondRepaymentPremiums,
-                                                    $activeConversionDifferences
-                                                    ){
+    private function totalGeneralActiveBalanceSheet(
+        $subscribedCapitalNotCall,
+        $totalFixedAsset,
+        $totalActiveCirculating,
+        $expensesSpreadOverSeveralFinancialYears,
+        $bondRepaymentPremiums,
+        $activeConversionDifferences
+                                                    ) {
         return $totalGeneralActiveBalanceSheet =    $subscribedCapitalNotCall+
                                                     $totalFixedAsset+
                                                     $totalActiveCirculating+
@@ -727,18 +743,20 @@ class BalanceSheetScreenController extends AbstractController
 
     //function use by calculationPassiveBalanceSheet
 
-    private function totalOwnCapital($shareCapitalOrIndividual,
-                                     $premiumIssueMergerContribution,
-                                     $revaluationDifferences,
-                                     $legalReserve,
-                                     $statutoryOrContractualReserves,
-                                     $regulatedReserves,
-                                     $otherReserves,
-                                     $reportAgain,
-                                     $yearProfit,
-                                     $investmentGrant,
-                                     $regulatedProvisions){
-         return $totalOwnCapital =  $shareCapitalOrIndividual+
+    private function totalOwnCapital(
+        $shareCapitalOrIndividual,
+        $premiumIssueMergerContribution,
+        $revaluationDifferences,
+        $legalReserve,
+        $statutoryOrContractualReserves,
+        $regulatedReserves,
+        $otherReserves,
+        $reportAgain,
+        $yearProfit,
+        $investmentGrant,
+        $regulatedProvisions
+    ) {
+        return $totalOwnCapital =  $shareCapitalOrIndividual+
                                     $premiumIssueMergerContribution+
                                     $revaluationDifferences+
                                     $legalReserve+
@@ -751,28 +769,28 @@ class BalanceSheetScreenController extends AbstractController
                                     $regulatedProvisions;
     }
 
-    private function totalOtherOwnCapital($proceedsFromEquitySecuritiesIssues, $conditionedAdvances ){
+    private function totalOtherOwnCapital($proceedsFromEquitySecuritiesIssues, $conditionedAdvances)
+    {
         return $totalOtherOwnCapital = $proceedsFromEquitySecuritiesIssues + $conditionedAdvances;
     }
 
-    private function totalProvisionForRiskAndCharges($riskProvision, $expensesProvision){
+    private function totalProvisionForRiskAndCharges($riskProvision, $expensesProvision)
+    {
         return $totalProvisionForRiskAndCharges = $riskProvision + $expensesProvision;
     }
 
-    private  function totalDebts($convertibleBonds,
-                                 $otherBonds,
-                                 $loanAndDebtsWihCreditInstitutions,
-                                 $borrowingAndOtherFinancialDebts,
-                                 $AdvancesAndDownPaymentReceived,
-                                 $tradePayableAndRelatedAccounts,
-                                 $taxAndSocialDebts,
-                                 $debtsOnFixedAssetsAndRelatedAccount,
-                                 $otherDebts,
-                                 $prepaidIncome ){
-
-
-
-
+    private function totalDebts(
+        $convertibleBonds,
+        $otherBonds,
+        $loanAndDebtsWihCreditInstitutions,
+        $borrowingAndOtherFinancialDebts,
+        $AdvancesAndDownPaymentReceived,
+        $tradePayableAndRelatedAccounts,
+        $taxAndSocialDebts,
+        $debtsOnFixedAssetsAndRelatedAccount,
+        $otherDebts,
+        $prepaidIncome
+    ) {
         return $totalDebts =    $convertibleBonds+
                                 $otherBonds+
                                 $loanAndDebtsWihCreditInstitutions+
@@ -785,19 +803,17 @@ class BalanceSheetScreenController extends AbstractController
                                 $prepaidIncome;
     }
 
-    private function totalGeneralPassiveBalanceSheet($totalOwnCapital,
-                                                     $totalOtherOwnCapital,
-                                                     $totalProvisionForRiskAndCharges,
-                                                     $totalDebts,
-                                                     $liabilitiesTranslationDifferences){
+    private function totalGeneralPassiveBalanceSheet(
+        $totalOwnCapital,
+        $totalOtherOwnCapital,
+        $totalProvisionForRiskAndCharges,
+        $totalDebts,
+        $liabilitiesTranslationDifferences
+    ) {
         return $totalGeneralPassiveBalanceSheet =        $totalOwnCapital+
                                                          $totalOtherOwnCapital+
                                                          $totalProvisionForRiskAndCharges+
                                                          $totalDebts+
                                                          $liabilitiesTranslationDifferences;
     }
-
-
-
-
 }

@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 abstract class SalesMan extends HumanResource
 {
-       /**
+    /**
      * @ORM\Column(type="integer")
      */
     private $commission;

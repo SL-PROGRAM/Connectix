@@ -8,7 +8,6 @@
 
 namespace App\Controller;
 
-
 use App\Entity\Game;
 use App\Entity\Product;
 
@@ -25,7 +24,8 @@ class FonctionWaiting
      * @param $totalPublicity
      * @return float|int
      */
-    public function publicityCoeficient(Product $product, $totalPublicity, Game $game){
+    public function publicityCoeficient(Product $product, $totalPublicity, Game $game)
+    {
         $publicityCoefficient = 100;
 
         $productLife = $this->getCycleLifeProductToUse($game, $product);
@@ -34,15 +34,15 @@ class FonctionWaiting
         $PriceMaxPublicityImpact = $productLife->getPriceMaxPublicityImpact();
         $publicityCoefficientMax = $productLife->getPublicityCoeficient();
 
-        if ($totalPublicity >= $PriceMaxPublicityImpact){
+        if ($totalPublicity >= $PriceMaxPublicityImpact) {
             $totalPublicity = $PriceMaxPublicityImpact;
         }
 
-        if ($totalPublicity <= $PriceMinPublicityImpact){
+        if ($totalPublicity <= $PriceMinPublicityImpact) {
             $publicityCoefficient = 1;
         }
 
-        if ($totalPublicity < $PriceMaxPublicityImpact and $totalPublicity >= $PriceMinPublicityImpact ){
+        if ($totalPublicity < $PriceMaxPublicityImpact and $totalPublicity >= $PriceMinPublicityImpact) {
             $publicityCoefficient = round(100*$totalPublicity*$publicityCoefficientMax/$PriceMaxPublicityImpact);
         }
 
@@ -54,23 +54,22 @@ class FonctionWaiting
      * @param Product $product
      * @return ProductLife|mixed
      */
-    function getCycleLifeProductToUse(Game $game, Product $product){
-
+    public function getCycleLifeProductToUse(Game $game, Product $product)
+    {
         $gameTurn = $game->getTurn();
 
         $productAlreadySales = $product->getProductAlreadySales();
         $productlifes = $product->getProductLifes();
 
-        foreach ($productlifes as $productLife){
+        foreach ($productlifes as $productLife) {
             $productCycleLifeNumberMax =$productLife->getProductCycleLifeNumberMax();
             $cycleDuration = $productLife->getCycleDuration();
 
 
-            if($productCycleLifeNumberMax > $productAlreadySales and $gameTurn <= $cycleDuration){
+            if ($productCycleLifeNumberMax > $productAlreadySales and $gameTurn <= $cycleDuration) {
                 return $productLife;
             }
         }
-
     }
 
 
@@ -84,7 +83,8 @@ class FonctionWaiting
      * @param $deferredFormLoan
      * @return float|int
      */
-    function totalLoanCost($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan ){
+    public function totalLoanCost($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan)
+    {
         return $totalCost = $borrowedAmount*$annualInterestRate*($termOfLoan+$deferredFormLoan);
     }
 
@@ -95,15 +95,16 @@ class FonctionWaiting
      * @param $annualInterestRate
      * @return float|int
      */
-   function loanDuration($borrowedAmount, $monthlyDueDate, $annualInterestRate){
-            $loanDuration = 0;
-        while($borrowedAmount*-$annualInterestRate > (12*$monthlyDueDate) ){
+    public function loanDuration($borrowedAmount, $monthlyDueDate, $annualInterestRate)
+    {
+        $loanDuration = 0;
+        while ($borrowedAmount*-$annualInterestRate > (12*$monthlyDueDate)) {
             $loanDuration += 12;
             $borrowedAmount -= ($borrowedAmount*$annualInterestRate) - (12*$monthlyDueDate);
         }
-            $loanDuration += ceil(($borrowedAmount*$annualInterestRate)/($monthlyDueDate));
-            return $loanDuration;
-   }
+        $loanDuration += ceil(($borrowedAmount*$annualInterestRate)/($monthlyDueDate));
+        return $loanDuration;
+    }
 
 
 
@@ -132,8 +133,9 @@ class FonctionWaiting
      * @param int $deferredFormLoan
      * @return float|int
      */
-    function monthlyInterestRateCost($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan = 0){
-            return ($borrowedAmount*($annualInterestRate/12)*($termOfLoan+$deferredFormLoan)/100);
+    public function monthlyInterestRateCost($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan = 0)
+    {
+        return ($borrowedAmount*($annualInterestRate/12)*($termOfLoan+$deferredFormLoan)/100);
     }
 
 
@@ -145,14 +147,17 @@ class FonctionWaiting
      * @param int $deferredFormLoan
      * @return float|int
      */
-    function monthlyBorrowedAmountRemain($borrowedAmount, $dueDate, $annualInterestRate, $termOfLoan, $deferredFormLoan = 0 ){
+    public function monthlyBorrowedAmountRemain($borrowedAmount, $dueDate, $annualInterestRate, $termOfLoan, $deferredFormLoan = 0)
+    {
         return $monthlyBorrowedAmountRemain = $borrowedAmount -
-            ($dueDate -
+            (
+                $dueDate -
                 $this->monthlyInterestRateCost(
                     $borrowedAmount,
                     $annualInterestRate,
                     $termOfLoan,
-                    $deferredFormLoan)
+                    $deferredFormLoan
+                )
             );
     }
 
@@ -163,7 +168,8 @@ class FonctionWaiting
      * @param $deferredFormLoan
      * @return float|int
      */
-    function monthlyDueDate($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan){
+    public function monthlyDueDate($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan)
+    {
         return $monthlyDueDate =
             (
                 $borrowedAmount +
@@ -182,7 +188,8 @@ class FonctionWaiting
      * @param int $deferredFormLoan
      * @return float|int
      */
-    function AnnuallyInterestRateCost($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan = 0){
+    public function AnnuallyInterestRateCost($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan = 0)
+    {
         return ($borrowedAmount*($annualInterestRate)*($termOfLoan+$deferredFormLoan)/100);
     }
 
@@ -193,7 +200,8 @@ class FonctionWaiting
      * @param $deferredFormLoan
      * @return float|int
      */
-    function annuallyDueDate($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan){
+    public function annuallyDueDate($borrowedAmount, $annualInterestRate, $termOfLoan, $deferredFormLoan)
+    {
         return $monthlyDueDate =
             (
                 $borrowedAmount +
@@ -211,14 +219,17 @@ class FonctionWaiting
      * @param int $deferredFormLoan
      * @return float|int
      */
-    function annualyBorrowedAmountRemain($borrowedAmount, $dueDate, $annualInterestRate, $termOfLoan, $deferredFormLoan = 0 ){
+    public function annualyBorrowedAmountRemain($borrowedAmount, $dueDate, $annualInterestRate, $termOfLoan, $deferredFormLoan = 0)
+    {
         return $monthlyBorrowedAmountRemain = $borrowedAmount -
-            ($dueDate -
+            (
+                $dueDate -
                 $this->annuallyInterestRateCost(
                     $borrowedAmount,
                     $annualInterestRate,
                     $termOfLoan,
-                    $deferredFormLoan)
+                    $deferredFormLoan
+                )
             );
     }
 
@@ -228,7 +239,8 @@ class FonctionWaiting
      * @param int $salesPriceProduct
      * @return float|int
      */
-    function annualSalesProduct (int $quantityProduct,int $salesPriceProduct){
+    public function annualSalesProduct(int $quantityProduct, int $salesPriceProduct)
+    {
         return $annualSalesProduct = $quantityProduct*$salesPriceProduct;
     }
 
@@ -236,14 +248,12 @@ class FonctionWaiting
      * @param array $annualSalesProduct
      * @return int|mixed
      */
-    function annualSales(array $annualSalesProduct){
-            $annualSales = 0;
-        foreach ($annualSalesProduct as $value){
+    public function annualSales(array $annualSalesProduct)
+    {
+        $annualSales = 0;
+        foreach ($annualSalesProduct as $value) {
             $annualSales += $value;
         }
-            return $annualSales;
+        return $annualSales;
     }
-
-
-
 }
