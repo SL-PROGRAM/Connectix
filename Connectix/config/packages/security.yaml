@@ -35,13 +35,35 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        #admin ROLE
+        ROLE_ADMIN:                             [ROLE_USER, PRESIDENT]
+        ROLE_SUPER_ADMIN:                       ROLE_ADMIN
 
-#    access_control:
-#      - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-#      - { path: ^/*, roles: ROLE_USER, requires_channel: https }
-#      - { path: ^/*, roles: ROLE_USER }
+        #lvl 1 player ROLE
+        DIRECTOR_HUMAN_RESSOURCES:              ROLE_USER
+        TECHNIC_DIRECTOR:                       ROLE_USER
+        COMMERCIAL_DIRECTOR:                    ROLE_USER
+        MARKETING_DIRECTOR:                     ROLE_USER
+        FINANCIAL_DIRECTOR:                     ROLE_USER
+        VALIDATION_DIRECTOR:                    ROLE_USER
+
+        #lvl2 player ROLE
+        TECHNIC_COMMERCIAL_DIRECTOR:            [TECHNIC_DIRECTOR, COMMERCIAL_DIRECTOR]
+        FINANCIAL_MARKETING_DIRECTOR:           [MARKETING_DIRECTOR, FINANCIAL_DIRECTOR]
+        VALIDATION_MARKETING_DIRECTOR:          [VALIDATION_DIRECTOR, MARKETING_DIRECTOR]
+        VALIDATION_HUMAN_RESSOURCE_DIRECTOR:    [VALIDATION_DIRECTOR, DIRECTOR_HUMAN_RESSOURCES]
+
+        #lvl 3 Player ROLE
+        GENERAL_FINANCIAL_DIRECTOR:             [VALIDATION_DIRECTOR, FINANCIAL_MARKETING_DIRECTOR]
+        EXCLUSIVE_DIRECTOR:                     [DIRECTOR_HUMAN_RESSOURCES, TECHNIC_COMMERCIAL_DIRECTOR]
+
+        #lvl 4 player ROLE (all player Grant)
+        PRESIDENT:                              [EXCLUSIVE_DIRECTOR, GENERAL_FINANCIAL_DIRECTOR]
+
+
+    access_control:
+      - { path: ^/(login)|(register), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/, roles: ROLE_USER }
 
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
