@@ -65,15 +65,15 @@ class FactoryController extends AbstractController
         ]);
     }
 
-//    /**
-//     * @Route("/{id}", name="factory_show", methods={"GET"})
-//     */
-//    public function show(Factory $factory): Response
-//    {
-//        return $this->render('factory/show.html.twig', [
-//            'factory' => $factory,
-//        ]);
-//    }
+    /**
+     * @Route("/{id}", name="factory_show", methods={"GET"})
+     */
+    public function show(Factory $factory): Response
+    {
+        return $this->render('factory/show.html.twig', [
+            'factory' => $factory,
+        ]);
+    }
 
     /**
      * @Route("/{id}/edit", name="factory_edit", methods={"GET","POST"})

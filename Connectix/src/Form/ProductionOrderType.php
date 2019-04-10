@@ -12,15 +12,7 @@ class ProductionOrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('turn')
-            ->add('status')
-            ->add('quantityProductCreat')
-            ->add('productionActivityCost')
-            ->add('administrationActivityCost')
-            ->add('productionTime')
-            ->add('rowMaterialCost')
-            ->add('product')
-            ->add('socity')
+          ->add('quantityProductCreat')
         ;
     }
 

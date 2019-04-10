@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ProductionOrder;
 use App\Form\ProductionOrderType;
 use App\Repository\ProductionOrderRepository;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,13 +31,34 @@ class ProductionOrderController extends AbstractController
     /**
      * @Route("/new", name="production_order_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ProductRepository $productRepository): Response
     {
         $productionOrder = new ProductionOrder();
         $form = $this->createForm(ProductionOrderType::class, $productionOrder);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $turn = $this->getUser()->getGame()->getTurn();
+            $socity = $this->getUser()->getSocity();
+            $status = 0;
+            $productionActivityCost = $productionOrder->getQuantityProductCreat()*2;
+            $administrationActivityCost = $productionOrder->getQuantityProductCreat()*0.2;
+            $product = $productRepository->findOneBy(['id' => $_GET["id"]]);
+            $productionTime = $productionOrder->getQuantityProductCreat()*$product->getProductiorTimeCost();
+            $rowMaterialCost = $productionOrder->getQuantityProductCreat()*$product->getRowMaterialCost();
+
+            $productionOrder->setProduct($product)
+                ->setTurn($turn)
+                ->setStatus($status)
+                ->setSocity($socity)
+                ->setProductionActivityCost($productionActivityCost)
+                ->setAdministrationActivityCost($administrationActivityCost)
+                ->setProduct($product)
+                ->setProductionTime($productionTime)
+                ->setRowMaterialCost($rowMaterialCost);
+
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($productionOrder);
             $entityManager->flush();

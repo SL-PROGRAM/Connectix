@@ -8,10 +8,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ production_lign.id }}</td>
-            </tr>
-            <tr>
                 <th>TurnCreation</th>
                 <td>{{ production_lign.turnCreation }}</td>
             </tr>
@@ -28,10 +24,6 @@
                 <td>{{ production_lign.administrationCost }}</td>
             </tr>
             <tr>
-                <th>AmortizationTurn</th>
-                <td>{{ production_lign.amortizationTurn }}</td>
-            </tr>
-            <tr>
                 <th>AnnualProductTime</th>
                 <td>{{ production_lign.annualProductTime }}</td>
             </tr>
@@ -42,9 +34,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('production_lign_index') }}">back to list</a>
-
-    <a href="{{ path('production_lign_edit', {'id': production_lign.id}) }}">edit</a>
+    <a href="{{ path('player_production') }}">back to list</a>
 
     {{ include('production_lign/_delete_form.html.twig') }}
 {% endblock %}

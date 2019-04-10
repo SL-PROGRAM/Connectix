@@ -26,26 +26,37 @@ class WorkManController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="work_man_new", methods={"GET","POST"})
+     * @Route("/new", name="work_man_new", methods={"NEW"})
      */
     public function new(Request $request): Response
     {
         $workMan = new WorkMan();
-        $form = $this->createForm(WorkManType::class, $workMan);
-        $form->handleRequest($request);
+        $coeficientSalary = 1;
+        $formation = 75;
+        $experience = 0;
+        $productivity = $formation+$experience;
+        $salary = $this->getUser()->getGame()->getSmic() * $coeficientSalary;
+        $socity = $this->getUser()->getSocity();
+        $productionActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100;
+        $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork()/50;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($workMan);
-            $entityManager->flush();
+        $workMan
+            ->setProductionActivity($productionActivity)
+            ->setAdministrationActivityCost($administrationActivityCost)
+            ->setSocity($socity)
+            ->setCoeficientSalary($coeficientSalary)
+            ->setExprience($experience)
+            ->setFormation($formation)
+            ->setProductivity($productivity)
+            ->setSalary($salary)
+        ;
 
-            return $this->redirectToRoute('work_man_index');
-        }
 
-        return $this->render('work_man/new.html.twig', [
-            'work_man' => $workMan,
-            'form' => $form->createView(),
-        ]);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($workMan);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('player_human_ressourcies');
     }
 
     /**

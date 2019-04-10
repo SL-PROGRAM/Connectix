@@ -26,9 +26,82 @@ class AdministrationController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="administration_new", methods={"GET","POST"})
+     * @Route("/", name="administration_new", methods={"NEW"})
      */
     public function new(Request $request): Response
+    {
+        $administration = new Administration();
+        $coeficientSalary = 1.2;
+        $formation = 75;
+        $experience = 0;
+        $productivity = $formation+$experience;
+        $smic = $this->getUser()->getGame()->getSmic();
+        dump($smic);
+        $salary = $coeficientSalary*$smic;
+        $socity = $this->getUser()->getSocity();
+        $administationActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100;
+        $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork()/50;
+        dump($salary);
+
+        $administration
+            ->setAdministationActivity($administationActivity)
+            ->setAdministrationActivityCost($administrationActivityCost)
+            ->setSocity($socity)
+            ->setCoeficientSalary($coeficientSalary)
+            ->setExprience($experience)
+            ->setFormation($formation)
+            ->setProductivity($productivity)
+            ->setSalary($salary)
+            ;
+
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($administration);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('player_human_ressourcies');
+    }
+
+    /**
+     * @Route("/", name="administration_cadre_new", methods={"NEW_C"})
+     */
+    public function newCadre(Request $request): Response
+    {
+        $administration = new Administration();
+        $coeficientSalary = 3;
+        $formation = 75;
+        $experience = 0;
+        $productivity = $formation+$experience;
+        $smic = $this->getUser()->getGame()->getSmic();
+        $salary = $coeficientSalary*$smic;
+        dump($salary);
+        $socity = $this->getUser()->getSocity();
+        $administationActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100;
+        $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork()/50;
+
+        $administration
+            ->setAdministationActivity($administationActivity)
+            ->setAdministrationActivityCost($administrationActivityCost)
+            ->setSocity($socity)
+            ->setCoeficientSalary($coeficientSalary)
+            ->setExprience($experience)
+            ->setFormation($formation)
+            ->setProductivity($productivity)
+            ->setSalary($salary)
+        ;
+
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($administration);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('player_human_ressourcies');
+    }
+
+    /**
+     * @Route("/newdirector", name="administration_director_new", methods={"GET","POST"})
+     */
+    public function newDirector(Request $request): Response
     {
         $administration = new Administration();
         $form = $this->createForm(AdministrationType::class, $administration);
@@ -39,7 +112,7 @@ class AdministrationController extends AbstractController
             $entityManager->persist($administration);
             $entityManager->flush();
 
-            return $this->redirectToRoute('administration_index');
+            return $this->redirectToRoute('player_human_ressourcies');
         }
 
         return $this->render('administration/new.html.twig', [
@@ -69,7 +142,7 @@ class AdministrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('administration_index', [
+            return $this->redirectToRoute('player_human_ressourcies', [
                 'id' => $administration->getId(),
             ]);
         }
@@ -91,6 +164,6 @@ class AdministrationController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('administration_index');
+        return $this->redirectToRoute('player_human_ressourcies');
     }
 }

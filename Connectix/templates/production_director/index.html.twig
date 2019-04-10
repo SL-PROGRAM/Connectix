@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block title %}ProductionDirector index{% endblock %}
+{#{% block title %}ProductionDirector index{% endblock %}#}
 
 {% block body %}
     <h1>ProductionDirector index</h1>
@@ -8,34 +8,22 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Salary</th>
                 <th>Formation</th>
                 <th>Exprience</th>
-                <th>Productivity</th>
-                <th>AdministrationActivityCost</th>
-                <th>CoeficientSalary</th>
                 <th>ProductionActivity</th>
                 <th>AdministrationActivity</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for production_director in production_directors %}
             <tr>
-                <td>{{ production_director.id }}</td>
                 <td>{{ production_director.salary }}</td>
                 <td>{{ production_director.formation }}</td>
                 <td>{{ production_director.exprience }}</td>
-                <td>{{ production_director.productivity }}</td>
-                <td>{{ production_director.administrationActivityCost }}</td>
-                <td>{{ production_director.coeficientSalary }}</td>
                 <td>{{ production_director.productionActivity }}</td>
                 <td>{{ production_director.administrationActivity }}</td>
-                <td>
-                    <a href="{{ path('production_director_show', {'id': production_director.id}) }}">show</a>
-                    <a href="{{ path('production_director_edit', {'id': production_director.id}) }}">edit</a>
-                </td>
+
             </tr>
         {% else %}
             <tr>
@@ -45,5 +33,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('production_director_new') }}">Create new</a>
 {% endblock %}

@@ -8,10 +8,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ purchase_order.id }}</td>
-            </tr>
-            <tr>
                 <th>Turn</th>
                 <td>{{ purchase_order.turn }}</td>
             </tr>
@@ -34,9 +30,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('purchase_order_index') }}">back to list</a>
+    <a href="{{ path('player_sales') }}">back to list</a>
 
-    <a href="{{ path('purchase_order_edit', {'id': purchase_order.id}) }}">edit</a>
-
-    {{ include('purchase_order/_delete_form.html.twig') }}
 {% endblock %}

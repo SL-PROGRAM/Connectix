@@ -26,26 +26,39 @@ class TechnicianController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="technician_new", methods={"GET","POST"})
+     * @Route("/new", name="technician_new", methods={"NEW"})
      */
     public function new(Request $request): Response
     {
         $technician = new Technician();
-        $form = $this->createForm(TechnicianType::class, $technician);
-        $form->handleRequest($request);
+        $coeficientSalary = 1.8;
+        $formation = 75;
+        $experience = 0;
+        $productivity = $formation+$experience;
+        $salary = $this->getUser()->getGame()->getSmic() * $coeficientSalary;
+        $socity = $this->getUser()->getSocity();
+        $productionActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100*0.9;
+        $administrationActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100*0.1;
+        $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork()/50;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($technician);
-            $entityManager->flush();
+        $technician
+            ->setAdministrationActivity($administrationActivity)
+            ->setProductionActivity($productionActivity)
+            ->setAdministrationActivityCost($administrationActivityCost)
+            ->setSocity($socity)
+            ->setCoeficientSalary($coeficientSalary)
+            ->setExprience($experience)
+            ->setFormation($formation)
+            ->setProductivity($productivity)
+            ->setSalary($salary)
+        ;
 
-            return $this->redirectToRoute('technician_index');
-        }
 
-        return $this->render('technician/new.html.twig', [
-            'technician' => $technician,
-            'form' => $form->createView(),
-        ]);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($technician);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('player_human_ressourcies');
     }
 
     /**

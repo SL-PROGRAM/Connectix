@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ReseachOrder;
 use App\Form\ReseachOrderType;
+use App\Repository\ProductRepository;
 use App\Repository\ReseachOrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +31,7 @@ class ReseachOrderController extends AbstractController
     /**
      * @Route("/new", name="reseach_order_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ProductRepository $productRepository): Response
     {
         $reseachOrder = new ReseachOrder();
         $form = $this->createForm(ReseachOrderType::class, $reseachOrder);
@@ -38,12 +39,26 @@ class ReseachOrderController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $turn = $this->getUser()->getGame()->getTurn();
-            $reseachOrder->setTurn($turn);
+            $socity = $this->getUser()->getSocity();
+            $product = $productRepository->findOneBy(["id" => $_GET["id"]]);
+            $researchActivityCost = $reseachOrder->getReseachDo();
+            $administrationActivityCost = $reseachOrder->getReseachDo()*0.5;
+
+
+
+            $reseachOrder->setTurn($turn)
+                        ->setSocity($socity)
+                        ->setProduct($product)
+                        ->setResearchActivityCost($researchActivityCost)
+                        ->setAdministrationActivityCost($administrationActivityCost);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($reseachOrder);
             $entityManager->flush();
 
-            return $this->redirectToRoute('reseach_order_index');
+
+
+            return $this->redirectToRoute('player_production');
         }
 
         return $this->render('reseach_order/new.html.twig', [
@@ -73,7 +88,7 @@ class ReseachOrderController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('reseach_order_index', [
+            return $this->redirectToRoute('player_production', [
                 'id' => $reseachOrder->getId(),
             ]);
         }
@@ -95,6 +110,6 @@ class ReseachOrderController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('reseach_order_index');
+        return $this->redirectToRoute('player_production');
     }
 }

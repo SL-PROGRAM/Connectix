@@ -8,10 +8,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ loan.id }}</td>
-            </tr>
-            <tr>
                 <th>BorrowAmount</th>
                 <td>{{ loan.borrowAmount }}</td>
             </tr>
@@ -27,16 +23,8 @@
                 <th>LoanDuration</th>
                 <td>{{ loan.loanDuration }}</td>
             </tr>
-            <tr>
-                <th>DelayLoanRepayment</th>
-                <td>{{ loan.DelayLoanRepayment }}</td>
-            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('loan_index') }}">back to list</a>
-
-    <a href="{{ path('loan_edit', {'id': loan.id}) }}">edit</a>
-
-    {{ include('loan/_delete_form.html.twig') }}
+    <a href="{{ path('player_financial') }}">back to list</a>
 {% endblock %}

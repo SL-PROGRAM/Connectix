@@ -13,11 +13,7 @@ class ReseachOrderType extends AbstractType
     {
         $builder
             ->add('reseachDo')
-            ->add('researchActivityCost')
-            ->add('administrationActivityCost')
-            ->add('socity')
-            ->add('product')
-        ;
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

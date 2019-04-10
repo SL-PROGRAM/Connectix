@@ -22,12 +22,12 @@ class Loan
     private $borrowAmount;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $bankInterest;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $monthlyDueDate;
 

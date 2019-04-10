@@ -8,14 +8,12 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class LoanByDurationType extends AbstractType
+class LoanFactoryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('borrowAmount', NumberType::class)
-            ->add('loanDuration', NumberType::class)
-            ->add('delayLoanRepayment', NumberType::class)
         ;
     }
 

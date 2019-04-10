@@ -1,41 +1,31 @@
-{#{% extends 'base.html.twig' %}#}
-
-{#{% block title %}Loan index{% endblock %}#}
-
 {% block body %}
     {% dump %}
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>BorrowAmount</th>
                 <th>BankInterest</th>
                 <th>MonthlyDueDate</th>
                 <th>LoanDuration</th>
-                <th>DelayLoanRepayment</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for loan in loans %}
             <tr>
-                <td>{{ loan.id }}</td>
                 <td>{{ loan.borrowAmount }}</td>
                 <td>{{ loan.bankInterest }}</td>
                 <td>{{ loan.monthlyDueDate }}</td>
                 <td>{{ loan.loanDuration }}</td>
-                <td>{{ loan.DelayLoanRepayment }}</td>
                 <td>
-                    {#<a href="{{ path('loan_show', {'id': loan.id}) }}">show</a>#}
                     {% if loan.turn == turn %}
-                        <div>
-                            <a href="{{ path('loan_edit_duration', {'id': loan.id}) }}">edit by duration</a>
-                        </div>
-                        <div>
-                            <a href="{{ path('loan_edit_duedate', {'id': loan.id}) }}">edit by dueDate</a>
-                        </div>
-
+                            <div>
+                                <a href="{{ path('loan_edit', {'id': loan.id}) }}">edit</a>
+                            </div>
                     {% endif %}
+                    <div>
+                        <a href="{{ path('loan_show', {'id': loan.id}) }}">show</a>
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -45,7 +35,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    {#<a href="{{ path('loan_new_duration') }}">Create new loan by duration</a>#}
-    {#<a href="{{ path('loan_new_duedate') }}">Create new loan by due date</a>#}
 {% endblock %}

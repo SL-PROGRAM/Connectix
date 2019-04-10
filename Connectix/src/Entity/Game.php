@@ -361,12 +361,12 @@ class Game
     /**
      * @ORM\Column(type="integer")
      */
-    private $productionLignAnnualProductTime;
+    private $productionLignAnnualProductTime = 15000;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productionLignTotalLifeProductTime;
+    private $productionLignTotalLifeProductTime = 180000;
 
     /**
      * Game constructor.

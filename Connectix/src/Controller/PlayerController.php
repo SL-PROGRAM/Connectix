@@ -122,6 +122,7 @@ class PlayerController extends AbstractController
             $turn
         );
 
+
         $researchOrderPrint = $this->researchOrderPrint($productRepository, $reseachOrderRepository, $socity, $turn);
         $globalProductionPrint = $this->globalProductionPrint($productionOrderPrint, $productionLignRepository, $socity);
 
@@ -181,6 +182,7 @@ class PlayerController extends AbstractController
             'turn' => $turn,
         ]);
     }
+
 
     /**
      * @Route("/information", name="player_information")
@@ -471,6 +473,7 @@ class PlayerController extends AbstractController
         return $userProductionLigns = $productionLignRepository->findBy(["socity" => $socity]);
     }
 
+
     private function productionOrderPrint(
         ProductionOrderRepository $productionOrderRepository,
         ReseachOrderRepository $reseachOrderRepository,
@@ -567,7 +570,7 @@ class PlayerController extends AbstractController
         foreach ($userProductionLigns as $productionLign) {
             $totalProductionTimeCapacity += $productionLign->getAnnualProductTime();
         }
-        if ($totalTime === 0) {
+        if ($totalTime === 0 || $totalProductionTimeCapacity === 0) {
             $totalActivity = "No activity";
         } else {
             $totalActivity = round(($totalProductionTimeCapacity -($totalProductionTimeCapacity - $totalTime))*100/$totalProductionTimeCapacity, 2);

@@ -7,11 +7,7 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ production_order.id }}</td>
-            </tr>
-            <tr>
+           <tr>
                 <th>Turn</th>
                 <td>{{ production_order.turn }}</td>
             </tr>
@@ -42,7 +38,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('production_order_index') }}">back to list</a>
+    <a href="{{ path('player_production') }}">back to list</a>
 
     <a href="{{ path('production_order_edit', {'id': production_order.id}) }}">edit</a>
 

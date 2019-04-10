@@ -26,26 +26,39 @@ class ProductionDirectorController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="production_director_new", methods={"GET","POST"})
+     * @Route("/new", name="production_director_new", methods={"NEW"})
      */
     public function new(Request $request): Response
     {
         $productionDirector = new ProductionDirector();
-        $form = $this->createForm(ProductionDirectorType::class, $productionDirector);
-        $form->handleRequest($request);
+        $coeficientSalary = 4.5;
+        $formation = 75;
+        $experience = 0;
+        $productivity = $formation+$experience;
+        $salary = $this->getUser()->getGame()->getSmic() * $coeficientSalary;
+        $socity = $this->getUser()->getSocity();
+        $productionActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100*0.7;
+        $administrationActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100*0.3;
+        $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork()/50;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($productionDirector);
-            $entityManager->flush();
+        $productionDirector
+            ->setAdministrationActivity($administrationActivity)
+            ->setProductionActivity($productionActivity)
+            ->setAdministrationActivityCost($administrationActivityCost)
+            ->setSocity($socity)
+            ->setCoeficientSalary($coeficientSalary)
+            ->setExprience($experience)
+            ->setFormation($formation)
+            ->setProductivity($productivity)
+            ->setSalary($salary)
+        ;
 
-            return $this->redirectToRoute('production_director_index');
-        }
 
-        return $this->render('production_director/new.html.twig', [
-            'production_director' => $productionDirector,
-            'form' => $form->createView(),
-        ]);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($productionDirector);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('player_human_ressourcies');
     }
 
     /**

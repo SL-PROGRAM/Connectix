@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Loan;
-use App\Form\LoanByDueDateType;
-use App\Form\LoanByDurationType;
+use App\Form\LoanFactoryType;
+use App\Form\LoanProductionLignType;
 use App\Form\LoanType;
 use App\Repository\LoanRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,28 +32,30 @@ class LoanController extends AbstractController
     }
 
     /**
-     * @Route("/newduedate", name="loan_new_duedate", methods={"GET","POST"})
+     * @Route("/factory", name="loan_factory", methods={"GET","POST"})
      */
-    public function newLoanByDueDate(Request $request): Response
+    public function newLoanFactory(Request $request): Response
     {
         $loan = new Loan();
-        $form = $this->createForm(LoanByDueDateType::class, $loan);
+        $form = $this->createForm(LoanFactoryType::class, $loan);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //TODO add calculation of loanDuration
-            $loanDuration = 0;
-            //TODO add get to bankInterest
-            $bankInterest = 0;
+            $loanDuration = $this->getUser()->getGame()->getFactoryAmortizationTurn();
+            $DelayLoanRepayment = 0;
+            $bankInterest = $this->getUser()->getGame()->getSocityStartLoanInterestRate();
             $turn = $this->getUser()->getGame()->getTurn();
-
             $socity = $this->getUser()->getSocity();
+            $dueDate = $loan->getBorrowAmount()/$loanDuration;
+
 
 
             $loan   ->setSocity($socity)
                 ->setBankInterest($bankInterest)
                 ->setLoanDuration($loanDuration)
-                ->setTurn($turn);
+                ->setTurn($turn)
+                ->setDelayLoanRepayment($DelayLoanRepayment)
+                ->setMonthlyDueDate($dueDate/12);
 
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -71,26 +73,30 @@ class LoanController extends AbstractController
 
 
     /**
-     * @Route("/newduration", name="loan_new_duration", methods={"GET","POST"})
+     * @Route("/productionlign", name="loan_production_lign", methods={"GET","POST"})
      */
-    public function newLoanByDuration(Request $request): Response
+    public function newLoanProductionLign(Request $request): Response
     {
         $loan = new Loan();
-        $form = $this->createForm(LoanByDurationType::class, $loan);
+        $form = $this->createForm(LoanProductionLignType::class, $loan);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //TODO add calculation of loanDueDate
-            $loanDueDate = 0;
-            //TODO add get to bankInterest
-            $bankInterest = 0;
-
+            $loanDuration = $this->getUser()->getGame()->getProductionLignAmortizationTurn();
+            $DelayLoanRepayment = 0;
+            $bankInterest = $this->getUser()->getGame()->getSocityStartLoanInterestRate();
+            $turn = $this->getUser()->getGame()->getTurn();
             $socity = $this->getUser()->getSocity();
+            $dueDate = $loan->getBorrowAmount()/$loanDuration;
+
 
 
             $loan   ->setSocity($socity)
                 ->setBankInterest($bankInterest)
-                ->setMonthlyDueDate($loanDueDate);
+                ->setLoanDuration($loanDuration)
+                ->setTurn($turn)
+                ->setDelayLoanRepayment($DelayLoanRepayment)
+                ->setMonthlyDueDate($dueDate/12);
 
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -106,25 +112,30 @@ class LoanController extends AbstractController
         ]);
     }
 
-//    /**
-//     * @Route("/{id}", name="loan_show", methods={"GET"})
-//     */
-//    public function show(Loan $loan): Response
-//    {
-//        return $this->render('loan/show.html.twig', [
-//            'loan' => $loan,
-//        ]);
-//    }
+    /**
+     * @Route("/{id}", name="loan_show", methods={"GET"})
+     */
+    public function show(Loan $loan): Response
+    {
+        return $this->render('loan/show.html.twig', [
+            'loan' => $loan,
+        ]);
+    }
 
     /**
-     * @Route("/{id}/editduedate", name="loan_edit_duedate", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="loan_edit", methods={"GET","POST"})
      */
-    public function editDueDate(Request $request, Loan $loan): Response
+    public function editLoanFactory(Request $request, Loan $loan): Response
     {
-        $form = $this->createForm(LoanByDueDateType::class, $loan);
+        $form = $this->createForm(LoanFactoryType::class, $loan);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $loanDuration = $loan->getLoanDuration();
+            $dueDate = $loan->getBorrowAmount()/$loanDuration;
+
+            $loan->setMonthlyDueDate($dueDate/12);
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('player_financial', [
@@ -138,27 +149,6 @@ class LoanController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/editduration", name="loan_edit_duration", methods={"GET","POST"})
-     */
-    public function editDuration(Request $request, Loan $loan): Response
-    {
-        $form = $this->createForm(LoanByDurationType::class, $loan);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('player_financial', [
-                'id' => $loan->getId(),
-            ]);
-        }
-
-        return $this->render('loan/edit.html.twig', [
-            'loan' => $loan,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="loan_delete", methods={"DELETE"})
@@ -171,6 +161,6 @@ class LoanController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('loan_index');
+        return $this->redirectToRoute('player_financial');
     }
 }

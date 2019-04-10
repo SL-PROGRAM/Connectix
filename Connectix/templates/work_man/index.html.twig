@@ -1,39 +1,22 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}WorkMan index{% endblock %}
-
 {% block body %}
     <h1>WorkMan index</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Salary</th>
                 <th>Formation</th>
                 <th>Exprience</th>
-                <th>Productivity</th>
-                <th>AdministrationActivityCost</th>
-                <th>CoeficientSalary</th>
                 <th>ProductionActivity</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for work_man in work_men %}
             <tr>
-                <td>{{ work_man.id }}</td>
                 <td>{{ work_man.salary }}</td>
                 <td>{{ work_man.formation }}</td>
                 <td>{{ work_man.exprience }}</td>
-                <td>{{ work_man.productivity }}</td>
-                <td>{{ work_man.administrationActivityCost }}</td>
-                <td>{{ work_man.coeficientSalary }}</td>
                 <td>{{ work_man.productionActivity }}</td>
-                <td>
-                    <a href="{{ path('work_man_show', {'id': work_man.id}) }}">show</a>
-                    <a href="{{ path('work_man_edit', {'id': work_man.id}) }}">edit</a>
-                </td>
             </tr>
         {% else %}
             <tr>
@@ -43,5 +26,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('work_man_new') }}">Create new</a>
 {% endblock %}

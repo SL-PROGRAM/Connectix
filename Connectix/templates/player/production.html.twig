@@ -14,9 +14,9 @@
                 <th>Date de création</th>
                 <th>Unité de production</th>
                 <th>Vendre</th>
-{#                {% if is_granted('CAN_PRODUCTION') %}#}
+                {% if is_granted('CAN_PRODUCTION') %}
                     <th> <a href="{{ path('factory_new') }}">achété une usine</a></th>
-{#                {% endif %}#}
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -27,11 +27,17 @@
                     <td></td>
 {#                    {% if is_granted('CAN_PRODUCTION') %}#}
                         <td>
-                                <a href="{{ path('factory_delete', {'id': factory.id}) }}">Delete</a>
+                            <a href="{{ path('factory_delete', {'id': factory.id}) }}">Delete</a>
                         </td>
-                        <td>
-                            <a href="{{ path('production_lign_new', {'id': factory.id}) }}">acheter une ligne de production</a>
-                        </td>
+                        {% if factory.ProductionLign | length >= 10 %}
+                            <td>
+                                Usine complète
+                            </td>
+                        {% else %}
+                            <td>
+                                <a href="{{ path('production_lign_new', {'id': factory.id}) }}">acheter une ligne de production</a>
+                            </td>
+                        {% endif %}
 {#                    {% endif %}#}
 
 
@@ -110,7 +116,7 @@
                     Recherche Terminée
                     {%  else %}
                         {%  if product.researchOrder == 0 %}
-                        <a href="{{ path('reseach_order_new') }}">Commander</a>
+                        <a href="{{ path('reseach_order_new', {'id': product.id}) }}">Commander</a>
                         {% else %}
                         <a href="{{ path('reseach_order_edit', {'id': product.researchOrderId}) }}">Modifier la commande</a>
                         {% endif %}
@@ -156,7 +162,7 @@
 {#                {% if is_granted('CAN_PRODUCTION') %}#}
 
                     {%  if product.quantity == 0 %}
-                        <a href="{{ path('production_order_new') }}">Commander</a>
+                        <a href="{{ path('production_order_new', {'id': product.id}) }}">Commander</a>
                     {% else %}
                         <a href="{{ path('production_order_edit', {'id': product.researchOrderId}) }}">Modifier la commande</a>
                     {% endif %}

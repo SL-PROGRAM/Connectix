@@ -23,14 +23,15 @@
                     <td>{{ product.purchasePrice }}</td>
                     <td>{{ product.quantity }}</td>
                     <td>{{ product.quantityDiscount }}</td>
-                    <td>
-                        {%  if product.quantity == 0 %}
-                            <a href="{{ path('purchase_order_new', {'id': product.id}) }}">Commander</a>
-                        {% else %}
-                            <a href="{{ path('purchase_order_edit', {'id': product.PurchaseOrderId}) }}">Modifier la commande</a>
-                        {% endif %}
-
-                    </td>
+                    {% if is_granted('CAN_COMMERCIAL') %}
+                        <td>
+                            {%  if product.quantity == 0 %}
+                                <a href="{{ path('purchase_order_new', {'id': product.id}) }}">Commander</a>
+                            {% else %}
+                                <a href="{{ path('purchase_order_edit', {'id': product.PurchaseOrderId}) }}">Modifier la commande</a>
+                            {% endif %}
+                        </td>
+                    {% endif %}
 
                 </tr>
             {% else %}
