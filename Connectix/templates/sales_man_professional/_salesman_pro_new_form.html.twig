@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('administration_a_new') }}" onsubmit="return confirm('Are you sure you want to recrute an administrative?');">
+    <input type="hidden" name="_method" value="NEW">
+{#    <input type="hidden" name="_token" value="{{ csrf_token('new' ~ administration.id) }}">#}
+    <button class="btn">New</button>
+</form>

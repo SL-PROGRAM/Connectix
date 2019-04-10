@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{%  dump %}
+
+{% block title %}Hello PlayerController!{% endblock %}
+
+{% block body %}
+    <a href="{{ path('cash_flow') }}">Trésorie</a>
+    <a href="{{ path('balance_sheet') }}">Bilan</a>
+    <a href="{{ path('profit_loss_account') }}">profit_loss_account</a>
+
+{% endblock %}

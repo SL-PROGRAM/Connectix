@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HumanRessourceScreenController!{% endblock %}
+{% block body %}
+    <div>
+        {{  render(controller('App\\Controller\\SalesManParticularController::index')) }}
+    </div>
+    <div>
+        {{  render(controller('App\\Controller\\SalesManProfessionalController::index')) }}
+    </div>
+    <div>
+        {{  render(controller('App\\Controller\\SalesManDirectorController::index')) }}
+    </div>
+
+    <a href="{{ path('player_human_ressourcies') }}">Back to list</a>
+
+
+{% endblock %}
