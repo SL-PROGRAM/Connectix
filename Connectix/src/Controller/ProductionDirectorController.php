@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\ProductionDirector;
 use App\Form\ProductionDirectorType;
 use App\Repository\ProductionDirectorRepository;
+use App\Service\Dismiss;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -61,49 +63,4 @@ class ProductionDirectorController extends AbstractController
         return $this->redirectToRoute('player_human_ressourcies');
     }
 
-    /**
-     * @Route("/{id}", name="production_director_show", methods={"GET"})
-     */
-    public function show(ProductionDirector $productionDirector): Response
-    {
-        return $this->render('production_director/show.html.twig', [
-            'production_director' => $productionDirector,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="production_director_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, ProductionDirector $productionDirector): Response
-    {
-        $form = $this->createForm(ProductionDirectorType::class, $productionDirector);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('production_director_index', [
-                'id' => $productionDirector->getId(),
-            ]);
-        }
-
-        return $this->render('production_director/edit.html.twig', [
-            'production_director' => $productionDirector,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="production_director_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, ProductionDirector $productionDirector): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$productionDirector->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($productionDirector);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('production_director_index');
-    }
 }

@@ -17,15 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  */
 class FactoryController extends AbstractController
 {
-//    /**
-//     * @Route("/", name="factory_index", methods={"GET"})
-//     */
-//    public function index(FactoryRepository $factoryRepository): Response
-//    {
-//        return $this->render('factory/index.html.twig', [
-//            'factories' => $factoryRepository->findAll(),
-//        ]);
-//    }
 
     /**
      * @Route("/new", name="factory_new", methods={"GET","POST"})

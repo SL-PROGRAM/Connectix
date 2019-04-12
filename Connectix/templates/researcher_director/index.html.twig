@@ -1,42 +1,25 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}ResearcherDirector index{% endblock %}
-
 {% block body %}
     <h1>ResearcherDirector index</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Salary</th>
                 <th>Formation</th>
                 <th>Exprience</th>
-                <th>Productivity</th>
-                <th>AdministrationActivityCost</th>
-                <th>CoeficientSalary</th>
                 <th>ResearchActivity</th>
                 <th>AdministrationActivity</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for researcher_director in researcher_directors %}
             <tr>
-                <td>{{ researcher_director.id }}</td>
                 <td>{{ researcher_director.salary }}</td>
                 <td>{{ researcher_director.formation }}</td>
                 <td>{{ researcher_director.exprience }}</td>
-                <td>{{ researcher_director.productivity }}</td>
-                <td>{{ researcher_director.administrationActivityCost }}</td>
-                <td>{{ researcher_director.coeficientSalary }}</td>
                 <td>{{ researcher_director.researchActivity }}</td>
                 <td>{{ researcher_director.administrationActivity }}</td>
-                <td>
-                    <a href="{{ path('researcher_director_show', {'id': researcher_director.id}) }}">show</a>
-                    <a href="{{ path('researcher_director_edit', {'id': researcher_director.id}) }}">edit</a>
-                </td>
-            </tr>
+
         {% else %}
             <tr>
                 <td colspan="10">no records found</td>
@@ -45,5 +28,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('researcher_director_new') }}">Create new</a>
 {% endblock %}

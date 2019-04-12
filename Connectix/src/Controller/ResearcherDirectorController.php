@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\ResearcherDirector;
 use App\Form\ResearcherDirectorType;
 use App\Repository\ResearcherDirectorRepository;
+use App\Service\Dismiss;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,66 +33,34 @@ class ResearcherDirectorController extends AbstractController
     public function new(Request $request): Response
     {
         $researcherDirector = new ResearcherDirector();
-        $form = $this->createForm(ResearcherDirectorType::class, $researcherDirector);
-        $form->handleRequest($request);
+        $coeficientSalary = 5.5;
+        $formation = 90;
+        $experience = 0;
+        $productivity = $formation+$experience;
+        $smic = $this->getUser()->getGame()->getSmic();
+        $salary = $coeficientSalary*$smic;
+        $socity = $this->getUser()->getSocity();
+        $researchActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100*0.8;
+        $administrationActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100*0.2;
+        $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork()/50;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($researcherDirector);
-            $entityManager->flush();
+        $researcherDirector
+            ->setAdministrationActivity($administrationActivity)
+            ->setResearchActivity($researchActivity)
+            ->setAdministrationActivityCost($administrationActivityCost)
+            ->setSocity($socity)
+            ->setCoeficientSalary($coeficientSalary)
+            ->setExprience($experience)
+            ->setFormation($formation)
+            ->setProductivity($productivity)
+            ->setSalary($salary)
+        ;
 
-            return $this->redirectToRoute('researcher_director_index');
-        }
 
-        return $this->render('researcher_director/new.html.twig', [
-            'researcher_director' => $researcherDirector,
-            'form' => $form->createView(),
-        ]);
-    }
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($researcherDirector);
+        $entityManager->flush();
 
-    /**
-     * @Route("/{id}", name="researcher_director_show", methods={"GET"})
-     */
-    public function show(ResearcherDirector $researcherDirector): Response
-    {
-        return $this->render('researcher_director/show.html.twig', [
-            'researcher_director' => $researcherDirector,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="researcher_director_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, ResearcherDirector $researcherDirector): Response
-    {
-        $form = $this->createForm(ResearcherDirectorType::class, $researcherDirector);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('researcher_director_index', [
-                'id' => $researcherDirector->getId(),
-            ]);
-        }
-
-        return $this->render('researcher_director/edit.html.twig', [
-            'researcher_director' => $researcherDirector,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="researcher_director_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, ResearcherDirector $researcherDirector): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$researcherDirector->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($researcherDirector);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('researcher_director_index');
+        return $this->redirectToRoute('player_human_ressourcies');
     }
 }

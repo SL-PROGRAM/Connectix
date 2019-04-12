@@ -5,7 +5,10 @@ namespace App\Controller;
 use App\Entity\SalesManDirector;
 use App\Form\SalesManDirectorType;
 use App\Repository\SalesManDirectorRepository;
+use App\Repository\SalesManRepository;
+use App\Service\Dismiss;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,71 +29,76 @@ class SalesManDirectorController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="sales_man_director_new", methods={"GET","POST"})
+     * @Route("/new", name="sales_man_director_new", methods={"NEW"})
      */
     public function new(Request $request): Response
     {
         $salesManDirector = new SalesManDirector();
-        $form = $this->createForm(SalesManDirectorType::class, $salesManDirector);
+        $coeficientSalary = 1.5;
+        $formation = 80;
+        $experience = 0;
+        $commission = 3;
+        $productivity = $formation+$experience;
+        $smic = $this->getUser()->getGame()->getSmic();
+        $salary = $coeficientSalary*$smic;
+        $socity = $this->getUser()->getSocity();
+        $salesActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100*0.7;
+        $administrationActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100*0.3;
+        $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork()/50;
+
+        $salesManDirector
+            ->setAdministrationActivity($administrationActivity)
+            ->setSalesActivity($salesActivity)
+            ->setCommission($commission)
+            ->setAdministrationActivityCost($administrationActivityCost)
+            ->setSocity($socity)
+            ->setCoeficientSalary($coeficientSalary)
+            ->setExprience($experience)
+            ->setFormation($formation)
+            ->setProductivity($productivity)
+            ->setSalary($salary)
+        ;
+
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($salesManDirector);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('player_human_ressourcies');
+    }
+
+    /**
+     * @Route("/dismiss", name="salesman_dismiss", methods={"GET","POST"})
+     */
+    public function dismissSalary(Request $request, SalesManRepository $repository, Dismiss $dismiss): Response
+    {
+        $defaultData = ['message' => 'Type your message here'];
+        $form = $this->createFormBuilder($defaultData)
+            ->add('number', NumberType::class)
+            ->getForm();
+
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($salesManDirector);
-            $entityManager->flush();
+        if ($form->isSubmitted() && $form->isValid())  {
+            $dataform = $form->getData();
+            $limit = $dataform["number"];
 
-            return $this->redirectToRoute('sales_man_director_index');
+            if($_GET['type'] === "Salary"){
+                $dismiss->salary($repository, $limit);
+                return $this->redirectToRoute('player_human_ressourcies');
+            }
+
+            if($_GET['type'] == "People") {
+                $dismiss->people($repository, $limit);
+
+                return $this->redirectToRoute('player_human_ressourcies');
+            }
         }
 
-        return $this->render('sales_man_director/new.html.twig', [
-            'sales_man_director' => $salesManDirector,
+        return $this->render('administration/new.html.twig', [
             'form' => $form->createView(),
+            'people' => 'sales forces'
         ]);
-    }
 
-    /**
-     * @Route("/{id}", name="sales_man_director_show", methods={"GET"})
-     */
-    public function show(SalesManDirector $salesManDirector): Response
-    {
-        return $this->render('sales_man_director/show.html.twig', [
-            'sales_man_director' => $salesManDirector,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="sales_man_director_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, SalesManDirector $salesManDirector): Response
-    {
-        $form = $this->createForm(SalesManDirectorType::class, $salesManDirector);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('sales_man_director_index', [
-                'id' => $salesManDirector->getId(),
-            ]);
-        }
-
-        return $this->render('sales_man_director/edit.html.twig', [
-            'sales_man_director' => $salesManDirector,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="sales_man_director_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, SalesManDirector $salesManDirector): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$salesManDirector->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($salesManDirector);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('sales_man_director_index');
     }
 }

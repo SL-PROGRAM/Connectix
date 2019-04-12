@@ -26,71 +26,42 @@ class SalesManProfessionalController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="sales_man_professional_new", methods={"GET","POST"})
+     * @Route("/new", name="sales_man_professional_new", methods={"NEW"})
      */
     public function new(Request $request): Response
     {
         $salesManProfessional = new SalesManProfessional();
-        $form = $this->createForm(SalesManProfessionalType::class, $salesManProfessional);
-        $form->handleRequest($request);
+        $coeficientSalary = 1.5;
+        $formation = 70;
+        $experience = 0;
+        $commission = 3;
+        $productivity = $formation+$experience;
+        $smic = $this->getUser()->getGame()->getSmic();
+        $salary = $coeficientSalary*$smic;
+        $socity = $this->getUser()->getSocity();
+        $salesActivityProfessional = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100*0.8;
+        $salesActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100*0.2;
+        $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork()/50;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($salesManProfessional);
-            $entityManager->flush();
+        $salesManProfessional
+            ->setSalesActivityProfessional($salesActivityProfessional)
+            ->setSalesActivity($salesActivity)
+            ->setCommission($commission)
+            ->setAdministrationActivityCost($administrationActivityCost)
+            ->setSocity($socity)
+            ->setCoeficientSalary($coeficientSalary)
+            ->setExprience($experience)
+            ->setFormation($formation)
+            ->setProductivity($productivity)
+            ->setSalary($salary)
+        ;
 
-            return $this->redirectToRoute('sales_man_professional_index');
-        }
 
-        return $this->render('sales_man_professional/new.html.twig', [
-            'sales_man_professional' => $salesManProfessional,
-            'form' => $form->createView(),
-        ]);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($salesManProfessional);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('player_human_ressourcies');
     }
 
-    /**
-     * @Route("/{id}", name="sales_man_professional_show", methods={"GET"})
-     */
-    public function show(SalesManProfessional $salesManProfessional): Response
-    {
-        return $this->render('sales_man_professional/show.html.twig', [
-            'sales_man_professional' => $salesManProfessional,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="sales_man_professional_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, SalesManProfessional $salesManProfessional): Response
-    {
-        $form = $this->createForm(SalesManProfessionalType::class, $salesManProfessional);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('sales_man_professional_index', [
-                'id' => $salesManProfessional->getId(),
-            ]);
-        }
-
-        return $this->render('sales_man_professional/edit.html.twig', [
-            'sales_man_professional' => $salesManProfessional,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="sales_man_professional_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, SalesManProfessional $salesManProfessional): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$salesManProfessional->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($salesManProfessional);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('sales_man_professional_index');
-    }
 }

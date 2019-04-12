@@ -1,43 +1,27 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}SalesManDirector index{% endblock %}
-
 {% block body %}
     <h1>SalesManDirector index</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Salary</th>
                 <th>Formation</th>
                 <th>Exprience</th>
-                <th>Productivity</th>
-                <th>AdministrationActivityCost</th>
-                <th>CoeficientSalary</th>
                 <th>Commission</th>
                 <th>SalesActivity</th>
                 <th>AdministrationActivity</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for sales_man_director in sales_man_directors %}
             <tr>
-                <td>{{ sales_man_director.id }}</td>
                 <td>{{ sales_man_director.salary }}</td>
                 <td>{{ sales_man_director.formation }}</td>
                 <td>{{ sales_man_director.exprience }}</td>
-                <td>{{ sales_man_director.productivity }}</td>
-                <td>{{ sales_man_director.administrationActivityCost }}</td>
-                <td>{{ sales_man_director.coeficientSalary }}</td>
                 <td>{{ sales_man_director.commission }}</td>
                 <td>{{ sales_man_director.salesActivity }}</td>
                 <td>{{ sales_man_director.administrationActivity }}</td>
-                <td>
-                    <a href="{{ path('sales_man_director_show', {'id': sales_man_director.id}) }}">show</a>
-                    <a href="{{ path('sales_man_director_edit', {'id': sales_man_director.id}) }}">edit</a>
-                </td>
+
             </tr>
         {% else %}
             <tr>
@@ -47,5 +31,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('sales_man_director_new') }}">Create new</a>
 {% endblock %}

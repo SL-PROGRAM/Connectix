@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\WorkMan;
 use App\Form\WorkManType;
+use App\Repository\ProductionRepository;
 use App\Repository\WorkManRepository;
+use App\Service\Dismiss;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -60,48 +63,37 @@ class WorkManController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="work_man_show", methods={"GET"})
+     * @Route("/dismiss", name="production_dismiss", methods={"GET","POST"})
      */
-    public function show(WorkMan $workMan): Response
+    public function dismissSalary(Request $request, ProductionRepository $repository, Dismiss $dismiss): Response
     {
-        return $this->render('work_man/show.html.twig', [
-            'work_man' => $workMan,
-        ]);
-    }
+        $defaultData = ['message' => 'Type your message here'];
+        $form = $this->createFormBuilder($defaultData)
+            ->add('number', NumberType::class)
+            ->getForm();
 
-    /**
-     * @Route("/{id}/edit", name="work_man_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, WorkMan $workMan): Response
-    {
-        $form = $this->createForm(WorkManType::class, $workMan);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if ($form->isSubmitted() && $form->isValid())  {
+            $dataform = $form->getData();
+            $limit = $dataform["number"];
 
-            return $this->redirectToRoute('work_man_index', [
-                'id' => $workMan->getId(),
-            ]);
+            if($_GET['type'] === "Salary"){
+                $dismiss->salary($repository, $limit);
+                return $this->redirectToRoute('player_human_ressourcies');
+            }
+
+            if($_GET['type'] == "People") {
+                $dismiss->people($repository, $limit);
+
+                return $this->redirectToRoute('player_human_ressourcies');
+            }
         }
 
-        return $this->render('work_man/edit.html.twig', [
-            'work_man' => $workMan,
+        return $this->render('administration/new.html.twig', [
             'form' => $form->createView(),
+            'people' => 'productive people'
         ]);
-    }
 
-    /**
-     * @Route("/{id}", name="work_man_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, WorkMan $workMan): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$workMan->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($workMan);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('work_man_index');
     }
 }

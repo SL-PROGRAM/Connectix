@@ -6,7 +6,7 @@
 
 {% block body %}
     <div class="row">
-        <section class="col-6">
+        <section class="col-md-6">
             <h1>Service administratif</h1>
                 <table>
                     <thead>
@@ -27,14 +27,34 @@
                     </tbody>
                 </table>
                 <div class="mt-4 mr-4">
-                    <div>
-                        <a href="{{ path("administration_index") }}">voir les employées</a>
+                    <div class="mb-1">
+                        <a class="btn btn-sm btn-block" href="{{ path("administration_index") }}">voir les employées</a>
                     </div>
-                    <div class="m-1">
-                        {{ include('administration/_administration_new_form.html.twig') }}
+                    <div class="row">
+                        <div class="col-md-6 mb-1">
+                            <a class="btn btn-sm btn-block" href="{{ path("administration_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
+                        </div>
+                        <div class="col-md-6 mb-1">
+                            <a class="btn btn-sm btn-block" href="{{ path("administration_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
+                        </div>
                     </div>
-                    <div class="m-1">
-                        {{ include('administration/_administration_cadre_new_form.html.twig') }}
+                    <div class="row">
+                        <div class="col-md-6 mb-1">
+                            {{ include('administration/_administration_new_form.html.twig') }}
+
+                        </div>
+                        <div class="col-md-6 mb-1">
+                            {{ include('administration/_administration_cadre_new_form.html.twig') }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-1">
+                            {{ include('administration/_administration_new_form.html.twig') }}
+
+                        </div>
+                        <div class="col-md-6 mb-1">
+                            {{ include('administration/_administration_cadre_new_form.html.twig') }}
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -71,6 +91,12 @@
                         <div>
                             <a href="{{ path("human_ressource_screen_production") }}">voir les employées</a>
                         </div>
+                        <div>
+                            <a href="{{ path("production_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
+                        </div>
+                        <div>
+                            <a href="{{ path("production_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
+                        </div>
                         <div class="m-1">
                             {{ include('work_man/_workmen_new_form.html.twig') }}
                         </div>
@@ -86,31 +112,6 @@
                     </div>
                     <div>
                         TODO : Include form formation
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card m-2" style="width: 18rem;">
-                        <div class="card-header">
-                            Augmentation de salaire
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <input type="number" step="0.1" required>
-                                <button>Valider</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card m-2" style="width: 18rem;">
-                        <div class="card-header">
-                            Formation
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <input type="number" step="0.1" required>
-                                <button>Valider</button>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -129,7 +130,6 @@
                                     <th>Productivité moyenne</th>
                                     <th>Coût licenciement</th>
                                     <th>Nombre salarié année</th>
-                                    <th>Recruter</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -138,42 +138,31 @@
                                 <td>{{ researchPrint.ProductivityAvg }}</td>
                                 <td>{{ researchPrint.dismissAvg }}</td>
                                 <td>{{ researchPrint.numberEmployeesTotal }}</td>
-                                <td>
-                                    <div>
-                                        <a href="{{ path('researcher_new') }}">Recruter un chercheur</a>
-                                    </div>
-                                    <div>
-                                        <a href="{{ path('researcher_director_new') }}">Recruter un directeur de recherche</a>
-                                    </div>
-
-                                </td>
                             </tr>
                             </tbody>
                         </table>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card m-2" style="width: 18rem;">
-                        <div class="card-header">
-                            Augmentation de salaire
+                    <div class="mt-4 mr-4">
+                        <div>
+                            <a href="{{ path("human_ressource_screen_research") }}">voir les employées</a>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <input type="number" step="0.1" required>
-                                <button>Valider</button>
-                            </li>
-                        </ul>
+                        <div>
+                            <a href="{{ path("researcher_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
+                        </div>
+                        <div>
+                            <a href="{{ path("researcher_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
+                        </div>
+                        <div class="m-1">
+                            {{ include('researcher/_reseacher_new_form.html.twig') }}
+                        </div>
+                        <div class="m-1">
+                            {{ include('researcher_director/_reseacher_director_new_form.html.twig') }}
+                        </div>
                     </div>
-                    <div class="card m-2" style="width: 18rem;">
-                        <div class="card-header">
-                            Formation
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <input type="number" step="0.1" required>
-                                <button>Valider</button>
-                            </li>
-                        </ul>
+                    <div>
+                        TODO : Include form hausse salaire
+                    </div>
+                    <div>
+                        TODO : Include form formation
                     </div>
                 </div>
             </div>
@@ -190,7 +179,6 @@
                             <th>Productivité moyenne</th>
                             <th>Coût licenciement</th>
                             <th>Nombre salarié année</th>
-                            <th>Recruter</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -199,55 +187,35 @@
                             <td>{{ salesManPrint.ProductivityAvg }}</td>
                             <td>{{ salesManPrint.dismissAvg }}</td>
                             <td>{{ salesManPrint.numberEmployeesTotal }}</td>
-                            <td>
-                                <div>
-                                    <a href="{{ path('sales_man_particular_new') }}">Recruter vendeur pour particlier</a>
-                                </div>
-                                <div>
-                                    <a href="{{ path('sales_man_professional_new') }}">Recruter vendeur pour Professionnel</a>
-                                </div>
-                                <div>
-                                    <a href="{{ path('sales_man_director_new') }}">Recruter directeur des ventes</a>
-                                </div>
-                            </td>
                         </tr>
                         </tbody>
                     </table>
-                </div>
+                    <div class="mt-4 mr-4">
+                        <div>
+                            <a href="{{ path("human_ressource_screen_sales") }}">voir les employées</a>
+                        </div>
+                        <div>
+                            <a href="{{ path("salesman_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
+                        </div>
+                        <div>
+                            <a href="{{ path("salesman_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
+                        </div>
+                        <div class="m-1">
+                            {{ include('sales_man_particular/_salesman_particular_new_form.html.twig') }}
+                        </div>
+                        <div class="m-1">
+                            {{ include('sales_man_professional/_salesman_pro_new_form.html.twig') }}
+                        </div>
+                        <div class="m-1">
+                            {{ include('sales_man_director/_salesman_director_new_form.html.twig') }}
+                        </div>
 
-                <div class="col-md-4">
-                    <div class="card m-2" style="width: 18rem;">
-                        <div class="card-header">
-                            Augmentation de salaire
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <input type="number" step="0.1" required>
-                                <button>Valider</button>
-                            </li>
-                        </ul>
                     </div>
-                    <div class="card m-2" style="width: 18rem;">
-                        <div class="card-header">
-                            Formation
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <input type="number" step="0.1" required>
-                                <button>Valider</button>
-                            </li>
-                        </ul>
+                    <div>
+                        TODO : Include form hausse salaire
                     </div>
-                    <div class="card m-2" style="width: 18rem;">
-                        <div class="card-header">
-                            Commission sur vente
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <input type="number" step="0.1" required>
-                                <button>Valider</button>
-                            </li>
-                        </ul>
+                    <div>
+                        TODO : Include form formation
                     </div>
                 </div>
             </div>

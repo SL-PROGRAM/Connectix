@@ -18,7 +18,9 @@
                     Exercice en cours :
                 </div>
                 <div class="card-body row">
-                    <span class="col-6 border-right">Valider l'exercice</span>
+{#                    {% if is_granted('CAN_VALIDATE') %}#}
+                        <a class="col-6 border-right" href="">Valider l'exercice</a>
+{#                    {% endif %}#}
                     <span class="col-6 border-left">Année numéro : <div>4</div>    </span>
                 </div>
                 <div class="card-footer text-muted p-0">

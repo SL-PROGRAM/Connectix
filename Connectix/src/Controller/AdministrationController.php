@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Administration;
-use App\Form\AdministrationType;
 use App\Repository\AdministrationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\Dismiss;
+
 
 /**
  * @Route("/administration")
@@ -36,12 +38,10 @@ class AdministrationController extends AbstractController
         $experience = 0;
         $productivity = $formation+$experience;
         $smic = $this->getUser()->getGame()->getSmic();
-        dump($smic);
         $salary = $coeficientSalary*$smic;
         $socity = $this->getUser()->getSocity();
         $administationActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100;
         $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork()/50;
-        dump($salary);
 
         $administration
             ->setAdministationActivity($administationActivity)
@@ -60,6 +60,41 @@ class AdministrationController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('player_human_ressourcies');
+    }
+
+    /**
+     * @Route("/dismiss", name="administration_dismiss", methods={"GET","POST"})
+     */
+    public function dismissSalary(Request $request, AdministrationRepository $repository, Dismiss $dismiss): Response
+    {
+        $defaultData = ['message' => 'Type your message here'];
+        $form = $this->createFormBuilder($defaultData)
+            ->add('number', NumberType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())  {
+            $dataform = $form->getData();
+            $limit = $dataform["number"];
+
+            if($_GET['type'] === "Salary"){
+                $dismiss->salary($repository, $limit);
+                return $this->redirectToRoute('player_human_ressourcies');
+            }
+
+            if($_GET['type'] == "People") {
+                $dismiss->people($repository, $limit);
+
+                return $this->redirectToRoute('player_human_ressourcies');
+            }
+        }
+
+        return $this->render('dismiss/new.html.twig', [
+            'form' => $form->createView(),
+            'people' => 'administrative'
+        ]);
+
     }
 
     /**
@@ -89,80 +124,9 @@ class AdministrationController extends AbstractController
             ->setProductivity($productivity)
             ->setSalary($salary)
         ;
-
-
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($administration);
         $entityManager->flush();
-
-        return $this->redirectToRoute('player_human_ressourcies');
-    }
-
-    /**
-     * @Route("/newdirector", name="administration_director_new", methods={"GET","POST"})
-     */
-    public function newDirector(Request $request): Response
-    {
-        $administration = new Administration();
-        $form = $this->createForm(AdministrationType::class, $administration);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($administration);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('player_human_ressourcies');
-        }
-
-        return $this->render('administration/new.html.twig', [
-            'administration' => $administration,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="administration_show", methods={"GET"})
-     */
-    public function show(Administration $administration): Response
-    {
-        return $this->render('administration/show.html.twig', [
-            'administration' => $administration,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="administration_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Administration $administration): Response
-    {
-        $form = $this->createForm(AdministrationType::class, $administration);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('player_human_ressourcies', [
-                'id' => $administration->getId(),
-            ]);
-        }
-
-        return $this->render('administration/edit.html.twig', [
-            'administration' => $administration,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="administration_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Administration $administration): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$administration->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($administration);
-            $entityManager->flush();
-        }
 
         return $this->redirectToRoute('player_human_ressourcies');
     }

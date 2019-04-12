@@ -8,10 +8,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
-            </tr>
-            <tr>
                 <th>Name</th>
                 <td>{{ product.name }}</td>
             </tr>
@@ -32,29 +28,10 @@
                 <td>{{ product.quantityDiscount }}</td>
             </tr>
             <tr>
-                <th>ProductionActivityCost</th>
-                <td>{{ product.productionActivityCost }}</td>
-            </tr>
-            <tr>
                 <th>ResearchCost</th>
                 <td>{{ product.researchCost }}</td>
             </tr>
-            <tr>
-                <th>ProductSaleType</th>
-                <td>{{ product.productSaleType }}</td>
-            </tr>
-            <tr>
-                <th>ProductMaxNumber</th>
-                <td>{{ product.ProductMaxNumber }}</td>
-            </tr>
-            <tr>
-                <th>PriceDiscount</th>
-                <td>{{ product.priceDiscount }}</td>
-            </tr>
-            <tr>
-                <th>ProductAlreadySales</th>
-                <td>{{ product.productAlreadySales }}</td>
-            </tr>
+            {% if path == "production" %}
             <tr>
                 <th>RowMaterialCost</th>
                 <td>{{ product.rowMaterialCost }}</td>
@@ -67,12 +44,14 @@
                 <th>ProductiorTimeCost</th>
                 <td>{{ product.productiorTimeCost }}</td>
             </tr>
+            {% endif %}
+        {%  dump %}
         </tbody>
     </table>
+    {% if path == "production" %}
+    <a href="{{ path('player_production') }}">back to list</a>
+    {% else %}
+    <a href="{{ path('player_sales') }}">back to list</a>
+    {% endif %}
 
-    <a href="{{ path('product_index') }}">back to list</a>
-
-    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
-
-    {{ include('product/_delete_form.html.twig') }}
 {% endblock %}
