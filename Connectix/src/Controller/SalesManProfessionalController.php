@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\SalesManProfessional;
-use App\Form\SalesManProfessionalType;
 use App\Repository\SalesManProfessionalRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

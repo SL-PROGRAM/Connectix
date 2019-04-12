@@ -63,38 +63,5 @@ class ResearcherController extends AbstractController
         return $this->redirectToRoute('player_human_ressourcies');
     }
 
-    /**
-     * @Route("/dismiss", name="researcher_dismiss", methods={"GET","POST"})
-     */
-    public function dismissSalary(Request $request, ResearcherRepository $repository, Dismiss $dismiss): Response
-    {
-        $defaultData = ['message' => 'Type your message here'];
-        $form = $this->createFormBuilder($defaultData)
-            ->add('number', NumberType::class)
-            ->getForm();
 
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid())  {
-            $dataform = $form->getData();
-            $limit = $dataform["number persons to dismiss"];
-
-            if($_GET['type'] === "Salary"){
-                $dismiss->salary($repository, $limit);
-                return $this->redirectToRoute('player_human_ressourcies');
-            }
-
-            if($_GET['type'] == "People") {
-                $dismiss->people($repository, $limit);
-
-                return $this->redirectToRoute('player_human_ressourcies');
-            }
-        }
-
-        return $this->render('administration/new.html.twig', [
-            'form' => $form->createView(),
-            'people' => 'research people'
-        ]);
-
-    }
 }

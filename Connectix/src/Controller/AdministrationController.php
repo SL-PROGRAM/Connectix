@@ -62,40 +62,7 @@ class AdministrationController extends AbstractController
         return $this->redirectToRoute('player_human_ressourcies');
     }
 
-    /**
-     * @Route("/dismiss", name="administration_dismiss", methods={"GET","POST"})
-     */
-    public function dismissSalary(Request $request, AdministrationRepository $repository, Dismiss $dismiss): Response
-    {
-        $defaultData = ['message' => 'Type your message here'];
-        $form = $this->createFormBuilder($defaultData)
-            ->add('number', NumberType::class)
-            ->getForm();
 
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid())  {
-            $dataform = $form->getData();
-            $limit = $dataform["number"];
-
-            if($_GET['type'] === "Salary"){
-                $dismiss->salary($repository, $limit);
-                return $this->redirectToRoute('player_human_ressourcies');
-            }
-
-            if($_GET['type'] == "People") {
-                $dismiss->people($repository, $limit);
-
-                return $this->redirectToRoute('player_human_ressourcies');
-            }
-        }
-
-        return $this->render('dismiss/new.html.twig', [
-            'form' => $form->createView(),
-            'people' => 'administrative'
-        ]);
-
-    }
 
     /**
      * @Route("/", name="administration_cadre_new", methods={"NEW_C"})
