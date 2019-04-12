@@ -28,7 +28,7 @@ class ResearcherDirectorController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="researcher_director_new", methods={"GET","POST"})
+     * @Route("/new", name="researcher_director_new", methods={"NEW"})
      */
     public function new(Request $request): Response
     {

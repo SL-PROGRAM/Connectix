@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DismissController extends AbstractController
 {
     /**
-     * @Route("/dismiss", name="administration_dismiss", methods={"GET","POST"})
+     * @Route("/dismissadmin", name="administration_dismiss", methods={"GET","POST"})
      */
     public function dismissAdmin(Request $request, AdministrationRepository $repository, \App\Service\Dismiss $dismiss): Response
     {
@@ -54,7 +54,7 @@ class DismissController extends AbstractController
     }
 
     /**
-     * @Route("/dismiss", name="researcher_dismiss", methods={"GET","POST"})
+     * @Route("/dismissresearcher", name="researcher_dismiss", methods={"GET","POST"})
      */
     public function dismissResearcher(Request $request, ResearcherRepository $repository, \App\Service\Dismiss $dismiss): Response
     {
@@ -89,7 +89,7 @@ class DismissController extends AbstractController
     }
 
     /**
-     * @Route("/dismiss", name="production_dismiss", methods={"GET","POST"})
+     * @Route("/dismissprod", name="production_dismiss", methods={"GET","POST"})
      */
     public function dismissProd(Request $request, ProductionRepository $repository, \App\Service\Dismiss $dismiss): Response
     {
@@ -124,7 +124,7 @@ class DismissController extends AbstractController
     }
 
     /**
-     * @Route("/dismiss", name="salesman_dismiss", methods={"GET","POST"})
+     * @Route("/dismisssales", name="salesman_dismiss", methods={"GET","POST"})
      */
     public function dismissSales(Request $request, SalesManRepository $repository, \App\Service\Dismiss $dismiss): Response
     {

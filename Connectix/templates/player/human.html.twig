@@ -56,122 +56,124 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    TODO : Include form hausse salaire
-                </div>
-                <div>
-                    TODO : Include form formation
-                </div>
 
         </section>
-        <section  class="col-md-6">
-            <h1>Service Production</h1>
-            <div class="row">
-                <div  class="table col-md-8">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Total des salaires</th>
-                            <th>Productivité moyenne</th>
-                            <th>Coût licenciement</th>
-                            <th>Nombre salarié année</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{ productionPrint.totalSalarie }}</td>
-                            <td>{{ productionPrint.ProductivityAvg }}</td>
-                            <td>{{ productionPrint.dismissAvg }}</td>
-                            <td>{{ productionPrint.numberEmployeesTotal }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="mt-4 mr-4">
-                        <div>
-                            <a href="{{ path("human_ressource_screen_production") }}">voir les employées</a>
-                        </div>
-                        <div>
-                            <a href="{{ path("production_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
-                        </div>
-                        <div>
-                            <a href="{{ path("production_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
-                        </div>
-                        <div class="m-1">
-                            {{ include('work_man/_workmen_new_form.html.twig') }}
-                        </div>
-                        <div class="m-1">
-                            {{ include('technician/_technician_new_form.html.twig') }}
-                        </div>
-                        <div class="m-1">
-                            {{ include('production_director/_factory_director_new_form.html.twig') }}
-                        </div>
+        <section class="col-md-6">
+            <h1>Service R&D</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>Total des salaires</th>
+                    <th>Productivité moyenne</th>
+                    <th>Coût licenciement</th>
+                    <th>Nombre salarié année</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ researchPrint.totalSalarie }}</td>
+                    <td>{{ researchPrint.ProductivityAvg }}</td>
+                    <td>{{ researchPrint.dismissAvg }}</td>
+                    <td>{{ researchPrint.numberEmployeesTotal }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="mt-4 mr-4">
+                <div class="mb-1">
+                    <a class="btn btn-sm btn-block" href="{{ path("human_ressource_screen_research") }}">voir les employées</a>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-1">
+                        <a class="btn btn-sm btn-block" href="{{ path("researcher_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
                     </div>
-                    <div>
-                        TODO : Include form hausse salaire
-                    </div>
-                    <div>
-                        TODO : Include form formation
+                    <div class="col-md-6 mb-1">
+                        <a class="btn btn-sm btn-block" href="{{ path("researcher_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6 mb-1">
+                        <a class="btn btn-sm btn-block" href="{{ path("researcher_up_salary") }}">Augmenter les salaires</a>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        <a class="btn btn-sm btn-block" href="{{ path("researcher_formation") }}">Former les employés</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-1">
+                        {{ include('researcher/_reseacher_new_form.html.twig') }}
+
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        {{ include('researcher_director/_reseacher_director_new_form.html.twig') }}
+                    </div>
+
+                </div>
             </div>
+
+
         </section>
+
     </div>
 
     <div class="row">
-        <section class="col-md-6">
-            <h1>Service Recherche et Développement</h1>
-            <div class="row">
-                <div  class="table col-md-8">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Total des salaires</th>
-                                    <th>Productivité moyenne</th>
-                                    <th>Coût licenciement</th>
-                                    <th>Nombre salarié année</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>{{ researchPrint.totalSalarie }}</td>
-                                <td>{{ researchPrint.ProductivityAvg }}</td>
-                                <td>{{ researchPrint.dismissAvg }}</td>
-                                <td>{{ researchPrint.numberEmployeesTotal }}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    <div class="mt-4 mr-4">
-                        <div>
-                            <a href="{{ path("human_ressource_screen_research") }}">voir les employées</a>
-                        </div>
-                        <div>
-                            <a href="{{ path("researcher_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
-                        </div>
-                        <div>
-                            <a href="{{ path("researcher_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
-                        </div>
-                        <div class="m-1">
-                            {{ include('researcher/_reseacher_new_form.html.twig') }}
-                        </div>
-                        <div class="m-1">
-                            {{ include('researcher_director/_reseacher_director_new_form.html.twig') }}
-                        </div>
+
+        <section  class="col-md-6">
+            <h1>Service Production</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>Total des salaires</th>
+                    <th>Productivité moyenne</th>
+                    <th>Coût licenciement</th>
+                    <th>Nombre salarié année</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ productionPrint.totalSalarie }}</td>
+                    <td>{{ productionPrint.ProductivityAvg }}</td>
+                    <td>{{ productionPrint.dismissAvg }}</td>
+                    <td>{{ productionPrint.numberEmployeesTotal }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="mt-4 mr-4">
+                <div class="mb-1">
+                    <a class="btn btn-sm btn-block" href="{{ path("human_ressource_screen_production") }}">voir les employées</a>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-1">
+                        <a class="btn btn-sm btn-block" href="{{ path("production_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
                     </div>
-                    <div>
-                        TODO : Include form hausse salaire
+                    <div class="col-md-6 mb-1">
+                        <a class="btn btn-sm btn-block" href="{{ path("production_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
                     </div>
-                    <div>
-                        TODO : Include form formation
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-1">
+                        <a class="btn btn-sm btn-block" href="{{ path("production_up_salary") }}">Augmenter les salaires</a>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        <a class="btn btn-sm btn-block" href="{{ path("production_formation") }}">Former les employés</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-1">
+                        {{ include('work_man/_workmen_new_form.html.twig') }}
+
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        {{ include('technician/_technician_new_form.html.twig') }}
+                    </div>
+                    <div class="col-md-12 mb-1">
+                        {{ include('production_director/_factory_director_new_form.html.twig') }}
                     </div>
                 </div>
             </div>
         </section>
-
         <section class="col-md-6">
             <h1>Service force de vente</h1>
-            <div class="row">
-                <div  class="table col-md-8">
-                    <table>
+                               <table>
                         <thead>
                         <tr>
                             <th>Total des salaires</th>
@@ -189,35 +191,41 @@
                         </tr>
                         </tbody>
                     </table>
-                    <div class="mt-4 mr-4">
-                        <div>
-                            <a href="{{ path("human_ressource_screen_sales") }}">voir les employées</a>
-                        </div>
-                        <div>
-                            <a href="{{ path("salesman_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
-                        </div>
-                        <div>
-                            <a href="{{ path("salesman_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
-                        </div>
-                        <div class="m-1">
-                            {{ include('sales_man_particular/_salesman_particular_new_form.html.twig') }}
-                        </div>
-                        <div class="m-1">
-                            {{ include('sales_man_professional/_salesman_pro_new_form.html.twig') }}
-                        </div>
-                        <div class="m-1">
-                            {{ include('sales_man_director/_salesman_director_new_form.html.twig') }}
-                        </div>
-
+            <div class="mt-4 mr-4">
+                <div class="mb-1">
+                    <a class="btn btn-sm btn-block" href="{{ path("human_ressource_screen_sales") }}">voir les employées</a>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-1">
+                        <a class="btn btn-sm btn-block" href="{{ path("salesman_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
                     </div>
-                    <div>
-                        TODO : Include form hausse salaire
-                    </div>
-                    <div>
-                        TODO : Include form formation
+                    <div class="col-md-6 mb-1">
+                        <a class="btn btn-sm btn-block" href="{{ path("salesman_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6 mb-1">
+                        <a class="btn btn-sm btn-block" href="{{ path("salesman_up_salary") }}">Augmenter les salaires</a>
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        <a class="btn btn-sm btn-block" href="{{ path("salesman_formation") }}">Former les employés</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-1">
+                        {{ include('sales_man_particular/_salesman_particular_new_form.html.twig') }}
+
+                    </div>
+                    <div class="col-md-6 mb-1">
+                        {{ include('sales_man_professional/_salesman_pro_new_form.html.twig') }}
+                    </div>
+                    <div class="col-md-12 mb-1">
+                        {{ include('sales_man_director/_salesman_director_new_form.html.twig') }}
+                    </div>
+
+                </div>
             </div>
+
         </section>
     </div>
 

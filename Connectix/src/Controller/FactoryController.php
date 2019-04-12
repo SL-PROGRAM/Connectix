@@ -66,27 +66,6 @@ class FactoryController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="factory_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Factory $factory): Response
-    {
-        $form = $this->createForm(FactoryType::class, $factory);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('player_production', [
-                'id' => $factory->getId(),
-            ]);
-        }
-
-        return $this->render('factory/edit.html.twig', [
-            'factory' => $factory,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="factory_delete", methods={"DELETE"})

@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UpSalaryController extends AbstractController
 {
     /**
-     * @Route("/Upsalary", name="administration_up_salary", methods={"GET","POST"})
+     * @Route("/Upsalaryadmin", name="administration_up_salary", methods={"GET","POST"})
      */
     public function up_salaryAdmin(Request $request, AdministrationRepository $repository, \App\Service\UpSalary $up_salary): Response
     {
@@ -46,7 +46,7 @@ class UpSalaryController extends AbstractController
     }
 
     /**
-     * @Route("/up_salary", name="researcher_up_salary", methods={"GET","POST"})
+     * @Route("/up_salaryresearcher", name="researcher_up_salary", methods={"GET","POST"})
      */
     public function upSalaryResearcher(Request $request, ResearcherRepository $repository, \App\Service\UpSalary $up_salary): Response
     {
@@ -74,7 +74,7 @@ class UpSalaryController extends AbstractController
     }
 
     /**
-     * @Route("/up_salary", name="production_up_salary", methods={"GET","POST"})
+     * @Route("/up_salaryprod", name="production_up_salary", methods={"GET","POST"})
      */
     public function upSalaryProd(Request $request, ProductionRepository $repository, \App\Service\UpSalary $up_salary): Response
     {
@@ -102,7 +102,7 @@ class UpSalaryController extends AbstractController
     }
 
     /**
-     * @Route("/up_salary", name="salesman_up_salary", methods={"GET","POST"})
+     * @Route("/up_salarysales", name="salesman_up_salary", methods={"GET","POST"})
      */
     public function upSalarySales(Request $request, SalesManRepository $repository, \App\Service\UpSalary $up_salary): Response
     {

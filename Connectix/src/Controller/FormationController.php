@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FormationController extends AbstractController
 {
     /**
-     * @Route("/formation", name="administration_formation", methods={"GET","POST"})
+     * @Route("/formationadmin", name="administration_formation", methods={"GET","POST"})
      */
     public function formationAdmin(Request $request, AdministrationRepository $repository, \App\Service\Formation $formation): Response
     {
@@ -45,7 +45,7 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/formation", name="researcher_formation", methods={"GET","POST"})
+     * @Route("/formationresearcher", name="researcher_formation", methods={"GET","POST"})
      */
     public function upSalaryResearcher(Request $request, ResearcherRepository $repository, \App\Service\Formation $formation): Response
     {
@@ -73,7 +73,7 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/formation", name="production_formation", methods={"GET","POST"})
+     * @Route("/formationprod", name="production_formation", methods={"GET","POST"})
      */
     public function upSalaryProd(Request $request, ProductionRepository $repository, \App\Service\Formation $formation): Response
     {
@@ -101,7 +101,7 @@ class FormationController extends AbstractController
     }
 
     /**
-     * @Route("/formation", name="salesman_formation", methods={"GET","POST"})
+     * @Route("/formationsalesman", name="salesman_formation", methods={"GET","POST"})
      */
     public function upSalarySales(Request $request, SalesManRepository $repository, \App\Service\Formation $formation): Response
     {
