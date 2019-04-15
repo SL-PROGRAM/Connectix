@@ -37,16 +37,7 @@ class UserType extends AbstractType
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
             ])
-            ->add(
-                'socity',
-                EntityType::class,
-                ['class' => Socity::class]
-            )
-            ->add(
-                'game',
-                EntityType::class,
-                ['class' => Game::class]
-            )
+//            ->add('role')
         ;
     }
 

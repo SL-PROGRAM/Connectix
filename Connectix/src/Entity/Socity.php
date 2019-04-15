@@ -50,27 +50,27 @@ class Socity
     private $humanRessourcies;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductionUnit", mappedBy="socity")
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductionUnit", mappedBy="socity", orphanRemoval=true)
      */
     private $ProductionUnits;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Loan", mappedBy="socity")
+     * @ORM\OneToMany(targetEntity="App\Entity\Loan", mappedBy="socity", orphanRemoval=true)
      */
     private $Loans;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BalanceSheet", mappedBy="socity")
+     * @ORM\OneToMany(targetEntity="App\Entity\BalanceSheet", mappedBy="socity", orphanRemoval=true)
      */
     private $balanceSheets;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PurchaseOrder", mappedBy="socity")
+     * @ORM\OneToMany(targetEntity="App\Entity\PurchaseOrder", mappedBy="socity", orphanRemoval=true)
      */
     private $purchaseOrders;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SalesOrder", mappedBy="socity")
+     * @ORM\OneToMany(targetEntity="App\Entity\SalesOrder", mappedBy="socity", orphanRemoval=true)
      */
     private $salesOrders;
 

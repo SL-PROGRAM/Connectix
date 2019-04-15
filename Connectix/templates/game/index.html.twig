@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Game index{% endblock %}
+
+{% block body %}
+    <h1>Game index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Tva</th>
+                <th>Maxturn</th>
+                <th>Turn</th>
+                <th>SocityNumber</th>
+                <th>Smic</th>
+                <th>CreatAt</th>
+                <th>SalesPriceMinLvl1</th>
+                <th>SalesPriceMinLvl2</th>
+                <th>SalesPriceMinLvl3</th>
+                <th>SalesPriceMinLvl4</th>
+                <th>SalesPriceMaxLvl1</th>
+                <th>SalesPriceMaxLvl2</th>
+                <th>SalesPriceMaxLvl3</th>
+                <th>SalesPriceMaxLvl4</th>
+                <th>ProductNumberMinLvl1</th>
+                <th>ProductNumberMinLvl2</th>
+                <th>ProductNumberMinLvl3</th>
+                <th>ProductNumberMinLvl4</th>
+                <th>ProductNumberMaxLvl1</th>
+                <th>ProductNumberMaxLvl2</th>
+                <th>ProductNumberMaxLvl3</th>
+                <th>ProductNumberMaxLvl4</th>
+                <th>PercentProductAvailableMinCycleLife1</th>
+                <th>PercentProductAvailableMinCycleLife2</th>
+                <th>PercentProductAvailableMinCycleLife3</th>
+                <th>PercentProductAvailableMinCycleLife4</th>
+                <th>PercentProductAvailableMaxCycleLife1</th>
+                <th>PercentProductAvailableMaxCycleLife2</th>
+                <th>PercentProductAvailableMaxCycleLife3</th>
+                <th>PercentProductAvailableMaxCycleLife4</th>
+                <th>ProductQualityMinCycleLife1</th>
+                <th>ProductQualityMinCycleLife2</th>
+                <th>ProductQualityMinCycleLife3</th>
+                <th>ProductQualityMinCycleLife4</th>
+                <th>ProductQualityMaxCycleLife1</th>
+                <th>ProductQualityMaxCycleLife2</th>
+                <th>ProductQualityMaxCycleLife3</th>
+                <th>ProductQualityMaxCycleLife4</th>
+                <th>TaxTurnover</th>
+                <th>EmployerContributions</th>
+                <th>PayTax</th>
+                <th>VariableExternalCharges</th>
+                <th>RowMaterialCost</th>
+                <th>RawMaterialMin</th>
+                <th>RawMaterialMax</th>
+                <th>ManPowerMin</th>
+                <th>ManPowerMax</th>
+                <th>ProductionTimeMin</th>
+                <th>ProductionTimeMax</th>
+                <th>TaxRate</th>
+                <th>EmployeeParticipation</th>
+                <th>SocityStartShareCapital</th>
+                <th>SocityStartLoanAmount</th>
+                <th>SocityStartLoanDuration</th>
+                <th>SocityStartLoanInterestRate</th>
+                <th>AnnualHoursWork</th>
+                <th>FactoryCreationCost</th>
+                <th>FactoryMaintenanceCost</th>
+                <th>FactoryAdministrationCost</th>
+                <th>FactoryAmortizationTurn</th>
+                <th>ProductionLignCreationCost</th>
+                <th>ProductionLignMaintenanceCost</th>
+                <th>ProductionLignAdministrationCost</th>
+                <th>ProductionLignAmortizationTurn</th>
+                <th>ProductionLignAnnualProductTime</th>
+                <th>ProductionLignTotalLifeProductTime</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for game in games %}
+            <tr>
+                <td>{{ game.id }}</td>
+                <td>{{ game.name }}</td>
+                <td>{{ game.tva }}</td>
+                <td>{{ game.maxturn }}</td>
+                <td>{{ game.turn }}</td>
+                <td>{{ game.socityNumber }}</td>
+                <td>{{ game.smic }}</td>
+                <td>{{ game.creatAt ? game.creatAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ game.salesPriceMinLvl1 }}</td>
+                <td>{{ game.salesPriceMinLvl2 }}</td>
+                <td>{{ game.salesPriceMinLvl3 }}</td>
+                <td>{{ game.salesPriceMinLvl4 }}</td>
+                <td>{{ game.salesPriceMaxLvl1 }}</td>
+                <td>{{ game.salesPriceMaxLvl2 }}</td>
+                <td>{{ game.salesPriceMaxLvl3 }}</td>
+                <td>{{ game.salesPriceMaxLvl4 }}</td>
+                <td>{{ game.productNumberMinLvl1 }}</td>
+                <td>{{ game.productNumberMinLvl2 }}</td>
+                <td>{{ game.productNumberMinLvl3 }}</td>
+                <td>{{ game.productNumberMinLvl4 }}</td>
+                <td>{{ game.productNumberMaxLvl1 }}</td>
+                <td>{{ game.productNumberMaxLvl2 }}</td>
+                <td>{{ game.productNumberMaxLvl3 }}</td>
+                <td>{{ game.productNumberMaxLvl4 }}</td>
+                <td>{{ game.percentProductAvailableMinCycleLife1 }}</td>
+                <td>{{ game.percentProductAvailableMinCycleLife2 }}</td>
+                <td>{{ game.percentProductAvailableMinCycleLife3 }}</td>
+                <td>{{ game.percentProductAvailableMinCycleLife4 }}</td>
+                <td>{{ game.percentProductAvailableMaxCycleLife1 }}</td>
+                <td>{{ game.percentProductAvailableMaxCycleLife2 }}</td>
+                <td>{{ game.percentProductAvailableMaxCycleLife3 }}</td>
+                <td>{{ game.percentProductAvailableMaxCycleLife4 }}</td>
+                <td>{{ game.productQualityMinCycleLife1 }}</td>
+                <td>{{ game.productQualityMinCycleLife2 }}</td>
+                <td>{{ game.productQualityMinCycleLife3 }}</td>
+                <td>{{ game.productQualityMinCycleLife4 }}</td>
+                <td>{{ game.productQualityMaxCycleLife1 }}</td>
+                <td>{{ game.productQualityMaxCycleLife2 }}</td>
+                <td>{{ game.productQualityMaxCycleLife3 }}</td>
+                <td>{{ game.productQualityMaxCycleLife4 }}</td>
+                <td>{{ game.taxTurnover }}</td>
+                <td>{{ game.employerContributions }}</td>
+                <td>{{ game.payTax }}</td>
+                <td>{{ game.variableExternalCharges }}</td>
+                <td>{{ game.rowMaterialCost }}</td>
+                <td>{{ game.rawMaterialMin }}</td>
+                <td>{{ game.rawMaterialMax }}</td>
+                <td>{{ game.manPowerMin }}</td>
+                <td>{{ game.manPowerMax }}</td>
+                <td>{{ game.productionTimeMin }}</td>
+                <td>{{ game.productionTimeMax }}</td>
+                <td>{{ game.taxRate }}</td>
+                <td>{{ game.employeeParticipation }}</td>
+                <td>{{ game.socityStartShareCapital }}</td>
+                <td>{{ game.socityStartLoanAmount }}</td>
+                <td>{{ game.socityStartLoanDuration }}</td>
+                <td>{{ game.socityStartLoanInterestRate }}</td>
+                <td>{{ game.annualHoursWork }}</td>
+                <td>{{ game.factoryCreationCost }}</td>
+                <td>{{ game.factoryMaintenanceCost }}</td>
+                <td>{{ game.factoryAdministrationCost }}</td>
+                <td>{{ game.factoryAmortizationTurn }}</td>
+                <td>{{ game.productionLignCreationCost }}</td>
+                <td>{{ game.productionLignMaintenanceCost }}</td>
+                <td>{{ game.productionLignAdministrationCost }}</td>
+                <td>{{ game.productionLignAmortizationTurn }}</td>
+                <td>{{ game.productionLignAnnualProductTime }}</td>
+                <td>{{ game.productionLignTotalLifeProductTime }}</td>
+                <td>
+                    <a href="{{ path('game_show', {'id': game.id}) }}">show</a>
+                    <a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="69">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('game_new') }}">Create new</a>
+{% endblock %}
