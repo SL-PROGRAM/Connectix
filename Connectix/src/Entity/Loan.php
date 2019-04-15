@@ -139,4 +139,9 @@ class Loan
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'Loan';
+    }
 }

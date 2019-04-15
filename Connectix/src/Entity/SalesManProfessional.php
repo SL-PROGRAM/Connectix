@@ -26,4 +26,9 @@ class SalesManProfessional extends SalesMan
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'Salesman pro';
+    }
 }

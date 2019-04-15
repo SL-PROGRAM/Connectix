@@ -26,4 +26,9 @@ class ResearcherDirector extends Researcher
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'Researcher director';
+    }
 }

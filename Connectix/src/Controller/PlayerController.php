@@ -650,7 +650,7 @@ class PlayerController extends AbstractController
             return $productivityAvg = "no employee";
         } else {
             return $dismissAvg =
-                round($totalSalarie/($numberEmployeesTotal * 12)*(1+$totalExperience)/$numberEmployeesTotal, 2);
+                round($totalSalarie/($numberEmployeesTotal * 12)*(1+$totalExperience), 2);
         }
     }
 }

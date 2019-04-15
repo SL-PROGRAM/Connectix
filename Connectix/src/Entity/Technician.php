@@ -9,4 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Technician extends ProductionCadre
 {
+    public function __toString()
+    {
+        return 'technician';
+    }
 }

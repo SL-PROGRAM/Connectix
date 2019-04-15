@@ -26,4 +26,9 @@ class Researcher extends HumanResource
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'Researcher';
+    }
 }

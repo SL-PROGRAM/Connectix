@@ -94,4 +94,9 @@ class PublicityOrder
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'Publicity Order';
+    }
 }

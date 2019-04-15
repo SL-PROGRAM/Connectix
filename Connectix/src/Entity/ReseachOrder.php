@@ -126,4 +126,10 @@ class ReseachOrder
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'Research Order';
+    }
 }
+

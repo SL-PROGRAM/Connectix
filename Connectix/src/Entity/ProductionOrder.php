@@ -177,4 +177,9 @@ class ProductionOrder
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'Production Order';
+    }
 }

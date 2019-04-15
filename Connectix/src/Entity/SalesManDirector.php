@@ -26,4 +26,9 @@ class SalesManDirector extends SalesMan
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'Salesman director';
+    }
 }

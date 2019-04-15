@@ -28,4 +28,9 @@ class Administration extends HumanResource
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'administration';
+    }
 }

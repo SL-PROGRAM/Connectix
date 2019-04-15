@@ -83,4 +83,9 @@ class ProductionLign extends ProductionUnit
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'Production Lign';
+    }
 }

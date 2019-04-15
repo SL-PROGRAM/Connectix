@@ -144,4 +144,9 @@ class PurchaseOrder
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'Purchase Order';
+    }
 }

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit ReseachOrder{% endblock %}
+
+{% block body %}
+    <h1>Edit ReseachOrder</h1>
+
+    {{ include('reseach_order/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('player_production') }}">back to list</a>
+
+    {{ include('reseach_order/_delete_form.html.twig') }}
+{% endblock %}

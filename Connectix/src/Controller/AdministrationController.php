@@ -37,7 +37,7 @@ class AdministrationController extends AbstractController
         $formation = 75;
         $experience = 0;
         $productivity = $formation+$experience;
-        $smic = $this->getUser()->getGame()->getSmic();
+        $smic = 12*$this->getUser()->getGame()->getSmic();
         $salary = $coeficientSalary*$smic;
         $socity = $this->getUser()->getSocity();
         $administationActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100;
@@ -74,7 +74,7 @@ class AdministrationController extends AbstractController
         $formation = 75;
         $experience = 0;
         $productivity = $formation+$experience;
-        $smic = $this->getUser()->getGame()->getSmic();
+        $smic = 12*$this->getUser()->getGame()->getSmic();
         $salary = $coeficientSalary*$smic;
         dump($salary);
         $socity = $this->getUser()->getSocity();

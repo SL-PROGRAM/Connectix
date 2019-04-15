@@ -820,4 +820,9 @@ class BalanceSheet
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return 'BalanceSheet';
+    }
 }
