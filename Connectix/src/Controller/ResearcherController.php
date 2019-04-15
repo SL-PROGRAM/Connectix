@@ -29,38 +29,56 @@ class ResearcherController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="researcher_new", methods={"NEW"})
+     * @Route("/new", name="researcher_new", methods={"NEW", "POST", "GET"})
      */
     public function new(Request $request): Response
     {
-        $researcher = new Researcher();
-        $coeficientSalary = 2.5;
-        $formation = 90;
-        $experience = 0;
-        $productivity = $formation+$experience;
-        $smic = $this->getUser()->getGame()->getSmic();
-        $salary = $coeficientSalary*$smic;
-        $socity = $this->getUser()->getSocity();
-        $researchActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100;
-        $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork()/50;
+        $defaultData = ['message' => 'Type your message here'];
+        $form = $this->createFormBuilder($defaultData)
+            ->add('number', NumberType::class)
+            ->getForm();
 
-        $researcher
-            ->setResearchActivity($researchActivity)
-            ->setAdministrationActivityCost($administrationActivityCost)
-            ->setSocity($socity)
-            ->setCoeficientSalary($coeficientSalary)
-            ->setExprience($experience)
-            ->setFormation($formation)
-            ->setProductivity($productivity)
-            ->setSalary($salary)
-        ;
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())  {
+            $dataform = $form->getData();
+            $number = $dataform["number"];
+
+            for ($i=0; $i < $number; $i++) {
+                $researcher = new Researcher();
+                $coeficientSalary = 2.5;
+                $formation = 90;
+                $experience = 0;
+                $productivity = $formation + $experience;
+                $smic = $this->getUser()->getGame()->getSmic();
+                $salary = $coeficientSalary * $smic;
+                $socity = $this->getUser()->getSocity();
+                $researchActivity = $this->getUser()->getGame()->getAnnualHoursWork() * $productivity / 100;
+                $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork() / 50;
+
+                $researcher
+                    ->setResearchActivity($researchActivity)
+                    ->setAdministrationActivityCost($administrationActivityCost)
+                    ->setSocity($socity)
+                    ->setCoeficientSalary($coeficientSalary)
+                    ->setExprience($experience)
+                    ->setFormation($formation)
+                    ->setProductivity($productivity)
+                    ->setSalary($salary);
 
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($researcher);
-        $entityManager->flush();
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($researcher);
+            }
+            $entityManager->flush();
 
-        return $this->redirectToRoute('player_human_ressourcies');
+            return $this->redirectToRoute('player_human_ressourcies');
+        }
+
+        return $this->render('up_salary/up_salary.html.twig', [
+            'form' => $form->createView(),
+            'people' => 'admin'
+        ]);
     }
 
 

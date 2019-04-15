@@ -16,10 +16,10 @@ class Formation extends AbstractController
 
         foreach ($peoples as  $people){
             $formationOld = $people->getFormation();
-            $formationnew = $formationOld + ($formationOld*$formation/100);
-            $people->setFormation($formationnew);
+            $formationNew = $formationOld + ($formationOld*$formation/100);
+            $people->setFormation($formationNew);
             $experience = $people->getExprience();
-            $people->setProductivity($experience + $formationnew);
+            $people->setProductivity($experience + $formationNew);
 
             $entityManager->persist($people);
         }

@@ -28,73 +28,109 @@ class AdministrationController extends AbstractController
     }
 
     /**
-     * @Route("/", name="administration_new", methods={"NEW"})
+     * @Route("/", name="administration_new", methods={"NEW", "POST", "GET"})
      */
     public function new(Request $request): Response
     {
-        $administration = new Administration();
-        $coeficientSalary = 1.2;
-        $formation = 75;
-        $experience = 0;
-        $productivity = $formation+$experience;
-        $smic = 12*$this->getUser()->getGame()->getSmic();
-        $salary = $coeficientSalary*$smic;
-        $socity = $this->getUser()->getSocity();
-        $administationActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100;
-        $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork()/50;
+        $defaultData = ['message' => 'Type your message here'];
+        $form = $this->createFormBuilder($defaultData)
+            ->add('number', NumberType::class)
+            ->getForm();
 
-        $administration
-            ->setAdministationActivity($administationActivity)
-            ->setAdministrationActivityCost($administrationActivityCost)
-            ->setSocity($socity)
-            ->setCoeficientSalary($coeficientSalary)
-            ->setExprience($experience)
-            ->setFormation($formation)
-            ->setProductivity($productivity)
-            ->setSalary($salary)
-            ;
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid())  {
+            $dataform = $form->getData();
+            $number = $dataform["number"];
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($administration);
-        $entityManager->flush();
+            for ($i=0; $i < $number; $i++){
+                $administration = new Administration();
+                $coeficientSalary = 1.2;
+                $formation = 75;
+                $experience = 0;
+                $productivity = $formation+$experience;
+                $smic = 12*$this->getUser()->getGame()->getSmic();
+                $salary = $coeficientSalary*$smic;
+                $socity = $this->getUser()->getSocity();
+                $administationActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100;
+                $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork()/50;
 
-        return $this->redirectToRoute('player_human_ressourcies');
+                $administration
+                    ->setAdministationActivity($administationActivity)
+                    ->setAdministrationActivityCost($administrationActivityCost)
+                    ->setSocity($socity)
+                    ->setCoeficientSalary($coeficientSalary)
+                    ->setExprience($experience)
+                    ->setFormation($formation)
+                    ->setProductivity($productivity)
+                    ->setSalary($salary)
+                ;
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($administration);
+            }
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('player_human_ressourcies');
+        }
+
+        return $this->render('up_salary/up_salary.html.twig', [
+            'form' => $form->createView(),
+            'people' => 'admin'
+        ]);
     }
 
 
 
     /**
-     * @Route("/", name="administration_cadre_new", methods={"NEW_C"})
+     * @Route("/", name="administration_cadre_new", methods={"NEW_C", "POST", "GET"})
      */
     public function newCadre(Request $request): Response
     {
-        $administration = new Administration();
-        $coeficientSalary = 3;
-        $formation = 75;
-        $experience = 0;
-        $productivity = $formation+$experience;
-        $smic = 12*$this->getUser()->getGame()->getSmic();
-        $salary = $coeficientSalary*$smic;
-        dump($salary);
-        $socity = $this->getUser()->getSocity();
-        $administationActivity = $this->getUser()->getGame()->getAnnualHoursWork()*$productivity/100;
-        $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork()/50;
+        $defaultData = ['message' => 'Type your message here'];
+        $form = $this->createFormBuilder($defaultData)
+            ->add('number', NumberType::class)
+            ->getForm();
 
-        $administration
-            ->setAdministationActivity($administationActivity)
-            ->setAdministrationActivityCost($administrationActivityCost)
-            ->setSocity($socity)
-            ->setCoeficientSalary($coeficientSalary)
-            ->setExprience($experience)
-            ->setFormation($formation)
-            ->setProductivity($productivity)
-            ->setSalary($salary)
-        ;
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($administration);
-        $entityManager->flush();
+        $form->handleRequest($request);
 
-        return $this->redirectToRoute('player_human_ressourcies');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $dataform = $form->getData();
+            $number = $dataform["number"];
+
+            for ($i = 0; $i < $number; $i++) {
+
+                $administration = new Administration();
+                $coeficientSalary = 3;
+                $formation = 75;
+                $experience = 0;
+                $productivity = $formation + $experience;
+                $smic = 12 * $this->getUser()->getGame()->getSmic();
+                $salary = $coeficientSalary * $smic;
+                $socity = $this->getUser()->getSocity();
+                $administationActivity = $this->getUser()->getGame()->getAnnualHoursWork() * $productivity / 100;
+                $administrationActivityCost = $this->getUser()->getGame()->getAnnualHoursWork() / 50;
+
+                $administration
+                    ->setAdministationActivity($administationActivity)
+                    ->setAdministrationActivityCost($administrationActivityCost)
+                    ->setSocity($socity)
+                    ->setCoeficientSalary($coeficientSalary)
+                    ->setExprience($experience)
+                    ->setFormation($formation)
+                    ->setProductivity($productivity)
+                    ->setSalary($salary);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($administration);
+            }
+            $entityManager->flush();
+
+            return $this->redirectToRoute('player_human_ressourcies');
+        }
+        return $this->render('up_salary/up_salary.html.twig', [
+            'form' => $form->createView(),
+            'people' => 'admin'
+        ]);
     }
 }
