@@ -13,11 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/publicityorder")
+ * Class PublicityOrderController
+ * @package App\Controller
  */
 class PublicityOrderController extends AbstractController
 {
     /**
      * @Route("/", name="publicity_order_index", methods={"GET"})
+     * @param PublicityOrderRepository $publicityOrderRepository
+     * @return Response
      */
     public function index(PublicityOrderRepository $publicityOrderRepository): Response
     {
@@ -28,6 +32,9 @@ class PublicityOrderController extends AbstractController
 
     /**
      * @Route("/new", name="publicity_order_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param ProductRepository $productRepository
+     * @return Response
      */
     public function new(Request $request, ProductRepository $productRepository): Response
     {
@@ -59,6 +66,8 @@ class PublicityOrderController extends AbstractController
 
     /**
      * @Route("/{id}", name="publicity_order_show", methods={"GET"})
+     * @param PublicityOrder $publicityOrder
+     * @return Response
      */
     public function show(PublicityOrder $publicityOrder): Response
     {
@@ -69,6 +78,9 @@ class PublicityOrderController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="publicity_order_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param PublicityOrder $publicityOrder
+     * @return Response
      */
     public function edit(Request $request, PublicityOrder $publicityOrder): Response
     {
@@ -91,6 +103,9 @@ class PublicityOrderController extends AbstractController
 
     /**
      * @Route("/{id}", name="publicity_order_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param PublicityOrder $publicityOrder
+     * @return Response
      */
     public function delete(Request $request, PublicityOrder $publicityOrder): Response
     {

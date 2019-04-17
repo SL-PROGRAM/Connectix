@@ -40,7 +40,7 @@ class Socity
     private $game;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="socity", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="socity", orphanRemoval=true, cascade={"persist"})
      */
     private $users;
 

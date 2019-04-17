@@ -59,7 +59,7 @@ class Game
     private $products;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Socity", mappedBy="game", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Socity", mappedBy="game", orphanRemoval=true, cascade={"persist"} )
      */
     private $socities;
 
@@ -224,7 +224,7 @@ class Game
     private $productQualityMaxCycleLife4 = 98;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="game")
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="game", cascade={"persist"})
      */
     private $users;
 

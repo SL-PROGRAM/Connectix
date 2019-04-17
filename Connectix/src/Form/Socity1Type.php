@@ -16,9 +16,9 @@ class Socity1Type extends AbstractType
             ->add('name')
 //            ->add('priceMinPublicicyImpact')
 //            ->add('priceMaxPublicityImpact')
-//            ->add('playerNumber')
 //            ->add('game')
         ;
+
 
         $builder->add('users', CollectionType::class, [
             'entry_type' => UserType::class,
@@ -26,6 +26,8 @@ class Socity1Type extends AbstractType
             'allow_add' => true,
             'by_reference' => false,
             'allow_delete' => true,
+            'prototype' => true,
+            'prototype_name' => 'user'
         ]);
 
 

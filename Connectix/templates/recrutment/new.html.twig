@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dismiss {{ people }}{% endblock %}
+
+{% block body %}
+    <h1>recrutment {{ people }} </h1>
+
+    {{ include('recrutment/_form.html.twig') }}
+
+    <a href="{{ path('player_human_ressourcies') }}">back to list</a>
+{% endblock %}

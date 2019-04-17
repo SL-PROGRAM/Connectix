@@ -48,7 +48,7 @@ class MakeGameController extends AbstractController
             $socity = new Socity();
             $user1 = new User();
             $user1->setFirstName('Joueur1');
-            $socity->getTags()->add($user1);
+            $socity->getUsers()->add($user1);
             $user2 = new User();
             $user2->setFirstName('Joueur2');
             $user3 = new User();
