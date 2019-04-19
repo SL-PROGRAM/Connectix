@@ -7,6 +7,7 @@ use App\Entity\Socity;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -37,7 +38,20 @@ class UserType extends AbstractType
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
             ])
-//            ->add('role')
+             ->add('roles', ChoiceType::class, array(
+                'attr'  =>  array('class' => 'form-control',
+                'style' => 'margin:5px 0;'),
+                'choices' =>
+                array
+                (
+
+                        'Admin' => 'ROLE_ADMIN',
+
+                )
+                ,
+                'multiple' => true,
+                'required' => true,
+                ));
         ;
     }
 

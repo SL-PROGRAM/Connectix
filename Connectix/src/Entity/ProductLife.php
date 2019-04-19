@@ -62,6 +62,16 @@ class ProductLife
      */
     private $product;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ProductLife", inversedBy="ParentProductLife", cascade={"persist", "remove"})
+     */
+    private $subProductLife;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\ProductLife", mappedBy="subProductLife", cascade={"persist", "remove"})
+     */
+    private $ParentProductLife;
+
 
     /**
      * @return int|null
@@ -238,6 +248,41 @@ class ProductLife
     public function setProduct(?Product $product): self
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return 'product life '.$this->getCycleLifeNumber();
+    }
+
+    public function getSubProductLife(): ?self
+    {
+        return $this->subProductLife;
+    }
+
+    public function setSubProductLife(?self $subProductLife): self
+    {
+        $this->subProductLife = $subProductLife;
+
+        return $this;
+    }
+
+    public function getParentProductLife(): ?self
+    {
+        return $this->ParentProductLife;
+    }
+
+    public function setParentProductLife(?self $ParentProductLife): self
+    {
+        $this->ParentProductLife = $ParentProductLife;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newSubProductLife = $ParentProductLife === null ? null : $this;
+        if ($newSubProductLife !== $ParentProductLife->getSubProductLife()) {
+            $ParentProductLife->setSubProductLife($newSubProductLife);
+        }
 
         return $this;
     }

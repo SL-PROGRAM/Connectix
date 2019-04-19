@@ -105,8 +105,17 @@ class Product
      */
     private $productiorTimeCost;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Product", inversedBy="parentProduct", cascade={"persist", "remove"})
+     */
+    private $subproduct;
 
-    public function __construct()
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Product", mappedBy="subproduct", cascade={"persist", "remove"})
+     */
+    private $parentProduct;
+
+      public function __construct()
     {
         $this->ProductLifes = new ArrayCollection();
     }
@@ -432,4 +441,36 @@ class Product
     {
         return $this->getName();
     }
+
+    public function getSubproduct(): ?self
+    {
+        return $this->subproduct;
+    }
+
+    public function setSubproduct(?self $subproduct): self
+    {
+        $this->subproduct = $subproduct;
+
+        return $this;
+    }
+
+    public function getParentProduct(): ?self
+    {
+        return $this->parentProduct;
+    }
+
+    public function setParentProduct(?self $parentProduct): self
+    {
+        $this->parentProduct = $parentProduct;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newSubproduct = $parentProduct === null ? null : $this;
+        if ($newSubproduct !== $parentProduct->getSubproduct()) {
+            $parentProduct->setSubproduct($newSubproduct);
+        }
+
+        return $this;
+    }
+
+
 }

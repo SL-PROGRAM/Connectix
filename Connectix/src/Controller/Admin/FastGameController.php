@@ -4,6 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\Game;
 use App\Form\FastGameType;
+use App\Repository\ProductRepository;
+use App\Repository\SeasonalityRepository;
+use App\Service\MakeProduct;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +22,7 @@ class FastGameController extends AbstractController
     /**
      * @Route("/new", name="fast_game_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, MakeProduct $makeProduct, ProductRepository $productRepository, SeasonalityRepository $seasonalityRepository): Response
     {
         $game = new Game();
         $form = $this->createForm(FastGameType::class, $game);
@@ -31,27 +34,12 @@ class FastGameController extends AbstractController
             $game->setCreatAt(new \DateTime());
 
             $entityManager = $this->getDoctrine()->getManager();
-
-            $socities = $game->getSocities();
-            dump($socities);
-            foreach ($socities as $socity){
-                dump($socity);
-                $socity->setPriceMaxPublicityImpact(1);
-                $socity->setPriceMinPublicicyImpact(1);
-                $socity->setGame($game);
-                $entityManager->persist($socity);
-
-            }
-
-            dump($form->getData());
-
             $entityManager->persist($game);
-
-
-
             $entityManager->flush();
 
-            return $this->redirectToRoute('game_index');
+            $makeProduct->products($game, $productRepository, $seasonalityRepository);
+
+            return $this->redirectToRoute('socity_new', ['gameid' => $game->getId()]);
         }
 
         return $this->render('game/fast_new.html.twig', [

@@ -54,94 +54,38 @@ class Game
     private $creatAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="game", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="game", orphanRemoval=true, cascade={"remove"})
      */
     private $products;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Socity", mappedBy="game", orphanRemoval=true, cascade={"persist"} )
+     * @ORM\OneToMany(targetEntity="App\Entity\Socity", mappedBy="game", orphanRemoval=true,cascade={"persist", "remove"})
      */
     private $socities;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesPriceMinLvl1 = 1000;
+    private $salesPriceMin = 1000;
+
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesPriceMinLvl2 = 1000;
+    private $salesPriceMax = 2000;
+
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesPriceMinLvl3 = 1000;
+    private $productNumberMin = 10000;
+
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesPriceMinLvl4 = 1000;
+    private $productNumberMax  = 20000;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $salesPriceMaxLvl1 = 2000;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $salesPriceMaxLvl2 = 2000;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $salesPriceMaxLvl3 = 2000;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $salesPriceMaxLvl4 = 2000;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $productNumberMinLvl1 = 10000;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $productNumberMinLvl2 = 10000;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $productNumberMinLvl3  = 10000;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $productNumberMinLvl4 = 10000;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $productNumberMaxLvl1  = 20000;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $productNumberMaxLvl2 = 20000;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $productNumberMaxLvl3 = 20000;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $productNumberMaxLvl4 = 20000;
 
     /**
      * @ORM\Column(type="integer")
@@ -597,194 +541,52 @@ class Game
         return $this;
     }
 
-    public function getSalesPriceMinLvl1(): ?int
+    public function getSalesPriceMin(): ?int
     {
-        return $this->salesPriceMinLvl1;
+        return $this->salesPriceMin;
     }
 
-    public function setSalesPriceMinLvl1(int $salesPriceMinLvl1): self
+    public function setSalesPrice(int $salesPriceMin): self
     {
-        $this->salesPriceMinLvl1 = $salesPriceMinLvl1;
+        $this->salesPriceMin = $salesPriceMin;
 
         return $this;
     }
 
-    public function getSalesPriceMaxLvl1(): ?int
+    public function getSalesPriceMax(): ?int
     {
-        return $this->salesPriceMaxLvl1;
+        return $this->salesPriceMax;
     }
 
-    public function setSalesPriceMaxLvl1(int $salesPriceMaxLvl1): self
+    public function setSalesPriceMax(int $salesPriceMax): self
     {
-        $this->salesPriceMaxLvl1 = $salesPriceMaxLvl1;
+        $this->salesPriceMax = $salesPriceMax;
 
         return $this;
     }
 
-    public function getSalesPriceMinLvl2(): ?int
+
+    public function getProductNumberMin(): ?int
     {
-        return $this->salesPriceMinLvl2;
+        return $this->productNumberMin;
     }
 
-    public function setSalesPriceMinLvl2(int $salesPriceMinLvl2): self
+    public function setProductNumberMin(int $productNumberMin): self
     {
-        $this->salesPriceMinLvl2 = $salesPriceMinLvl2;
+        $this->productNumberMin = $productNumberMin;
 
         return $this;
     }
 
-    public function getSalesPriceMinLvl3(): ?int
+
+    public function getProductNumberMax(): ?int
     {
-        return $this->salesPriceMinLvl3;
+        return $this->productNumberMax;
     }
 
-    public function setSalesPriceMinLvl3(int $salesPriceMinLvl3): self
+    public function setProductNumberMax(int $productNumberMax): self
     {
-        $this->salesPriceMinLvl3 = $salesPriceMinLvl3;
-
-        return $this;
-    }
-
-    public function getSalesPriceMinLvl4(): ?int
-    {
-        return $this->salesPriceMinLvl4;
-    }
-
-    public function setSalesPriceMinLvl4(int $salesPriceMinLvl4): self
-    {
-        $this->salesPriceMinLvl4 = $salesPriceMinLvl4;
-
-        return $this;
-    }
-
-    public function getSalesPriceMaxLvl2(): ?int
-    {
-        return $this->salesPriceMaxLvl2;
-    }
-
-    public function setSalesPriceMaxLvl2(int $salesPriceMaxLvl2): self
-    {
-        $this->salesPriceMaxLvl2 = $salesPriceMaxLvl2;
-
-        return $this;
-    }
-
-    public function getSalesPriceMaxLvl3(): ?int
-    {
-        return $this->salesPriceMaxLvl3;
-    }
-
-    public function setSalesPriceMaxLvl3(int $salesPriceMaxLvl3): self
-    {
-        $this->salesPriceMaxLvl3 = $salesPriceMaxLvl3;
-
-        return $this;
-    }
-
-    public function getSalesPriceMaxLvl4(): ?int
-    {
-        return $this->salesPriceMaxLvl4;
-    }
-
-    public function setSalesPriceMaxLvl4(int $salesPriceMaxLvl4): self
-    {
-        $this->salesPriceMaxLvl4 = $salesPriceMaxLvl4;
-
-        return $this;
-    }
-
-    public function getProductNumberMinLvl1(): ?int
-    {
-        return $this->productNumberMinLvl1;
-    }
-
-    public function setProductNumberMinLvl1(int $productNumberMinLvl1): self
-    {
-        $this->productNumberMinLvl1 = $productNumberMinLvl1;
-
-        return $this;
-    }
-
-    public function getProductNumberMinLvl2(): ?int
-    {
-        return $this->productNumberMinLvl2;
-    }
-
-    public function setProductNumberMinLvl2(int $productNumberMinLvl2): self
-    {
-        $this->productNumberMinLvl2 = $productNumberMinLvl2;
-
-        return $this;
-    }
-
-    public function getProductNumberMinLvl3(): ?int
-    {
-        return $this->productNumberMinLvl3;
-    }
-
-    public function setProductNumberMinLvl3(int $productNumberMinLvl3): self
-    {
-        $this->productNumberMinLvl3 = $productNumberMinLvl3;
-
-        return $this;
-    }
-
-    public function getProductNumberMinLvl4(): ?int
-    {
-        return $this->productNumberMinLvl4;
-    }
-
-    public function setProductNumberMinLvl4(int $productNumberMinLvl4): self
-    {
-        $this->productNumberMinLvl4 = $productNumberMinLvl4;
-
-        return $this;
-    }
-
-    public function getProductNumberMaxLvl1(): ?int
-    {
-        return $this->productNumberMaxLvl1;
-    }
-
-    public function setProductNumberMaxLvl1(int $productNumberMaxLvl1): self
-    {
-        $this->productNumberMaxLvl1 = $productNumberMaxLvl1;
-
-        return $this;
-    }
-
-    public function getProductNumberMaxLvl2(): ?int
-    {
-        return $this->productNumberMaxLvl2;
-    }
-
-    public function setProductNumberMaxLvl2(int $productNumberMaxLvl2): self
-    {
-        $this->productNumberMaxLvl2 = $productNumberMaxLvl2;
-
-        return $this;
-    }
-
-    public function getProductNumberMaxLvl3(): ?int
-    {
-        return $this->productNumberMaxLvl3;
-    }
-
-    public function setProductNumberMaxLvl3(int $productNumberMaxLvl3): self
-    {
-        $this->productNumberMaxLvl3 = $productNumberMaxLvl3;
-
-        return $this;
-    }
-
-    public function getProductNumberMaxLvl4(): ?int
-    {
-        return $this->productNumberMaxLvl4;
-    }
-
-    public function setProductNumberMaxLvl4(int $productNumberMaxLvl4): self
-    {
-        $this->productNumberMaxLvl4 = $productNumberMaxLvl4;
+        $this->productNumberMax = $productNumberMax;
 
         return $this;
     }
