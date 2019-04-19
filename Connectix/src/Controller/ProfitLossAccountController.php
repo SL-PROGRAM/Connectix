@@ -4,6 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Game;
 use App\Entity\Socity;
+use App\Repository\AdministrationRepository;
+use App\Repository\BalanceSheetRepository;
+use App\Repository\ProductionRepository;
+use App\Repository\PurchaseOrderRepository;
+use App\Repository\ResearcherRepository;
+use App\Repository\SalesManParticularRepository;
+use App\Repository\SalesManProfessionalRepository;
+use App\Repository\SalesManRepository;
+use App\Repository\SalesOrderRepository;
+use App\Service\BalanceSheetCall;
+use App\Service\BalanceSheetRecord;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -14,14 +25,48 @@ class ProfitLossAccountController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/profitlossaccount", name="profit_loss_account")
      */
-    public function index()
+    public function index(SalesOrderRepository  $salesOrderRepository,
+                          PurchaseOrderRepository $purchaseOrderRepository,
+                          BalanceSheetRepository $balanceSheetRepository,
+                          BalanceSheetCall $balanceSheetCall,
+                          BalanceSheetRecord $balanceSheetRecord,
+                           AdministrationRepository $administrationRepository,
+                           SalesManRepository $salesManRepository,
+                           ResearcherRepository $researcherRepository,
+                           SalesManProfessionalRepository $salesManProfessionalRepository,
+                           SalesManParticularRepository $salesManParticularRepository,
+                           ProductionRepository $productionRepository
+                            )
     {
         $user = $this->getUser();
         $socity = $user->getSocity();
         $game = $user->getGame();
+        $turn = $game->getTurn();
+        $status = 0;
 
-        $actualYear = $this->actualYear($socity, $game);
-        $lastYear = $this->lastYear($socity, $game);
+
+        $balanceSheetRecord->record($socity,
+                           $turn,
+                           $status,
+                            $administrationRepository,
+                            $salesManRepository,
+                            $researcherRepository,
+                            $salesManProfessionalRepository,
+                            $salesManParticularRepository,
+                            $productionRepository,
+                            $salesOrderRepository,
+                            $purchaseOrderRepository,
+                            $balanceSheetRepository);
+
+
+
+
+        $actualYear = $this->actualYear($socity, $game,
+            $balanceSheetCall,
+            $balanceSheetRepository);
+        $lastYear = $this->lastYear( $socity,  $game,
+                               $balanceSheetCall,
+                               $balanceSheetRepository);
 
 
 
@@ -39,37 +84,51 @@ class ProfitLossAccountController extends AbstractController
      * @param Game $game
      * @return array
      */
-    private function actualYear(Socity $socity, Game $game)
+    private function actualYear(Socity $socity, Game $game,
+                                BalanceSheetCall $balanceSheetCall,
+                                BalanceSheetRepository $balanceSheetRepository)
     {
 
+        $turn = $game->getTurn();
         //TODO Parameter must create in entity BalanceSheet
         //TODO change value buy GET PARAMETER
 
-        $frenchGoodsSale = 120000;
-        $internationalGoodsSale = 1200;
-        $frenchProductionSoldGoods = 1500;
-        $internationalProductionSoldGoods = 1500;
-        $frenchProductionSoldServices = 2000;
-        $internationalProductionSoldServices = 2000;
-        $stockedProduction = 100;
-        $operatingGrant = 1000;
-        $repaymentOnDepreciationAndProvisions = 1250;
-        $otherProduct = 100;
-        $goodsPurchases = 1000;
-        $changeInStock = 10000;
-        $purchasesOfRawMaterialsAndSupplies = 2000;
-        $InventoryChange = 3000;
-        $otherPurchaseAndExternalCharges = 10;
-        $payRoll = $this->payRoll($socity); //TODO change position of function too
-        $depreciationAndAmortization = 550;
-        $provisions = 05252;
-        $provisionOnCurrentAsset = 10;
-        $provisionForRiskAndCharge = 25000;
-        $otherExpenses= 20;
-        $capitalExceptionalOperatingProduct = 20;
-        $capitalExceptionalExpense = 10;
-        $intestAndSimilarExpenses = 50;
-        $intestAndSimilarProduct = 600;
+
+        $frenchGoodsSale = $balanceSheetCall->frenchGoodsSale($socity, $turn, $balanceSheetRepository);
+        $frenchProductionSoldGoods = $balanceSheetCall->frenchProductionSoldGoods($socity, $turn, $balanceSheetRepository);
+        $stockedProduction = $balanceSheetCall->stockedProduction($socity, $turn, $balanceSheetRepository);
+
+        $repaymentOnDepreciationAndProvisions = $balanceSheetCall->repaymentOnDepreciationAndProvisions($socity, $turn, $balanceSheetRepository);
+        $goodsPurchases = $balanceSheetCall->goodsPurchases($socity, $turn, $balanceSheetRepository);
+        $changeInStock = $balanceSheetCall->changeInStock($socity, $turn, $balanceSheetRepository);
+        $purchasesOfRawMaterialsAndSupplies = $balanceSheetCall->purchasesOfRawMaterialsAndSupplies($socity, $turn, $balanceSheetRepository);
+        $otherPurchaseAndExternalCharges = $balanceSheetCall->otherPurchaseAndExternalCharges($socity, $turn, $balanceSheetRepository);
+        $payRoll = $balanceSheetCall->payRoll($socity, $turn, $balanceSheetRepository); //TODO change position of function too
+        $depreciationAndAmortization = $balanceSheetCall->depreciationAndAmortization($socity, $turn, $balanceSheetRepository);
+        $intestAndSimilarExpenses = $balanceSheetCall->intestAndSimilarExpenses($socity, $turn, $balanceSheetRepository);
+
+
+
+
+
+        /*
+         * Parameter not use in the game
+         */
+        $internationalGoodsSale = 0;
+        $internationalProductionSoldGoods = 0;
+        $frenchProductionSoldServices = 0;
+        $internationalProductionSoldServices = 0;
+        $operatingGrant = 0;
+        $otherProduct = 0;
+        $InventoryChange = 0;
+        $provisions = 0;
+        $provisionOnCurrentAsset = 0;
+        $provisionForRiskAndCharge = 0;
+        $otherExpenses= 0;
+        $capitalExceptionalOperatingProduct = 0;
+        $capitalExceptionalExpense = 0;
+        $intestAndSimilarProduct = 0;
+
 
 
 
@@ -104,41 +163,60 @@ class ProfitLossAccountController extends AbstractController
         );
     }
 
+
+
     /**
      * @param Socity $socity
      * @param Game $game
      * @return array
      */
-    private function lastYear(Socity $socity, Game $game)
+    private function lastYear(Socity $socity, Game $game,
+                              BalanceSheetCall $balanceSheetCall,
+                              BalanceSheetRepository $balanceSheetRepository)
     {
 
+        $turn = $game->getTurn()-1;
         //TODO Parameter must create in entity BalanceSheet
         //TODO change value buy GET PARAMETER
-        $frenchGoodsSale = 1200;
-        $internationalGoodsSale = 1200;
-        $frenchProductionSoldGoods = 1500;
-        $internationalProductionSoldGoods = 1500;
-        $frenchProductionSoldServices = 2000;
-        $internationalProductionSoldServices = 2000;
-        $stockedProduction = 100;
-        $operatingGrant = 1000;
-        $repaymentOnDepreciationAndProvisions = 1250;
-        $otherProduct = 100;
-        $goodsPurchases = 1000;
-        $changeInStock = 10000;
-        $purchasesOfRawMaterialsAndSupplies = 2000;
-        $InventoryChange = 3000;
-        $otherPurchaseAndExternalCharges = 10;
-        $payRoll = $this->payRoll($socity); //TODO change position of function too
-        $depreciationAndAmortization = 550;
-        $provisions = 05252;
-        $provisionOnCurrentAsset = 10;
-        $provisionForRiskAndCharge = 25000;
-        $otherExpenses= 20;
-        $capitalExceptionalOperatingProduct = 20;
-        $capitalExceptionalExpense = 10;
-        $intestAndSimilarExpenses = 50;
-        $intestAndSimilarProduct = 600;
+
+        $frenchGoodsSale = $balanceSheetCall->frenchGoodsSale($socity, $turn, $balanceSheetRepository);
+        $frenchProductionSoldGoods = $balanceSheetCall->frenchProductionSoldGoods($socity, $turn, $balanceSheetRepository);
+        $stockedProduction = $balanceSheetCall->stockedProduction($socity, $turn, $balanceSheetRepository);
+
+        $repaymentOnDepreciationAndProvisions = $balanceSheetCall->repaymentOnDepreciationAndProvisions($socity, $turn, $balanceSheetRepository);
+        $goodsPurchases = $balanceSheetCall->goodsPurchases($socity, $turn, $balanceSheetRepository);
+        $changeInStock = $balanceSheetCall->changeInStock($socity, $turn, $balanceSheetRepository);
+        $purchasesOfRawMaterialsAndSupplies = $balanceSheetCall->purchasesOfRawMaterialsAndSupplies($socity, $turn, $balanceSheetRepository);
+        $otherPurchaseAndExternalCharges = $balanceSheetCall->otherPurchaseAndExternalCharges($socity, $turn, $balanceSheetRepository);
+        $payRoll = $balanceSheetCall->payRoll($socity,  $turn, $balanceSheetRepository);
+        $depreciationAndAmortization = $balanceSheetCall->depreciationAndAmortization($socity, $turn, $balanceSheetRepository);
+        $intestAndSimilarExpenses = $balanceSheetCall->intestAndSimilarExpenses($socity, $turn, $balanceSheetRepository);
+
+
+
+
+
+        /*
+         * Parameter not use in the game
+         */
+        $internationalGoodsSale = 0;
+        $internationalProductionSoldGoods = 0;
+        $frenchProductionSoldServices = 0;
+        $internationalProductionSoldServices = 0;
+        $operatingGrant = 0;
+        $otherProduct = 0;
+        $InventoryChange = 0;
+        $provisions = 0;
+        $provisionOnCurrentAsset = 0;
+        $provisionForRiskAndCharge = 0;
+        $otherExpenses= 0;
+        $capitalExceptionalOperatingProduct = 0;
+        $capitalExceptionalExpense = 0;
+        $intestAndSimilarProduct = 0;
+
+
+
+
         return $lastYear = $this->profitLosAccountCalculator(
             $frenchGoodsSale,
             $internationalGoodsSale,
@@ -549,19 +627,6 @@ class ProfitLossAccountController extends AbstractController
         return $salariesAndTreatments = $payRoll-$socialCharges;
     }
 
-    /**
-     * @param Socity $socity
-     * @return float
-     */
-    private function payRoll(Socity $socity)
-    {
-        $payRoll = 0;
-        $employees = $socity->getHumanRessourcies();
-        foreach ($employees as $employee) {
-            $payRoll += $employee->getSalary();
-        }
-        return round($payRoll, 2);
-    }
 
     /**
      * @param $netTurnover

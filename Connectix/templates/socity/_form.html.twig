@@ -6,7 +6,6 @@
     <h2>Players</h2>
     <ul class="users"  data-prototype-user="{{ form_row(form.users.vars.prototype)|e('html_attr') }}">
     </ul>
-    <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
 
 {%  block javascripts %}

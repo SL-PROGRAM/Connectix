@@ -23,9 +23,10 @@ class LoanController extends AbstractController
     public function index(LoanRepository $loanRepository): Response
     {
         $turn = $this->getUser()->getGame()->getTurn();
+        $socity = $this->getUser()->getSocity();
 
         return $this->render('loan/index.html.twig', [
-            'loans' => $loanRepository->findAll(),
+            'loans' => $loanRepository->findBy(['socity' => $socity]),
             'turn' => $turn,
 
         ]);

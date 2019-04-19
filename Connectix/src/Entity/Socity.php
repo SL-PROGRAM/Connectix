@@ -45,47 +45,47 @@ class Socity
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\HumanResource", mappedBy="socity", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\HumanResource", mappedBy="socity", orphanRemoval=true, cascade={"persist"})
      */
     private $humanRessourcies;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductionUnit", mappedBy="socity", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductionUnit", mappedBy="socity", orphanRemoval=true, cascade={"persist"})
      */
     private $ProductionUnits;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Loan", mappedBy="socity", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Loan", mappedBy="socity", orphanRemoval=true, cascade={"persist"})
      */
     private $Loans;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\BalanceSheet", mappedBy="socity", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\BalanceSheet", mappedBy="socity", orphanRemoval=true, cascade={"persist"})
      */
     private $balanceSheets;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PurchaseOrder", mappedBy="socity", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\PurchaseOrder", mappedBy="socity", orphanRemoval=true, cascade={"persist"})
      */
     private $purchaseOrders;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\SalesOrder", mappedBy="socity", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\SalesOrder", mappedBy="socity", orphanRemoval=true, cascade={"persist"})
      */
     private $salesOrders;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ReseachOrder", mappedBy="socity", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\ReseachOrder", mappedBy="socity", orphanRemoval=true, cascade={"persist"})
      */
     private $reseachOrders;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PublicityOrder", mappedBy="socity", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\PublicityOrder", mappedBy="socity", orphanRemoval=true, cascade={"persist"})
      */
     private $publicityOrders;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ProductionOrder", mappedBy="socity", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\ProductionOrder", mappedBy="socity", orphanRemoval=true, cascade={"persist"})
      */
     private $productionOrders;
 

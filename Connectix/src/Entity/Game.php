@@ -265,7 +265,7 @@ class Game
     /**
      * @ORM\Column(type="integer")
      */
-    private $factoryCreationCost = 2500000;
+    private $factoryCreationCost = 560000;
 
     /**
      * @ORM\Column(type="integer")
@@ -285,7 +285,7 @@ class Game
     /**
      * @ORM\Column(type="integer")
      */
-    private $productionLignCreationCost = 15000;
+    private $productionLignCreationCost = 250000;
 
     /**
      * @ORM\Column(type="integer")
@@ -311,6 +311,11 @@ class Game
      * @ORM\Column(type="integer")
      */
     private $productionLignTotalLifeProductTime = 180000;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $groundCost = 100000;
 
     /**
      * Game constructor.
@@ -1151,6 +1156,18 @@ class Game
     public function setProductionLignTotalLifeProductTime(int $productionLignTotalLifeProductTime): self
     {
         $this->productionLignTotalLifeProductTime = $productionLignTotalLifeProductTime;
+
+        return $this;
+    }
+
+    public function getGroundCost(): ?int
+    {
+        return $this->groundCost;
+    }
+
+    public function setGroundCost(int $groundCost): self
+    {
+        $this->groundCost = $groundCost;
 
         return $this;
     }

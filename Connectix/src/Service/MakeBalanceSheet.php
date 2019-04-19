@@ -51,7 +51,7 @@ class MakeBalanceSheet extends AbstractController
             ->setCustomersAndRelatedAccounts(0)
             ->setOtherReceivables(0)
             ->setAvailability(0)
-            ->setShareCapitalOrIndividual(0)
+            ->setShareCapitalOrIndividual($game->getSocityStartShareCapital())
             ->setPremiumIssueMergerContribution(0)
             ->setLegalReserve(0)
             ->setStatutoryOrContractualReserves(0)

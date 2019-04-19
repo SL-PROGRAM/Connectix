@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Socity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
@@ -26,19 +27,27 @@ class SocityType extends AbstractType
             'allow_delete' => true,
             'prototype' => true,
             'prototype_name' => 'player',
-//             'mapped' => false,
-//                'constraints' => [
-//                    new NotBlank([
-//                        'message' => 'Please enter a password',
-//                    ]),
-//                    new Length([
-//                        'min' => 6,
-//                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-//                        'max' => 4096,
-//                    ]),
-//              ]
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Please enter a password',
+                ]),
+                new Length([
+                    'min' => 6,
+                    'minMessage' => 'Your password should be at least {{ limit }} characters',
+                    'max' => 4096,
+                ]),
+          ]
         ]
     );
+        $builder
+        ->add('submit', SubmitType::class, [
+        'label' => 'article.form.submit.label',
+    ])
+        ->add('submitAndRestart', SubmitType::class, [
+            'label' => 'article.form.submitAndRestart.label',
+        ])
+    ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

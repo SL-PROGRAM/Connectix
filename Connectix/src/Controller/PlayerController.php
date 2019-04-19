@@ -202,7 +202,7 @@ class PlayerController extends AbstractController
         $productPurchables = $this->productPurchables($productRepository);
 
 
-        return $productPurchasePrint = $this->productPurchase($productPurchables, $productPurchaseOrders);
+        return $productPurchasePrint = $this->productPurchase($productPurchables, $productPurchaseOrders, $socity);
     }
 
     private function productSalesPrint(
@@ -285,8 +285,6 @@ class PlayerController extends AbstractController
             $name = $product->getName();
             $id = $product->getId();
             $cycleLife = $product->getProductLifes(); //TODO modify to select productLifeCycle
-
-            dump($publicityOrderTurn);
 
             if ($publicityOrderTurn !== null) {
                 $productPublicityTurn = $publicityOrderTurn->getPublicityPrice();
@@ -412,31 +410,33 @@ class PlayerController extends AbstractController
         return $productReseachOrders = $reseachOrderRepository->findBy(["socity" => $socity, "product" => $Product]);
     }
 
-    private function productPurchase($productPurchables, $productPurchaseOrders)
+    private function productPurchase($productPurchables, $productPurchaseOrders,Socity $socity)
     {
         $productPurchasePrint =  [];
         foreach ($productPurchables as $productPurchable) {
-            $quantity = 0;
-            $PurchaseOrderId = null;
-            $id = $productPurchable->getId();
-            $name = $productPurchable->getName();
-            $purchasePrice = $productPurchable->getBuyPrice();
-            $quantityDiscount = $productPurchable->getQuantityDiscount();
-            foreach ($productPurchaseOrders as $productPurchaseOrder) {
-                if ($productPurchaseOrder->getProduct()->getName() === $productPurchable->getName()) {
-                    $quantity = $productPurchaseOrder->getProductQuantityPurchase();
-                    $PurchaseOrderId = $productPurchaseOrder->getId();
+            if ($socity->getGame() === $productPurchable->getGame()){
+                $quantity = 0;
+                $PurchaseOrderId = null;
+                $id = $productPurchable->getId();
+                $name = $productPurchable->getName();
+                $purchasePrice = $productPurchable->getBuyPrice();
+                $quantityDiscount = $productPurchable->getQuantityDiscount();
+                foreach ($productPurchaseOrders as $productPurchaseOrder) {
+                    if ($productPurchaseOrder->getProduct()->getName() === $productPurchable->getName()) {
+                        $quantity = $productPurchaseOrder->getProductQuantityPurchase();
+                        $PurchaseOrderId = $productPurchaseOrder->getId();
+                    }
                 }
+                $productPrint = [
+                    "id" => $id,
+                    "name" => $name,
+                    "purchasePrice" => $purchasePrice,
+                    "quantityDiscount" => $quantityDiscount,
+                    "quantity" => $quantity,
+                    "PurchaseOrderId" => $PurchaseOrderId,
+                ];
+                array_push($productPurchasePrint, $productPrint);
             }
-            $productPrint = [
-                "id" => $id,
-                "name" => $name,
-                "purchasePrice" => $purchasePrice,
-                "quantityDiscount" => $quantityDiscount,
-                "quantity" => $quantity,
-                "PurchaseOrderId" => $PurchaseOrderId,
-            ];
-            array_push($productPurchasePrint, $productPrint);
         }
         return $productPurchasePrint;
     }
@@ -456,7 +456,7 @@ class PlayerController extends AbstractController
             }
 
 
-            if ($research >= $product->getResearchCost() or $product->getTechnologicLevel() === 1) {
+            if (($research >= $product->getResearchCost() or $product->getTechnologicLevel() === 1) and $product->getGame() === $socity->getGame()) {
                 array_push($productSalable, $product);
             }
         }
@@ -486,22 +486,23 @@ class PlayerController extends AbstractController
 
         $productionOrderPrint =[];
         foreach ($productSalable as $product) {
-            $quantity = 0;
-            $researchOrderId = null;
-            $id = $product->getId();
-            $name = $product->getName();
-            $rowMaterialCost = $product->getRowMaterialCost();
-            $productionTimeCost = $product->getProductiorTimeCost();
+            if($product->getTechnologicLevel() !== 1) {
+                $quantity = 0;
+                $researchOrderId = null;
+                $id = $product->getId();
+                $name = $product->getName();
+                $rowMaterialCost = $product->getRowMaterialCost();
+                $productionTimeCost = $product->getProductiorTimeCost();
 
 
-            foreach ($productProductionOrders as $productProductionOrder) {
-                if ($productProductionOrder->getProduct()->getName() === $product->getName()) {
-                    $quantity += $productProductionOrder->getQuantityProductCreat();
-                    $researchOrderId = $productProductionOrder->getId();
+                foreach ($productProductionOrders as $productProductionOrder) {
+                    if ($productProductionOrder->getProduct()->getName() === $product->getName()) {
+                        $quantity += $productProductionOrder->getQuantityProductCreat();
+                        $researchOrderId = $productProductionOrder->getId();
+                    }
                 }
-            }
 
-            $productionPrint = [
+                $productionPrint = [
                     "id" => $id,
                     "name" => $name,
                     'rowMaterialCost' => $rowMaterialCost,
@@ -512,15 +513,17 @@ class PlayerController extends AbstractController
                     'researchOrderId' => $researchOrderId
 
                 ];
-            array_push($productionOrderPrint, $productionPrint);
+                array_push($productionOrderPrint, $productionPrint);
+            }
         }
         return $productionOrderPrint;
     }
 
-    private function researchOrderPrint(ProductRepository $productRepository, ReseachOrderRepository $reseachOrderRepository, $socity, $turn)
+    private function researchOrderPrint(ProductRepository $productRepository, ReseachOrderRepository $reseachOrderRepository,Socity $socity, $turn)
     {
         //TODO voir comment limiter les recherches en fonctions des lvl et produit déja recherché
-        $products = $productRepository->findBy([]);
+        $game = $socity->getGame();
+        $products = $productRepository->findBy(["game" => $game]);
         $researchOrderPrint = [];
         foreach ($products as $product) {
             if ($product->getTechnologicLevel() != 1) {
@@ -558,7 +561,6 @@ class PlayerController extends AbstractController
     {
         $totalProductionTimeCapacity = 0;
         $totalTime = 0;
-        dump($productionOrderPrint);
         foreach ($productionOrderPrint as $values) {
             foreach ($values as $key => $value) {
                 if ($key == "productiorTimeTotalCost") {

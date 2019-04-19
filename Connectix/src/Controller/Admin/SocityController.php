@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Game;
+use App\Entity\Loan;
 use App\Entity\Socity;
 use App\Form\SocityType;
 use App\Repository\GameRepository;
@@ -10,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -20,15 +21,6 @@ class SocityController extends AbstractController
 {
 
 
-    /**
-     * @var EncoderFactoryInterface
-     */
-    private $securityEncoderFactory;
-
-    public function __construct(EncoderFactoryInterface $securityEncoderFactory)
-    {
-        $this->securityEncoderFactory = $securityEncoderFactory;
-    }
 
 
     /**
@@ -64,13 +56,27 @@ class SocityController extends AbstractController
                 $entityManager->persist($user);
             }
 
-
             $entityManager->persist($socity);
-            $entityManager->flush();
+
 
             $makeBalanceSheet->makeBalanceSheet($socity, $game);
 
-            return $this->redirectToRoute('socity_new');
+
+            $loan = $this->makeStartLoan($game, $socity);
+
+            $entityManager->persist($loan);
+
+
+            $entityManager->flush();
+
+            if ($form->get('submitAndRestart')->isClicked()) {
+                return $this->render('socity/new.html.twig', [
+                    'socity' => $socity,
+                    'form' => $form->createView(),
+                ]);
+            }
+
+            return $this->redirectToRoute('player_sales');
         }
 
         return $this->render('socity/new.html.twig', [
@@ -79,4 +85,20 @@ class SocityController extends AbstractController
         ]);
     }
 
+    private function makeStartLoan(Game $game, Socity $socity){
+        $loan =new Loan();
+        $borrowAmount = $game->getSocityStartLoanAmount();
+        $loanInterestRate = $game->getSocityStartLoanInterestRate();
+        $loanDuration = $game->getSocityStartLoanDuration();
+        $loan->setSocity($socity)
+            ->setTurn($game->getTurn())
+            ->setBorrowAmount($borrowAmount)
+            ->setBankInterest($loanInterestRate)
+            ->setLoanDuration($loanDuration)
+            ->setMonthlyDueDate(
+                $borrowAmount/$loanDuration*(1+($loanInterestRate/100)^$loanDuration))
+            ->setDelayLoanRepayment(0);
+
+        return $loan;
+    }
 }
