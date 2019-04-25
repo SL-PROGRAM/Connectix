@@ -2,6 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Game;
+use App\Entity\Socity;
+use App\Repository\BalanceSheetRepository;
+use App\Repository\FactoryRepository;
+use App\Repository\ProductionLignRepository;
+use App\Service\BalanceSheetCall;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -17,16 +23,24 @@ class BalanceSheetScreenController extends AbstractController
     /**
      * @Route("/balancesheetscreen", name="balance_sheet")
      */
-    public function index()
+    public function index(BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository, FactoryRepository $factoryRepository,
+                          ProductionLignRepository $productionLignRepository)
     {
-        $actualYearActiveBalanceSheetBrut = $this->actualYearActiveBalanceSheetBrut();
-        $actualYearActiveBalanceSheetDepreciationProvision = $this->actualYearActiveBalanceSheetDepreciationProvision();
+        $socity = $this->getUser()->getSocity();
+        $game = $this->getUser()->getGame();
+        $turn = $game->getTurn();
+
+
+        $actualYearActiveBalanceSheetBrut = $this->actualYearActiveBalanceSheetBrut($balanceSheetCall, $balanceSheetRepository, $socity, $turn);
+        $actualYearActiveBalanceSheetDepreciationProvision = $this->actualYearActiveBalanceSheetDepreciationProvision($factoryRepository,
+                                                                       $productionLignRepository,
+                                                                       $game,$socity);
         $actualYearActiveBalanceSheetNet = $this->actualYearActiveBalanceSheetNet(
             $actualYearActiveBalanceSheetBrut,
             $actualYearActiveBalanceSheetDepreciationProvision
         );
         $lastYearActiveBalanceSheet = $this->lastYearActiveBalanceSheet();
-        $actualYearPassiveBalanceSheet = $this->actualYearPassiveBalanceSheet();
+        $actualYearPassiveBalanceSheet = $this->actualYearPassiveBalanceSheet($balanceSheetCall, $balanceSheetRepository);
         $lastYearPassiveBalanceSheet = $this->lastYearPassiveBalanceSheet();
 
 
@@ -43,19 +57,37 @@ class BalanceSheetScreenController extends AbstractController
 
 
 
-    private function actualYearActiveBalanceSheetBrut()
+    private function actualYearActiveBalanceSheetBrut(BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository,Socity $socity, $turn)
     {
+
         //TODO RETURN TABLE TO INDEX
         //TODO GET PARAMETER AND GIVE THEM TO calculationActiveBalanceSheet
-        $administrationFees = 1000;
-        $researchAndDevelopmentCost = 1000;
-        $concessionPatentsAndSimilar = 1000;
+        $researchAndDevelopmentCost = 0;
+        $concessionPatentsAndSimilar = 0;
+
+        $grounds = $balanceSheetCall->grounds($socity, $turn, $balanceSheetRepository);
+        $constructions = $balanceSheetCall->factory($socity, $turn, $balanceSheetRepository);
+        $technicalInstallationsEquipment = $balanceSheetCall->productionLign($socity, $turn, $balanceSheetRepository);
+
+        $intermediateAndFinishProduct = $balanceSheetCall->stockedProduction($socity, $turn, $balanceSheetRepository);
+        $merchandise = $balanceSheetCall->goodsPurchases($socity, $turn, $balanceSheetRepository);
+
+        $customersAndRelatedAccounts = 0;
+        $otherReceivables = 0;
+
+        $availability = 0;
+
+
+
+        /*
+         * variable not use
+         */
+        $administrationFees = 0;
+
         $commercialFund = 0;
         $otherIntangibleAsset = 0;
         $advancesAndDownPaymentOnIntangibleAssets = 0;
-        $grounds = 0;
-        $constructions = 0;
-        $technicalInstallationsEquipment = 0;
+
         $otherTangibleFixedAssets = 0;
         $assetInProgress = 0;
         $advancesAndDownPaymentOnTangibleAssets = 0;
@@ -65,20 +97,20 @@ class BalanceSheetScreenController extends AbstractController
         $otherLockedSecurities = 0;
         $loans = 0;
         $otherFinancialAssets = 0;
+
         $rowMaterialsSupplies = 0;
         $outstandingProducingGoods = 0;
         $outstandingServices = 0;
-        $intermediateAndFinishProduct = 0;
-        $merchandise = 0;
+
         $advancesAndPrepaymentOrders = 0;
-        $customersAndRelatedAccounts = 0;
-        $otherReceivables = 0;
+
         $subscribedAndCallCapitalUnpaid = 0;
         $marketableSecurities = 0;
         $bank = 0;
-        $availability = 0;
+
         $prepaidExpenses = 0;
         $subscribedCapitalNotCall = 0;
+
         $expensesSpreadOverSeveralFinancialYears = 0;
         $bondRepaymentPremiums = 0;
         $activeConversionDifferences = 0;
@@ -123,19 +155,33 @@ class BalanceSheetScreenController extends AbstractController
         );
     }
 
-    private function actualYearActiveBalanceSheetDepreciationProvision()
+    private function actualYearActiveBalanceSheetDepreciationProvision(FactoryRepository $factoryRepository,
+                                                                       ProductionLignRepository $productionLignRepository,
+                                                                       Game $game,Socity $socity)
     {
         //TODO RETURN TABLE TO INDEX
         //TODO GET PARAMETER AND GIVE THEM TO calculationActiveBalanceSheet
-        $administrationFees = 100;
-        $researchAndDevelopmentCost = 100;
-        $concessionPatentsAndSimilar = 100;
+        $researchAndDevelopmentCost = 0;
+        $concessionPatentsAndSimilar = 0;
+
+        $constructions = $this->factoryAmortization($game, $socity, $factoryRepository);
+        $technicalInstallationsEquipment = $this->productionLignAmortization($socity, $game, $productionLignRepository);
+
+        $merchandise = 0; //TODO change value if production or merchandise is "déprécié"
+
+
+        /*
+         * variable not use
+         */
+        $administrationFees = 0;
+
         $commercialFund = 0;
         $otherIntangibleAsset = 0;
         $advancesAndDownPaymentOnIntangibleAssets = 0;
-        $grounds = 0;
-        $constructions = 0;
-        $technicalInstallationsEquipment = 0;
+        $grounds = 0; //not amortizable
+
+        $intermediateAndFinishProduct = 0;
+
         $otherTangibleFixedAssets = 0;
         $assetInProgress = 0;
         $advancesAndDownPaymentOnTangibleAssets = 0;
@@ -145,20 +191,23 @@ class BalanceSheetScreenController extends AbstractController
         $otherLockedSecurities = 0;
         $loans = 0;
         $otherFinancialAssets = 0;
+
         $rowMaterialsSupplies = 0;
         $outstandingProducingGoods = 0;
         $outstandingServices = 0;
-        $intermediateAndFinishProduct = 0;
-        $merchandise = 0;
+
         $advancesAndPrepaymentOrders = 0;
+
         $customersAndRelatedAccounts = 0;
         $otherReceivables = 0;
+
         $subscribedAndCallCapitalUnpaid = 0;
         $marketableSecurities = 0;
         $bank = 0;
         $availability = 0;
         $prepaidExpenses = 0;
         $subscribedCapitalNotCall = 0;
+
         $expensesSpreadOverSeveralFinancialYears = 0;
         $bondRepaymentPremiums = 0;
         $activeConversionDifferences = 0;
@@ -424,37 +473,75 @@ class BalanceSheetScreenController extends AbstractController
         ];
     }
 
-    private function actualYearPassiveBalanceSheet()
+
+    private function factoryAmortization(Game $game, Socity $socity, FactoryRepository $factoryRepository){
+        $factoryAmortization = $game->getFactoryAmortizationTurn();
+        $factoryCost = $game->getFactoryCreationCost();
+        $nbreFactory =  count($factoryRepository->findBy(['socity' => $socity]));
+
+        return $amortization = round($nbreFactory*$factoryCost/$factoryAmortization, 2);
+    }
+
+    private function productionLignAmortization(Socity $socity, Game $game, ProductionLignRepository $productionLignRepository){
+        $productionLignAAmortization = $game->getProductionLignAmortizationTurn();
+        $productionLignCost = $game->getProductionLignCreationCost();
+        $nbreProductionLign =  count($productionLignRepository->findBy(['socity' => $socity]));
+
+        return $amortization = round($nbreProductionLign*$productionLignCost/$productionLignAAmortization, 2);
+    }
+
+
+    //PASSIVE BALANCE SHEET
+
+
+
+    private function actualYearPassiveBalanceSheet(BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository)
     {
+        $socity = $this->getUser()->getSocity();
+        $game = $this->getUser()->getGame();
+        $turn = $game->getTurn();
 
         //TODO RETURN TABLE TO INDEX
         //TODO GET PARAMETER AND GIVE THEM TO calculationPassiveBalanceSheet
         $shareCapitalOrIndividual = 0;
-        $convertibleBonds = 0;
-        $otherBonds = 0;
-        $loanAndDebtsWihCreditInstitutions = 0;
-        $borrowingAndOtherFinancialDebts = 0;
-        $AdvancesAndDownPaymentReceived = 0;
+        $premiumIssueMergerContribution = 0;
+
+        $yearProfit = $balanceSheetCall->yearResult($socity, $turn,$balanceSheetRepository);
+
+        $loanAndDebtsWihCreditInstitutions = $balanceSheetCall->loanAndDebtsWihCreditInstitutions($socity, $turn,$balanceSheetRepository);
+
         $tradePayableAndRelatedAccounts = 0;
         $taxAndSocialDebts = 0;
-        $debtsOnFixedAssetsAndRelatedAccount = 0;
+
         $otherDebts = 0;
-        $prepaidIncome = 0;
-        $premiumIssueMergerContribution = 0;
+
+        //Variable not use
         $revaluationDifferences = 0;
         $legalReserve = 0;
         $statutoryOrContractualReserves = 0;
         $regulatedReserves = 0;
         $otherReserves = 0;
         $reportAgain = 0;
-        $yearProfit = 0;
+
         $investmentGrant = 0;
         $regulatedProvisions = 0;
+
         $proceedsFromEquitySecuritiesIssues = 0;
         $conditionedAdvances = 0;
         $riskProvision = 0;
         $expensesProvision = 0;
+
+        $convertibleBonds = 0;
+        $otherBonds = 0;
+
+        $borrowingAndOtherFinancialDebts = 0;
+        $AdvancesAndDownPaymentReceived = 0;
+
+        $debtsOnFixedAssetsAndRelatedAccount = 0;
+        $prepaidIncome = 0;
+
         $liabilitiesTranslationDifferences = 0;
+
 
         return $actualYearPassiveBalanceSheet = $this->calculationPassiveBalanceSheet(
             $shareCapitalOrIndividual,
@@ -491,32 +578,44 @@ class BalanceSheetScreenController extends AbstractController
     {
         //TODO RETURN TABLE TO INDEX
         //TODO GET PARAMETER AND GIVE THEM TO calculationPassiveBalanceSheet
-        $shareCapitalOrIndividual = 250;
-        $convertibleBonds = 240;
-        $otherBonds = 230;
-        $loanAndDebtsWihCreditInstitutions = 220;
-        $borrowingAndOtherFinancialDebts = 210;
-        $AdvancesAndDownPaymentReceived = 200;
-        $tradePayableAndRelatedAccounts = 190;
-        $taxAndSocialDebts = 180;
-        $debtsOnFixedAssetsAndRelatedAccount = 170;
-        $otherDebts = 160;
-        $prepaidIncome = 150;
-        $premiumIssueMergerContribution = 140;
-        $revaluationDifferences = 130;
-        $legalReserve = 120;
-        $statutoryOrContractualReserves = 110;
-        $regulatedReserves = 100;
+        $shareCapitalOrIndividual = 0;
+        $premiumIssueMergerContribution = 0;
+
+        $yearProfit = 0;
+
+        $loanAndDebtsWihCreditInstitutions = 0;
+
+        $tradePayableAndRelatedAccounts = 0;
+        $taxAndSocialDebts = 0;
+
+        $otherDebts = 0;
+
+        //Variable not use
+        $revaluationDifferences = 0;
+        $legalReserve = 0;
+        $statutoryOrContractualReserves = 0;
+        $regulatedReserves = 0;
         $otherReserves = 0;
-        $reportAgain = 90;
-        $yearProfit = 80;
-        $investmentGrant = 70;
-        $regulatedProvisions = 60;
-        $proceedsFromEquitySecuritiesIssues = 50;
-        $conditionedAdvances = 40;
-        $riskProvision = 30;
-        $expensesProvision = 20;
-        $liabilitiesTranslationDifferences = 10;
+        $reportAgain = 0;
+
+        $investmentGrant = 0;
+        $regulatedProvisions = 0;
+
+        $proceedsFromEquitySecuritiesIssues = 0;
+        $conditionedAdvances = 0;
+        $riskProvision = 0;
+        $expensesProvision = 0;
+
+        $convertibleBonds = 0;
+        $otherBonds = 0;
+
+        $borrowingAndOtherFinancialDebts = 0;
+        $AdvancesAndDownPaymentReceived = 0;
+
+        $debtsOnFixedAssetsAndRelatedAccount = 0;
+        $prepaidIncome = 0;
+
+        $liabilitiesTranslationDifferences = 0;
 
         return $lastYearPassiveBalanceSheet = $this->calculationPassiveBalanceSheet(
             $shareCapitalOrIndividual,

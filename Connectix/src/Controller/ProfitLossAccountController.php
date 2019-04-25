@@ -6,7 +6,12 @@ use App\Entity\Game;
 use App\Entity\Socity;
 use App\Repository\AdministrationRepository;
 use App\Repository\BalanceSheetRepository;
+use App\Repository\FactoryRepository;
+use App\Repository\LoanRepository;
+use App\Repository\ProductionLignRepository;
+use App\Repository\ProductionOrderRepository;
 use App\Repository\ProductionRepository;
+use App\Repository\PublicityOrderRepository;
 use App\Repository\PurchaseOrderRepository;
 use App\Repository\ResearcherRepository;
 use App\Repository\SalesManParticularRepository;
@@ -35,6 +40,11 @@ class ProfitLossAccountController extends AbstractController
                            ResearcherRepository $researcherRepository,
                            SalesManProfessionalRepository $salesManProfessionalRepository,
                            SalesManParticularRepository $salesManParticularRepository,
+                           ProductionOrderRepository $productionOrderRepository,
+                          PublicityOrderRepository $publicityOrderRepository,
+                          FactoryRepository $factoryRepository,
+                          ProductionLignRepository $productionLignRepository,
+                          LoanRepository $loanRepository,
                            ProductionRepository $productionRepository
                             )
     {
@@ -56,14 +66,20 @@ class ProfitLossAccountController extends AbstractController
                             $productionRepository,
                             $salesOrderRepository,
                             $purchaseOrderRepository,
+                            $productionOrderRepository,
+                            $publicityOrderRepository,
+                            $loanRepository,
+                            $factoryRepository,
+                            $productionLignRepository,
                             $balanceSheetRepository);
-
-
 
 
         $actualYear = $this->actualYear($socity, $game,
             $balanceSheetCall,
+            $balanceSheetRecord,
             $balanceSheetRepository);
+
+
         $lastYear = $this->lastYear( $socity,  $game,
                                $balanceSheetCall,
                                $balanceSheetRepository);
@@ -86,12 +102,11 @@ class ProfitLossAccountController extends AbstractController
      */
     private function actualYear(Socity $socity, Game $game,
                                 BalanceSheetCall $balanceSheetCall,
+                                BalanceSheetRecord $balanceSheetRecord,
                                 BalanceSheetRepository $balanceSheetRepository)
     {
 
         $turn = $game->getTurn();
-        //TODO Parameter must create in entity BalanceSheet
-        //TODO change value buy GET PARAMETER
 
 
         $frenchGoodsSale = $balanceSheetCall->frenchGoodsSale($socity, $turn, $balanceSheetRepository);
@@ -103,7 +118,7 @@ class ProfitLossAccountController extends AbstractController
         $changeInStock = $balanceSheetCall->changeInStock($socity, $turn, $balanceSheetRepository);
         $purchasesOfRawMaterialsAndSupplies = $balanceSheetCall->purchasesOfRawMaterialsAndSupplies($socity, $turn, $balanceSheetRepository);
         $otherPurchaseAndExternalCharges = $balanceSheetCall->otherPurchaseAndExternalCharges($socity, $turn, $balanceSheetRepository);
-        $payRoll = $balanceSheetCall->payRoll($socity, $turn, $balanceSheetRepository); //TODO change position of function too
+        $payRoll = $balanceSheetCall->payRoll($socity, $turn, $balanceSheetRepository);
         $depreciationAndAmortization = $balanceSheetCall->depreciationAndAmortization($socity, $turn, $balanceSheetRepository);
         $intestAndSimilarExpenses = $balanceSheetCall->intestAndSimilarExpenses($socity, $turn, $balanceSheetRepository);
 
@@ -133,7 +148,7 @@ class ProfitLossAccountController extends AbstractController
 
 
 
-        return $actualYear = $this->profitLosAccountCalculator(
+        $actualYear = $this->profitLosAccountCalculator(
             $frenchGoodsSale,
             $internationalGoodsSale,
             $frenchProductionSoldGoods,
@@ -161,6 +176,12 @@ class ProfitLossAccountController extends AbstractController
             $intestAndSimilarProduct,
             $game
         );
+
+        $profitLoss = $actualYear['profitLoss'];
+        $balanceSheetRecord->recordProfitYears($socity, $turn, $profitLoss, $balanceSheetRepository);
+
+
+        return $actualYear;
     }
 
 
@@ -176,8 +197,6 @@ class ProfitLossAccountController extends AbstractController
     {
 
         $turn = $game->getTurn()-1;
-        //TODO Parameter must create in entity BalanceSheet
-        //TODO change value buy GET PARAMETER
 
         $frenchGoodsSale = $balanceSheetCall->frenchGoodsSale($socity, $turn, $balanceSheetRepository);
         $frenchProductionSoldGoods = $balanceSheetCall->frenchProductionSoldGoods($socity, $turn, $balanceSheetRepository);
@@ -365,6 +384,8 @@ class ProfitLossAccountController extends AbstractController
         $profitLoss = $this->profitLoss($totalProduct, $totalExpenses);
 
 
+
+
         return $profitLosAccountCalculator = [
             "frenchGoodsSale" => $frenchGoodsSale,
             "internationalGoodsSale" => $internationalGoodsSale,
@@ -527,7 +548,7 @@ class ProfitLossAccountController extends AbstractController
      */
     private function financialResult($totalFinanceExpenses, $totalFinancialProduct)
     {
-        return $financialResult = $totalFinanceExpenses + $totalFinancialProduct;
+        return $financialResult = $totalFinancialProduct - $totalFinanceExpenses ;
     }
 
     /**

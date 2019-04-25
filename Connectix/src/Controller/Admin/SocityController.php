@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\BalanceSheet;
 use App\Entity\Game;
 use App\Entity\Loan;
 use App\Entity\Socity;
@@ -58,14 +59,11 @@ class SocityController extends AbstractController
 
             $entityManager->persist($socity);
 
-
-            $makeBalanceSheet->makeBalanceSheet($socity, $game);
-
-
             $loan = $this->makeStartLoan($game, $socity);
+            $balanceSheet = $this->makeBalanceSheet($game, $socity);
 
             $entityManager->persist($loan);
-
+            $entityManager->persist($balanceSheet);
 
             $entityManager->flush();
 
@@ -100,5 +98,15 @@ class SocityController extends AbstractController
             ->setDelayLoanRepayment(0);
 
         return $loan;
+    }
+
+    private function makeBalanceSheet(Game $game, Socity $socity){
+        $balanceSheet = new BalanceSheet();
+        $balanceSheet->setShareCapitalOrIndividual($game->getSocityStartShareCapital())
+            ->setSocity($socity)
+            ->setTurn($game->getTurn())
+        ;
+
+        return $balanceSheet;
     }
 }

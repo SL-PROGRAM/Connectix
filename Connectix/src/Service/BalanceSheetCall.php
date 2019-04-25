@@ -4,10 +4,9 @@
 namespace App\Service;
 
 
+use App\Entity\BalanceSheet;
 use App\Entity\Socity;
 use App\Repository\BalanceSheetRepository;
-use App\Repository\PurchaseOrderRepository;
-use App\Repository\SalesOrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BalanceSheetCall extends AbstractController
@@ -26,6 +25,7 @@ class BalanceSheetCall extends AbstractController
             return $frenchGoodsSale->getMarchendiseSales();
         }
     }
+
     public function frenchProductionSoldGoods(Socity $socity, $turn, BalanceSheetRepository $balanceSheetRepository){
         $frenchGoodsSale = $balanceSheetRepository->findOneBy([
             'socity' => $socity,
@@ -94,8 +94,6 @@ class BalanceSheetCall extends AbstractController
             return $goodsPurchases->getMarchendisePurchase();
         }
     }
-
-
 
     public function changeInStock(Socity $socity, $turn, BalanceSheetRepository $balanceSheetRepository){
         $changeInStockLastTurn = $balanceSheetRepository->findOneBy(
@@ -193,4 +191,124 @@ class BalanceSheetCall extends AbstractController
             return $payRoll->getTotalSalary();
         }
     }
+
+    public function interestAndSimilarExpenses(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
+        $interestAndSimilarExpenses = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+                'status' => 0, ]);
+        if ($interestAndSimilarExpenses === null){
+            return $interestAndSimilarExpenses = 0;
+        }
+        else {
+            return $interestAndSimilarExpenses->getInterestAndSimilarExpenses();
+        }
+    }
+
+    public function grounds(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
+        $grounds = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+                'status' => 0, ]);
+        if ($grounds === null){
+            return $grounds = 0;
+        }
+        else {
+            return $grounds->getGrounds();
+        }
+    }
+
+    public function productionLign(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
+        $productionLign = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+                'status' => 0, ]);
+        if ($productionLign === null){
+            return 0;
+        }
+        else {
+            return $productionLign->getTechnicalInstallationsEquipment();
+        }
+    }
+
+    public function factory(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
+        $factory = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+                'status' => 0, ]);
+        if ($factory === null){
+            return 0;
+        }
+        else {
+            return $factory->getConstructions();
+        }
+    }
+
+    public function yearResult(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
+        $yearResult = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ]);
+        if ($yearResult === null){
+            return 0;
+        }
+        else {
+            return $yearResult->getYearProfit();
+        }
+    }
+
+    public function loanAndDebtsWihCreditInstitutions(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
+        $loanAndDebtsWihCreditInstitutions = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ]);
+        if ($loanAndDebtsWihCreditInstitutions === null){
+            return 0;
+        }
+        else {
+            return $loanAndDebtsWihCreditInstitutions->getLoanAndDebtsWihCreditInstitutions();
+        }
+    }
+
+     public function shareCapitalOrIndividual(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
+            $shareCapitalOrIndividual = $balanceSheetRepository->findOneBy(
+                [
+                    'socity' => $socity,
+                    'turn' => $turn,
+                ]);
+            if ($shareCapitalOrIndividual === null){
+                return 0;
+            }
+            else {
+                return $shareCapitalOrIndividual->getShareCapitalOrIndividual();
+            }
+        }
+
+        public function tva(){
+            $socity = $this->getUser()->getSocity();
+            $turn = $this->getUser()->getGame()->getTurn()-1;
+            $balanceSheetRepository = $this->getDoctrine()->getRepository(BalanceSheet::class);
+
+            $balanceSheetToRecord = $balanceSheetRepository->findOneBy([
+                'socity' => $socity,
+                'turn' => $turn,
+                'status' => 0
+            ]);
+
+            if ($balanceSheetToRecord === null){
+                return 0;
+            }
+            else {
+                return $balanceSheetToRecord->getTva();
+            }
+        }
+
+
+
 }

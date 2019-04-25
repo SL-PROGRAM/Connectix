@@ -43,6 +43,7 @@ class PlayerController extends AbstractController
         ReseachOrderRepository $reseachOrderRepository,
         SalesOrderRepository $salesOrderRepository,
         BalanceSheetRepository $balanceSheetRepository,
+        ProductionOrderRepository $productionOrderRepository,
         PurchaseOrderRepository $purchaseOrderRepository
     ) {
         $socity = $this->getUser()->getSocity();
@@ -53,6 +54,7 @@ class PlayerController extends AbstractController
             $reseachOrderRepository,
             $purchaseOrderRepository,
             $balanceSheetRepository,
+            $productionOrderRepository,
             $socity
         );
 
@@ -211,6 +213,7 @@ class PlayerController extends AbstractController
         ReseachOrderRepository $reseachOrderRepository,
         PurchaseOrderRepository $purchaseOrderRepository,
         BalanceSheetRepository $balanceSheetRepository,
+        ProductionOrderRepository $productionOrderRepository,
         Socity $socity
     ) {
         $productSalePrint = [];
@@ -218,9 +221,11 @@ class PlayerController extends AbstractController
         $productPurchaseOrders = $this->productPurchaseOrders($purchaseOrderRepository, $socity);
         $productSalable = $this->productSalable($reseachOrderRepository, $productRepository, $socity);
 
+
         //TODO add differentiation salesType
 
         foreach ($productSalable as $product) {
+            $turn = $socity->getGame()->getTurn();
             $quantityProfessional = 0;
             $quantityParticular = 0;
             $quantity = 0;
@@ -232,11 +237,19 @@ class PlayerController extends AbstractController
             $salesPrice = $product->getSalePrice();
             $purchaseCost = $this->purchaseCost($product);
             $cycleLife = $product->getProductLifes(); //TODO modify to select productLifeCycle
+            $productionOrders = $this->productProductionOrders($productionOrderRepository, $socity, $turn);
 
             foreach ($productPurchaseOrders as $productPurchaseOrder) {
-                $stock += $productPurchaseOrder->getProductQuantityPurchase();
+                if($product->getName() === $productPurchaseOrder->getProduct()->getName()){
+                    $stock += $productPurchaseOrder->getProductQuantityPurchase();
+                }
             }
-
+            foreach ($productionOrders as $productionOrder) {
+                if ($productionOrder->getProduct()->getName() === $product->getName()) {
+                    $quantity = $productionOrder->getQuantityProductCreat();
+                    $stock += $quantity;
+                }
+            }
 
             foreach ($productSalesOrders as $productSalesOrder) {
                 if ($productSalesOrder->getProduct()->getName() === $product->getName()) {
@@ -244,8 +257,11 @@ class PlayerController extends AbstractController
                     $quantityProfessional = $this->quantityProfessional($quantity, $balanceSheetRepository);
                     $quantityParticular = $this->quantityParticular($quantity, $quantityProfessional);
                     $salesOrderId = $productSalesOrder->getId();
+                    $stock -= $quantity;
                 }
+
             }
+
             $productPrint = [
                 "id" => $id,
                 "name" => $name,

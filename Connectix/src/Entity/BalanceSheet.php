@@ -24,217 +24,217 @@ class BalanceSheet
     /**
      * @ORM\Column(type="integer")
      */
-    private $status;
+    private $status = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $administationActivityCapacity;
+    private $administationActivityCapacity = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesActivityCapacity;
+    private $salesActivityCapacity = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $researchActivityCapacity;
+    private $researchActivityCapacity = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesActivityProfessionalCapacity;
+    private $salesActivityProfessionalCapacity = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $salesActivityParticularCapacity;
+    private $salesActivityParticularCapacity = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $productionActivityCapacity;
+    private $productionActivityCapacity = 0;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $marchendiseSales;
+    private $marchendiseSales = 0;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $productionSales;
+    private $productionSales = 0;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $productionStock;
+    private $productionStock = 0;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $merchandiseStock;
+    private $merchandiseStock = 0;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $totalSalary;
+    private $totalSalary = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $rawPurchase;
+    private $rawPurchase = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $marchendisePurchase;
+    private $marchendisePurchase = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $otherPurchase;
+    private $otherPurchase = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $depreciationAmortization;
+    private $depreciationAmortization = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $taxes;
+    private $taxes = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $repaymentOnDepreciationAndProvisions;
+    private $repaymentOnDepreciationAndProvisions = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $provisions;
+    private $provisions = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $provisionOnCurrentAsset;
+    private $provisionOnCurrentAsset = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $otherExpenses;
+    private $otherExpenses = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $interestAndSimilarProduct;
+    private $interestAndSimilarProduct = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $interestAndSimilarExpenses;
+    private $interestAndSimilarExpenses = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $capitalExceptionalOperatingProduct;
+    private $capitalExceptionalOperatingProduct = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $capitalExceptionalExpense;
+    private $capitalExceptionalExpense = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $researchAndDevelopmentCost;
+    private $researchAndDevelopmentCost = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $concessionPatentsAndSimilar;
+    private $concessionPatentsAndSimilar = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $grounds;
+    private $grounds = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $constructions;
+    private $constructions = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $technicalInstallationsEquipment;
+    private $technicalInstallationsEquipment = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $customersAndRelatedAccounts;
+    private $customersAndRelatedAccounts = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $otherReceivables;
+    private $otherReceivables = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $availability;
+    private $availability = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $shareCapitalOrIndividual;
+    private $shareCapitalOrIndividual = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $premiumIssueMergerContribution;
+    private $premiumIssueMergerContribution = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $legalReserve;
+    private $legalReserve = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $statutoryOrContractualReserves;
+    private $statutoryOrContractualReserves = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $otherReserves;
+    private $otherReserves = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $reportAgain;
+    private $reportAgain = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $loanAndDebtsWihCreditInstitutions;
+    private $loanAndDebtsWihCreditInstitutions = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $tradePayableAndRelatedAccounts;
+    private $tradePayableAndRelatedAccounts = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $taxAndSocialDebts;
+    private $taxAndSocialDebts = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $otherDebts;
+    private $otherDebts = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Socity", inversedBy="balanceSheets")
@@ -244,12 +244,27 @@ class BalanceSheet
     /**
      * @ORM\Column(type="integer")
      */
-    private $professionalSalesPart;
+    private $professionalSalesPart = 0;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $particularSalesPart;
+    private $particularSalesPart = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $ProductionMake = 0;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $yearProfit = 0;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $tva = 0;
 
 
     public function getId(): ?int
@@ -824,5 +839,41 @@ class BalanceSheet
     public function __toString()
     {
         return 'BalanceSheet';
+    }
+
+    public function getProductionMake(): ?int
+    {
+        return $this->ProductionMake;
+    }
+
+    public function setProductionMake(int $ProductionMake): self
+    {
+        $this->ProductionMake = $ProductionMake;
+
+        return $this;
+    }
+
+    public function getYearProfit(): ?float
+    {
+        return $this->yearProfit;
+    }
+
+    public function setYearProfit(float $yearProfit): self
+    {
+        $this->yearProfit = $yearProfit;
+
+        return $this;
+    }
+
+    public function getTva(): ?float
+    {
+        return $this->tva;
+    }
+
+    public function setTva(float $tva): self
+    {
+        $this->tva = $tva;
+
+        return $this;
     }
 }

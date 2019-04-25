@@ -318,6 +318,11 @@ class Game
     private $groundCost = 100000;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $salaryContributions = 22;
+
+    /**
      * Game constructor.
      */
     public function __construct()
@@ -1168,6 +1173,18 @@ class Game
     public function setGroundCost(int $groundCost): self
     {
         $this->groundCost = $groundCost;
+
+        return $this;
+    }
+
+    public function getSalaryContributions(): ?int
+    {
+        return $this->salaryContributions;
+    }
+
+    public function setSalaryContributions(int $salaryContributions): self
+    {
+        $this->salaryContributions = $salaryContributions;
 
         return $this;
     }

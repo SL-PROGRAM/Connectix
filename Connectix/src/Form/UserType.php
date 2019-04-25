@@ -44,12 +44,23 @@ class UserType extends AbstractType
                 'choices' =>
                 array
                 (
-
-                        'Admin' => 'ROLE_ADMIN',
+                        'DRH' => 'DIRECTOR_HUMAN_RESSOURCES',
+                        'Directeur de production' => 'TECHNIC_DIRECTOR',
+                        'Directeur Commercial' => 'COMMERCIAL_DIRECTOR',
+                        'Directeur Marketing' => 'MARKETING_DIRECTOR',
+                        'Directeur Financier' => 'FINANCIAL_DIRECTOR',
+                        'Directeur d\'entreprise' => 'VALIDATION_DIRECTOR',
+                        'Directeur de production et commerce' => 'TECHNIC_COMMERCIAL_DIRECTOR',
+                        'Directeur Financier et marketing' => 'FINANCIAL_MARKETING_DIRECTOR',
+                        'Directeur du marketing et d\'entreprise' => 'VALIDATION_MARKETING_DIRECTOR',
+                        'DRH et Directeur d\'entreprise' => 'VALIDATION_HUMAN_RESSOURCE_DIRECTOR',
+                        'Directeur Financier, marketing et d\'entreprise' => 'GENERAL_FINANCIAL_DIRECTOR',
+                        'Directeur RH, production et Commerce' => 'EXCLUSIVE_DIRECTOR',
+                        'Gérant unique' => 'PRESIDENT',
 
                 )
                 ,
-                'multiple' => true,
+                'multiple' => false,
                 'required' => true,
                 ));
         ;
