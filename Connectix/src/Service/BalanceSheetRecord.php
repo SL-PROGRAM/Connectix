@@ -202,7 +202,7 @@ class BalanceSheetRecord extends AbstractController
         $payRoll = 0;
         $employees = $socity->getHumanRessourcies();
         foreach ($employees as $employee) {
-            $payRoll += $employee->getSalary();
+            $payRoll += $employee->getSalary()*12;
         }
         $balanceSheetToRecord->setTotalSalary($payRoll);
     }
@@ -440,7 +440,100 @@ class BalanceSheetRecord extends AbstractController
         $entityManager->flush();
     }
 
+    public function rowMaterial30j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository, $value){
+        $balanceSheetToRecord = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ])
+        ->setRowMaterial30j($value);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($balanceSheetToRecord);
+        $entityManager->flush();
 
+    }
+
+    public function rowMaterial60j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository, $value){
+        $balanceSheetToRecord = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ])
+            ->setRowMaterial60j($value);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($balanceSheetToRecord);
+        $entityManager->flush();
+
+    }
+
+    public function merchandisePurchase30j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository, $value){
+        $balanceSheetToRecord = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ])
+            ->setMerchandisePurchase30j($value);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($balanceSheetToRecord);
+        $entityManager->flush();
+
+    }
+
+    public function salesCashing30j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository, $value){
+        $balanceSheetToRecord = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ])
+            ->setSalesCashing30j($value);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($balanceSheetToRecord);
+        $entityManager->flush();
+    }
+
+    public function salesCashing60j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository, $value){
+        $balanceSheetToRecord = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ])
+            ->setSalesCashing60j($value);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($balanceSheetToRecord);
+        $entityManager->flush();
+    }
+
+    public function availability($value){
+        $socity = $this->getUser()->getSocity();
+        $turn = $this->getUser()->getGame()->getTurn();
+        $balanceSheetRepository = $this->getDoctrine()->getRepository(BalanceSheet::class);
+
+        $balanceSheetToRecord = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ])
+            ->setAvailability($value);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($balanceSheetToRecord);
+        $entityManager->flush();
+    }
+
+    public function taxAndSocialDebts($value){
+        $socity = $this->getUser()->getSocity();
+        $turn = $this->getUser()->getGame()->getTurn();
+        $balanceSheetRepository = $this->getDoctrine()->getRepository(BalanceSheet::class);
+
+        $balanceSheetToRecord = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ])
+            ->setTaxAndSocialDebts($value);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($balanceSheetToRecord);
+        $entityManager->flush();
+    }
 
 
 

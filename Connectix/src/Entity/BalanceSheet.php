@@ -266,6 +266,46 @@ class BalanceSheet
      */
     private $tva = 0;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $rowMaterial30j = 0;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $rowMaterial60j = 0;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $salesCashing30j = 0;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $salesCashing60j = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $customer0j = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $customer30j = 0;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $customer60j = 100;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $merchandisePurchase30j = 0;
+
 
     public function getId(): ?int
     {
@@ -873,6 +913,102 @@ class BalanceSheet
     public function setTva(float $tva): self
     {
         $this->tva = $tva;
+
+        return $this;
+    }
+
+    public function getRowMaterial30j(): ?float
+    {
+        return $this->rowMaterial30j;
+    }
+
+    public function setRowMaterial30j(float $rowMaterial30j): self
+    {
+        $this->rowMaterial30j = $rowMaterial30j;
+
+        return $this;
+    }
+
+    public function getRowMaterial60j(): ?float
+    {
+        return $this->rowMaterial60j;
+    }
+
+    public function setRowMaterial60j(float $rowMaterial60j): self
+    {
+        $this->rowMaterial60j = $rowMaterial60j;
+
+        return $this;
+    }
+
+    public function getSalesCashing30j(): ?float
+    {
+        return $this->salesCashing30j;
+    }
+
+    public function setSalesCashing30j(float $salesCashing30j): self
+    {
+        $this->salesCashing30j = $salesCashing30j;
+
+        return $this;
+    }
+
+    public function getSalesCashing60j(): ?float
+    {
+        return $this->salesCashing60j;
+    }
+
+    public function setSalesCashing60j(float $salesCashing60j): self
+    {
+        $this->salesCashing60j = $salesCashing60j;
+
+        return $this;
+    }
+
+    public function getCustomer0j(): ?int
+    {
+        return $this->customer0j;
+    }
+
+    public function setCustomer0j(int $customer0j): self
+    {
+        $this->customer0j = $customer0j;
+
+        return $this;
+    }
+
+    public function getCustomer30j(): ?int
+    {
+        return $this->customer30j;
+    }
+
+    public function setCustomer30j(int $customer30j): self
+    {
+        $this->customer30j = $customer30j;
+
+        return $this;
+    }
+
+    public function getCustomer60j(): ?int
+    {
+        return $this->customer60j;
+    }
+
+    public function setCustomer60j(int $customer60j): self
+    {
+        $this->customer60j = $customer60j;
+
+        return $this;
+    }
+
+    public function getMerchandisePurchase30j(): ?float
+    {
+        return $this->merchandisePurchase30j;
+    }
+
+    public function setMerchandisePurchase30j(float $merchandisePurchase30j): self
+    {
+        $this->merchandisePurchase30j = $merchandisePurchase30j;
 
         return $this;
     }

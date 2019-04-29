@@ -7,6 +7,10 @@ security:
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
+        backend_users:
+            memory:
+                users:
+                    Adibeo-Admin: { password: '$2y$12$.F71arMlNkhmgvY4FhqslOxo5c0yJQTfMB942W7hsgcn.8wI/d0dK', roles: ['ROLE_ADMIN'] }
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:

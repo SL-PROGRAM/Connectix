@@ -11,7 +11,6 @@ use App\Service\BalanceSheetCall;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * Require ROLE_USER for *every* controller method in this class.
@@ -72,10 +71,13 @@ class BalanceSheetScreenController extends AbstractController
         $intermediateAndFinishProduct = $balanceSheetCall->stockedProduction($socity, $turn, $balanceSheetRepository);
         $merchandise = $balanceSheetCall->goodsPurchases($socity, $turn, $balanceSheetRepository);
 
-        $customersAndRelatedAccounts = 0;
+        $customersAndRelatedAccounts =
+            $balanceSheetCall->salesCashing30j($socity,$turn,$balanceSheetRepository)
+            + $balanceSheetCall->salesCashing60j($socity, $turn, $balanceSheetRepository)
+        ;
         $otherReceivables = 0;
 
-        $availability = 0;
+        $availability = $balanceSheetCall->availability($turn);
 
 
 
@@ -503,17 +505,22 @@ class BalanceSheetScreenController extends AbstractController
 
         //TODO RETURN TABLE TO INDEX
         //TODO GET PARAMETER AND GIVE THEM TO calculationPassiveBalanceSheet
-        $shareCapitalOrIndividual = 0;
+        $shareCapitalOrIndividual = $balanceSheetCall->shareCapitalOrIndividual($socity, $turn, $balanceSheetRepository);
         $premiumIssueMergerContribution = 0;
 
         $yearProfit = $balanceSheetCall->yearResult($socity, $turn,$balanceSheetRepository);
 
         $loanAndDebtsWihCreditInstitutions = $balanceSheetCall->loanAndDebtsWihCreditInstitutions($socity, $turn,$balanceSheetRepository);
 
-        $tradePayableAndRelatedAccounts = 0;
-        $taxAndSocialDebts = 0;
+        $tradePayableAndRelatedAccounts = $balanceSheetCall->rowMaterial30j($socity, $turn,$balanceSheetRepository) +
+            $balanceSheetCall->rowMaterial60j($socity, $turn,$balanceSheetRepository) +
+            $balanceSheetCall->merchandisePurchase30j($socity, $turn,$balanceSheetRepository)
+        ;
 
-        $otherDebts = 0;
+
+        $taxAndSocialDebts = $balanceSheetCall->taxAndSocialDebts($turn);
+
+        $otherDebts = $balanceSheetCall->tva($turn);
 
         //Variable not use
         $revaluationDifferences = 0;

@@ -38,31 +38,31 @@ class UserType extends AbstractType
                 'first_options'  => ['label' => 'Password'],
                 'second_options' => ['label' => 'Repeat Password'],
             ])
-             ->add('roles', ChoiceType::class, array(
-                'attr'  =>  array('class' => 'form-control',
-                'style' => 'margin:5px 0;'),
-                'choices' =>
-                array
-                (
-                        'DRH' => 'DIRECTOR_HUMAN_RESSOURCES',
-                        'Directeur de production' => 'TECHNIC_DIRECTOR',
-                        'Directeur Commercial' => 'COMMERCIAL_DIRECTOR',
-                        'Directeur Marketing' => 'MARKETING_DIRECTOR',
-                        'Directeur Financier' => 'FINANCIAL_DIRECTOR',
-                        'Directeur d\'entreprise' => 'VALIDATION_DIRECTOR',
-                        'Directeur de production et commerce' => 'TECHNIC_COMMERCIAL_DIRECTOR',
-                        'Directeur Financier et marketing' => 'FINANCIAL_MARKETING_DIRECTOR',
-                        'Directeur du marketing et d\'entreprise' => 'VALIDATION_MARKETING_DIRECTOR',
-                        'DRH et Directeur d\'entreprise' => 'VALIDATION_HUMAN_RESSOURCE_DIRECTOR',
-                        'Directeur Financier, marketing et d\'entreprise' => 'GENERAL_FINANCIAL_DIRECTOR',
-                        'Directeur RH, production et Commerce' => 'EXCLUSIVE_DIRECTOR',
-                        'Gérant unique' => 'PRESIDENT',
-
-                )
-                ,
-                'multiple' => false,
-                'required' => true,
-                ));
+//             ->add('roles', ChoiceType::class, array(
+//                'attr'  =>  array('class' => 'form-control',
+//                'style' => 'margin:5px 0;'),
+//                'choices' =>
+//                array
+//                (
+//                        'DRH' => 'DIRECTOR_HUMAN_RESSOURCES',
+//                        'Directeur de production' => 'TECHNIC_DIRECTOR',
+//                        'Directeur Commercial' => 'COMMERCIAL_DIRECTOR',
+//                        'Directeur Marketing' => 'MARKETING_DIRECTOR',
+//                        'Directeur Financier' => 'FINANCIAL_DIRECTOR',
+//                        'Directeur d\'entreprise' => 'VALIDATION_DIRECTOR',
+//                        'Directeur de production et commerce' => 'TECHNIC_COMMERCIAL_DIRECTOR',
+//                        'Directeur Financier et marketing' => 'FINANCIAL_MARKETING_DIRECTOR',
+//                        'Directeur du marketing et d\'entreprise' => 'VALIDATION_MARKETING_DIRECTOR',
+//                        'DRH et Directeur d\'entreprise' => 'VALIDATION_HUMAN_RESSOURCE_DIRECTOR',
+//                        'Directeur Financier, marketing et d\'entreprise' => 'GENERAL_FINANCIAL_DIRECTOR',
+//                        'Directeur RH, production et Commerce' => 'EXCLUSIVE_DIRECTOR',
+//                        'Gérant unique' => 'PRESIDENT',
+//
+//                )
+//                ,
+//                'multiple' => false,
+//                'required' => true,
+//                ));
         ;
     }
 

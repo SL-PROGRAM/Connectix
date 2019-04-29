@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{%  dump %}
+
 {% block title %}Hello CashFlowController!{% endblock %}
 
 {% block body %}
@@ -110,18 +110,18 @@
         </TR>
         <TR class="resultat">
             <TH colspan="1">A. TOTAL ENCAISSEMENTS</TH>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1">{{ totalCashing.january }}</TD>
+            <TD colspan="1">{{ totalCashing.february }}</TD>
+            <TD colspan="1">{{ totalCashing.march }}</TD>
+            <TD colspan="1">{{ totalCashing.april }}</TD>
+            <TD colspan="1">{{ totalCashing.may }}</TD>
+            <TD colspan="1">{{ totalCashing.june }}</TD>
+            <TD colspan="1">{{ totalCashing.july }}</TD>
+            <TD colspan="1">{{ totalCashing.august }}</TD>
+            <TD colspan="1">{{ totalCashing.september }}</TD>
+            <TD colspan="1">{{ totalCashing.october }}</TD>
+            <TD colspan="1">{{ totalCashing.november }}</TD>
+            <TD colspan="1">{{ totalCashing.december }}</TD>
         </TR>
         <TR>
             <TH colspan="13" align="center" class="col-titre-tresorie">DÉCAISSEMENTS</TH>
@@ -253,21 +253,6 @@
             <TH colspan="13" align="center" class="col-titre-2-tresorie">Hors Exploitation</TH>
         </TR>
         <TR>
-            <TH colspan="1">Investissements incorporels</TH>
-            <TD colspan="1">{{ monthlyMerchandiseTTCPurchase.january }}</TD>
-            <TD colspan="1">{{ monthlyMerchandiseTTCPurchase.february }}</TD>
-            <TD colspan="1">{{ monthlyMerchandiseTTCPurchase.march }}</TD>
-            <TD colspan="1">{{ monthlyMerchandiseTTCPurchase.april }}</TD>
-            <TD colspan="1">{{ monthlyMerchandiseTTCPurchase.may }}</TD>
-            <TD colspan="1">{{ monthlyMerchandiseTTCPurchase.june }}</TD>
-            <TD colspan="1">{{ monthlyMerchandiseTTCPurchase.july }}</TD>
-            <TD colspan="1">{{ monthlyMerchandiseTTCPurchase.august }}</TD>
-            <TD colspan="1">{{ monthlyMerchandiseTTCPurchase.september }}</TD>
-            <TD colspan="1">{{ monthlyMerchandiseTTCPurchase.october }}</TD>
-            <TD colspan="1">{{ monthlyMerchandiseTTCPurchase.november }}</TD>
-            <TD colspan="1">{{ monthlyMerchandiseTTCPurchase.december }}</TD>
-        </TR>
-        <TR>
             <TH colspan="1">Investissements corporels</TH>
             <TD colspan="1">{{ tangibleInvestments.january }}</TD>
             <TD colspan="1">{{ tangibleInvestments.february }}</TD>
@@ -317,36 +302,36 @@
         </TR>
         <TR class="resultat">
             <TH colspan="1">A - B</TH>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1">{{ totalMonth.january }}</TD>
+            <TD colspan="1">{{ totalMonth.february }}</TD>
+            <TD colspan="1">{{ totalMonth.march }}</TD>
+            <TD colspan="1">{{ totalMonth.april }}</TD>
+            <TD colspan="1">{{ totalMonth.may }}</TD>
+            <TD colspan="1">{{ totalMonth.june }}</TD>
+            <TD colspan="1">{{ totalMonth.july }}</TD>
+            <TD colspan="1">{{ totalMonth.august }}</TD>
+            <TD colspan="1">{{ totalMonth.september }}</TD>
+            <TD colspan="1">{{ totalMonth.october }}</TD>
+            <TD colspan="1">{{ totalMonth.november }}</TD>
+            <TD colspan="1">{{ totalMonth.december }}</TD>
         </TR>
         <TR>
             <TH colspan="13" align="center" class="col-titre-tresorie">SOLDES FIN DE MOIS</TH>
         </TR>
         <TR class="resultat">
             <TH colspan="1">2 + 4</TH>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
-            <TD colspan="1"></TD>
+            <TD colspan="1">{{ totalEndMonth.january }}</TD>
+            <TD colspan="1">{{ totalEndMonth.february }}</TD>
+            <TD colspan="1">{{ totalEndMonth.march }}</TD>
+            <TD colspan="1">{{ totalEndMonth.april }}</TD>
+            <TD colspan="1">{{ totalEndMonth.may }}</TD>
+            <TD colspan="1">{{ totalEndMonth.june }}</TD>
+            <TD colspan="1">{{ totalEndMonth.july }}</TD>
+            <TD colspan="1">{{ totalEndMonth.august }}</TD>
+            <TD colspan="1">{{ totalEndMonth.september }}</TD>
+            <TD colspan="1">{{ totalEndMonth.october }}</TD>
+            <TD colspan="1">{{ totalEndMonth.november }}</TD>
+            <TD colspan="1">{{ totalEndMonth.december }}</TD>
         </TR>
     </TABLE>
 {% endblock %}

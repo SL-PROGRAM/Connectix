@@ -188,7 +188,7 @@ class BalanceSheetCall extends AbstractController
             return $payRoll = 0;
         }
         else {
-            return $payRoll->getTotalSalary();
+            return $payRoll->getTotalSalary()*12;
         }
     }
 
@@ -290,24 +290,129 @@ class BalanceSheetCall extends AbstractController
             }
         }
 
-        public function tva(){
-            $socity = $this->getUser()->getSocity();
-            $turn = $this->getUser()->getGame()->getTurn()-1;
-            $balanceSheetRepository = $this->getDoctrine()->getRepository(BalanceSheet::class);
-
-            $balanceSheetToRecord = $balanceSheetRepository->findOneBy([
+    public function rowMaterial30j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
+        $rowMaterial = $balanceSheetRepository->findOneBy(
+            [
                 'socity' => $socity,
                 'turn' => $turn,
-                'status' => 0
             ]);
-
-            if ($balanceSheetToRecord === null){
-                return 0;
-            }
-            else {
-                return $balanceSheetToRecord->getTva();
-            }
+        if ($rowMaterial === null){
+            return 0;
         }
+        else {
+            return $rowMaterial->getRowMaterial30j();
+        }
+    }
+
+    public function rowMaterial60j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
+        $rowMaterial = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ]);
+        if ($rowMaterial === null){
+            return 0;
+        }
+        else {
+            return $rowMaterial->getRowMaterial60j();
+        }
+    }
+
+    public function salesCashing30j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
+        $rowMaterial = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ]);
+        if ($rowMaterial === null){
+            return 0;
+        }
+        else {
+            return $rowMaterial->getSalesCashing30j();
+        }
+    }
+
+    public function salesCashing60j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
+        $rowMaterial = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ]);
+        if ($rowMaterial === null){
+            return 0;
+        }
+        else {
+            return $rowMaterial->getSalesCashing60j();
+        }
+    }
+
+    public function merchandisePurchase30j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
+        $rowMaterial = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ]);
+        if ($rowMaterial === null){
+            return 0;
+        }
+        else {
+            return $rowMaterial->getMerchandisePurchase30j();
+        }
+    }
+
+
+    public function tva($turn){
+        $socity = $this->getUser()->getSocity();
+        $balanceSheetRepository = $this->getDoctrine()->getRepository(BalanceSheet::class);
+
+        $balanceSheetToRecord = $balanceSheetRepository->findOneBy([
+            'socity' => $socity,
+            'turn' => $turn,
+            'status' => 0
+        ]);
+
+        if ($balanceSheetToRecord === null){
+            return 0;
+        }
+        else {
+            return $balanceSheetToRecord->getTva();
+        }
+    }
+
+    public function availability($turn){
+        $socity = $this->getUser()->getSocity();
+        $balanceSheetRepository = $this->getDoctrine()->getRepository(BalanceSheet::class);
+
+        $availability = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ]);
+        if ($availability === null){
+            return 0;
+        }
+        else {
+            return $availability->getAvailability();
+        }
+    }
+
+    public function taxAndSocialDebts($turn){
+        $socity = $this->getUser()->getSocity();
+        $balanceSheetRepository = $this->getDoctrine()->getRepository(BalanceSheet::class);
+
+        $taxAndSocialDebts = $balanceSheetRepository->findOneBy(
+            [
+                'socity' => $socity,
+                'turn' => $turn,
+            ]);
+        if ($taxAndSocialDebts === null){
+            return 0;
+        }
+        else {
+            return $taxAndSocialDebts->getTaxAndSocialDebts();
+        }
+    }
+
 
 
 
