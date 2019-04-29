@@ -44,8 +44,6 @@ class GameType extends AbstractType
             ->add('payTax')
             ->add('variableExternalCharges')
             ->add('rowMaterialCost')
-            ->add('rawMaterialMin')
-            ->add('rawMaterialMax')
             ->add('manPowerMin')
             ->add('manPowerMax')
             ->add('productionTimeMin')
@@ -67,6 +65,8 @@ class GameType extends AbstractType
             ->add('productionLignAmortizationTurn')
             ->add('productionLignAnnualProductTime')
             ->add('productionLignTotalLifeProductTime')
+            ->add('groundCost')
+            ->add('salaryContributions')
         ;
     }
 
