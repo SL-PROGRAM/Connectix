@@ -6,7 +6,11 @@ button:
       factory: Êtes vous sur de vouloir supprimer cette usine ?
       loan: Êtes vous sur de vouloir annuler ce crédit ?
       productionlign: Êtes vous sur de vouloir supprimer cette ligne de production ?
-
+      researchorder: êtes vous sur de vouloir annuler la recherche de ce produit ?
+      salesorder: êtes vous sur de vouloir annuler la mise en vente de ce produit ?
+      purchaseorder: êtes vous sur de vouloir annuler l'achat de ce produit ?
+      pubicityorder: êtes vous sur de vouloir annuler la promotion de ce produit ?
+      productiororder: êtes vous sur de vouloir annuler la production de ce produit ?
 
 form:
   user:
@@ -77,7 +81,7 @@ form:
 
 template:
   footer:
-    sales: Vente
+    sales: Ventepublicity
     publicity: Publicité et distribution
     production: Gestion de la production
     rh: Ressources humaines
@@ -311,6 +315,162 @@ template:
     mail: E-mail
     password: Mot de passe
     button: S'identifier
+
+  order:
+    research:
+      title: Recherche
+      edit:
+        h1: Modifier la recherche
+      new:
+        h1: Faire des recherche sur le produit
+    sales:
+      title: Vente
+        edit:
+          h1: Modifier la vente
+        new:
+          h1: Mettre en vente le produit
+    purchase:
+      title: Achat
+        edit:
+          h1: Modifier de l'ordre d'achat
+        new:
+          h1: Emettre un ordre d'achat sur le produit
+    publicity:
+      title: Publicité
+        edit:
+          h1: Modifier la publicité du produit
+        new:
+          h1: Faire de la publicité du produit
+    Production:
+      title: Production
+        edit:
+          h1: Modifier la fabrication du prnoduit
+        new:
+          h1: Lancer le produit en fabrication
+
+  player:
+    financial:
+      title: Finance
+      loan:
+        actual: Crédit en cours
+        new:
+          prodlign: Nouveau crédit pour ligne de production
+          factory: Nouveau crédit pour usine
+    human:
+      title: Ressource humaine
+      administrative:
+        h1: Service administratif
+      rd:
+        h1: Recherche et Développement
+      production:
+        h1: Service production
+      sales:
+        h1: Forces de vente
+
+      salary: Total des salaires
+      productivity: Productivité moyenne
+      dismiss: Coût licenciement moyen
+      number: Nombre salarié année
+      see: Voir les employées
+      costdismiss: Licencier des employées ayant le plus d'ancienneté
+      numberdismiss: Licencier des employées ayant le moinr d'ancienneté
+      upsalary: Augmenter les salaires
+      formation: Former les salariées
+    production:
+      title: Production et Recherche
+      unit:
+        h1: Unité de production
+        factory:
+          name: Nom de l'usine
+          creatat: Date de fabrication
+          sales: Vendre l'usine
+          buy: Acheter une usine
+          delete: Vendre l'usine
+          show: Détali de l'usine
+          full: Usine complète
+          record: Pas d'usine
+        lignprod:
+          name: Ligne de production
+          buy: Acheter une ligne de production
+          delete: Vendre la ligne de production
+          show: Détali de la ligne de production
+          record: Pas de ligne de production
+      global:
+        h1: Global production
+        machine:
+          timehave:
+          timeuse:
+          percent:
+      rd:
+        h1: Recherche et développement
+        product:
+          name: Nom du produit
+          time: Temps de recherche nécessaire
+          researchdo: Recherche effectée
+          researchwant: Recherche prévu
+          research: Faire une recherche
+          editresearch: Modifier la recherche
+          show: Détail du produit
+          record: Pas de recherche disponible
+      prod:
+        h1: Fabrication
+        product:
+          name: Nom du produit
+          cost: Coût unitaire
+          time: Temps de production unitaire
+          quantity: Quantité de produit fabriqué
+          total:
+            cost: Coût total de fabrication
+            time: Temps total de production
+          buy: Mise en fabrication
+          edit: Modifier l'ordre de fabrication
+          record: Pas de fabrication de produit possible
+    publicity:
+      title: Publicité
+      pub:
+        h1: Publicité produit
+        product:
+          name: Nom du produit
+          cycle: Cycle de vie du produit
+          pubn: Montant de pub pour l'année en cours
+          pubn-1: Montant de pub pour l'année passé
+          variation: Variation du montant de publicité
+          ratio: Ratio publicité sur CA
+          buy: Faire de la publicité
+          edit: Modifier l'ofre publicitaire
+          record: Pas de produit disponible pour de la publicité
+    sales:
+      title: Achat et vente
+      purchase:
+        h1: Achat de marchandise
+        product:
+          name: Nom du produit
+          price: Prix moyen du produit
+          quantity: Quantité de produit acheté
+          promo: Volume minimum pour remise
+          buy: Acheter le produit
+          edit: Modifier la commande
+          show: voir les détail du produit
+          record: Pas de produit disponible à l'achat
+      sales:
+        h1: Vente de marchandise
+        product:
+          name: Nom du produit
+          price: Prix moyen du produit
+          stock: Quantité de produit en stock
+          cost: Coût d'achat ou de production
+          quantitypro: Quantité vendu aux professionnels
+          quantitypart: Quantité vendu aux particuliers
+          cycle: Cycle de vie du produit
+          sell: Vendre le produit
+          edit: Modifier la vente
+          record: Pas de produit disponible à la vente
+
+
+
+
+
+
 
 
 
