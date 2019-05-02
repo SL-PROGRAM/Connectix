@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% dump %}
 <html>
     <head>
         <meta charset="UTF-8">
@@ -18,13 +19,25 @@
         {% endblock %}
     </div>
 
+    {% if is_granted('ROLE_ADMIN') %}
+        {% if  socity == null%}
+            {{ 'admin.error.message' | trans }}
+        {% else %}
+            <footer>
+                {%  block footeradmin %}
+                    {% include 'footer/index.html.twig' %}
 
+                {% endblock %}
+            </footer>
+        {% endif %}
+    {%  else %}
         <footer>
             {%  block footer %}
                 {% include 'footer/index.html.twig' %}
 
             {% endblock %}
         </footer>
+    {% endif %}
 
         {% block javascripts %}
 

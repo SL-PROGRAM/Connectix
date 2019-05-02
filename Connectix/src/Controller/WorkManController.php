@@ -23,8 +23,9 @@ class WorkManController extends AbstractController
      */
     public function index(WorkManRepository $workManRepository): Response
     {
+        $socity = $this->getUser()->getSocity();
         return $this->render('work_man/index.html.twig', [
-            'work_men' => $workManRepository->findAll(),
+            'work_men' => $workManRepository->findBy($socity),
         ]);
     }
 

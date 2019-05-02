@@ -23,8 +23,9 @@ class SalesManDirectorController extends AbstractController
      */
     public function index(SalesManDirectorRepository $salesManDirectorRepository): Response
     {
+        $socity = $this->getUser()->getSocity();
         return $this->render('sales_man_director/index.html.twig', [
-            'sales_man_directors' => $salesManDirectorRepository->findAll(),
+            'sales_man_directors' => $salesManDirectorRepository->findBy($socity),
         ]);
     }
 

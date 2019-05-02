@@ -1,3 +1,7 @@
+admin:
+  message:
+    error: Avant de continuer veuillez modifier votre utilisateur pour le lier à une partie et à une socité
+
 button:
   save: Enregistrer
   delete: Supprimer
@@ -325,28 +329,28 @@ template:
         h1: Faire des recherche sur le produit
     sales:
       title: Vente
-        edit:
-          h1: Modifier la vente
-        new:
-          h1: Mettre en vente le produit
+      edit:
+        h1: Modifier la vente
+      new:
+        h1: Mettre en vente le produit
     purchase:
       title: Achat
-        edit:
-          h1: Modifier de l'ordre d'achat
-        new:
-          h1: Emettre un ordre d'achat sur le produit
+      edit:
+        h1: Modifier de l'ordre d'achat
+      new:
+        h1: Emettre un ordre d'achat sur le produit
     publicity:
       title: Publicité
-        edit:
-          h1: Modifier la publicité du produit
-        new:
-          h1: Faire de la publicité du produit
-    Production:
+      edit:
+        h1: Modifier la publicité du produit
+      new:
+        h1: Faire de la publicité du produit
+    production:
       title: Production
-        edit:
-          h1: Modifier la fabrication du prnoduit
-        new:
-          h1: Lancer le produit en fabrication
+      edit:
+        h1: Modifier la fabrication du produit
+      new:
+        h1: Lancer le produit en fabrication
 
   player:
     financial:

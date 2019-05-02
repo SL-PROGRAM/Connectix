@@ -22,8 +22,9 @@ class ProductionDirectorController extends AbstractController
      */
     public function index(ProductionDirectorRepository $productionDirectorRepository): Response
     {
+        $socity = $this->getUser()->getSocity();
         return $this->render('production_director/index.html.twig', [
-            'production_directors' => $productionDirectorRepository->findAll(),
+            'production_directors' => $productionDirectorRepository->findBy($socity),
         ]);
     }
 

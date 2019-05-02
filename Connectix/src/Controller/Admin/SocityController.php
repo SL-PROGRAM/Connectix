@@ -39,6 +39,13 @@ class SocityController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $socity->setGame($game);
 
+            /*
+             * join admin profil with the new game
+             */
+            $this->getUser()->setSocity($socity);
+            $this->getUser()->setGame($game);
+
+
             $socity->setPriceMinPublicicyImpact(1);
             $socity->setPriceMaxPublicityImpact(1);
 

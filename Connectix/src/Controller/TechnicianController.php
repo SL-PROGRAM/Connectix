@@ -21,8 +21,9 @@ class TechnicianController extends AbstractController
      */
     public function index(TechnicianRepository $technicianRepository): Response
     {
+        $socity = $this->getUser()->getSocity();
         return $this->render('technician/index.html.twig', [
-            'technicians' => $technicianRepository->findAll(),
+            'technicians' => $technicianRepository->findBy($socity),
         ]);
     }
 

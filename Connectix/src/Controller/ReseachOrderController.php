@@ -23,8 +23,10 @@ class ReseachOrderController extends AbstractController
      */
     public function index(ReseachOrderRepository $reseachOrderRepository): Response
     {
+        $socity = $this->getUser()->getSocity();
+
         return $this->render('reseach_order/index.html.twig', [
-            'reseach_orders' => $reseachOrderRepository->findAll(),
+            'reseach_orders' => $reseachOrderRepository->findBy($socity),
         ]);
     }
 

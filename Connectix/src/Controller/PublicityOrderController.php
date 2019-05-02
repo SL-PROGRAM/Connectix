@@ -25,8 +25,9 @@ class PublicityOrderController extends AbstractController
      */
     public function index(PublicityOrderRepository $publicityOrderRepository): Response
     {
+        $socity = $this->getUser()->getSocity();
         return $this->render('publicity_order/index.html.twig', [
-            'publicity_orders' => $publicityOrderRepository->findAll(),
+            'publicity_orders' => $publicityOrderRepository->findBy($socity),
         ]);
     }
 

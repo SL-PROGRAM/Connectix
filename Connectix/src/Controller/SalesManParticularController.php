@@ -21,8 +21,9 @@ class SalesManParticularController extends AbstractController
      */
     public function index(SalesManParticularRepository $salesManParticularRepository): Response
     {
+        $socity = $this->getUser()->getSocity();
         return $this->render('sales_man_particular/index.html.twig', [
-            'sales_man_particulars' => $salesManParticularRepository->findAll(),
+            'sales_man_particulars' => $salesManParticularRepository->findBy($socity),
         ]);
     }
 

@@ -23,8 +23,9 @@ class ResearcherController extends AbstractController
      */
     public function index(ResearcherRepository $reseacherRepository): Response
     {
+        $socity = $this->getUser()->getSocity();
         return $this->render('researcher/index.html.twig', [
-            'researchers' => $reseacherRepository->findAll(),
+            'researchers' => $reseacherRepository->findBy($socity),
         ]);
     }
 

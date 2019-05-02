@@ -20,8 +20,9 @@ class SalesManProfessionalController extends AbstractController
      */
     public function index(SalesManProfessionalRepository $salesManProfessionalRepository): Response
     {
+        $socity = $this->getUser()->getSocity();
         return $this->render('sales_man_professional/index.html.twig', [
-            'sales_man_professionals' => $salesManProfessionalRepository->findAll(),
+            'sales_man_professionals' => $salesManProfessionalRepository->findBy($socity),
         ]);
     }
 

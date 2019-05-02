@@ -21,8 +21,9 @@ class SalesOrderController extends AbstractController
      */
     public function index(SalesOrderRepository $salesOrderRepository): Response
     {
+        $socity = $this->getUser()->getSocity();
         return $this->render('sales_order/index.html.twig', [
-            'sales_orders' => $salesOrderRepository->findAll(),
+            'sales_orders' => $salesOrderRepository->findBy($socity),
         ]);
     }
 

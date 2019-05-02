@@ -21,8 +21,10 @@ class ProductionLignController extends AbstractController
      */
     public function index(ProductionLignRepository $productionLignRepository): Response
     {
+        $socity = $this->getUser()->getSocity();
+
         return $this->render('production_lign/index.html.twig', [
-            'production_ligns' => $productionLignRepository->findAll(),
+            'production_ligns' => $productionLignRepository->findBy($socity),
         ]);
     }
 

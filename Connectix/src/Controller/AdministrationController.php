@@ -22,8 +22,9 @@ class AdministrationController extends AbstractController
      */
     public function index(AdministrationRepository $administrationRepository): Response
     {
+        $socity = $this->getUser()->getSocity();
         return $this->render('administration/index.html.twig', [
-            'administrations' => $administrationRepository->findAll(),
+            'administrations' => $administrationRepository->findBy($socity),
         ]);
     }
 
