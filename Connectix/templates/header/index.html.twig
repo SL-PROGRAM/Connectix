@@ -13,27 +13,39 @@
 
     </div>
     <div class="col-lg-3 col-md-6 col-12 elem-center">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <div>
-                <a href="/admin">{{ 'template.header.admin.pannel' | trans }}</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="card text-center">
+                <div class="card-header  alert alert-primary">
+                    {{ 'template.header.admin.title' | trans }} :
+                </div>
+                <div class="card-body row">
+                    <div>
+                        <a href="/admin">{{ 'template.header.admin.pannel' | trans }}</a>
+                    </div>
+                    <div>
+                        <a href="{{ path('fast_game_new') }}">{{ 'template.header.admin.fast' | trans }}</a>
+                    </div>
+                    <div>
+                        <a href="{{ path('game_new') }}">{{ 'template.header.admin.personalisable' | trans }}</a>
+                    </div>
+                </div>
+                <div class="card-footer text-muted p-0">
+                    <form action="/logout" class="col-12 m-0 p-0">
+                        <input type="submit" value="{{ 'template.header.player.logout' | trans }}" class="btn-block" />
+                    </form>
+                </div>
             </div>
-            <div>
-                <a href="{{ path('fast_game_new') }}">{{ 'template.header.admin.fast' | trans }}</a>
-            </div>
-            <div>
-                <a href="{{ path('game_new') }}">{{ 'template.header.admin.personalisable' | trans }}</a>
-            </div>
-        {%  endif %}
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+        {%  elseif is_granted('IS_AUTHENTICATED_FULLY') %}
             <div class="card text-center">
                 <div class="card-header  alert alert-primary">
                     {{ 'template.header.player.game' | trans }} :
                 </div>
                 <div class="card-body row">
-{#                    {% if is_granted('CAN_VALIDATE') %}#}
+                    {% if is_granted('CAN_VALIDATE') %}
                         <a class="col-6 border-right" href="">{{ 'template.header.player.canvalidate' | trans }}</a>
-{#                    {% endif %}#}
-                    <span class="col-6 border-left">{{ 'template.header.player.turn' | trans }} : <div></div>    </span>
+                    {% endif %}
+                    <span class="col-6 border-left">{{ 'template.header.player.turn' | trans }} : <div></div>  </span>
                 </div>
                 <div class="card-footer text-muted p-0">
                     <form action="/logout" class="col-12 m-0 p-0">

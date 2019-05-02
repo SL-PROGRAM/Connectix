@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'template.player.production.publicity.title' | trans }}{% endblock %}
+{% block title %}{{ 'template.player.publicity.title' | trans }}{% endblock %}
 
 {% block body %}
     <section>
-        <h1>{{ 'template.player.production.publicity.h1' | trans }}</h1>
+        <h1>{{ 'template.player.publicity.pub.h1' | trans }}</h1>
         <table class="table">
             <thead>
             <tr>
-                <th>{{ 'template.player.production.publicity.pub.product.name' | trans }}</th>
-                <th>{{ 'template.player.production.publicity.pub.product.cycle' | trans }}</th>
-                <th>{{ 'template.player.production.publicity.pub.product.pubn' | trans }}</th>
-                <th>{{ 'template.player.production.publicity.pub.product.pubn-1' | trans }}</th>
-                <th>{{ 'template.player.production.publicity.pub.product.variation' | trans }}</th>
-                <th>{{ 'template.player.production.publicity.pub.product.ratio' | trans }}</th>
-                <th>{{ 'template.player.production.publicity.pub.product.buy' | trans }}</th>
+                <th>{{ 'template.player.publicity.pub.product.name' | trans }}</th>
+                <th>{{ 'template.player.publicity.pub.product.cycle' | trans }}</th>
+                <th>{{ 'template.player.publicity.pub.product.pubn' | trans }}</th>
+                <th>{{ 'template.player.publicity.pub.product.pubn-1' | trans }}</th>
+                <th>{{ 'template.player.publicity.pub.product.variation' | trans }}</th>
+                <th>{{ 'template.player.publicity.pub.product.ratio' | trans }}</th>
+                <th>{{ 'template.player.publicity.pub.product.buy' | trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -26,19 +26,22 @@
                     <td>{{ product.publicityLastTurn }}</td>
                     <td>{{ product.variationPublicity }} %</td>
                     <td>{{ product.percentPublicityLastTurn }} %</td>
+                    {% if is_granted('CAN_MARKETING') %}
+
                     <td>
                         {%  if product.publicityTurn == 0 %}
-                            <a href="{{ path('publicity_order_new', {'id': product.id}) }}">{{ 'template.player.production.publicity.pub.product.buy' | trans }}</a>
+                            <a href="{{ path('publicity_order_new', {'id': product.id}) }}">{{ 'template.player.publicity.pub.product.buy' | trans }}</a>
                         {% else %}
-                            <a href="{{ path('publicity_order_edit', {'id': product.idPublicityOrderTurn}) }}">{{ 'template.player.production.publicity.pub.product.edit' | trans }}</a>
+                            <a href="{{ path('publicity_order_edit', {'id': product.idPublicityOrderTurn}) }}">{{ 'template.player.publicity.pub.product.edit' | trans }}</a>
                         {% endif %}
 
                     </td>
+                    {% endif %}
 
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="7">{{ 'template.player.production.publicity.pub.product.record' | trans }}</td>
+                    <td colspan="7">{{ 'template.player.production.pub.product.record' | trans }}</td>
                 </tr>
             {% endfor %}
             </tbody>

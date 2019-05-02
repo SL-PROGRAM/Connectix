@@ -12,7 +12,7 @@ class FinancialVoter extends Voter
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['CAN_FINANCIAL', 'POST_VIEW']);
+        return in_array($attribute, ['CAN_FINANCIAL']);
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)

@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{  'tenplate.player.sales.title' | trans }}{% endblock %}
+{% block title %}{{  'template.player.sales.title' | trans }}{% endblock %}
 
 {% block body %}
     <section>
-        <h1>{{  'tenplate.player.sales.purchase.h1' | trans }}</h1>
+        <h1>{{  'template.player.sales.purchase.h1' | trans }}</h1>
         <table class="table">
             <thead>
             <tr>
-                <th>{{  'tenplate.player.sales.purchase.product.name' | trans }}</th>
-                <th>{{  'tenplate.player.sales.purchase.product.price' | trans }}Prix moyen</th>
-                <th>{{  'tenplate.player.sales.purchase.product.quantity' | trans }}Quantité acheté</th>
-                <th>{{  'tenplate.player.sales.purchase.product.promo' | trans }}Volume minimum pour remise</th>
-                <th>{{  'tenplate.player.sales.purchase.product.buy' | trans }}</th>
+                <th>{{  'template.player.sales.purchase.product.name' | trans }}</th>
+                <th>{{  'template.player.sales.purchase.product.price' | trans }}Prix moyen</th>
+                <th>{{  'template.player.sales.purchase.product.quantity' | trans }}Quantité acheté</th>
+                <th>{{  'template.player.sales.purchase.product.promo' | trans }}Volume minimum pour remise</th>
+                <th>{{  'template.player.sales.purchase.product.buy' | trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -22,26 +22,27 @@
                     <td>{{ product.purchasePrice }}</td>
                     <td>{{ product.quantity }}</td>
                     <td>{{ product.quantityDiscount }}</td>
-{#                    {% if is_granted('CAN_COMMERCIAL') %}#}
+                    {% if is_granted('CAN_COMMERCIAL') %}
                         <td>
                             {%  if product.quantity == 0 %}
-                                <a href="{{ path('purchase_order_new', {'id': product.id}) }}">{{  'tenplate.player.sales.purchase.product.buy' | trans }}</a>
+                                <a href="{{ path('purchase_order_new', {'id': product.id}) }}">{{  'template.player.sales.purchase.product.buy' | trans }}</a>
                             {% else %}
-                                <a href="{{ path('purchase_order_edit', {'id': product.PurchaseOrderId}) }}">{{  'tenplate.player.sales.purchase.product.edit' | trans }}</a>
+                                <a href="{{ path('purchase_order_edit', {'id': product.PurchaseOrderId}) }}">{{  'template.player.sales.purchase.product.edit' | trans }}</a>
                             {% endif %}
                         </td>
                         <td>
-                        <td>
-                            <a href="{{ path('product_show', {'id': product.id, 'path' : 'sales'}) }}">{{  'tenplate.player.sales.purchase.product.show' | trans }}</a>
+                            {% endif %}
+
+                    <td>
+                            <a href="{{ path('product_show', {'id': product.id, 'path' : 'sales'}) }}">{{  'template.player.sales.purchase.product.show' | trans }}</a>
 
                         </td>
                         </td>
-{#                    {% endif %}#}
 
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="7">{{  'tenplate.player.sales.purchase.product.record' | trans }}</td>
+                    <td colspan="7">{{  'template.player.sales.purchase.product.record' | trans }}</td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -53,14 +54,14 @@
         <table class="table">
             <thead>
             <tr>
-                <th>{{  'tenplate.player.sales.sales.product.name' | trans }}</th>
-                <th>{{  'tenplate.player.sales.sales.product.price' | trans }}</th>
-                <th>{{  'tenplate.player.sales.sales.product.stock' | trans }}</th>
-                <th>{{  'tenplate.player.sales.sales.product.cost' | trans }}</th>
-                <th>{{  'tenplate.player.sales.sales.product.quantitypart' | trans }}</th>
-                <th>{{  'tenplate.player.sales.sales.product.quantitypro' | trans }}</th>
-                <th>{{  'tenplate.player.sales.sales.product.cycle' | trans }}</th>
-                <th>{{  'tenplate.player.sales.sales.product.sell' | trans }}</th>
+                <th>{{  'template.player.sales.sales.product.name' | trans }}</th>
+                <th>{{  'template.player.sales.sales.product.price' | trans }}</th>
+                <th>{{  'template.player.sales.sales.product.stock' | trans }}</th>
+                <th>{{  'template.player.sales.sales.product.cost' | trans }}</th>
+                <th>{{  'template.player.sales.sales.product.quantitypart' | trans }}</th>
+                <th>{{  'template.player.sales.sales.product.quantitypro' | trans }}</th>
+                <th>{{  'template.player.sales.sales.product.cycle' | trans }}</th>
+                <th>{{  'template.player.sales.sales.product.sell' | trans }}</th>
 
 
             </tr>
@@ -75,19 +76,22 @@
                     <td>{{ product.quantityParticular }}</td>
                     <td>{{ product.quantityProfessional }}</td>
                     <td>{{ product.quantity }}</td>
+                    {% if is_granted('CAN_COMMERCIAL') %}
+
                     <td>
                         {%  if product.quantity == 0 %}
-                            <a href="{{ path('sales_order_new', {'id': product.id}) }}">{{  'tenplate.player.sales.sales.product.sell' | trans }}</a>
+                            <a href="{{ path('sales_order_new', {'id': product.id}) }}">{{  'template.player.sales.sales.product.sell' | trans }}</a>
                         {% else %}
-                            <a href="{{ path('sales_order_edit', {'id': product.SalesOrderId}) }}">{{  'tenplate.player.sales.sales.product.edit' | trans }}</a>
+                            <a href="{{ path('sales_order_edit', {'id': product.SalesOrderId}) }}">{{  'template.player.sales.sales.product.edit' | trans }}</a>
                         {% endif %}
 
                     </td>
+                    {% endif %}
 
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="7">{{  'tenplate.player.sales.sales.product.record' | trans }}</td>
+                    <td colspan="7">{{  'template.player.sales.sales.product.record' | trans }}</td>
                 </tr>
             {% endfor %}
             </tbody>

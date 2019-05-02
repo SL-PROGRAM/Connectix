@@ -12,7 +12,7 @@ class HumanRessourceVoter extends Voter
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['CAN_MARKETING', 'POST_VIEW']);
+        return in_array($attribute, ['CAN_HUMAN']);
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)

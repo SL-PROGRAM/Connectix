@@ -66,6 +66,7 @@
         </div>
     </div>
 
+    {% if is_granted('CAN_FINANCIAL') %}
     <div class="row">
         <div class="col-md-6">
             <a href="{{ path("loan_production_lign") }}"> {{ 'template.player.finacial.loan.prodlign' | trans }}</a>
@@ -74,4 +75,5 @@
             <a href="{{ path("loan_factory") }}"> {{ 'template.player.finacial.loan.factory' | trans }}</a>
         </div>
     </div>
+    {%  endif %}
 {% endblock %}

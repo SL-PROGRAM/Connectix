@@ -42,9 +42,6 @@ class SocityController extends AbstractController
             /*
              * join admin profil with the new game
              */
-            $this->getUser()->setSocity($socity);
-            $this->getUser()->setGame($game);
-
 
             $socity->setPriceMinPublicicyImpact(1);
             $socity->setPriceMaxPublicityImpact(1);

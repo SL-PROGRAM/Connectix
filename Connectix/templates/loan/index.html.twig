@@ -18,6 +18,7 @@
                 <td>{{ loan.monthlyDueDate }}</td>
                 <td>{{ loan.loanDuration }}</td>
                 <td>
+                    {% if is_granted('CAN_FINANCIAL') %}
                     {% if loan.turn == turn %}
                             <div>
                                 <a href="{{ path('loan_edit', {'id': loan.id}) }}">{{ 'template.loan.index.edit' | trans }}</a>
@@ -26,6 +27,7 @@
                     <div>
                         <a href="{{ path('loan_show', {'id': loan.id}) }}">{{ 'template.loan.index.show' | trans }}</a>
                     </div>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}

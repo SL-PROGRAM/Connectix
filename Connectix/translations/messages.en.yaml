@@ -85,7 +85,7 @@ form:
 
 template:
   footer:
-    sales: Ventepublicity
+    sales: Achat et Vente
     publicity: Publicité et distribution
     production: Gestion de la production
     rh: Ressources humaines
@@ -96,6 +96,7 @@ template:
     logo: Votre partenaire confiance
     title: Connectix
     admin:
+      title: Gestion administrateur
       pannel: Panneau d'administration
       fast: Creation d'une partie rapide
       personalisable: Creation d'une partie personalisée
@@ -397,7 +398,7 @@ template:
           name: Ligne de production
           buy: Acheter une ligne de production
           delete: Vendre la ligne de production
-          show: Détali de la ligne de production
+          show: Détail de la ligne de production
           record: Pas de ligne de production
       global:
         h1: Global production
@@ -405,7 +406,7 @@ template:
           timehave:
           timeuse:
           percent:
-      rd:
+      dr:
         h1: Recherche et développement
         product:
           name: Nom du produit

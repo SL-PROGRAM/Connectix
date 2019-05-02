@@ -13,9 +13,9 @@
                 <th>{{ 'template.player.production.unit.factory.creatat' | trans }}</th>
                 <th>{{ 'template.player.production.unit.lignprod.name' | trans }}</th>
                 <th>{{ 'template.player.production.unit.factory.sales' | trans }}</th>
-{#                {% if is_granted('CAN_PRODUCTION') %}#}
+                {% if is_granted('CAN_PRODUCTION') %}
                     <th> <a href="{{ path('factory_new') }}">{{ 'template.player.production.unit.factory.buy' | trans }}</a></th>
-{#                {% endif %}#}
+                {% endif %}
             </tr>
             </thead>
             <tbody>
@@ -24,7 +24,7 @@
                     <td>{{ factory.name }}</td>
                     <td>{{ factory.turnCreation }}</td>
                     <td></td>
-{#                    {% if is_granted('CAN_PRODUCTION') %}#}
+                    {% if is_granted('CAN_PRODUCTION') %}
                         <td><a href="{{ path('factory_delete', {'id': factory.id}) }}">{{ 'template.player.production.unit.factory.delete' | trans }}</a></td>
                         <td> <a href="{{ path('factory_show', { "id" : factory.id}) }}">{{ 'template.player.production.unit.factory.show' | trans }}</a></td>
 
@@ -37,7 +37,7 @@
                                 <a href="{{ path('production_lign_new', {'id': factory.id}) }}">{{ 'template.player.production.unit.lignprod.buy' | trans }}</a>
                             </td>
                         {% endif %}
-{#                    {% endif %}#}
+                    {% endif %}
 
 
                 {%  for productionLign in userProductionLigns %}
@@ -45,14 +45,14 @@
                             <tr>
                                 <td colspan="2"></td>
                                 <td colspan="1" align="center" class="productionLignColor">{{ productionLign.name }}</td>
-{#                                {% if is_granted('CAN_PRODUCTION') %}#}
+                                {% if is_granted('CAN_PRODUCTION') %}
                                     <td>
                                         <a href="{{ path('production_lign_delete', {'id': productionLign.id}) }}">{{ 'template.player.production.unit.factory.delete' | trans }}</a>
                                     </td>
                                     <td>
                                         <a href="{{ path('production_lign_show', {'id': productionLign.id}) }}">{{ 'template.player.production.unit.factory.show' | trans }}</a>
                                     </td>
-{#                                {% endif %}#}
+                                {% endif %}
                             </tr>
                         {% endif %}
                     {% else %}
@@ -116,7 +116,7 @@
                     {% if product.researchCost == product.researchDo  %}
                     Recherche Terminée
                     {%  else %}
-                        {#                {% if is_granted('CAN_PRODUCTION') %}#}
+                                        {% if is_granted('CAN_PRODUCTION') %}
 
                         {%  if product.researchOrder == 0 %}
                         <a href="{{ path('reseach_order_new', {'id': product.id}) }}">{{ 'template.player.production.dr.product.research' | trans }}</a>
@@ -127,7 +127,7 @@
                     {% endif %}
             </td>
 
-            {#                {% endif %}#}
+                            {% endif %}
             <td>
                 <a href="{{ path('product_show', {'id': product.id, 'path': 'production'}) }}">{{ 'template.player.production.dr.product.show' | trans }}</a>
 
@@ -167,14 +167,14 @@
             <td>{{ product.rowMaterialTotalCost }}</td>
             <td>{{ product.productiorTimeTotalCost }}</td>
             <td>
-{#                {% if is_granted('CAN_PRODUCTION') %}#}
+                {% if is_granted('CAN_PRODUCTION') %}
 
                     {%  if product.quantity == 0 %}
                         <a href="{{ path('production_order_new', {'id': product.id}) }}">{{ 'template.player.production.prod.product.buy' | trans }}</a>
                     {% else %}
                         <a href="{{ path('production_order_edit', {'id': product.researchOrderId}) }}">{{ 'template.player.production.prod.product.edit' | trans }}</a>
                     {% endif %}
-{#                {% endif %}#}
+                {% endif %}
             </td>
 
             </tr>

@@ -12,7 +12,7 @@ class DirectorVoter extends Voter
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['CAN_VALIDATE', 'POST_VIEW']);
+        return in_array($attribute, ['CAN_VALIDATE']);
     }
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
