@@ -1,47 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Product{% endblock %}
+{% block title %}{{ 'template.product.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Product</h1>
+    <h1>{{ 'template.product.h1' | trans }}</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Name</th>
+                <th>{{ 'template.product.name' | trans }}</th>
                 <td>{{ product.name }}</td>
             </tr>
             <tr>
-                <th>TechnologicLevel</th>
+                <th>{{ 'template.product.tech' | trans }}</th>
                 <td>{{ product.technologicLevel }}</td>
             </tr>
             <tr>
-                <th>BuyPrice</th>
+                <th>{{ 'template.product.buy' | trans }}</th>
                 <td>{{ product.buyPrice }}</td>
             </tr>
             <tr>
-                <th>SalePrice</th>
+                <th>{{ 'template.product.sales' | trans }}</th>
                 <td>{{ product.salePrice }}</td>
             </tr>
             <tr>
-                <th>QuantityDiscount</th>
+                <th>{{ 'template.product.quantity' | trans }}</th>
                 <td>{{ product.quantityDiscount }}</td>
             </tr>
             <tr>
-                <th>ResearchCost</th>
+                <th>{{ 'template.product.research' | trans }}</th>
                 <td>{{ product.researchCost }}</td>
             </tr>
             {% if path == "production" %}
             <tr>
-                <th>RowMaterialCost</th>
+                <th>{{ 'template.product.row' | trans }}</th>
                 <td>{{ product.rowMaterialCost }}</td>
             </tr>
             <tr>
-                <th>ManpowerCost</th>
+                <th>{{ 'template.product.manpower' | trans }}</th>
                 <td>{{ product.manpowerCost }}</td>
             </tr>
             <tr>
-                <th>ProductiorTimeCost</th>
+                <th>{{ 'template.product.prodtime' | trans }}</th>
                 <td>{{ product.productiorTimeCost }}</td>
             </tr>
             {% endif %}
@@ -49,9 +49,9 @@
         </tbody>
     </table>
     {% if path == "production" %}
-    <a href="{{ path('player_production') }}">back to list</a>
+    <a href="{{ path('player_production') }}">{{ 'template.back.production' | trans }}</a>
     {% else %}
-    <a href="{{ path('player_sales') }}">back to list</a>
+    <a href="{{ path('player_sales') }}">{{ 'template.back.sales' | trans }}</a>
     {% endif %}
 
 {% endblock %}

@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\ReseachOrder;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,7 +13,9 @@ class ReseachOrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('reseachDo')
+            ->add('reseachDo', NumberType::class,[
+                'label' => 'form.order.research.quantity'
+            ])
             ;
     }
 

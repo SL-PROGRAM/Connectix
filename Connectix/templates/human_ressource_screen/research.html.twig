@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HumanRessourceScreenController!{% endblock %}
+{% block title %}{{ 'template.human.research.title' | trans }}{% endblock %}
 
 {% block body %}
     <div>
@@ -10,7 +10,7 @@
         {{  render(controller('App\\Controller\\ResearcherDirectorController::index')) }}
     </div>
 
-    <a href="{{ path('player_human_ressourcies') }}">Back to list</a>
+    <a href="{{ path('player_human_ressourcies') }}">{{ 'template.back.research' | trans }}</a>
 
 
 {% endblock %}

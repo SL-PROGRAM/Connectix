@@ -6,6 +6,7 @@ use App\Entity\Socity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
@@ -16,7 +17,9 @@ class SocityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', TextType::class, [
+                'label' => 'form.socity.name',
+            ])
         ;
 
         $builder->add('users', CollectionType::class, [
@@ -41,10 +44,10 @@ class SocityType extends AbstractType
     );
         $builder
         ->add('submit', SubmitType::class, [
-        'label' => 'article.form.submit.label',
+        'label' => 'form.socity.submit.label',
     ])
         ->add('submitAndRestart', SubmitType::class, [
-            'label' => 'article.form.submitAndRestart.label',
+            'label' => 'form.socity.submitAndRestart.label',
         ])
     ;
 

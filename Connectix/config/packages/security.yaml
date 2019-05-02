@@ -42,15 +42,15 @@ security:
     role_hierarchy:
         #admin ROLE
         ROLE_ADMIN:                             [ROLE_USER, PRESIDENT]
-        ROLE_SUPER_ADMIN:                       ROLE_ADMIN
+        ROLE_SUPER_ADMIN:                       [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
         #lvl 1 player ROLE
-        DIRECTOR_HUMAN_RESSOURCES:              ROLE_USER
-        TECHNIC_DIRECTOR:                       ROLE_USER
-        COMMERCIAL_DIRECTOR:                    ROLE_USER
-        MARKETING_DIRECTOR:                     ROLE_USER
-        FINANCIAL_DIRECTOR:                     ROLE_USER
-        VALIDATION_DIRECTOR:                    ROLE_USER
+        DIRECTOR_HUMAN_RESSOURCES:              [ROLE_USER]
+        TECHNIC_DIRECTOR:                       [ROLE_USER]
+        COMMERCIAL_DIRECTOR:                    [ROLE_USER]
+        MARKETING_DIRECTOR:                     [ROLE_USER]
+        FINANCIAL_DIRECTOR:                     [ROLE_USER]
+        VALIDATION_DIRECTOR:                    [ROLE_USER]
 
         #lvl2 player ROLE
         TECHNIC_COMMERCIAL_DIRECTOR:            [TECHNIC_DIRECTOR, COMMERCIAL_DIRECTOR]

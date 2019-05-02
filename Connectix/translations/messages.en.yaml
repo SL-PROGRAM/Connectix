@@ -1,0 +1,519 @@
+button:
+  save: Enregistrer
+  delete: Supprimer
+  confirm:
+    delete:
+      factory: Êtes vous sur de vouloir supprimer cette usine ?
+      loan: Êtes vous sur de vouloir annuler ce crédit ?
+      productionlign: Êtes vous sur de vouloir supprimer cette ligne de production ?
+      researchorder: êtes vous sur de vouloir annuler la recherche de ce produit ?
+      salesorder: êtes vous sur de vouloir annuler la mise en vente de ce produit ?
+      purchaseorder: êtes vous sur de vouloir annuler l'achat de ce produit ?
+      pubicityorder: êtes vous sur de vouloir annuler la promotion de ce produit ?
+      productiororder: êtes vous sur de vouloir annuler la production de ce produit ?
+
+form:
+  user:
+    firstName: Prénom
+    lastName: Nom de Famille
+    email: E-mail
+    repeatEmail : Confirmer votre E-mail
+    password : entrez votre mot de passe
+    repeatPassword: Confirmer votre mot de passe
+    roles: Profession du joueur dans l'entreprise
+    role1: Roles de niveau 1
+    drh: Directeur des ressources humaines
+    dprod: Directeur de production
+    dsales: Directeur Commecial
+    dmark: Directeur Marketing
+    dfin: Directeur Financier
+    dval: Directeur d'entreprise
+    role2: Roles de niveau 2
+    dprodsales: Directeur de production et commerce
+    dfinmark: Directeur Financier et marketing
+    dvalmark: Directeur du marketing et d\'entreprise
+    dvaldrh: DRH et Directeur d\'entreprise
+    role3: Roles de niveau 3
+    dgfin: Directeur Financier, marketing et d\'entreprise
+    dgh: Directeur RH, production et Commerce
+    role4: Role de niveau 4
+    gerant: Gérant unique
+
+
+  socity:
+    name: Nom de la société
+    submit:
+      label: Valider
+    submitAndRestart:
+      label: Valider et recommencer
+
+  game:
+    name: Nom de la partie
+    tva: taux de TVA en %
+    maxturn: nombre de tour maximum
+    smic: valeur du smic brut mensuel
+    salespricemin: Prix de vente minimum du produit
+    salespricemax: Prix de vente maximum du produit
+    numbermin: Nombre de produit minimum disponible a la vente
+    numbermax: Nombre de produit maximum disponible a la vente
+  #   TODO FINIR LA TRAD DE GAME
+
+  loan:
+    borrow: Montant emprunté
+
+  prodlign:
+    name: Nom de la ligne de production
+
+  factory:
+    name: Nom de l'usine
+
+  order:
+    prod:
+      quantity: Quantité de produit à fabriquer
+    publicity:
+      price: Montant alouer à la publicité du produit
+    purchase:
+      quantity: Quantité de produit à acheter
+    research:
+      quantity: Temps de recherche aloué au produit
+    sales:
+      quantity: Quatité de produit mis en vente
+
+template:
+  footer:
+    sales: Ventepublicity
+    publicity: Publicité et distribution
+    production: Gestion de la production
+    rh: Ressources humaines
+    financial: Ressources financières
+    info: Information générale
+
+  header:
+    logo: Votre partenaire confiance
+    title: Connectix
+    admin:
+      pannel: Panneau d'administration
+      fast: Creation d'une partie rapide
+      personalisable: Creation d'une partie personalisée
+    player:
+      game: Exercice en cours
+      canvalidate: Valider l'exercice
+      turn: Année numéro
+      logout: Déconnexion
+      email: Entrez votre Email
+      password: Entrez votre password
+      signin: s'autentifier
+
+  dismiss:
+    h1: Licenciement des
+    title: Licenciement
+
+  upsalary:
+    h1: Augmentation des salaires pour les
+    title: Augmentation de salaire
+
+  recrutment:
+    title: Recrutement
+    h1: Recrutement de
+
+  socity:
+    new:
+      title: Société
+      h1: Créer une nouvelle société
+    form:
+      h2: Joueurs
+      delete: Supprimer ce joueur
+      add: Ajouter un joueur
+
+  formation:
+    title: Formation
+    h1: Former les
+
+  product:
+    title: Produits
+    h1: détail du produit
+    name: Nom du produit
+    tech: Niveau technologique du produit
+    buy: Prix d'achat du produit
+    sales: Prix de vente recommendé du produit
+    quantity: Nombre de produit a acheter pour bénéficier d'une remise
+    research: Temps de recherche nécéssaire pour pouvoir produire le pnoduit
+    row: quantité de matière première nécessaire
+    manpower: heure de fabrication humaine
+    prodtime: heure de fabrication machine
+
+  loan:
+    title: Emprunt
+    edit:
+      h1: modification de l'emprunt
+    new:
+      h1: nouveau emprunt
+    show:
+      h1: Détail de l'emprunt
+    index:
+      borrow: Montant restant du
+      bankinterest: Taux d'interet banquaire (%)
+      monthlyduedate: montant mensuel interet compris
+      duration: durée restante de l'emprunt
+      action: Gestion des emprunts
+      edit: Modification de l'emprunt
+      show: détail de l'emprunt
+      record: pas de de crédit en cours
+
+  game:
+    fast:
+      title: Création d'une partie rapide
+      h1: Créer une nouvelle partie rapide
+    personalisable:
+      title: Création d'une partie personalisée
+      h1: Créer une nouvelle partie personalisée
+
+
+  back:
+    humanRessourcies: Retour à l'écran des ressources humaines
+    production: Retour à l'écran de gestion de la production
+    rh: Retour à l'écran de gestion des ressources humaines
+    research: Retour à l'écran de gestion de la recherche
+    sales: Retour à l'écran de gestion des achats et ventes
+    financial: Retour à l'écran de gestion des ressources financières
+
+  human:
+    production:
+      title: Productifs
+    sales:
+      title: Commerciaux
+    research:
+      title: Recherche et Développement
+
+  factorydirector:
+    form:
+      new: Nouveau directeur d'usine
+    index:
+      h1: Liste des directeurs d'usine
+      salary: Salaire mensuel
+      formation: taux de formation actuel
+      experience: Année d'ancienté dans l'entreprise
+      productivity: Taux de productivité
+      record: Pas de directeur d'usine actuellement dans la société
+
+  researchdirector:
+    form:
+      new: Nouveau directeur de recherche
+    index:
+      h1: Liste des directeurs de recherches
+      salary: Salaire mensuel
+      formation: taux de formation actuel
+      experience: Année d'ancienté dans l'entreprise
+      productivity: Taux de productivité
+      record: Pas de directeur de recherche actuellement dans la société
+
+  salesdirector:
+    form:
+      new: Nouveau directeur de recherche
+    index:
+      h1: Liste des directeurs de recherches
+      salary: Salaire mensuel
+      formation: taux de formation actuel
+      experience: Année d'ancienté dans l'entreprise
+      productivity: Taux de productivité
+      record: Pas de directeur de recherche actuellement dans la société
+
+  salesparticulier:
+    form:
+      new: Nouveau vendeur spécialisé particulier
+    index:
+      h1: Liste desvendeurs spécialisé particulier
+      salary: Salaire mensuel
+      formation: taux de formation actuel
+      experience: Année d'ancienté dans l'entreprise
+      productivity: Taux de productivité
+      record: Pas de vendeur spécialisé particulier actuellement dans la société
+
+  salespro:
+    form:
+      new: Nouveau vendeur spécialisé professionnel
+    index:
+      h1: Liste desvendeurs spécialisé professionnel
+      salary: Salaire mensuel
+      formation: taux de formation actuel
+      experience: Année d'ancienté dans l'entreprise
+      productivity: Taux de productivité
+      record: Pas de vendeur spécialisé professionnel actuellement dans la société
+
+  researcher:
+    form:
+      new: Nouveau chercheur
+    index:
+      h1: Liste des chercheurs
+      salary: Salaire mensuel
+      formation: taux de formation actuel
+      experience: Année d'ancienté dans l'entreprise
+      productivity: Taux de productivité
+      record: Pas de chercheur actuellement dans la société
+
+  technician:
+    form:
+      new: Nouveau technicien
+    index:
+      h1: Liste des techniciens
+      salary: Salaire mensuel
+      formation: taux de formation actuel
+      experience: Année d'ancienté dans l'entreprise
+      productivity: Taux de productivité
+      record: Pas de technicien actuellement dans la société
+
+  workman:
+      form:
+        new: Nouveau ouvrier
+      index:
+        h1: Liste des ouvriers
+        salary: Salaire mensuel
+        formation: taux de formation actuel
+        experience: Année d'ancienté dans l'entreprise
+        productivity: Taux de productivité
+        record: Pas d'ouvrier actuellement dans la société
+
+  administration:
+    form:
+      cadre: Recruter un cadre administratif
+      admin: Recruter un employé administratif
+    index:
+      titre: Administratifs
+      h1: Liste des employés administratifs
+      salary : Salaire mensuel
+      formation : taux de formation actuel
+      experience: Année d'ancienté dans l'entreprise
+      productivity: Taux de productivité
+      record: Pas d'employé administratif actuellement dans la société
+
+  factory:
+    title: Usine
+    create:
+      h1: Acheter une usine
+    show:
+      h1: Description de l'usine
+      turn: Date d'achat
+      maintenanceCost: Coût annuel de la maintenace de l'usine
+      adminCost: Coût annuel de gestion administrative de l'usine
+      name: Nom de l'usine
+
+  productiorlign:
+    title: Ligne de production
+    create:
+      h1: Acheter une ligne de production
+    show:
+      h1: Description de la ligne de production
+      turn: Date d'achat
+      maintenanceCost: Coût annuel de la maintenace de la ligne de production
+      adminCost: Coût annuel de gestion administrative de la ligne de production
+      annualtime: Nombre d'heure de production annuel
+      totaltime: Nombre d'heure maximal de production de la ligne
+      name: Nom de la ligne de production
+
+  security:
+    signin: Veuillez vous identifier
+    mail: E-mail
+    password: Mot de passe
+    button: S'identifier
+
+  order:
+    research:
+      title: Recherche
+      edit:
+        h1: Modifier la recherche
+      new:
+        h1: Faire des recherche sur le produit
+    sales:
+      title: Vente
+        edit:
+          h1: Modifier la vente
+        new:
+          h1: Mettre en vente le produit
+    purchase:
+      title: Achat
+        edit:
+          h1: Modifier de l'ordre d'achat
+        new:
+          h1: Emettre un ordre d'achat sur le produit
+    publicity:
+      title: Publicité
+        edit:
+          h1: Modifier la publicité du produit
+        new:
+          h1: Faire de la publicité du produit
+    Production:
+      title: Production
+        edit:
+          h1: Modifier la fabrication du prnoduit
+        new:
+          h1: Lancer le produit en fabrication
+
+  player:
+    financial:
+      title: Finance
+      loan:
+        actual: Crédit en cours
+        new:
+          prodlign: Nouveau crédit pour ligne de production
+          factory: Nouveau crédit pour usine
+    human:
+      title: Ressource humaine
+      administrative:
+        h1: Service administratif
+      rd:
+        h1: Recherche et Développement
+      production:
+        h1: Service production
+      sales:
+        h1: Forces de vente
+
+      salary: Total des salaires
+      productivity: Productivité moyenne
+      dismiss: Coût licenciement moyen
+      number: Nombre salarié année
+      see: Voir les employées
+      costdismiss: Licencier des employées ayant le plus d'ancienneté
+      numberdismiss: Licencier des employées ayant le moinr d'ancienneté
+      upsalary: Augmenter les salaires
+      formation: Former les salariées
+    production:
+      title: Production et Recherche
+      unit:
+        h1: Unité de production
+        factory:
+          name: Nom de l'usine
+          creatat: Date de fabrication
+          sales: Vendre l'usine
+          buy: Acheter une usine
+          delete: Vendre l'usine
+          show: Détali de l'usine
+          full: Usine complète
+          record: Pas d'usine
+        lignprod:
+          name: Ligne de production
+          buy: Acheter une ligne de production
+          delete: Vendre la ligne de production
+          show: Détali de la ligne de production
+          record: Pas de ligne de production
+      global:
+        h1: Global production
+        machine:
+          timehave:
+          timeuse:
+          percent:
+      rd:
+        h1: Recherche et développement
+        product:
+          name: Nom du produit
+          time: Temps de recherche nécessaire
+          researchdo: Recherche effectée
+          researchwant: Recherche prévu
+          research: Faire une recherche
+          editresearch: Modifier la recherche
+          show: Détail du produit
+          record: Pas de recherche disponible
+      prod:
+        h1: Fabrication
+        product:
+          name: Nom du produit
+          cost: Coût unitaire
+          time: Temps de production unitaire
+          quantity: Quantité de produit fabriqué
+          total:
+            cost: Coût total de fabrication
+            time: Temps total de production
+          buy: Mise en fabrication
+          edit: Modifier l'ordre de fabrication
+          record: Pas de fabrication de produit possible
+    publicity:
+      title: Publicité
+      pub:
+        h1: Publicité produit
+        product:
+          name: Nom du produit
+          cycle: Cycle de vie du produit
+          pubn: Montant de pub pour l'année en cours
+          pubn-1: Montant de pub pour l'année passé
+          variation: Variation du montant de publicité
+          ratio: Ratio publicité sur CA
+          buy: Faire de la publicité
+          edit: Modifier l'ofre publicitaire
+          record: Pas de produit disponible pour de la publicité
+    sales:
+      title: Achat et vente
+      purchase:
+        h1: Achat de marchandise
+        product:
+          name: Nom du produit
+          price: Prix moyen du produit
+          quantity: Quantité de produit acheté
+          promo: Volume minimum pour remise
+          buy: Acheter le produit
+          edit: Modifier la commande
+          show: voir les détail du produit
+          record: Pas de produit disponible à l'achat
+      sales:
+        h1: Vente de marchandise
+        product:
+          name: Nom du produit
+          price: Prix moyen du produit
+          stock: Quantité de produit en stock
+          cost: Coût d'achat ou de production
+          quantitypro: Quantité vendu aux professionnels
+          quantitypart: Quantité vendu aux particuliers
+          cycle: Cycle de vie du produit
+          sell: Vendre le produit
+          edit: Modifier la vente
+          record: Pas de produit disponible à la vente
+
+
+
+
+
+
+
+
+
+  balancesheet:
+    active:
+      name: Désignation de l'entreprise
+      time: Durée de l'exercice exprimée en nombre de mois
+      adress: Adresse de l'entreprise
+      time-1: Durée de l'exercice précédent exprimée en nombre de mois
+      siret: Numéro SIRET
+      money: Déclaration souscrite en €
+      endtime: Exercice N, clos le
+      brut: Brut
+      amortization: Amortissements, provisions
+      net: Net
+      capitalnotcall: Capital souscrit non appelé (I)
+      aimmo: ACTIF IMMOBILISÉ
+      immo: IMMOBILISATIONS
+      incorporelle: INCORPORELLES
+      administrationfees: Frais d'établissement
+      research: Frais de recherche et de développement
+      brevet: Concession, brevets et droits similaire
+      commerce: Fonds commercial (1)
+      otherimmo: Autres immobilisations incorporelles
+      acompteimmo: Avances et acomptes sur immobilisations incorporelles
+      ground: Terrains
+      construction: Constructions
+      installation: Installations techniques, matériels et outillage industriels
+      othercorporelimmo: Autres immobilisations corporelles
+      actualimmo: Immobilisations en cours
+      acompteimmocorporel: Avances et acomptes sur immobilisations corporelles
+      financial: FINANCIERES (2)
+      participation: Participations évalués par mise en équivalence
+      otherparticipation: Autres participations
+      participationdept: Créances rattachées à des participations
+      othertitleimmo: Autres titres immobilisés
+      loan: Prêts
+      otherfinancialimmo: Autres immobilisations financières
+      totalimmo: TOTAL (II)
+
+
+
+
+
+
+

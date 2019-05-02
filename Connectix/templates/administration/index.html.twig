@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Administration index{% endblock %}
+{% block title %}{{ 'template.administration.index.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Administration index</h1>
+    <h1>{{ 'template.administration.index.h1' | trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Salary</th>
-                <th>Formation</th>
-                <th>Exprience</th>
-                <th>Productivity</th>
+                <th>{{ 'template.administration.index.salary' | trans }}</th>
+                <th>{{ 'template.administration.index.formation' | trans }}</th>
+                <th>{{ 'template.administration.index.experience' | trans }}</th>
+                <th>{{ 'template.administration.index.productivity' | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -24,11 +24,11 @@
                            </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">{{ 'template.administration.index.record' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <a href="{{ path('player_human_ressourcies') }}">back to list</a>
+    <a href="{{ path('player_human_ressourcies') }}">{{ 'template.back.humanRessourcies' | trans }}</a>
 
 {% endblock %}

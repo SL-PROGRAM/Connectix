@@ -1,26 +1,26 @@
 {% block body %}
-    <h1>WorkMan index</h1>
+    <h1>{{  'template.workman.index.h1' | trans }}</h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Salary</th>
-                <th>Formation</th>
-                <th>Exprience</th>
-                <th>ProductionActivity</th>
-            </tr>
+        <tr>
+            <th>{{ 'template.workman.index.salary' | trans }}</th>
+            <th>{{ 'template.workman.index.formation' | trans }}</th>
+            <th>{{ 'template.workman.index.experience' | trans }}</th>
+            <th>{{ 'template.workman.index.productivity' | trans }}</th>
+        </tr>
         </thead>
         <tbody>
-        {% for work_man in work_men %}
+        {% for researcher in researchers %}
             <tr>
-                <td>{{ work_man.salary }}</td>
-                <td>{{ work_man.formation }}</td>
-                <td>{{ work_man.exprience }}</td>
-                <td>{{ work_man.productionActivity }}</td>
+                <td>{{ researcher.salary }}</td>
+                <td>{{ researcher.formation }}</td>
+                <td>{{ researcher.exprience }}</td>
+                <td>{{ researcher.productivity }}</td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">{{ 'template.workman.index.record' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>

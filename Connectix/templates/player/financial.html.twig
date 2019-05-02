@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PlayerController!{% endblock %}
+{% block title %}{{ 'template.player.financial.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -59,7 +59,7 @@
 
     <div class="card text-center">
         <div class="card-header  alert alert-success">
-            Credit en cours :
+            {{ 'template.player.finacial.loan.actual' | trans }} :
         </div>
         <div class="card-body">
             {{ render(controller('App\\Controller\\LoanController::index')) }}
@@ -68,10 +68,10 @@
 
     <div class="row">
         <div class="col-md-6">
-            <a href="{{ path("loan_production_lign") }}">nouveau crédit pour ligne de production</a>
+            <a href="{{ path("loan_production_lign") }}"> {{ 'template.player.finacial.loan.prodlign' | trans }}</a>
         </div>
         <div class="col-md-6">
-            <a href="{{ path("loan_factory") }}">nouveau crédit pour usine</a>
+            <a href="{{ path("loan_factory") }}"> {{ 'template.player.finacial.loan.factory' | trans }}</a>
         </div>
     </div>
 {% endblock %}

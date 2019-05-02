@@ -6,6 +6,7 @@ use App\Entity\BalanceSheet;
 use App\Entity\Game;
 use App\Entity\Loan;
 use App\Entity\Socity;
+use App\Entity\User;
 use App\Form\SocityType;
 use App\Repository\GameRepository;
 use App\Service\MakeBalanceSheet;
@@ -27,7 +28,7 @@ class SocityController extends AbstractController
     /**
      * @Route("/new/{gameid}", name="socity_new", methods={"GET","POST"})
      */
-    public function new($gameid, Request $request, GameRepository $gameRepository, MakeBalanceSheet $makeBalanceSheet, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function new($gameid, Request $request, GameRepository $gameRepository, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $game = $gameRepository->findOneBy(['id' => $gameid]);
         $socity = new Socity();
@@ -37,8 +38,6 @@ class SocityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $socity->setGame($game);
-
-
 
             $socity->setPriceMinPublicicyImpact(1);
             $socity->setPriceMaxPublicityImpact(1);
@@ -51,7 +50,6 @@ class SocityController extends AbstractController
                         $user->getPassword()
                     )
                 );
-
                 $user->setGame($game);
                 $user->setSocity($socity);
                 $entityManager->persist($user);
@@ -74,7 +72,11 @@ class SocityController extends AbstractController
                 ]);
             }
 
+            if ($this->isGranted('ROLE_ADMIN')){
+                return $this->redirectToRoute('home');
+            }
             return $this->redirectToRoute('player_sales');
+
         }
 
         return $this->render('socity/new.html.twig', [

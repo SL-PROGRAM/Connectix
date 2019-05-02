@@ -34,12 +34,12 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable = true)
      */
     private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable = true)
      */
     private $lastName;
 
@@ -93,22 +93,23 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getRoles(): array
+    public function getRoles()
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        return ($roles);
     }
 
     /**
      * @param array $roles
      * @return User
      */
-    public function setRoles(array $roles): self
+    public function setRoles($roles): self
     {
-        $this->roles = $roles;
+        $role[] = $roles;
+        $this->roles = $role;
 
         return $this;
     }

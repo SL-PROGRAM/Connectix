@@ -2,7 +2,7 @@
 {{ form_start(form) }}
     {{ form_row(form.name) }}
 
-    <h2>Players</h2>
+    <h2>{{ 'template.socity.form.h2' | trans }}</h2>
     <ul class="users"  data-prototype-user="{{ form_row(form.users.vars.prototype)|e('html_attr') }}">
     </ul>
 {{ form_end(form) }}

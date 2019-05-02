@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New ProductionOrder{% endblock %}
+{% block title %}{{ 'template.order.production.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new ProductionOrder</h1>
+    <h1>{{ 'template.order.production.new.h1' | trans }}</h1>
 
     {{ include('production_order/_form.html.twig') }}
 
-    <a href="{{ path('player_production') }}">back to list</a>
+    <a href="{{ path('player_production') }}">{{ 'template.back.production' | trans }}</a>
 {% endblock %}

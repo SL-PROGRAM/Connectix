@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit SalesOrder{% endblock %}
+{% block title %}{{ 'template.order.sales.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Edit SalesOrder</h1>
+    <h1>{{ 'template.order.sales.edit.h1' | trans }}</h1>
 
     {{ include('sales_order/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('player_sales') }}">back to list</a>
+    <a href="{{ path('player_sales') }}">{{ 'template.back.sales' | trans }}</a>
 
     {{ include('sales_order/_delete_form.html.twig') }}
 {% endblock %}

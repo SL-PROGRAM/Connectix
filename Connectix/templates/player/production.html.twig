@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}Hello PlayerController!{% endblock %}
+{% block title %}{{ 'template.player.production.title' | trans }}{% endblock %}
 
 {% block body %}
     <section>
-        <h1>Unité de production</h1>
+        <h1>{{ 'template.player.production.unit.h1' | trans }}</h1>
         <table class="table">
             <thead>
             <tr>
-                <th>Usine</th>
-                <th>Date de création</th>
-                <th>Unité de production</th>
-                <th>Vendre</th>
+                <th>{{ 'template.player.production.unit.factory.name' | trans }}</th>
+                <th>{{ 'template.player.production.unit.factory.creatat' | trans }}</th>
+                <th>{{ 'template.player.production.unit.lignprod.name' | trans }}</th>
+                <th>{{ 'template.player.production.unit.factory.sales' | trans }}</th>
 {#                {% if is_granted('CAN_PRODUCTION') %}#}
-                    <th> <a href="{{ path('factory_new') }}">achété une usine</a></th>
+                    <th> <a href="{{ path('factory_new') }}">{{ 'template.player.production.unit.factory.buy' | trans }}</a></th>
 {#                {% endif %}#}
             </tr>
             </thead>
@@ -25,16 +25,16 @@
                     <td>{{ factory.turnCreation }}</td>
                     <td></td>
 {#                    {% if is_granted('CAN_PRODUCTION') %}#}
-                        <td><a href="{{ path('factory_delete', {'id': factory.id}) }}">Delete</a></td>
-                        <td> <a href="{{ path('factory_show', { "id" : factory.id}) }}">Détail de l'usine</a></td>
+                        <td><a href="{{ path('factory_delete', {'id': factory.id}) }}">{{ 'template.player.production.unit.factory.delete' | trans }}</a></td>
+                        <td> <a href="{{ path('factory_show', { "id" : factory.id}) }}">{{ 'template.player.production.unit.factory.show' | trans }}</a></td>
 
                 {% if factory.ProductionLign | length >= 10 %}
                             <td>
-                                Usine complète
+                                {{ 'template.player.production.unit.factory.full' | trans }}
                             </td>
                         {% else %}
                             <td>
-                                <a href="{{ path('production_lign_new', {'id': factory.id}) }}">acheter une ligne de production</a>
+                                <a href="{{ path('production_lign_new', {'id': factory.id}) }}">{{ 'template.player.production.unit.lignprod.buy' | trans }}</a>
                             </td>
                         {% endif %}
 {#                    {% endif %}#}
@@ -47,24 +47,24 @@
                                 <td colspan="1" align="center" class="productionLignColor">{{ productionLign.name }}</td>
 {#                                {% if is_granted('CAN_PRODUCTION') %}#}
                                     <td>
-                                        <a href="{{ path('production_lign_delete', {'id': productionLign.id}) }}">Delete</a>
+                                        <a href="{{ path('production_lign_delete', {'id': productionLign.id}) }}">{{ 'template.player.production.unit.factory.delete' | trans }}</a>
                                     </td>
                                     <td>
-                                        <a href="{{ path('production_lign_show', {'id': productionLign.id}) }}">Détail de la ligne de production</a>
+                                        <a href="{{ path('production_lign_show', {'id': productionLign.id}) }}">{{ 'template.player.production.unit.factory.show' | trans }}</a>
                                     </td>
 {#                                {% endif %}#}
                             </tr>
                         {% endif %}
                     {% else %}
                         <tr>
-                            <td colspan="3">no records found</td>
+                            <td colspan="3">{{ 'template.player.production.unit.lignprod.record' | trans }}</td>
                         </tr>
                     {% endfor %}
 
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="7">no records found</td>
+                    <td colspan="7">{{ 'template.player.production.unit.factory.record' | trans }}</td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -72,13 +72,13 @@
     </section>
 
     <section>
-        <h1>Global production</h1>
+        <h1>{{ 'template.player.production.global.h1' | trans }}</h1>
         <table class="table">
             <thead>
             <tr>
-                <th>Total heure machine</th>
-                <th>Total utilisé</th>
-                <th>Taux d'activité</th>
+                <th>{{ 'template.player.production.global.machine.timehave' | trans }}</th>
+                <th>{{ 'template.player.production.global.machine.timeuse' | trans }}</th>
+                <th>{{ 'template.player.production.global.machine.percent' | trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -94,15 +94,15 @@
 
 
     <section>
-        <h1>Recherche et développement</h1>
+        <h1>{{ 'template.player.production.dr.h1' | trans }}</h1>
         <table class="table">
             <thead>
             <tr>
-                <th>Produit</th>
-                <th>temps de recherche nécéssaire</th>
-                <th>recherche effectuée</th>
-                <th>Recherche prévu</th>
-                <th>Faire une recherche</th>
+                <th>{{ 'template.player.production.dr.product.name' | trans }}</th>
+                <th>{{ 'template.player.production.dr.product.time' | trans }}</th>
+                <th>{{ 'template.player.production.dr.product.researchdo' | trans }}</th>
+                <th>{{ 'template.player.production.dr.product.researchwant' | trans }}</th>
+                <th>{{ 'template.player.production.dr.product.research' | trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -119,9 +119,9 @@
                         {#                {% if is_granted('CAN_PRODUCTION') %}#}
 
                         {%  if product.researchOrder == 0 %}
-                        <a href="{{ path('reseach_order_new', {'id': product.id}) }}">Commander</a>
+                        <a href="{{ path('reseach_order_new', {'id': product.id}) }}">{{ 'template.player.production.dr.product.research' | trans }}</a>
                         {% else %}
-                        <a href="{{ path('reseach_order_edit', {'id': product.researchOrderId}) }}">Modifier la commande</a>
+                        <a href="{{ path('reseach_order_edit', {'id': product.researchOrderId}) }}">{{ 'template.player.production.dr.product.editresearch' | trans }}</a>
                         {% endif %}
 
                     {% endif %}
@@ -129,14 +129,14 @@
 
             {#                {% endif %}#}
             <td>
-                <a href="{{ path('product_show', {'id': product.id, 'path': 'production'}) }}">Détail du produit</a>
+                <a href="{{ path('product_show', {'id': product.id, 'path': 'production'}) }}">{{ 'template.player.production.dr.product.show' | trans }}</a>
 
             </td>
 
             </tr>
             {% else %}
             <tr>
-            <td colspan="7">no records found</td>
+            <td colspan="7">{{ 'template.player.production.dr.product.record' | trans }}</td>
             </tr>
             {% endfor %}
             </tbody>
@@ -144,17 +144,17 @@
     </section>
 
     <section>
-        <h1>Production</h1>
+        <h1>{{ 'template.player.production.prod.h1' | trans }}</h1>
         <table class="table">
             <thead>
             <tr>
-                <th>Product</th>
-                <th>coût unitaire</th>
-                <th>temps de prod unitaire</th>
-                <th>qté créer</th>
-                <th>coût total</th>
-                <th>temps de prod total</th>
-                <th>fabriquer</th>
+                <th>{{ 'template.player.production.prod.product.name' | trans }}</th>
+                <th>{{ 'template.player.production.prod.product.cost' | trans }}</th>
+                <th>{{ 'template.player.production.prod.product.time' | trans }}</th>
+                <th>{{ 'template.player.production.prod.product.quantity' | trans }}</th>
+                <th>{{ 'template.player.production.prod.product.total.cost' | trans }}</th>
+                <th>{{ 'template.player.production.prod.product.total.time' | trans }}</th>
+                <th>{{ 'template.player.production.prod.product.buy' | trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -170,9 +170,9 @@
 {#                {% if is_granted('CAN_PRODUCTION') %}#}
 
                     {%  if product.quantity == 0 %}
-                        <a href="{{ path('production_order_new', {'id': product.id}) }}">Commander</a>
+                        <a href="{{ path('production_order_new', {'id': product.id}) }}">{{ 'template.player.production.prod.product.buy' | trans }}</a>
                     {% else %}
-                        <a href="{{ path('production_order_edit', {'id': product.researchOrderId}) }}">Modifier la commande</a>
+                        <a href="{{ path('production_order_edit', {'id': product.researchOrderId}) }}">{{ 'template.player.production.prod.product.edit' | trans }}</a>
                     {% endif %}
 {#                {% endif %}#}
             </td>
@@ -180,7 +180,7 @@
             </tr>
             {% else %}
             <tr>
-            <td colspan="7">no records found</td>
+            <td colspan="7">{{ 'template.player.production.prod.product.record' | trans }}</td>
             </tr>
             {% endfor %}
             </tbody>

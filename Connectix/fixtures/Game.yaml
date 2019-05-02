@@ -1,0 +1,5 @@
+#App\entity\Game:
+#  Game:
+#    name: 'Game 1'
+#    rawMaterialMin: '10'
+#    rawMaterialMax: '12'

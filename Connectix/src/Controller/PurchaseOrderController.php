@@ -39,6 +39,8 @@ class PurchaseOrderController extends AbstractController
             $product = $productRepository->findOneBy(["id" => $_GET["id"]]);
             $purchaseOrder->setProduct($product);
 
+            $purchaseOrder->setPurchasePrice($product->getSalePrice()*0.8);
+
             $productActivityCost = 10; // $purchaseOrder->getProduct()->getProductionActivityCost();
             $quantity = $purchaseOrder->getProductQuantityPurchase();
 

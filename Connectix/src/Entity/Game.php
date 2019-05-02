@@ -38,10 +38,6 @@ class Game
      */
     private $turn = 0;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $socityNumber = 5;
 
     /**
      * @ORM\Column(type="float")
@@ -412,25 +408,6 @@ class Game
     public function setTurn(int $turn): self
     {
         $this->turn = $turn;
-
-        return $this;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getSocityNumber(): ?int
-    {
-        return $this->socityNumber;
-    }
-
-    /**
-     * @param int $socityNumber
-     * @return Game
-     */
-    public function setSocityNumber(int $socityNumber): self
-    {
-        $this->socityNumber = $socityNumber;
 
         return $this;
     }

@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}Hello PlayerController!{% endblock %}
+{% block title %}{{ 'template.player.human.title' | trans }}{% endblock %}
 
 {% block body %}
     <div class="row">
         <section class="col-md-6">
-            <h1>Service administratif</h1>
+            <h1>{{ 'template.player.human.administrative.h1' | trans }}</h1>
                 <table>
                     <thead>
                     <tr>
-                        <th>Total des salaires</th>
-                        <th>Productivité moyenne</th>
-                        <th>Coût licenciement moyen</th>
-                        <th>Nombre salarié année</th>
+                        <th>{{ 'template.player.human.salary' | trans }}</th>
+                        <th>{{ 'template.player.human.productivity' | trans }}</th>
+                        <th>{{ 'template.player.human.dismiss' | trans }}</th>
+                        <th>{{ 'template.player.human.number' | trans }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -27,22 +27,22 @@
                 </table>
                 <div class="mt-4 mr-4">
                     <div class="mb-1">
-                        <a class="btn btn-sm btn-block" href="{{ path("administration_index") }}">voir les employées</a>
+                        <a class="btn btn-sm btn-block" href="{{ path("administration_index") }}">{{ 'template.player.human.see' | trans }}</a>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-1">
-                            <a class="btn btn-sm btn-block" href="{{ path("administration_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
+                            <a class="btn btn-sm btn-block" href="{{ path("administration_dismiss", {'type' : 'Salary'}) }}">{{ 'template.player.human.costdismiss' | trans }}</a>
                         </div>
                         <div class="col-md-6 mb-1">
-                            <a class="btn btn-sm btn-block" href="{{ path("administration_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
+                            <a class="btn btn-sm btn-block" href="{{ path("administration_dismiss", {"type" : "People"}) }}">{{ 'template.player.human.numberdismiss' | trans }}</a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-1">
-                            <a class="btn btn-sm btn-block" href="{{ path("administration_up_salary") }}">Augmenter les salaires</a>
+                            <a class="btn btn-sm btn-block" href="{{ path("administration_up_salary") }}">{{ 'template.player.human.upsalary' | trans }}</a>
                         </div>
                         <div class="col-md-6 mb-1">
-                            <a class="btn btn-sm btn-block" href="{{ path("administration_formation") }}">Former les employés</a>
+                            <a class="btn btn-sm btn-block" href="{{ path("administration_formation") }}">{{ 'template.player.human.formation' | trans }}</a>
                         </div>
                     </div>
                     <div class="row">
@@ -58,14 +58,14 @@
 
         </section>
         <section class="col-md-6">
-            <h1>Service R&D</h1>
+            <h1>{{ 'template.player.human.rd.h1' | trans }}</h1>
             <table>
                 <thead>
                 <tr>
-                    <th>Total des salaires</th>
-                    <th>Productivité moyenne</th>
-                    <th>Coût licenciement</th>
-                    <th>Nombre salarié année</th>
+                    <th>{{ 'template.player.human.salary' | trans }}</th>
+                    <th>{{ 'template.player.human.productivity' | trans }}</th>
+                    <th>{{ 'template.player.human.dismiss' | trans }}</th>
+                    <th>{{ 'template.player.human.number' | trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -79,22 +79,22 @@
             </table>
             <div class="mt-4 mr-4">
                 <div class="mb-1">
-                    <a class="btn btn-sm btn-block" href="{{ path("human_ressource_screen_research") }}">voir les employées</a>
+                    <a class="btn btn-sm btn-block" href="{{ path("human_ressource_screen_research") }}">{{ 'template.player.human.see' | trans }}</a>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-1">
-                        <a class="btn btn-sm btn-block" href="{{ path("researcher_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
+                        <a class="btn btn-sm btn-block" href="{{ path("researcher_dismiss", {'type' : 'Salary'}) }}">{{ 'template.player.human.costdismiss' | trans }}</a>
                     </div>
                     <div class="col-md-6 mb-1">
-                        <a class="btn btn-sm btn-block" href="{{ path("researcher_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
+                        <a class="btn btn-sm btn-block" href="{{ path("researcher_dismiss", {"type" : "People"}) }}">{{ 'template.player.human.numberdismiss' | trans }}</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-1">
-                        <a class="btn btn-sm btn-block" href="{{ path("researcher_up_salary") }}">Augmenter les salaires</a>
+                        <a class="btn btn-sm btn-block" href="{{ path("researcher_up_salary") }}">{{ 'template.player.human.upsalary' | trans }}</a>
                     </div>
                     <div class="col-md-6 mb-1">
-                        <a class="btn btn-sm btn-block" href="{{ path("researcher_formation") }}">Former les employés</a>
+                        <a class="btn btn-sm btn-block" href="{{ path("researcher_formation") }}">{{ 'template.player.human.formation' | trans }}</a>
                     </div>
                 </div>
                 <div class="row">
@@ -117,14 +117,14 @@
     <div class="row">
 
         <section  class="col-md-6">
-            <h1>Service Production</h1>
+            <h1>{{ 'template.player.human.production.h1' | trans }}</h1>
             <table>
                 <thead>
                 <tr>
-                    <th>Total des salaires</th>
-                    <th>Productivité moyenne</th>
-                    <th>Coût licenciement</th>
-                    <th>Nombre salarié année</th>
+                    <th>{{ 'template.player.human.salary' | trans }}</th>
+                    <th>{{ 'template.player.human.productivity' | trans }}</th>
+                    <th>{{ 'template.player.human.dismiss' | trans }}</th>
+                    <th>{{ 'template.player.human.number' | trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -138,22 +138,22 @@
             </table>
             <div class="mt-4 mr-4">
                 <div class="mb-1">
-                    <a class="btn btn-sm btn-block" href="{{ path("human_ressource_screen_production") }}">voir les employées</a>
+                    <a class="btn btn-sm btn-block" href="{{ path("human_ressource_screen_production") }}">{{ 'template.player.human.see' | trans }}</a>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-1">
-                        <a class="btn btn-sm btn-block" href="{{ path("production_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
+                        <a class="btn btn-sm btn-block" href="{{ path("production_dismiss", {'type' : 'Salary'}) }}">{{ 'template.player.human.costdismiss' | trans }}</a>
                     </div>
                     <div class="col-md-6 mb-1">
-                        <a class="btn btn-sm btn-block" href="{{ path("production_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
+                        <a class="btn btn-sm btn-block" href="{{ path("production_dismiss", {"type" : "People"}) }}">{{ 'template.player.human.numberdismiss' | trans }}</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-1">
-                        <a class="btn btn-sm btn-block" href="{{ path("production_up_salary") }}">Augmenter les salaires</a>
+                        <a class="btn btn-sm btn-block" href="{{ path("production_up_salary") }}">{{ 'template.player.human.upsalary' | trans }}</a>
                     </div>
                     <div class="col-md-6 mb-1">
-                        <a class="btn btn-sm btn-block" href="{{ path("production_formation") }}">Former les employés</a>
+                        <a class="btn btn-sm btn-block" href="{{ path("production_formation") }}">{{ 'template.player.human.formation' | trans }}</a>
                     </div>
                 </div>
                 <div class="row">
@@ -171,15 +171,15 @@
             </div>
         </section>
         <section class="col-md-6">
-            <h1>Service force de vente</h1>
-                               <table>
-                        <thead>
-                        <tr>
-                            <th>Total des salaires</th>
-                            <th>Productivité moyenne</th>
-                            <th>Coût licenciement</th>
-                            <th>Nombre salarié année</th>
-                        </tr>
+            <h1>{{ 'template.player.human.sales.h1' | trans }}</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>{{ 'template.player.human.salary' | trans }}</th>
+                    <th>{{ 'template.player.human.productivity' | trans }}</th>
+                    <th>{{ 'template.player.human.dismiss' | trans }}</th>
+                    <th>{{ 'template.player.human.number' | trans }}</th>
+                </tr>
                         </thead>
                         <tbody>
                         <tr>
@@ -192,22 +192,22 @@
                     </table>
             <div class="mt-4 mr-4">
                 <div class="mb-1">
-                    <a class="btn btn-sm btn-block" href="{{ path("human_ressource_screen_sales") }}">voir les employées</a>
+                    <a class="btn btn-sm btn-block" href="{{ path("human_ressource_screen_sales") }}">{{ 'template.player.human.see' | trans }}</a>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-1">
-                        <a class="btn btn-sm btn-block" href="{{ path("salesman_dismiss", {'type' : 'Salary'}) }}">licencier des employées par les salaires</a>
+                        <a class="btn btn-sm btn-block" href="{{ path("salesman_dismiss", {'type' : 'Salary'}) }}">{{ 'template.player.human.costdismiss' | trans }}</a>
                     </div>
                     <div class="col-md-6 mb-1">
-                        <a class="btn btn-sm btn-block" href="{{ path("salesman_dismiss", {"type" : "People"}) }}">licencier des employées par date d'entrée</a>
+                        <a class="btn btn-sm btn-block" href="{{ path("salesman_dismiss", {"type" : "People"}) }}">{{ 'template.player.human.numberdismiss' | trans }}</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-1">
-                        <a class="btn btn-sm btn-block" href="{{ path("salesman_up_salary") }}">Augmenter les salaires</a>
+                        <a class="btn btn-sm btn-block" href="{{ path("salesman_up_salary") }}">{{ 'template.player.human.upsalary' | trans }}</a>
                     </div>
                     <div class="col-md-6 mb-1">
-                        <a class="btn btn-sm btn-block" href="{{ path("salesman_formation") }}">Former les employés</a>
+                        <a class="btn btn-sm btn-block" href="{{ path("salesman_formation") }}">{{ 'template.player.human.formation' | trans }}</a>
                     </div>
                 </div>
                 <div class="row">

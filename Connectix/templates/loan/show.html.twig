@@ -1,30 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Loan{% endblock %}
+{% block title %}{{ 'template.loan.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Loan</h1>
+    <h1>{{ 'template.loan.show.h1' | trans }}</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>BorrowAmount</th>
+                <th>{{ 'template.loan.index.borrow' | trans }}</th>
                 <td>{{ loan.borrowAmount }}</td>
             </tr>
             <tr>
-                <th>BankInterest</th>
+                <th>{{ 'template.loan.index.bankinterest' | trans }}</th>
                 <td>{{ loan.bankInterest }}</td>
             </tr>
             <tr>
-                <th>MonthlyDueDate</th>
+                <th>{{ 'template.loan.index.monthyduedate' | trans }}</th>
                 <td>{{ loan.monthlyDueDate }}</td>
             </tr>
             <tr>
-                <th>LoanDuration</th>
+                <th>{{ 'template.loan.index.duratiom' | trans }}</th>
                 <td>{{ loan.loanDuration }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('player_financial') }}">back to list</a>
+    <a href="{{ path('player_financial') }}">{{ 'template.back.financial' | trans }}</a>
 {% endblock %}

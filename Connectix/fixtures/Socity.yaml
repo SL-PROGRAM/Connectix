@@ -1,0 +1,6 @@
+#App\Entity\Socity:
+#  Socity1:
+#    name: 'Soc1'
+#    priceMinPublicicyImpact: '10'
+#    priceMaxPublicityImpact : '10'
+#    game: @game

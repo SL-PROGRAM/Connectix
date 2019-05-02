@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New PublicityOrder{% endblock %}
+{% block title %}{{ 'template.order.sales.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new PublicityOrder</h1>
+    <h1>{{ 'template.order.publicity.new.h1' | trans }}</h1>
 
     {{ include('publicity_order/_form.html.twig') }}
 
-    <a href="{{ path('player_publicity') }}">back to list</a>
+    <a href="{{ path('player_publicity') }}">{{ 'template.back.publicity' | trans }}</a>
 {% endblock %}

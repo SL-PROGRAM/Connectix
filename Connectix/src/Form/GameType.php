@@ -12,17 +12,30 @@ class GameType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('tva')
-            ->add('maxturn')
-            ->add('turn')
-            ->add('socityNumber')
-            ->add('smic')
-            ->add('creatAt')
-            ->add('salesPriceMin')
-            ->add('salesPriceMax')
-            ->add('productNumberMin')
-            ->add('productNumberMax')
+            ->add('name' ,[
+            'label' => 'form.game.name'
+            ])
+            ->add('tva',[
+                'label' => 'form.game.tva'
+            ])
+            ->add('maxturn',[
+                'label' => 'form.game.maxturn'
+            ])
+            ->add('smic',[
+                'label' => 'form.game.smic'
+            ])
+            ->add('salesPriceMin',[
+                'label' => 'form.game.salespricemin'
+            ])
+            ->add('salesPriceMax',[
+                'label' => 'form.game.salespricemax'
+            ])
+            ->add('productNumberMin',[
+                'label' => 'form.game.numbermin'
+            ])
+            ->add('productNumberMax',[
+                'label' => 'form.game.numbermax'
+            ])
             ->add('percentProductAvailableMinCycleLife1')
             ->add('percentProductAvailableMinCycleLife2')
             ->add('percentProductAvailableMinCycleLife3')

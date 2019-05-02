@@ -3,40 +3,41 @@
         <div>
             <img src="{{ asset('build/adhidéo.jpg') }}" alt="logo adhidéo">
         </div>
-        <div class="text-logo-color text-center">Votre partenaire confiance</div>
+        <div class="text-logo-color text-center">{{ 'template.header.logo' | trans }}</div>
     </div>
     <div class="col-lg-7">
-        <h1 class="text-center pt-5 titre-header"> titre</h1>
-
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <h1 class="text-center pt-5 titre-header">{{ 'template.header.title' | trans }} </h1>
+        {%  endif %}
 
 
     </div>
     <div class="col-lg-3 col-md-6 col-12 elem-center">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div>
-                <a href="/admin">Panneau d'administration</a>
+                <a href="/admin">{{ 'template.header.admin.pannel' | trans }}</a>
             </div>
             <div>
-                <a href="{{ path('fast_game_new') }}">Créer une partie rapide</a>
+                <a href="{{ path('fast_game_new') }}">{{ 'template.header.admin.fast' | trans }}</a>
             </div>
             <div>
-                <a href="{{ path('game_new') }}">Créer une partie personalisée</a>
+                <a href="{{ path('game_new') }}">{{ 'template.header.admin.personalisable' | trans }}</a>
             </div>
         {%  endif %}
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div class="card text-center">
                 <div class="card-header  alert alert-primary">
-                    Exercice en cours :
+                    {{ 'template.header.player.game' | trans }} :
                 </div>
                 <div class="card-body row">
 {#                    {% if is_granted('CAN_VALIDATE') %}#}
-                        <a class="col-6 border-right" href="">Valider l'exercice</a>
+                        <a class="col-6 border-right" href="">{{ 'template.header.player.canvalidate' | trans }}</a>
 {#                    {% endif %}#}
-                    <span class="col-6 border-left">Année numéro : <div>4</div>    </span>
+                    <span class="col-6 border-left">{{ 'template.header.player.turn' | trans }} : <div></div>    </span>
                 </div>
                 <div class="card-footer text-muted p-0">
                     <form action="/logout" class="col-12 m-0 p-0">
-                        <input type="submit" value="Deconnexion" class="btn-block" />
+                        <input type="submit" value="{{ 'template.header.player.logout' | trans }}" class="btn-block" />
                     </form>
                 </div>
             </div>
@@ -45,22 +46,18 @@
             <div class="m-3">
                 <form method="post" action="/login">
 
-                    <label for="inputEmail" class="sr-only">Email</label>
+                    <label for="inputEmail" class="sr-only">{{ 'template.header.player.email' | trans }}</label>
                     <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-                    <label for="inputPassword" class="sr-only">Password</label>
+                    <label for="inputPassword" class="sr-only">{{ 'template.header.player.password' | trans }}</label>
                     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
                     <input type="hidden" name="_csrf_token"
                            value="{{ csrf_token('authenticate') }}"
                     >
                     <button class="btn btn-block btn-primary" type="submit">
-                        Sign in
+                        {{ 'template.header.player.signin' | trans }}
                     </button>
-                    <a class="btn btn-block btn-primary" href="{{ 'login' }}">
-                        Sign on
-                    </a>
-
-                </form>
+                    </form>
             </div>
         {% endif %}
     </div>

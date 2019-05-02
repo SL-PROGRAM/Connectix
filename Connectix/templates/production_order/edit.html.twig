@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit ProductionOrder{% endblock %}
+{% block title %}{{ 'template.order.production.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Edit ProductionOrder</h1>
+    <h1>{{ 'template.order.production.edit.h1' | trans }}</h1>
 
     {{ include('production_order/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('player_production') }}">back to list</a>
+    <a href="{{ path('player_production') }}">{{ 'template.back.production' | trans }}</a>
 
     {{ include('production_order/_delete_form.html.twig') }}
 {% endblock %}

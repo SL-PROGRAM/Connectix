@@ -10,37 +10,37 @@
                     <TD align="center" colspan="11">BILAN ACTIF</TD>
                 </TR>
                 <TR>
-                    <TD colspan="2">Désignation de l'entreprise : </TD>
+                    <TD colspan="2">{{ 'template.balancesheet.active.name' | trans }} : </TD>
                     <TD colspan="3"></TD>
-                    <TD colspan="5" align="right">Durée de l'exercice exprimée en nombre de mois* :</TD>
+                    <TD colspan="5" align="right">{{ 'template.balancesheet.active.time' | trans }} :</TD>
+                    <TD colspan="1">12</TD>
+                </TR>
+                <TR>
+                    <TD colspan="2">{{ 'template.balancesheet.active.adress' | trans }} :</TD>
+                    <TD colspan="3"></TD>
+                    <TD colspan="5" align="right">} :</TD>
                     <TD colspan="1"></TD>
                 </TR>
                 <TR>
-                    <TD colspan="2">Adresse de l'entreprise :</TD>
-                    <TD colspan="3"></TD>
-                    <TD colspan="5" align="right">Durée de l'exercice précédent exprimée en nombre de mois* :</TD>
-                    <TD colspan="1"></TD>
-                </TR>
-                <TR>
-                    <TD colspan="2">Numéro SIRET* :</TD>
+                    <TD colspan="2">{{ 'template.balancesheet.active.siret' | trans }} :</TD>
                     <TD colspan="3"></TD>
                     <TD colspan="5" align="right">Code APE :</TD>
                     <TD colspan="1"></TD>
                 </TR>
                 <TR>
-                    <TD colspan="5" rowspan="2" class="rowspan" align="center">Déclaration souscrite en €</TD>
-                    <TD colspan="4" align="right">Exercice N, clos le : </TD>
+                    <TD colspan="5" rowspan="2" class="rowspan" align="center"></TD>
+                    <TD colspan="4" align="right">{{ 'template.balancesheet.active.endtime' | trans }} : </TD>
                     <TD class="col-année-n" colspan="1">31/12/20N</TD>
                     <TD class="col-année-n-1" colspan="1">31/12/20N-1</TD>
                 </TR>
                 <TR>
-                    <TD align="center" colspan="2">Brut</TD>
-                    <TD colspan="2" align="center">Amortissements, provisions</TD>
-                    <TD class="col-année-n" colspan="1">Net</TD>
-                    <TD class="col-année-n-1" colspan="1">Net</TD>
+                    <TD align="center" colspan="2">{{ 'template.balancesheet.active.brut' | trans }}</TD>
+                    <TD colspan="2" align="center">{{ 'template.balancesheet.active.amortization' | trans }}</TD>
+                    <TD class="col-année-n" colspan="1">{{ 'template.balancesheet.active.net' | trans }}</TD>
+                    <TD class="col-année-n-1" colspan="1">{{ 'template.balancesheet.active.net' | trans }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="5" align="center">Capital souscrit non appelé (I)</TD>
+                    <TD colspan="5" align="center">{{ 'template.balancesheet.active.capitalnotcall' | trans }}</TD>
                     <TD colspan="1" align="center">AA</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.subscribedCapitalNotCall }}</TD>
                     <TD colspan="2" class="col-interdit" align="center"></TD>
@@ -48,9 +48,9 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.subscribedCapitalNotCall }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="1" rowspan="18" class="rowspan" valign="middle" align="center">ACTIF IMMOBILISÉ*</TD>
-                    <TD colspan="1" rowspan="6" class="rowspan" valign="middle" align="center"><div>IMMOBILISATIONS</div><div>INCORPORELLES</div> </TD>
-                    <TD colspan="3">Frais d'établissement*</TD>
+                    <TD colspan="1" rowspan="18" class="rowspan" valign="middle" align="center">{{ 'template.balancesheet.active.aimmo' | trans }}</TD>
+                    <TD colspan="1" rowspan="6" class="rowspan" valign="middle" align="center"><div>{{ 'template.balancesheet.active.immo' | trans }}</div><div>{{ 'template.balancesheet.active.incorporelle' | trans }}</div> </TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.administrationfees' | trans }}</TD>
                     <TD colspan="1" align="center">AB</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.administrationFees }}</TD>
                     <TD colspan="1" align="center">AC</TD>
@@ -59,7 +59,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.administrationFees }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Frais de recherche et de développement*</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.research' | trans }}</TD>
                     <TD colspan="1" align="center">AD</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.researchAndDevelopmentCost }}</TD>
                     <TD colspan="1" align="center">AE</TD>
@@ -68,7 +68,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.researchAndDevelopmentCost }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Concession, brevets et droits similaire</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.brevet' | trans }}</TD>
                     <TD colspan="1" align="center">AF</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.concessionPatentsAndSimilar }}</TD>
                     <TD colspan="1" align="center">AG</TD>
@@ -77,7 +77,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.concessionPatentsAndSimilar }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Fonds commercial (1)</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.commerce' | trans }}</TD>
                     <TD colspan="1" align="center">AH</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.commercialFund }}</TD>
                     <TD colspan="1" align="center">AI</TD>
@@ -86,7 +86,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.commercialFund }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Autres immobilisations incorporelles</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.otherimmo' | trans }}</TD>
                     <TD colspan="1" align="center">AJ</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.otherIntangibleAsset }}</TD>
                     <TD colspan="1" align="center">AK</TD>
@@ -95,7 +95,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.otherIntangibleAsset }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Avances et acomptes sur immobilisations incorporelles</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.acompteimmo' | trans }}</TD>
                     <TD colspan="1" align="center">AL</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.advancesAndDownPaymentOnIntangibleAssets }}</TD>
                     <TD colspan="1" align="center">AM</TD>
@@ -106,7 +106,7 @@
 
                 <TR>
                     <TD colspan="1" rowspan="6" class="rowspan" valign="middle" align="center"><div>IMMOBILISATIONS</div><div>CORPORELLES</div> </TD>
-                    <TD colspan="3">Terrains</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.ground' | trans }}</TD>
                     <TD colspan="1" align="center">AN</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.grounds }}</TD>
                     <TD colspan="1" align="center">AO</TD>
@@ -115,7 +115,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.grounds }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Constructions</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.construction' | trans }} </TD>
                     <TD colspan="1" align="center">AP</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.constructions }}</TD>
                     <TD colspan="1" align="center">AQ</TD>
@@ -124,7 +124,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.constructions }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Installations techniques, matériels et outillage industriels</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.installation' | trans }}</TD>
                     <TD colspan="1" align="center">AR</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.technicalInstallationsEquipment }}</TD>
                     <TD colspan="1" align="center">AS</TD>
@@ -133,7 +133,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.technicalInstallationsEquipment }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Autres immobilisations corporelles</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.othercorporelimmo' | trans }}</TD>
                     <TD colspan="1" align="center">AT</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.otherTangibleFixedAssets }}</TD>
                     <TD colspan="1" align="center">AU</TD>
@@ -142,7 +142,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.otherTangibleFixedAssets }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Immobilisations en cours</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.actualimmo' | trans }}</TD>
                     <TD colspan="1" align="center">AV</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.assetInProgress }}</TD>
                     <TD colspan="1" align="center">AW</TD>
@@ -151,7 +151,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.assetInProgress }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Avances et acomptes sur immobilisations corporelles</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.acompteimmocorporel' | trans }}</TD>
                     <TD colspan="1" align="center">AX</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.advancesAndDownPaymentOnTangibleAssets }}</TD>
                     <TD colspan="1" align="center">AY</TD>
@@ -160,8 +160,8 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.advancesAndDownPaymentOnTangibleAssets }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="1" rowspan="6" class="rowspan" valign="middle" align="center"><div>IMMOBILISATIONS</div><div>FINANCIERES (2)</div>  </TD>
-                    <TD colspan="3">Participations évalués par mise en équivalence</TD>
+                    <TD colspan="1" rowspan="6" class="rowspan" valign="middle" align="center"><div>{{ 'template.balancesheet.active.immo' | trans }}</div><div>{{ 'template.balancesheet.active.financial' | trans }}</div>  </TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.participation' | trans }}</TD>
                     <TD colspan="1" align="center">CS</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.investmentsAccountedForEquityMethod }}</TD>
                     <TD colspan="1" align="center">CT</TD>
@@ -170,7 +170,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.investmentsAccountedForEquityMethod }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Autres participations</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.otherparticipation' | trans }}</TD>
                     <TD colspan="1" align="center">CU</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.otherParticipations }}</TD>
                     <TD colspan="1" align="center">CV</TD>
@@ -179,7 +179,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.otherParticipations }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Créances rattachées à des participations</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.participationdept' | trans }}</TD>
                     <TD colspan="1" align="center">BB</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.receivablesRelatedEquityInvestments }}</TD>
                     <TD colspan="1" align="center">BC</TD>
@@ -188,7 +188,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.receivablesRelatedEquityInvestments }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Autres titres immobilisés</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.othertitleimmo' | trans }}</TD>
                     <TD colspan="1" align="center">BD</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.otherLockedSecurities }}</TD>
                     <TD colspan="1" align="center">BE</TD>
@@ -197,7 +197,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.otherLockedSecurities }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Prêts</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.loan' | trans }}</TD>
                     <TD colspan="1" align="center">BF</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.loans }}</TD>
                     <TD colspan="1" align="center">BG</TD>
@@ -206,7 +206,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.loans }}</TD>
                 </TR>
                 <TR>
-                    <TD colspan="3">Autres immobilisations financières*</TD>
+                    <TD colspan="3">{{ 'template.balancesheet.active.otherfinancialimmo' | trans }}</TD>
                     <TD colspan="1" align="center">BH</TD>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.otherFinancialAssets }}</TD>
                     <TD colspan="1" align="center">BI</TD>
@@ -215,7 +215,7 @@
                     <TD class="col-année-n-1" colspan="1" align="center">{{ lastYearActiveBalanceSheet.otherFinancialAssets }}</TD>
                 </TR>
                 <tr class="resultat">
-                    <td colspan="5" align="right">TOTAL (II)</td>
+                    <td colspan="5" align="right">{{ 'template.balancesheet.active.totalimmo' | trans }}</td>
                     <td colspan="1" align="center">BJ</td>
                     <TD colspan="1" align="center">{{ actualYearActiveBalanceSheetBrut.totalFixedAsset }}</TD>
                     <TD colspan="1" align="center">BK</TD>
@@ -402,6 +402,10 @@
 
             </TABLE>
         </div>
+
+
+
+
         <div class="col-lg-6 col-sm-12">
             <TABLE BORDER="05" CELLPADDING=2 align="center">
                 <TR>

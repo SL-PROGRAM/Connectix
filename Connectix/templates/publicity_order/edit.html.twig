@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit PublicityOrder{% endblock %}
+{% block title %}{{ 'template.order.publicity.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Edit PublicityOrder</h1>
+    <h1>{{ 'template.order.publicity.edit.h1' | trans }}</h1>
 
     {{ include('publicity_order/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('player_publicity') }}">back to list</a>
+    <a href="{{ path('player_publicity') }}">{{ 'template.back.publicity' | trans }}</a>
 
     {{ include('publicity_order/_delete_form.html.twig') }}
 {% endblock %}

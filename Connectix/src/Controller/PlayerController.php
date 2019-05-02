@@ -47,6 +47,7 @@ class PlayerController extends AbstractController
         PurchaseOrderRepository $purchaseOrderRepository
     ) {
         $socity = $this->getUser()->getSocity();
+        $turn = $this->getUser()->getGame()->getTurn();
         $productPurchasePrint = $this->productPurchasePrint($productRepository, $purchaseOrderRepository, $socity);
         $productSalesPrint = $this->productSalesPrint(
             $productRepository,
@@ -62,6 +63,8 @@ class PlayerController extends AbstractController
             'controller_name' => 'PlayerSales page',
             "productPurchasePrint" => $productPurchasePrint,
             "productSalesPrint" => $productSalesPrint,
+            'socity' => $socity,
+            'turn' => $turn,
         ]);
     }
 
@@ -80,6 +83,7 @@ class PlayerController extends AbstractController
         ProductRepository $productRepository
     ) {
         $socity = $this->getUser()->getSocity();
+        $turn = $this->getUser()->getGame()->getTurn();
         $productPublicityPrint = $this->productPublicityPrint(
             $reseachOrderRepository,
             $publicityOrderRepository,
@@ -91,6 +95,8 @@ class PlayerController extends AbstractController
         return $this->render('player/publicity.html.twig', [
             'controller_name' => 'PlayerController',
             "productPublicityPrint" => $productPublicityPrint,
+            'socity' => $socity,
+            'turn' => $turn,
         ]);
     }
 
@@ -131,6 +137,7 @@ class PlayerController extends AbstractController
         return $this->render('player/production.html.twig', [
             'controller_name' => 'PlayerController',
             "userFactories" => $userFactories,
+            'socity' => $socity,
             'turn' => $turn,
             'userProductionLigns' => $userProductionLigns,
             'productionOrderPrint' => $productionOrderPrint,
@@ -154,6 +161,7 @@ class PlayerController extends AbstractController
         ProductionRepository $productionRepository
     ) {
         $socity = $this->getUser()->getSocity();
+        $turn = $this->getUser()->getGame()->getTurn();
         $administrationPrint = $this->administrationPrint($administrationRepository, $socity);
 
         $reseachPrint = $this->reseachPrint($researcherRepository, $socity);
@@ -167,7 +175,9 @@ class PlayerController extends AbstractController
             'administrationPrint' => $administrationPrint,
             'researchPrint' => $reseachPrint,
             'salesManPrint' => $salesManPrint,
-            'productionPrint' => $productionPrint
+            'productionPrint' => $productionPrint,
+            'socity' => $socity,
+            'turn' => $turn,
         ]);
     }
 

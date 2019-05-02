@@ -16,8 +16,9 @@ class PurchaseOrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('productQuantityPurchase', IntegerType::class)
-            ->add('purchasePrice', IntegerType::class)
+            ->add('productQuantityPurchase', IntegerType::class, [
+                'label' => 'form.order.purchase.quantity'
+            ])
         ;
     }
 

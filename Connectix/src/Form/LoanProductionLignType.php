@@ -13,7 +13,9 @@ class LoanProductionLignType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('borrowAmount', NumberType::class)
+            ->add('borrowAmount', NumberType::class,[
+                'label' => 'form.loan.borrow'
+            ])
         ;
     }
 

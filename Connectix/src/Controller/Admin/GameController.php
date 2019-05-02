@@ -29,6 +29,8 @@ class GameController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $game->setRawMaterialMax(10);
             $game->setRawMaterialMin(10);
+            $game->setTurn(0);
+            $game->setCreatAt(new \DateTime());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($game);
             $entityManager->flush();

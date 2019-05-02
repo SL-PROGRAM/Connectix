@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Loan{% endblock %}
+{% block title %}{{ 'template.loan.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new Loan</h1>
+    <h1>{{ 'template.loan.new.emprunt' | trans }}</h1>
 
     {{ include('loan/_form.html.twig') }}
 
-    <a href="{{ path('player_financial') }}">back to list</a>
+    <a href="{{ path('player_financial') }}">{{ 'template.back.financial' | trans }}</a>
 {% endblock %}

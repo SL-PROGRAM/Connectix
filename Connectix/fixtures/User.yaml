@@ -1,22 +1,118 @@
 App\entity\User:
   Admin_User:
     email: admin@admin.admin
-    roles: [ROLE_ADMIN];
-    password: \$argon2i\$v=19\$m=1024,t=2,p=2\$QklzM1J6b2JVTW9mRk1mTw\$FeOqUItUzHMedQKBMlt8yNajyTLofBAOT2hm5ZIqOvQ
+    roles: [ROLE_ADMIN]
+    password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
     firstName: Admin
     lastName: Role
-    socity: @socity
-    game: @game
+#    socity: @socity
+#    game: @game
 
-  Production_User:
+  TECHNIC_DIRECTOR:
     email: prod@prod.prod
-    roles: [TECHNIC_DIRECTOR];
-    password: \$argon2i\$v=19\$m=1024,t=2,p=2\$QklzM1J6b2JVTW9mRk1mTw\$FeOqUItUzHMedQKBMlt8yNajyTLofBAOT2hm5ZIqOvQ
+    roles: [TECHNIC_DIRECTOR]
+    password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
     firstName: TECHNIC_DIRECTOR
     lastName: Role
-    socity: @socity
-    game: @game
+#    socity: @socity
+#    game: @game
 
+  DIRECTOR_HUMAN_RESSOURCES:
+    email: drh@adhibeo.fr
+    roles: [DIRECTOR_HUMAN_RESSOURCES]
+    password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
+    firstName: DIRECTOR_HUMAN_RESSOURCES
+    lastName: Role
+#    socity: @socity
+#    game: @game
+  COMMERCIAL_DIRECTOR:
+      email: sales@adhibeo.fr
+      roles: [COMMERCIAL_DIRECTOR]
+      password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
+      firstName: COMMERCIAL_DIRECTOR
+      lastName: Role
+#      socity: @socity
+#      game: @game
+  MARKETING_DIRECTOR:
+      email: marketing@adhibeo.fr
+      roles: [MARKETING_DIRECTOR]
+      password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
+      firstName: MARKETING_DIRECTOR
+      lastName: Role
+#      socity: @socity
+#      game: @game
+  FINANCIAL_DIRECTOR:
+      email: finance@adhibeo.fr
+      roles: [FINANCIAL_DIRECTOR]
+      password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
+      firstName: FINANCIAL_DIRECTOR
+      lastName: Role
+#      socity: @socity
+#      game: @game
+  VALIDATION_DIRECTOR:
+      email: validation@adhibeo.fr
+      roles: [VALIDATION_DIRECTOR]
+      password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
+      firstName: VALIDATION_DIRECTOR
+      lastName: Role
+#      socity: @socity
+#      game: @game
+  TECHNIC_COMMERCIAL_DIRECTOR:
+      email: salesTech@adhibeo.fr
+      roles: [TECHNIC_COMMERCIAL_DIRECTOR]
+      password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
+      firstName: TECHNIC_COMMERCIAL_DIRECTOR
+      lastName: Role
+#      socity: @socity
+#      game: @game
+  FINANCIAL_MARKETING_DIRECTOR:
+      email: financeMarketing@adhibeo.fr
+      roles: [FINANCIAL_MARKETING_DIRECTOR]
+      password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
+      firstName: FINANCIAL_MARKETING_DIRECTOR
+      lastName: Role
+#      socity: @socity
+#      game: @game
+  VALIDATION_MARKETING_DIRECTOR:
+      email: marketingValid@adhibeo.fr
+      roles: [VALIDATION_MARKETING_DIRECTOR]
+      password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
+      firstName: VALIDATION_MARKETING_DIRECTOR
+      lastName: Role
+#      socity: @socity
+#      game: @game
+  VALIDATION_HUMAN_RESSOURCE_DIRECTOR:
+      email: DRHValid@adhibeo.fr
+      roles: [VALIDATION_HUMAN_RESSOURCE_DIRECTOR]
+      password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
+      firstName: VALIDATION_HUMAN_RESSOURCE_DIRECTOR
+      lastName: Role
+#      socity: @socity
+#      game: @game
+  GENERAL_FINANCIAL_DIRECTOR:
+      email: generalFinance@adhibeo.fr
+      roles: [GENERAL_FINANCIAL_DIRECTOR]
+      password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
+      firstName: GENERAL_FINANCIAL_DIRECTOR
+      lastName: Role
+#      socity: @socity
+#      game: @game
+  EXCLUSIVE_DIRECTOR:
+      email: exclusive@adhibeo.fr
+      roles: [EXCLUSIVE_DIRECTOR]
+      password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
+      firstName: EXCLUSIVE_DIRECTOR
+      lastName: Role
+#      socity: @socity
+#      game: @game
+  PRESIDENT:
+      email: fpresident@adhibeo.fr
+      roles: [PRESIDENT]
+      password: \$2y\$13\$HyjOTcu6pgSru1f23dg3keXrV5XRKjV9ao3BqiDiwR8AxNuipzBNe
+      firstName: PRESIDENT
+      lastName: Role
+#      socity: @socity
+#      game: @game
 
 
 

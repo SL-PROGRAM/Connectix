@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit ReseachOrder{% endblock %}
+{% block title %}{{ 'template.order.research.edit.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Edit ReseachOrder</h1>
+    <h1>{{ 'template.order.research.edit.h1' | trans }}</h1>
 
     {{ include('reseach_order/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('player_production') }}">back to list</a>
+    <a href="{{ path('player_production') }}">{{ 'template.back.production' | trans }}</a>
 
     {{ include('reseach_order/_delete_form.html.twig') }}
 {% endblock %}

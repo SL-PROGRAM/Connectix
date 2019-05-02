@@ -1,16 +1,16 @@
-App\entity\Seasonality:
-  Seasonality{0..50}:
-    january: randomFloat(1, 0, 2)
-    february: randomFloat(1, 0, 2)
-    march: randomFloat(1, 0, 2)
-    april: randomFloat(1, 0, 2)
-    may: randomFloat(1, 0, 2)
-    june: randomFloat(1, 0, 2)
-    july: randomFloat(1, 0, 2)
-    august: randomFloat(1, 0, 2)
-    september: randomFloat(1, 0, 2)
-    october: randomFloat(1, 0, 2)
-    november: randomFloat(1, 0, 2)
-    december: randomFloat(1, 0, 2)
-    products: randomFloat(1, 0, 2)
-
+#App\entity\Seasonality:
+#  Seasonality{0..50}:
+#    january: randomFloat(1, 0, 2)
+#    february: randomFloat(1, 0, 2)
+#    march: randomFloat(1, 0, 2)
+#    april: randomFloat(1, 0, 2)
+#    may: randomFloat(1, 0, 2)
+#    june: randomFloat(1, 0, 2)
+#    july: randomFloat(1, 0, 2)
+#    august: randomFloat(1, 0, 2)
+#    september: randomFloat(1, 0, 2)
+#    october: randomFloat(1, 0, 2)
+#    november: randomFloat(1, 0, 2)
+#    december: randomFloat(1, 0, 2)
+#    products: randomFloat(1, 0, 2)
+#

@@ -1,14 +1,14 @@
 {% block body %}
-    <h1>Researcher index</h1>
+    <h1>{{  'template.researcher.index.h1' | trans }}</h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Salary</th>
-                <th>Formation</th>
-                <th>Exprience</th>
-                <th>ResearchActivity</th>
-            </tr>
+        <tr>
+            <th>{{ 'template.researcher.index.salary' | trans }}</th>
+            <th>{{ 'template.researcher.index.formation' | trans }}</th>
+            <th>{{ 'template.researcher.index.experience' | trans }}</th>
+            <th>{{ 'template.researcher.index.productivity' | trans }}</th>
+        </tr>
         </thead>
         <tbody>
         {% for researcher in researchers %}
@@ -16,11 +16,11 @@
                 <td>{{ researcher.salary }}</td>
                 <td>{{ researcher.formation }}</td>
                 <td>{{ researcher.exprience }}</td>
-                <td>{{ researcher.researchActivity }}</td>
+                <td>{{ researcher.productivity }}</td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">{{ 'template.researcher.index.record' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>

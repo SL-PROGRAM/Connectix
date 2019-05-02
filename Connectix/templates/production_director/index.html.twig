@@ -1,14 +1,13 @@
 {% block body %}
-    <h1>ProductionDirector index</h1>
+    <h1>{{ 'template.administration.index.h1' | trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Salary</th>
-                <th>Formation</th>
-                <th>Exprience</th>
-                <th>ProductionActivity</th>
-                <th>AdministrationActivity</th>
+                <th>{{ 'template.administration.index.salary' | trans }}</th>
+                <th>{{ 'template.administration.index.formation' | trans }}</th>
+                <th>{{ 'template.administration.index.experience' | trans }}</th>
+                <th>{{ 'template.administration.index.productivity' | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -18,12 +17,11 @@
                 <td>{{ production_director.formation }}</td>
                 <td>{{ production_director.exprience }}</td>
                 <td>{{ production_director.productionActivity }}</td>
-                <td>{{ production_director.administrationActivity }}</td>
 
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="10">{{ 'template.administration.index.record' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>

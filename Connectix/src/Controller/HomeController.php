@@ -12,8 +12,12 @@ class HomeController extends AbstractController
      */
     public function index()
     {
+        $socity = $this->getUser()->getSocity();
+        $turn = $this->getUser()->getGame()->getTurn();
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
+            'socity' => $socity,
+            'turn' => $turn,
         ]);
     }
 }

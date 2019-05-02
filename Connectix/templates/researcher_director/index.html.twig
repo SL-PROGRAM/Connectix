@@ -1,28 +1,26 @@
 {% block body %}
-    <h1>ResearcherDirector index</h1>
+    <h1>{{  'template.researchdirector.index.h1' | trans }}</h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Salary</th>
-                <th>Formation</th>
-                <th>Exprience</th>
-                <th>ResearchActivity</th>
-                <th>AdministrationActivity</th>
-            </tr>
+        <tr>
+            <th>{{ 'template.researchdirector.index.salary' | trans }}</th>
+            <th>{{ 'template.researchdirector.index.formation' | trans }}</th>
+            <th>{{ 'template.researchdirector.index.experience' | trans }}</th>
+            <th>{{ 'template.researchdirector.index.productivity' | trans }}</th>
+        </tr>
         </thead>
         <tbody>
-        {% for researcher_director in researcher_directors %}
+        {% for researcher in researchers %}
             <tr>
-                <td>{{ researcher_director.salary }}</td>
-                <td>{{ researcher_director.formation }}</td>
-                <td>{{ researcher_director.exprience }}</td>
-                <td>{{ researcher_director.researchActivity }}</td>
-                <td>{{ researcher_director.administrationActivity }}</td>
-
+                <td>{{ researcher.salary }}</td>
+                <td>{{ researcher.formation }}</td>
+                <td>{{ researcher.exprience }}</td>
+                <td>{{ researcher.productivity }}</td>
+            </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="9">{{ 'template.researchdirector.index.record' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Dismiss {{ people }}{% endblock %}
+{% block title %}{{  'template.formation.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Dismiss {{ people }} </h1>
+    <h1>{{  'template.formation.h1' | trans }} {{ people }} </h1>
 
     {{ include('dismiss/_form.html.twig') }}
 
-    <a href="{{ path('player_human_ressourcies') }}">back to list</a>
+    <a href="{{ path('player_human_ressourcies') }}">{{  'template.back.rh' | trans }}</a>
 {% endblock %}

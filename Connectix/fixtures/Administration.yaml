@@ -1,3 +1,0 @@
-App\entity\Administration:
-  Administration{0..50}:
-    administationActivity: 100

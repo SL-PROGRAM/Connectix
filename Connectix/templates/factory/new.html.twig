@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Factory{% endblock %}
+{% block title %}{{  'template.factory.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new Factory</h1>
+    <h1>{{  'template.factory.create.h1' | trans }}</h1>
 
     {{ include('factory/_form.html.twig') }}
 
-    <a href="{{ path('player_production') }}">back to list</a>
+    <a href="{{ path('player_production') }}">{{  'template.back.production' | trans }}</a>
 {% endblock %}

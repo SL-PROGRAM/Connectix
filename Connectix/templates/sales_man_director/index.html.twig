@@ -1,31 +1,26 @@
 {% block body %}
-    <h1>SalesManDirector index</h1>
+    <h1>{{  'template.salesdirector.index.h1' | trans }}</h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Salary</th>
-                <th>Formation</th>
-                <th>Exprience</th>
-                <th>Commission</th>
-                <th>SalesActivity</th>
-                <th>AdministrationActivity</th>
-            </tr>
+        <tr>
+            <th>{{ 'template.salesdirector.index.salary' | trans }}</th>
+            <th>{{ 'template.salesdirector.index.formation' | trans }}</th>
+            <th>{{ 'template.salesdirector.index.experience' | trans }}</th>
+            <th>{{ 'template.salesdirector.index.productivity' | trans }}</th>
+        </tr>
         </thead>
         <tbody>
-        {% for sales_man_director in sales_man_directors %}
+        {% for researcher in researchers %}
             <tr>
-                <td>{{ sales_man_director.salary }}</td>
-                <td>{{ sales_man_director.formation }}</td>
-                <td>{{ sales_man_director.exprience }}</td>
-                <td>{{ sales_man_director.commission }}</td>
-                <td>{{ sales_man_director.salesActivity }}</td>
-                <td>{{ sales_man_director.administrationActivity }}</td>
-
+                <td>{{ researcher.salary }}</td>
+                <td>{{ researcher.formation }}</td>
+                <td>{{ researcher.exprience }}</td>
+                <td>{{ researcher.productivity }}</td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="11">no records found</td>
+                <td colspan="9">{{ 'template.salesdirector.index.record' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>

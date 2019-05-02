@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New ReseachOrder{% endblock %}
+{% block title %}{{ 'template.order.research.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new ReseachOrder</h1>
+    <h1>{{ 'template.order.research.new.h1' | trans }}</h1>
 
     {{ include('reseach_order/_form.html.twig') }}
 
-    <a href="{{ path('player_production') }}">back to list</a>
+    <a href="{{ path('player_production') }}">{{ 'template.back.production' | trans }}</a>
 {% endblock %}
