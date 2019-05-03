@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Game;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,28 +14,28 @@ class GameType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name' ,[
+            ->add('name' , TextType::class,[
             'label' => 'form.game.name'
             ])
-            ->add('tva',[
+            ->add('tva', NumberType::class,[
                 'label' => 'form.game.tva'
             ])
-            ->add('maxturn',[
+            ->add('maxturn',NumberType::class,[
                 'label' => 'form.game.maxturn'
             ])
-            ->add('smic',[
+            ->add('smic',NumberType::class,[
                 'label' => 'form.game.smic'
             ])
-            ->add('salesPriceMin',[
-                'label' => 'form.game.salespricemin'
-            ])
-            ->add('salesPriceMax',[
-                'label' => 'form.game.salespricemax'
-            ])
-            ->add('productNumberMin',[
+//            ->add('salesPriceMin',NumberType::class,[
+//                'label' => 'form.game.salespricemin'
+//            ])
+//            ->add('salesPriceMax',NumberType::class,[
+//                'label' => 'form.game.salespricemax'
+//            ])
+            ->add('productNumberMin',NumberType::class,[
                 'label' => 'form.game.numbermin'
             ])
-            ->add('productNumberMax',[
+            ->add('productNumberMax',NumberType::class,[
                 'label' => 'form.game.numbermax'
             ])
             ->add('percentProductAvailableMinCycleLife1')

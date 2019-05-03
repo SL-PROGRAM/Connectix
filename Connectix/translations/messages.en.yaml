@@ -472,25 +472,6 @@ template:
           record: Pas de produit disponible à la vente
 
 
-easyadmin:
-  label:
-    game:
-      entity: Jeu
-      name: Nom de la partie
-      creatAt: Date de création
-      turn: Tour de jeu de la partie
-    socity:
-      entity: Société
-    user:
-      entity: Joueur
-    balanceSheet:
-      entity: Bilan des actions du tour
-
-
-
-
-
-
   balancesheet:
     active:
       name: Désignation de l'entreprise
@@ -528,7 +509,19 @@ easyadmin:
       otherfinancialimmo: Autres immobilisations financières
       totalimmo: TOTAL (II)
 
-
+easyadmin:
+  label:
+    game:
+      entity: Jeu
+      name: Nom de la partie
+      creatAt: Date de création
+      turn: Tour de jeu de la partie
+    socity:
+      entity: Société
+    user:
+      entity: Joueur
+    balanceSheet:
+      entity: Bilan des actions du tour
 
 
 

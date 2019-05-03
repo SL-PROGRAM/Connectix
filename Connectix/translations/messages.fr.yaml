@@ -1,3 +1,7 @@
+admin:
+  message:
+    error: Avant de continuer veuillez modifier votre utilisateur pour le lier à une partie et à une socité
+
 button:
   save: Enregistrer
   delete: Supprimer
@@ -81,7 +85,7 @@ form:
 
 template:
   footer:
-    sales: Ventepublicity
+    sales: Achat et Vente
     publicity: Publicité et distribution
     production: Gestion de la production
     rh: Ressources humaines
@@ -92,6 +96,7 @@ template:
     logo: Votre partenaire confiance
     title: Connectix
     admin:
+      title: Gestion administrateur
       pannel: Panneau d'administration
       fast: Creation d'une partie rapide
       personalisable: Creation d'une partie personalisée
@@ -325,28 +330,28 @@ template:
         h1: Faire des recherche sur le produit
     sales:
       title: Vente
-        edit:
-          h1: Modifier la vente
-        new:
-          h1: Mettre en vente le produit
+      edit:
+        h1: Modifier la vente
+      new:
+        h1: Mettre en vente le produit
     purchase:
       title: Achat
-        edit:
-          h1: Modifier de l'ordre d'achat
-        new:
-          h1: Emettre un ordre d'achat sur le produit
+      edit:
+        h1: Modifier de l'ordre d'achat
+      new:
+        h1: Emettre un ordre d'achat sur le produit
     publicity:
       title: Publicité
-        edit:
-          h1: Modifier la publicité du produit
-        new:
-          h1: Faire de la publicité du produit
-    Production:
+      edit:
+        h1: Modifier la publicité du produit
+      new:
+        h1: Faire de la publicité du produit
+    production:
       title: Production
-        edit:
-          h1: Modifier la fabrication du prnoduit
-        new:
-          h1: Lancer le produit en fabrication
+      edit:
+        h1: Modifier la fabrication du produit
+      new:
+        h1: Lancer le produit en fabrication
 
   player:
     financial:
@@ -393,7 +398,7 @@ template:
           name: Ligne de production
           buy: Acheter une ligne de production
           delete: Vendre la ligne de production
-          show: Détali de la ligne de production
+          show: Détail de la ligne de production
           record: Pas de ligne de production
       global:
         h1: Global production
@@ -401,7 +406,7 @@ template:
           timehave:
           timeuse:
           percent:
-      rd:
+      dr:
         h1: Recherche et développement
         product:
           name: Nom du produit
@@ -467,13 +472,6 @@ template:
           record: Pas de produit disponible à la vente
 
 
-
-
-
-
-
-
-
   balancesheet:
     active:
       name: Désignation de l'entreprise
@@ -511,7 +509,19 @@ template:
       otherfinancialimmo: Autres immobilisations financières
       totalimmo: TOTAL (II)
 
-
+easyadmin:
+  label:
+    game:
+      entity: Jeu
+      name: Nom de la partie
+      creatAt: Date de création
+      turn: Tour de jeu de la partie
+    socity:
+      entity: Société
+    user:
+      entity: Joueur
+    balanceSheet:
+      entity: Bilan des actions du tour
 
 
 

@@ -533,7 +533,7 @@ class Game
         return $this->salesPriceMin;
     }
 
-    public function setSalesPrice(int $salesPriceMin): self
+    public function setSalesPriceMin(int $salesPriceMin): self
     {
         $this->salesPriceMin = $salesPriceMin;
 
