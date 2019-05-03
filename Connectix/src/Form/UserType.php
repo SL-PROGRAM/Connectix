@@ -61,8 +61,8 @@ class UserType extends AbstractType
                     'form.user.role2' => [
                         'form.user.dprodsales' => "TECHNIC_COMMERCIAL_DIRECTOR",
                         'form.user.dfinmark' => "FINANCIAL_MARKETING_DIRECTOR",
-                        'form.user.valmark' => "VALIDATION_MARKETING_DIRECTOR",
-                        'form.user.valdrh' => "VALIDATION_HUMAN_RESSOURCE_DIRECTOR",
+                        'form.user.dvalmark' => "VALIDATION_MARKETING_DIRECTOR",
+                        'form.user.dvaldrh' => "VALIDATION_HUMAN_RESSOURCE_DIRECTOR",
                     ],
                     'form.user.role3' => [
                         'form.user.dgfin' => "GENERAL_FINANCIAL_DIRECTOR",

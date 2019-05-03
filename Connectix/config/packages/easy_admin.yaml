@@ -1,8 +1,60 @@
 easy_admin:
+    design:
+        templates:
+            layout: 'bundles/admin/layout.html.twig'
+
     entities:
+
         # List the entity class name you want to manage
-        - App\Entity\Game
-        - App\Entity\Socity
-        - App\Entity\User
-        - App\Entity\Product
-        - App\Entity\BalanceSheet
+        Game:
+            class: App\Entity\Game
+            label: easyadmin.label.game.entity
+            list:
+                title: '%%entity_label%%'
+                sort: 'creatAt'
+                fields:
+                    - {property: 'name', label: 'easyadmin.label.game.name'}
+                    - {property: 'creatAt', label: 'easyadmin.label.game.creatAt'}
+                    - {property: 'turn', label: 'easyadmin.label.game.turn'}
+
+            edit:
+                title: '%%entity_label%%'
+                sort: 'creatAt'
+                fields:
+                    - { type: 'tab' , label: 'Basic Information' }
+                    - {property: 'name', label: 'easyadmin.label.game.name'}
+                    - {property: 'creatAt', label: 'easyadmin.label.game.creatAt'}
+                    - {property: 'turn', label: 'easyadmin.label.game.turn'}
+                    - { type: 'tab', label: 'Contact Information' }
+
+
+
+        Socity:
+            class: App\Entity\Socity
+            label: easyadmin.label.socity.entity
+            list:
+                title: '%%entity_label%%'
+                sort: 'game'
+                fields:
+                    - {property: 'name', label: 'easyadmin.label.socity.name'}
+                    - 'game'
+        User:
+            class: App\Entity\User
+            label: easyadmin.label.user.entity
+            list:
+                title: '%%entity_label%%'
+                sort: 'socity'
+                fields:
+                    - {property: 'name', label: 'easyadmin.label.socity.name'}
+                    - 'game'
+
+        BalanceSheet:
+            class: App\Entity\BalanceSheet
+            label: easyadmin.label.balanceSheet.entity
+            list:
+                title: '%%entity_label%%'
+                sort: 'socity'
+                fields:
+                    - 'turn'
+                    - 'socity'
+
