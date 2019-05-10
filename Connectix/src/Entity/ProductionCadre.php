@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductionCadreRepository")
+ * Class ProductionCadre
+ * @package App\Entity
  */
 abstract class ProductionCadre extends Production
 {

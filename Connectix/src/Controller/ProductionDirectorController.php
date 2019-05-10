@@ -14,11 +14,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/productiondirector")
+ * Class ProductionDirectorController
+ * @package App\Controller
  */
 class ProductionDirectorController extends AbstractController
 {
     /**
      * @Route("/", name="production_director_index", methods={"GET"})
+     * @param ProductionDirectorRepository $productionDirectorRepository
+     * @return Response
      */
     public function index(ProductionDirectorRepository $productionDirectorRepository): Response
     {
@@ -30,6 +34,10 @@ class ProductionDirectorController extends AbstractController
 
     /**
      * @Route("/new", name="production_director_new", methods={"NEW", "POST", "GET"})
+     */
+    /**
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {

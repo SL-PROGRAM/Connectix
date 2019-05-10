@@ -14,12 +14,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * @Route("/factory")
  * @ISGranted("ROLE_USER")
+ * Class FactoryController
+ * @package App\Controller
  */
 class FactoryController extends AbstractController
 {
 
     /**
      * @Route("/new", name="factory_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -58,6 +62,8 @@ class FactoryController extends AbstractController
 
     /**
      * @Route("/{id}", name="factory_show", methods={"GET"})
+     * @param Factory $factory
+     * @return Response
      */
     public function show(Factory $factory): Response
     {
@@ -69,6 +75,9 @@ class FactoryController extends AbstractController
 
     /**
      * @Route("/{id}", name="factory_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Factory $factory
+     * @return Response
      */
     public function delete(Request $request, Factory $factory): Response
     {

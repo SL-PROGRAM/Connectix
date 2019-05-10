@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SalesManProfessionalRepository")
+ * Class SalesManProfessional
+ * @package App\Entity
  */
 class SalesManProfessional extends SalesMan
 {

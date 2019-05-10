@@ -14,11 +14,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/loan")
+ * Class LoanController
+ * @package App\Controller
  */
 class LoanController extends AbstractController
 {
     /**
      * @Route("/", name="loan_index", methods={"GET"})
+     * @param LoanRepository $loanRepository
+     * @return Response
      */
     public function index(LoanRepository $loanRepository): Response
     {
@@ -34,6 +38,8 @@ class LoanController extends AbstractController
 
     /**
      * @Route("/factory", name="loan_factory", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function newLoanFactory(Request $request): Response
     {
@@ -75,6 +81,8 @@ class LoanController extends AbstractController
 
     /**
      * @Route("/productionlign", name="loan_production_lign", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function newLoanProductionLign(Request $request): Response
     {
@@ -115,6 +123,8 @@ class LoanController extends AbstractController
 
     /**
      * @Route("/{id}", name="loan_show", methods={"GET"})
+     * @param Loan $loan
+     * @return Response
      */
     public function show(Loan $loan): Response
     {
@@ -125,6 +135,9 @@ class LoanController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="loan_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Loan $loan
+     * @return Response
      */
     public function editLoanFactory(Request $request, Loan $loan): Response
     {
@@ -153,6 +166,9 @@ class LoanController extends AbstractController
 
     /**
      * @Route("/{id}", name="loan_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Loan $loan
+     * @return Response
      */
     public function delete(Request $request, Loan $loan): Response
     {

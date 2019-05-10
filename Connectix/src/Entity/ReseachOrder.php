@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReseachOrderRepository")
+ * Class ReseachOrder
+ * @package App\Entity
  */
 class ReseachOrder
 {

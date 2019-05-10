@@ -14,11 +14,15 @@ use App\Service\Dismiss;
 
 /**
  * @Route("/administration")
+ * Class AdministrationController
+ * @package App\Controller
  */
 class AdministrationController extends AbstractController
 {
     /**
      * @Route("/", name="administration_index", methods={"GET"})
+     * @param AdministrationRepository $administrationRepository
+     * @return Response
      */
     public function index(AdministrationRepository $administrationRepository): Response
     {
@@ -30,6 +34,8 @@ class AdministrationController extends AbstractController
 
     /**
      * @Route("/", name="administration_new", methods={"NEW", "POST", "GET"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -86,6 +92,8 @@ class AdministrationController extends AbstractController
 
     /**
      * @Route("/", name="administration_cadre_new", methods={"NEW_C", "POST", "GET"})
+     * @param Request $request
+     * @return Response
      */
     public function newCadre(Request $request): Response
     {

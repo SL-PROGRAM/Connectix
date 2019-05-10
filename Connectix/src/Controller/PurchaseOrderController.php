@@ -15,11 +15,21 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/purchaseorder")
  */
+
+/**
+ * Class PurchaseOrderController
+ * @package App\Controller
+ */
 class PurchaseOrderController extends AbstractController
 {
 
     /**
      * @Route("/new", name="purchase_order_new", methods={"GET","POST"})
+     */
+    /**
+     * @param Request $request
+     * @param ProductRepository $productRepository
+     * @return Response
      */
     public function new(Request $request, ProductRepository $productRepository): Response
     {
@@ -66,6 +76,11 @@ class PurchaseOrderController extends AbstractController
     /**
      * @Route("/{id}/edit", name="purchase_order_edit", methods={"GET","POST"})
      */
+    /**
+     * @param Request $request
+     * @param PurchaseOrder $purchaseOrder
+     * @return Response
+     */
     public function edit(Request $request, PurchaseOrder $purchaseOrder): Response
     {
         $form = $this->createForm(PurchaseOrderType::class, $purchaseOrder);
@@ -87,6 +102,11 @@ class PurchaseOrderController extends AbstractController
 
     /**
      * @Route("/{id}", name="purchase_order_delete", methods={"DELETE"})
+     */
+    /**
+     * @param Request $request
+     * @param PurchaseOrder $purchaseOrder
+     * @return Response
      */
     public function delete(Request $request, PurchaseOrder $purchaseOrder): Response
     {

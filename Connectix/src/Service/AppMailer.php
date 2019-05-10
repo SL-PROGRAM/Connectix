@@ -4,6 +4,10 @@ namespace App\Service;
 
 use Twig\Environment;
 
+/**
+ * Class AppMailer
+ * @package App\Service
+ */
 class AppMailer
 {
     /**
@@ -27,6 +31,15 @@ class AppMailer
         $this->twig = $twig;
     }
 
+    /**
+     * @param string $subject
+     * @param string $to
+     * @param string $template
+     * @param array $vars
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function send(
         string $subject,
         string $to,

@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FactoryRepository")
- *
+ * Class Factory
+ * @package App\Entity
  */
 class Factory extends ProductionUnit
 {

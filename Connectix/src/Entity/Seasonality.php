@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SeasonalityRepository")
+ * Class Seasonality
+ * @package App\Entity
  */
 class Seasonality
 {

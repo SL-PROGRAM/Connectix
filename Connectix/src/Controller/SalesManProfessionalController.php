@@ -13,10 +13,19 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/salesmanprofessional")
  */
+
+/**
+ * Class SalesManProfessionalController
+ * @package App\Controller
+ */
 class SalesManProfessionalController extends AbstractController
 {
     /**
      * @Route("/", name="sales_man_professional_index", methods={"GET"})
+     */
+    /**
+     * @param SalesManProfessionalRepository $salesManProfessionalRepository
+     * @return Response
      */
     public function index(SalesManProfessionalRepository $salesManProfessionalRepository): Response
     {
@@ -28,6 +37,10 @@ class SalesManProfessionalController extends AbstractController
 
     /**
      * @Route("/new", name="sales_man_professional_new", methods={"NEW", "POST", "GET"})
+     */
+    /**
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {

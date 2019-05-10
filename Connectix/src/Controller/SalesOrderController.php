@@ -14,10 +14,19 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/salesorder")
  */
+
+/**
+ * Class SalesOrderController
+ * @package App\Controller
+ */
 class SalesOrderController extends AbstractController
 {
     /**
      * @Route("/", name="sales_order_index", methods={"GET"})
+     */
+    /**
+     * @param SalesOrderRepository $salesOrderRepository
+     * @return Response
      */
     public function index(SalesOrderRepository $salesOrderRepository): Response
     {
@@ -29,6 +38,11 @@ class SalesOrderController extends AbstractController
 
     /**
      * @Route("/new", name="sales_order_new", methods={"GET","POST"})
+     */
+    /**
+     * @param Request $request
+     * @param ProductRepository $productRepository
+     * @return Response
      */
     public function new(Request $request, ProductRepository $productRepository): Response
     {
@@ -68,6 +82,10 @@ class SalesOrderController extends AbstractController
     /**
      * @Route("/{id}", name="sales_order_show", methods={"GET"})
      */
+    /**
+     * @param SalesOrder $salesOrder
+     * @return Response
+     */
     public function show(SalesOrder $salesOrder): Response
     {
         return $this->render('sales_order/show.html.twig', [
@@ -77,6 +95,11 @@ class SalesOrderController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="sales_order_edit", methods={"GET","POST"})
+     */
+    /**
+     * @param Request $request
+     * @param SalesOrder $salesOrder
+     * @return Response
      */
     public function edit(Request $request, SalesOrder $salesOrder): Response
     {
@@ -99,6 +122,11 @@ class SalesOrderController extends AbstractController
 
     /**
      * @Route("/{id}", name="sales_order_delete", methods={"DELETE"})
+     */
+    /**
+     * @param Request $request
+     * @param SalesOrder $salesOrder
+     * @return Response
      */
     public function delete(Request $request, SalesOrder $salesOrder): Response
     {

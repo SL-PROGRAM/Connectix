@@ -12,6 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin/game")
+ * Class GameController
+ * @package App\Controller\Admin
  */
 class GameController extends AbstractController
 {
@@ -19,6 +21,9 @@ class GameController extends AbstractController
 
     /**
      * @Route("/new", name="game_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
+     * @throws \Exception
      */
     public function new(Request $request): Response
     {

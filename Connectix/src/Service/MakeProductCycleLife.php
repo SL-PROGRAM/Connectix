@@ -7,8 +7,16 @@ namespace App\Service;
 use App\Entity\Product;
 use App\Entity\ProductLife;
 
+/**
+ * Class MakeProductCycleLife
+ * @package App\Service
+ */
 class MakeProductCycleLife
 {
+    /**
+     * @param $cyclelifeNumber
+     * @param Product $product
+     */
     public function makeCycleLife($cyclelifeNumber, Product $product)
     {
         $productCycle = new ProductLife();

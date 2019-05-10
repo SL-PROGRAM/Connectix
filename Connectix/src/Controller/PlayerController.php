@@ -183,6 +183,7 @@ class PlayerController extends AbstractController
 
     /**
      * @Route("/financial", name="player_financial")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function financial()
     {
@@ -198,6 +199,7 @@ class PlayerController extends AbstractController
 
     /**
      * @Route("/information", name="player_information")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function information()
     {
@@ -208,6 +210,13 @@ class PlayerController extends AbstractController
 
 
     //Function use to return array for sales twig
+
+    /**
+     * @param ProductRepository $productRepository
+     * @param PurchaseOrderRepository $purchaseOrderRepository
+     * @param Socity $socity
+     * @return array
+     */
     private function productPurchasePrint(ProductRepository $productRepository, PurchaseOrderRepository $purchaseOrderRepository, Socity $socity)
     {
         $productPurchaseOrders = $this->productPurchaseOrders($purchaseOrderRepository, $socity);
@@ -217,6 +226,16 @@ class PlayerController extends AbstractController
         return $productPurchasePrint = $this->productPurchase($productPurchables, $productPurchaseOrders, $socity);
     }
 
+    /**
+     * @param ProductRepository $productRepository
+     * @param SalesOrderRepository $salesOrderRepository
+     * @param ReseachOrderRepository $reseachOrderRepository
+     * @param PurchaseOrderRepository $purchaseOrderRepository
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @param ProductionOrderRepository $productionOrderRepository
+     * @param Socity $socity
+     * @return array
+     */
     private function productSalesPrint(
         ProductRepository $productRepository,
         SalesOrderRepository $salesOrderRepository,
@@ -289,6 +308,13 @@ class PlayerController extends AbstractController
         return $productSalePrint;
     }
 
+    /**
+     * @param ReseachOrderRepository $reseachOrderRepository
+     * @param PublicityOrderRepository $publicityOrderRepository
+     * @param ProductRepository $productRepository
+     * @param Socity $socity
+     * @return array
+     */
     private function productPublicityPrint(
         ReseachOrderRepository $reseachOrderRepository,
         PublicityOrderRepository $publicityOrderRepository,
@@ -347,7 +373,11 @@ class PlayerController extends AbstractController
         return $productPublicityPrint;
     }
 
-
+    /**
+     * @param $productPublicityTurn
+     * @param $productPublicityLastTurn
+     * @return float|int|string
+     */
     private function variationPublicity($productPublicityTurn, $productPublicityLastTurn)
     {
         if ($productPublicityTurn === 0) {
@@ -357,6 +387,11 @@ class PlayerController extends AbstractController
         }
     }
 
+    /**
+     * @param $netSales
+     * @param $productPublicityLastTurn
+     * @return float|int|string
+     */
     private function percentPublicityLastTurn($netSales, $productPublicityLastTurn)
     {
         if ($netSales === 0) {
@@ -366,27 +401,54 @@ class PlayerController extends AbstractController
         }
     }
 
+    /**
+     * @param Product $product
+     * @param PublicityOrderRepository $publicityOrderRepository
+     * @param $turn
+     * @param $socity
+     * @return \App\Entity\PublicityOrder|null
+     */
     private function productPublicityOrder(Product $product, PublicityOrderRepository $publicityOrderRepository, $turn, $socity)
     {
         return $productPublicityOrder = $publicityOrderRepository->findOneBy(["socity" =>$socity, "turn" => $turn, "product" => $product]);
     }
 
+    /**
+     * @param ProductRepository $productRepository
+     * @return Product[]
+     */
     private function productPurchables(ProductRepository $productRepository)
     {
         return $productLvl1 = $productRepository->findBy(["technologicLevel" => 1]);
     }
 
+    /**
+     * @param PurchaseOrderRepository $purchaseOrderRepository
+     * @param Socity $socity
+     * @return \App\Entity\PurchaseOrder[]
+     */
     private function productPurchaseOrders(PurchaseOrderRepository $purchaseOrderRepository, Socity $socity)
     {
         $turn = $this->getUser()->getGame()->getTurn();
         return $productPurchaseOrders = $purchaseOrderRepository->findBy(["socity" => $socity, "turn" => $turn]);
     }
 
+    /**
+     * @param ProductionOrderRepository $productionOrderRepository
+     * @param Socity $socity
+     * @param $turn
+     * @return \App\Entity\ProductionOrder[]
+     */
     private function productProductionOrders(ProductionOrderRepository $productionOrderRepository, Socity $socity, $turn)
     {
         return $productPurchaseOrders = $productionOrderRepository->findBy(["socity" => $socity, "turn" => $turn]);
     }
 
+    /**
+     * @param $quantity
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return float|int
+     */
     private function quantityProfessional($quantity, BalanceSheetRepository $balanceSheetRepository)
     {
         $turn = $this->getUser()->getGame()->getTurn();
@@ -402,6 +464,11 @@ class PlayerController extends AbstractController
         return $quantityProfessional;
     }
 
+    /**
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @param $turn
+     * @return \App\Entity\BalanceSheet|null
+     */
     private function balanceSheetTurn(BalanceSheetRepository $balanceSheetRepository, $turn)
     {
         $socity = $this->getUser()->getSocity();
@@ -410,11 +477,20 @@ class PlayerController extends AbstractController
         return $balanceSheetTurn;
     }
 
+    /**
+     * @param $quantity
+     * @param $quantityProfessional
+     * @return mixed
+     */
     private function quantityParticular($quantity, $quantityProfessional)
     {
         return $quantityParticular = $quantity - $quantityProfessional;
     }
 
+    /**
+     * @param Product $product
+     * @return int|null
+     */
     private function purchaseCost(Product $product)
     {
         if ($product->getTechnologicLevel() === 1) {
@@ -425,17 +501,34 @@ class PlayerController extends AbstractController
         }
     }
 
+    /**
+     * @param SalesOrderRepository $salesOrderRepository
+     * @param Socity $socity
+     * @return \App\Entity\SalesOrder[]
+     */
     private function productSalesOrders(SalesOrderRepository $salesOrderRepository, Socity $socity)
     {
         $turn = $this->getUser()->getGame()->getTurn();
         return $productPurchaseOrders = $salesOrderRepository->findBy(["socity" => $socity, "turn" => $turn]);
     }
 
+    /**
+     * @param $Product
+     * @param ReseachOrderRepository $reseachOrderRepository
+     * @param Socity $socity
+     * @return \App\Entity\ReseachOrder[]
+     */
     private function productResearchOrder($Product, ReseachOrderRepository $reseachOrderRepository, Socity $socity)
     {
         return $productReseachOrders = $reseachOrderRepository->findBy(["socity" => $socity, "product" => $Product]);
     }
 
+    /**
+     * @param $productPurchables
+     * @param $productPurchaseOrders
+     * @param Socity $socity
+     * @return array
+     */
     private function productPurchase($productPurchables, $productPurchaseOrders,Socity $socity)
     {
         $productPurchasePrint =  [];
@@ -467,6 +560,12 @@ class PlayerController extends AbstractController
         return $productPurchasePrint;
     }
 
+    /**
+     * @param ReseachOrderRepository $reseachOrderRepository
+     * @param ProductRepository $productRepository
+     * @param Socity $socity
+     * @return array
+     */
     private function productSalable(
         ReseachOrderRepository $reseachOrderRepository,
         ProductRepository $productRepository,
@@ -489,17 +588,34 @@ class PlayerController extends AbstractController
         return $productSalable;
     }
 
+    /**
+     * @param FactoryRepository $factoryRepository
+     * @param Socity $socity
+     * @return \App\Entity\Factory[]
+     */
     private function userFactories(FactoryRepository $factoryRepository, Socity $socity)
     {
         return $userFactories = $factoryRepository->findBy(["socity" => $socity]);
     }
 
+    /**
+     * @param ProductionLignRepository $productionLignRepository
+     * @param Socity $socity
+     * @return \App\Entity\ProductionLign[]
+     */
     private function userProductionLigns(ProductionLignRepository $productionLignRepository, Socity $socity)
     {
         return $userProductionLigns = $productionLignRepository->findBy(["socity" => $socity]);
     }
 
-
+    /**
+     * @param ProductionOrderRepository $productionOrderRepository
+     * @param ReseachOrderRepository $reseachOrderRepository
+     * @param ProductRepository $productRepository
+     * @param Socity $socity
+     * @param $turn
+     * @return array
+     */
     private function productionOrderPrint(
         ProductionOrderRepository $productionOrderRepository,
         ReseachOrderRepository $reseachOrderRepository,
@@ -545,6 +661,13 @@ class PlayerController extends AbstractController
         return $productionOrderPrint;
     }
 
+    /**
+     * @param ProductRepository $productRepository
+     * @param ReseachOrderRepository $reseachOrderRepository
+     * @param Socity $socity
+     * @param $turn
+     * @return array
+     */
     private function researchOrderPrint(ProductRepository $productRepository, ReseachOrderRepository $reseachOrderRepository,Socity $socity, $turn)
     {
         //TODO voir comment limiter les recherches en fonctions des lvl et produit déja recherché
@@ -583,6 +706,12 @@ class PlayerController extends AbstractController
         return $researchOrderPrint;
     }
 
+    /**
+     * @param $productionOrderPrint
+     * @param ProductionLignRepository $productionLignRepository
+     * @param Socity $socity
+     * @return array
+     */
     private function globalProductionPrint($productionOrderPrint, ProductionLignRepository $productionLignRepository, Socity $socity)
     {
         $totalProductionTimeCapacity = 0;
@@ -611,31 +740,54 @@ class PlayerController extends AbstractController
         ];
     }
 
+    /**
+     * @param AdministrationRepository $administrationRepository
+     * @param Socity $socity
+     * @return array.
+     */
     private function administrationPrint(AdministrationRepository $administrationRepository, Socity $socity)
     {
         $employees = $administrationRepository->findBy(["socity" => $socity]);
         return $employees = $this->employees($employees);
     }
 
+    /**
+     * @param ResearcherRepository $researcherRepository
+     * @param Socity $socity
+     * @return array
+     */
     private function reseachPrint(ResearcherRepository $researcherRepository, Socity $socity)
     {
         $employees = $researcherRepository->findBy(["socity" => $socity]);
         return $employees = $this->employees($employees);
     }
 
+    /**
+     * @param SalesManRepository $salesManRepository
+     * @param Socity $socity
+     * @return array
+     */
     private function salesManPrint(SalesManRepository $salesManRepository, Socity $socity)
     {
         $employees = $salesManRepository->findBy(["socity" => $socity]);
         return $employees = $this->employees($employees);
     }
 
+    /**
+     * @param ProductionRepository $productionRepository
+     * @param Socity $socity
+     * @return array
+     */
     private function productionPrint(ProductionRepository $productionRepository, Socity $socity)
     {
         $employees = $productionRepository->findBy(["socity" => $socity]);
         return $employees = $this->employees($employees);
     }
 
-
+    /**
+     * @param $employees
+     * @return array
+     */
     private function employees($employees)
     {
         $totalSalarie = 0;
@@ -663,6 +815,11 @@ class PlayerController extends AbstractController
         ];
     }
 
+    /**
+     * @param $totalProductivity
+     * @param $numberEmployeesTotal
+     * @return float|string
+     */
     private function productivityAvg($totalProductivity, $numberEmployeesTotal)
     {
         if ($numberEmployeesTotal === 0) {
@@ -672,6 +829,12 @@ class PlayerController extends AbstractController
         }
     }
 
+    /**
+     * @param $totalSalarie
+     * @param $numberEmployeesTotal
+     * @param $totalExperience
+     * @return float|string
+     */
     private function dismissAvg($totalSalarie, $numberEmployeesTotal, $totalExperience)
     {
         if ($numberEmployeesTotal === 0) {

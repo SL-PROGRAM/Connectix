@@ -14,11 +14,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
+/**
+ * Class FormationController
+ * @package App\Controller
+ */
 class FormationController extends AbstractController
 {
     /**
      * @Route("/formationadmin", name="administration_formation", methods={"GET","POST"})
+     * @param Request $request
+     * @param AdministrationRepository $repository
+     * @param \App\Service\Formation $formation
+     * @return Response
      */
     public function formationAdmin(Request $request, AdministrationRepository $repository, \App\Service\Formation $formation): Response
     {
@@ -46,6 +53,10 @@ class FormationController extends AbstractController
 
     /**
      * @Route("/formationresearcher", name="researcher_formation", methods={"GET","POST"})
+     * @param Request $request
+     * @param ResearcherRepository $repository
+     * @param \App\Service\Formation $formation
+     * @return Response
      */
     public function upSalaryResearcher(Request $request, ResearcherRepository $repository, \App\Service\Formation $formation): Response
     {
@@ -74,6 +85,10 @@ class FormationController extends AbstractController
 
     /**
      * @Route("/formationprod", name="production_formation", methods={"GET","POST"})
+     * @param Request $request
+     * @param ProductionRepository $repository
+     * @param \App\Service\Formation $formation
+     * @return Response
      */
     public function upSalaryProd(Request $request, ProductionRepository $repository, \App\Service\Formation $formation): Response
     {
@@ -102,6 +117,10 @@ class FormationController extends AbstractController
 
     /**
      * @Route("/formationsalesman", name="salesman_formation", methods={"GET","POST"})
+     * @param Request $request
+     * @param SalesManRepository $repository
+     * @param \App\Service\Formation $formation
+     * @return Response
      */
     public function upSalarySales(Request $request, SalesManRepository $repository, \App\Service\Formation $formation): Response
     {
@@ -130,6 +149,10 @@ class FormationController extends AbstractController
 
     /**
      * @Route("/formation", name="all_formation", methods={"GET","POST"})
+     * @param Request $request
+     * @param HumanRessourceRepository $repository
+     * @param \App\Service\Formation $formation
+     * @return Response
      */
     public function upSalaryAll(Request $request, HumanRessourceRepository $repository, \App\Service\Formation $formation): Response
     {

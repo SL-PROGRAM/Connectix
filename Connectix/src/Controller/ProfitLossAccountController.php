@@ -24,11 +24,34 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+/**
+ * Class ProfitLossAccountController
+ * @package App\Controller
+ */
 class ProfitLossAccountController extends AbstractController
 {
     /**
      * @IsGranted("ROLE_USER")
      * @Route("/profitlossaccount", name="profit_loss_account")
+     */
+    /**
+     * @param SalesOrderRepository $salesOrderRepository
+     * @param PurchaseOrderRepository $purchaseOrderRepository
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRecord $balanceSheetRecord
+     * @param AdministrationRepository $administrationRepository
+     * @param SalesManRepository $salesManRepository
+     * @param ResearcherRepository $researcherRepository
+     * @param SalesManProfessionalRepository $salesManProfessionalRepository
+     * @param SalesManParticularRepository $salesManParticularRepository
+     * @param ProductionOrderRepository $productionOrderRepository
+     * @param PublicityOrderRepository $publicityOrderRepository
+     * @param FactoryRepository $factoryRepository
+     * @param ProductionLignRepository $productionLignRepository
+     * @param LoanRepository $loanRepository
+     * @param ProductionRepository $productionRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(SalesOrderRepository  $salesOrderRepository,
                           PurchaseOrderRepository $purchaseOrderRepository,
@@ -98,6 +121,9 @@ class ProfitLossAccountController extends AbstractController
     /**
      * @param Socity $socity
      * @param Game $game
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRecord $balanceSheetRecord
+     * @param BalanceSheetRepository $balanceSheetRepository
      * @return array
      */
     private function actualYear(Socity $socity, Game $game,
@@ -185,10 +211,11 @@ class ProfitLossAccountController extends AbstractController
     }
 
 
-
     /**
      * @param Socity $socity
      * @param Game $game
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRepository $balanceSheetRepository
      * @return array
      */
     private function lastYear(Socity $socity, Game $game,

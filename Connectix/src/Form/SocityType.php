@@ -12,6 +12,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * Class SocityType
+ * @package App\Form
+ */
 class SocityType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -25,6 +29,7 @@ class SocityType extends AbstractType
         $builder->add('users', CollectionType::class, [
             'entry_type' => UserType::class,
             'entry_options' => ['label' => false],
+            'label' => false,
             'allow_add' => true,
             'by_reference' => false,
             'allow_delete' => true,

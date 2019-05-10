@@ -13,14 +13,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * Require ROLE_USER for *every* controller method in this class.
- *
- * @IsGranted("ROLE_USER")
+ * Class BalanceSheetScreenController
+ * @package App\Controller
  */
 class BalanceSheetScreenController extends AbstractController
 {
     /**
      * @Route("/balancesheetscreen", name="balance_sheet")
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @param FactoryRepository $factoryRepository
+     * @param ProductionLignRepository $productionLignRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository, FactoryRepository $factoryRepository,
                           ProductionLignRepository $productionLignRepository)
@@ -55,7 +59,13 @@ class BalanceSheetScreenController extends AbstractController
     }
 
 
-
+    /**
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @param Socity $socity
+     * @param $turn
+     * @return array
+     */
     private function actualYearActiveBalanceSheetBrut(BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository,Socity $socity, $turn)
     {
 
@@ -157,6 +167,13 @@ class BalanceSheetScreenController extends AbstractController
         );
     }
 
+    /**
+     * @param FactoryRepository $factoryRepository
+     * @param ProductionLignRepository $productionLignRepository
+     * @param Game $game
+     * @param Socity $socity
+     * @return array
+     */
     private function actualYearActiveBalanceSheetDepreciationProvision(FactoryRepository $factoryRepository,
                                                                        ProductionLignRepository $productionLignRepository,
                                                                        Game $game,Socity $socity)
@@ -254,6 +271,11 @@ class BalanceSheetScreenController extends AbstractController
         );
     }
 
+    /**
+     * @param array $actualYearActiveBalanceSheetBrut
+     * @param array $actualYearActiveBalanceSheetDepreciationProvision
+     * @return array
+     */
     private function actualYearActiveBalanceSheetNet(
         array $actualYearActiveBalanceSheetBrut,
         array $actualYearActiveBalanceSheetDepreciationProvision
@@ -269,6 +291,9 @@ class BalanceSheetScreenController extends AbstractController
         return $actualYearActiveBalanceSheetNet;
     }
 
+    /**
+     * @return array
+     */
     private function lastYearActiveBalanceSheet()
     {
         //TODO RETURN TABLE TO INDEX
@@ -349,6 +374,44 @@ class BalanceSheetScreenController extends AbstractController
         );
     }
 
+    /**
+     * @param $administrationFees
+     * @param $researchAndDevelopmentCost
+     * @param $concessionPatentsAndSimilar
+     * @param $commercialFund
+     * @param $otherIntangibleAsset
+     * @param $advancesAndDownPaymentOnIntangibleAssets
+     * @param $grounds
+     * @param $constructions
+     * @param $technicalInstallationsEquipment
+     * @param $otherTangibleFixedAssets
+     * @param $assetInProgress
+     * @param $advancesAndDownPaymentOnTangibleAssets
+     * @param $investmentsAccountedForEquityMethod
+     * @param $otherParticipations
+     * @param $receivablesRelatedEquityInvestments
+     * @param $otherLockedSecurities
+     * @param $loans
+     * @param $otherFinancialAssets
+     * @param $rowMaterialsSupplies
+     * @param $outstandingProducingGoods
+     * @param $outstandingServices
+     * @param $intermediateAndFinishProduct
+     * @param $merchandise
+     * @param $advancesAndPrepaymentOrders
+     * @param $customersAndRelatedAccounts
+     * @param $otherReceivables
+     * @param $subscribedAndCallCapitalUnpaid
+     * @param $marketableSecurities
+     * @param $bank
+     * @param $availability
+     * @param $prepaidExpenses
+     * @param $subscribedCapitalNotCall
+     * @param $expensesSpreadOverSeveralFinancialYears
+     * @param $bondRepaymentPremiums
+     * @param $activeConversionDifferences
+     * @return array
+     */
     private function calculationActiveBalanceSheet(
         $administrationFees,
         $researchAndDevelopmentCost,
@@ -476,6 +539,12 @@ class BalanceSheetScreenController extends AbstractController
     }
 
 
+    /**
+     * @param Game $game
+     * @param Socity $socity
+     * @param FactoryRepository $factoryRepository
+     * @return float
+     */
     private function factoryAmortization(Game $game, Socity $socity, FactoryRepository $factoryRepository){
         $factoryAmortization = $game->getFactoryAmortizationTurn();
         $factoryCost = $game->getFactoryCreationCost();
@@ -484,6 +553,12 @@ class BalanceSheetScreenController extends AbstractController
         return $amortization = round($nbreFactory*$factoryCost/$factoryAmortization, 2);
     }
 
+    /**
+     * @param Socity $socity
+     * @param Game $game
+     * @param ProductionLignRepository $productionLignRepository
+     * @return float
+     */
     private function productionLignAmortization(Socity $socity, Game $game, ProductionLignRepository $productionLignRepository){
         $productionLignAAmortization = $game->getProductionLignAmortizationTurn();
         $productionLignCost = $game->getProductionLignCreationCost();
@@ -496,7 +571,11 @@ class BalanceSheetScreenController extends AbstractController
     //PASSIVE BALANCE SHEET
 
 
-
+    /**
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return array
+     */
     private function actualYearPassiveBalanceSheet(BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository)
     {
         $socity = $this->getUser()->getSocity();
@@ -580,7 +659,9 @@ class BalanceSheetScreenController extends AbstractController
         );
     }
 
-
+    /**
+     * @return array
+     */
     private function lastYearPassiveBalanceSheet()
     {
         //TODO RETURN TABLE TO INDEX
@@ -655,6 +736,35 @@ class BalanceSheetScreenController extends AbstractController
     }
 
 
+    /**
+     * @param $shareCapitalOrIndividual
+     * @param $premiumIssueMergerContribution
+     * @param $revaluationDifferences
+     * @param $legalReserve
+     * @param $statutoryOrContractualReserves
+     * @param $regulatedReserves
+     * @param $otherReserves
+     * @param $reportAgain
+     * @param $yearProfit
+     * @param $investmentGrant
+     * @param $regulatedProvisions
+     * @param $proceedsFromEquitySecuritiesIssues
+     * @param $conditionedAdvances
+     * @param $riskProvision
+     * @param $expensesProvision
+     * @param $convertibleBonds
+     * @param $otherBonds
+     * @param $loanAndDebtsWihCreditInstitutions
+     * @param $borrowingAndOtherFinancialDebts
+     * @param $AdvancesAndDownPaymentReceived
+     * @param $tradePayableAndRelatedAccounts
+     * @param $taxAndSocialDebts
+     * @param $debtsOnFixedAssetsAndRelatedAccount
+     * @param $otherDebts
+     * @param $prepaidIncome
+     * @param $liabilitiesTranslationDifferences
+     * @return array
+     */
     private function calculationPassiveBalanceSheet(
         $shareCapitalOrIndividual,
         $premiumIssueMergerContribution,
@@ -760,6 +870,26 @@ class BalanceSheetScreenController extends AbstractController
     //function use by calculationActiveBalanceSheet
 
 
+    /**
+     * @param $administrationFees
+     * @param $researchAndDevelopmentCost
+     * @param $concessionPatentsAndSimilar
+     * @param $commercialFund
+     * @param $otherIntangibleAsset
+     * @param $advancesAndDownPaymentOnIntangibleAssets
+     * @param $grounds
+     * @param $constructions
+     * @param $technicalInstallationsEquipment
+     * @param $otherTangibleFixedAssets
+     * @param $advancesAndDownPaymentOnTangibleAssets
+     * @param $investmentsAccountedForEquityMethod
+     * @param $otherParticipations
+     * @param $receivablesRelatedEquityInvestments
+     * @param $otherLockedSecurities
+     * @param $loans
+     * @param $otherFinancialAssets
+     * @return mixed
+     */
     private function totalFixedAsset(
         $administrationFees,
         $researchAndDevelopmentCost,
@@ -799,6 +929,22 @@ class BalanceSheetScreenController extends AbstractController
                         $otherFinancialAssets;
     }
 
+    /**
+     * @param $rowMaterialsSupplies
+     * @param $outstandingProducingGoods
+     * @param $outstandingServices
+     * @param $intermediateAndFinishProduct
+     * @param $merchandise
+     * @param $advancesAndPrepaymentOrders
+     * @param $customersAndRelatedAccounts
+     * @param $otherReceivables
+     * @param $subscribedAndCallCapitalUnpaid
+     * @param $marketableSecurities
+     * @param $bank
+     * @param $availability
+     * @param $prepaidExpenses
+     * @return mixed
+     */
     private function totalActiveCirculating(
         $rowMaterialsSupplies,
         $outstandingProducingGoods,
@@ -830,6 +976,15 @@ class BalanceSheetScreenController extends AbstractController
     }
 
 
+    /**
+     * @param $subscribedCapitalNotCall
+     * @param $totalFixedAsset
+     * @param $totalActiveCirculating
+     * @param $expensesSpreadOverSeveralFinancialYears
+     * @param $bondRepaymentPremiums
+     * @param $activeConversionDifferences
+     * @return mixed
+     */
     private function totalGeneralActiveBalanceSheet(
         $subscribedCapitalNotCall,
         $totalFixedAsset,
@@ -849,6 +1004,20 @@ class BalanceSheetScreenController extends AbstractController
 
     //function use by calculationPassiveBalanceSheet
 
+    /**
+     * @param $shareCapitalOrIndividual
+     * @param $premiumIssueMergerContribution
+     * @param $revaluationDifferences
+     * @param $legalReserve
+     * @param $statutoryOrContractualReserves
+     * @param $regulatedReserves
+     * @param $otherReserves
+     * @param $reportAgain
+     * @param $yearProfit
+     * @param $investmentGrant
+     * @param $regulatedProvisions
+     * @return mixed
+     */
     private function totalOwnCapital(
         $shareCapitalOrIndividual,
         $premiumIssueMergerContribution,
@@ -875,16 +1044,39 @@ class BalanceSheetScreenController extends AbstractController
                                     $regulatedProvisions;
     }
 
+    /**
+     * @param $proceedsFromEquitySecuritiesIssues
+     * @param $conditionedAdvances
+     * @return mixed
+     */
     private function totalOtherOwnCapital($proceedsFromEquitySecuritiesIssues, $conditionedAdvances)
     {
         return $totalOtherOwnCapital = $proceedsFromEquitySecuritiesIssues + $conditionedAdvances;
     }
 
+    /**
+     * @param $riskProvision
+     * @param $expensesProvision
+     * @return mixed
+     */
     private function totalProvisionForRiskAndCharges($riskProvision, $expensesProvision)
     {
         return $totalProvisionForRiskAndCharges = $riskProvision + $expensesProvision;
     }
 
+    /**
+     * @param $convertibleBonds
+     * @param $otherBonds
+     * @param $loanAndDebtsWihCreditInstitutions
+     * @param $borrowingAndOtherFinancialDebts
+     * @param $AdvancesAndDownPaymentReceived
+     * @param $tradePayableAndRelatedAccounts
+     * @param $taxAndSocialDebts
+     * @param $debtsOnFixedAssetsAndRelatedAccount
+     * @param $otherDebts
+     * @param $prepaidIncome
+     * @return mixed
+     */
     private function totalDebts(
         $convertibleBonds,
         $otherBonds,
@@ -909,6 +1101,14 @@ class BalanceSheetScreenController extends AbstractController
                                 $prepaidIncome;
     }
 
+    /**
+     * @param $totalOwnCapital
+     * @param $totalOtherOwnCapital
+     * @param $totalProvisionForRiskAndCharges
+     * @param $totalDebts
+     * @param $liabilitiesTranslationDifferences
+     * @return mixed
+     */
     private function totalGeneralPassiveBalanceSheet(
         $totalOwnCapital,
         $totalOtherOwnCapital,

@@ -9,8 +9,16 @@ use App\Entity\Game;
 use App\Entity\Socity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * Class MakeBalanceSheet
+ * @package App\Service
+ */
 class MakeBalanceSheet extends AbstractController
 {
+    /**
+     * @param Socity $socity
+     * @param Game $game
+     */
     public function makeBalanceSheet(Socity $socity, Game $game){
         $turn = $game->getTurn();
         $balanceSheet = new BalanceSheet();

@@ -16,10 +16,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * @Route("/reseachorder")
  * @ISGranted("ROLE_USER")
  */
+
+/**
+ * Class ReseachOrderController
+ * @package App\Controller
+ */
 class ReseachOrderController extends AbstractController
 {
     /**
      * @Route("/", name="reseach_order_index", methods={"GET"})
+     */
+    /**
+     * @param ReseachOrderRepository $reseachOrderRepository
+     * @return Response
      */
     public function index(ReseachOrderRepository $reseachOrderRepository): Response
     {
@@ -32,6 +41,11 @@ class ReseachOrderController extends AbstractController
 
     /**
      * @Route("/new", name="reseach_order_new", methods={"GET","POST"})
+     */
+    /**
+     * @param Request $request
+     * @param ProductRepository $productRepository
+     * @return Response
      */
     public function new(Request $request, ProductRepository $productRepository): Response
     {
@@ -72,6 +86,10 @@ class ReseachOrderController extends AbstractController
     /**
      * @Route("/{id}", name="reseach_order_show", methods={"GET"})
      */
+    /**
+     * @param ReseachOrder $reseachOrder
+     * @return Response
+     */
     public function show(ReseachOrder $reseachOrder): Response
     {
         return $this->render('reseach_order/show.html.twig', [
@@ -81,6 +99,11 @@ class ReseachOrderController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="reseach_order_edit", methods={"GET","POST"})
+     */
+    /**
+     * @param Request $request
+     * @param ReseachOrder $reseachOrder
+     * @return Response
      */
     public function edit(Request $request, ReseachOrder $reseachOrder): Response
     {
@@ -103,6 +126,11 @@ class ReseachOrderController extends AbstractController
 
     /**
      * @Route("/{id}", name="reseach_order_delete", methods={"DELETE"})
+     */
+    /**
+     * @param Request $request
+     * @param ReseachOrder $reseachOrder
+     * @return Response
      */
     public function delete(Request $request, ReseachOrder $reseachOrder): Response
     {

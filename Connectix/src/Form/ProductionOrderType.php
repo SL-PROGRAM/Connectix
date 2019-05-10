@@ -8,6 +8,10 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class ProductionOrderType
+ * @package App\Form
+ */
 class ProductionOrderType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

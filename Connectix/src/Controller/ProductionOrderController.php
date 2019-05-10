@@ -16,12 +16,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * @Route("/productionorder")
  * @ISGranted("ROLE_USER")
  */
+
+/**
+ * Class ProductionOrderController
+ * @package App\Controller
+ */
 class ProductionOrderController extends AbstractController
 {
 
 
     /**
      * @Route("/new", name="production_order_new", methods={"GET","POST"})
+     */
+    /**
+     * @param Request $request
+     * @param ProductRepository $productRepository
+     * @return Response
      */
     public function new(Request $request, ProductRepository $productRepository): Response
     {
@@ -68,6 +78,11 @@ class ProductionOrderController extends AbstractController
     /**
      * @Route("/{id}/edit", name="production_order_edit", methods={"GET","POST"})
      */
+    /**
+     * @param Request $request
+     * @param ProductionOrder $productionOrder
+     * @return Response
+     */
     public function edit(Request $request, ProductionOrder $productionOrder): Response
     {
         $form = $this->createForm(ProductionOrderType::class, $productionOrder);
@@ -89,6 +104,11 @@ class ProductionOrderController extends AbstractController
 
     /**
      * @Route("/{id}", name="production_order_delete", methods={"DELETE"})
+     */
+    /**
+     * @param Request $request
+     * @param ProductionOrder $productionOrder
+     * @return Response
      */
     public function delete(Request $request, ProductionOrder $productionOrder): Response
     {

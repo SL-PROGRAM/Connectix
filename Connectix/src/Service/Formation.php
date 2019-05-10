@@ -7,8 +7,16 @@ namespace App\Service;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * Class Formation
+ * @package App\Service
+ */
 class Formation extends AbstractController
 {
+    /**
+     * @param ObjectRepository $Repository
+     * @param $formation
+     */
     public function salary(ObjectRepository $Repository, $formation){
         $peoples = $Repository->findAll();
 

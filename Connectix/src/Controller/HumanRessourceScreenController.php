@@ -5,10 +5,15 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class HumanRessourceScreenController
+ * @package App\Controller
+ */
 class HumanRessourceScreenController extends AbstractController
 {
     /**
      * @Route("/humanressourcescreen/production", name="human_ressource_screen_production")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function production()
     {
@@ -19,6 +24,7 @@ class HumanRessourceScreenController extends AbstractController
 
     /**
      * @Route("/humanressourcescreen/reseach", name="human_ressource_screen_research")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function research()
     {
@@ -29,6 +35,7 @@ class HumanRessourceScreenController extends AbstractController
 
     /**
      * @Route("/humanressourcescreen/sales", name="human_ressource_screen_sales")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function sales()
     {

@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PurchaseOrderRepository")
+ * Class PurchaseOrder
+ * @package App\Entity
  */
 class PurchaseOrder
 {

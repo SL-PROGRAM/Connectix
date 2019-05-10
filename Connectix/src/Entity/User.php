@@ -7,6 +7,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * Class User
+ * @package App\Entity
  */
 class User implements UserInterface
 {

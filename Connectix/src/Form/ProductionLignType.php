@@ -8,6 +8,10 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class ProductionLignType
+ * @package App\Form
+ */
 class ProductionLignType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

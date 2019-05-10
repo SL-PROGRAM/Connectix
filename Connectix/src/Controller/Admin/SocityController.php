@@ -18,6 +18,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/admin/socity")
+ * Class SocityController
+ * @package App\Controller\Admin
  */
 class SocityController extends AbstractController
 {
@@ -27,6 +29,11 @@ class SocityController extends AbstractController
 
     /**
      * @Route("/new/{gameid}", name="socity_new", methods={"GET","POST"})
+     * @param $gameid
+     * @param Request $request
+     * @param GameRepository $gameRepository
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
      */
     public function new($gameid, Request $request, GameRepository $gameRepository, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -89,6 +96,11 @@ class SocityController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Game $game
+     * @param Socity $socity
+     * @return Loan
+     */
     private function makeStartLoan(Game $game, Socity $socity){
         $loan =new Loan();
         $borrowAmount = $game->getSocityStartLoanAmount();
@@ -106,6 +118,11 @@ class SocityController extends AbstractController
         return $loan;
     }
 
+    /**
+     * @param Game $game
+     * @param Socity $socity
+     * @return BalanceSheet
+     */
     private function makeBalanceSheet(Game $game, Socity $socity){
         $balanceSheet = new BalanceSheet();
         $balanceSheet->setShareCapitalOrIndividual($game->getSocityStartShareCapital())

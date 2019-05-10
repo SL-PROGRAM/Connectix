@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ResearcherRepository")
+ * Class Researcher
+ * @package App\Entity
  */
 class Researcher extends HumanResource
 {

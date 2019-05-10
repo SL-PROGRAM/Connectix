@@ -11,9 +11,17 @@ use App\Repository\ProductRepository;
 use App\Repository\SeasonalityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * Class MakeProduct
+ * @package App\Service
+ */
 class MakeProduct extends AbstractController
 {
-
+    /**
+     * @param Game $game
+     * @param ProductRepository $productRepository
+     * @param SeasonalityRepository $seasonalityRepository
+     */
     public function products(Game $game, ProductRepository $productRepository, SeasonalityRepository $seasonalityRepository ){
         $name = 'A';
         for($i =1; $i < 5;$i++){
@@ -30,7 +38,13 @@ class MakeProduct extends AbstractController
     }
 
 
-
+    /**
+     * @param SeasonalityRepository $seasonalityRepository
+     * @param Game $game
+     * @param string $name
+     * @param int $lvl
+     * @param $subproduct
+     */
     public function makeProduct(SeasonalityRepository $seasonalityRepository, Game $game, string $name, int $lvl, $subproduct){
 
             $season = $seasonalityRepository->findOneBy(['id' => 1]);
@@ -73,6 +87,11 @@ class MakeProduct extends AbstractController
 
     }
 
+    /**
+     * @param Game $game
+     * @param $lvl
+     * @return float|int
+     */
     private function salesPrice(Game $game, $lvl){
         $salesPriceMin = $game->getSalesPriceMin();
         $salesPriceMax = $game->getSalesPriceMax();
@@ -80,6 +99,11 @@ class MakeProduct extends AbstractController
         return $salesPrice = $this->addLvlPercent($salesPriceMin, $salesPriceMax, $lvl);
     }
 
+    /**
+     * @param Game $game
+     * @param $lvl
+     * @return float|int
+     */
     private function productionTime(Game $game, $lvl){
         $productionTimeMin = $game->getProductionTimeMin();
         $productionTimeMax = $game->getProductionTimeMax();
@@ -87,6 +111,11 @@ class MakeProduct extends AbstractController
         return $productionTime = $this->addLvlPercent($productionTimeMin, $productionTimeMax, $lvl);
     }
 
+    /**
+     * @param Game $game
+     * @param $lvl
+     * @return float|int
+     */
     private function manPowenCost(Game $game, $lvl){
         $manPowenMin = $game->getManPowerMin();
         $manPowenMax = $game->getManPowerMax();
@@ -94,6 +123,11 @@ class MakeProduct extends AbstractController
         return $manpower = $this->addLvlPercent($manPowenMin, $manPowenMax, $lvl);
     }
 
+    /**
+     * @param Game $game
+     * @param $lvl
+     * @return float|int
+     */
     private function productNumber(Game $game, $lvl){
         $productNumberMin = $game->getProductNumberMin();
         $productNumberMax = $game->getProductNumberMax();
@@ -102,11 +136,21 @@ class MakeProduct extends AbstractController
 
     }
 
+    /**
+     * @param $min
+     * @param $max
+     * @param $lvl
+     * @return float|int
+     */
     private function addLvlPercent($min, $max, $lvl){
         return $value = rand($min, $max)*(1+$lvl/10);
     }
 
-
+    /**
+     * @param $cyclelifeNumber
+     * @param Product $product
+     * @return ProductLife
+     */
     public function makeCycleLife($cyclelifeNumber, Product $product)
     {
         $productCycle = new ProductLife();
@@ -137,6 +181,12 @@ class MakeProduct extends AbstractController
         return $productCycle;
     }
 
+    /**
+     * @param Product $product
+     * @param $cycleLifeNumber
+     * @param $cycleDuration
+     * @return int|null
+     */
     public function getCycleDuration(Product $product, $cycleLifeNumber, $cycleDuration)
     {
         $cycleLifeNumber = $cycleLifeNumber-1;

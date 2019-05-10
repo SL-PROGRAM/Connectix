@@ -14,10 +14,19 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/productionlign")
  */
+
+/**
+ * Class ProductionLignController
+ * @package App\Controller
+ */
 class ProductionLignController extends AbstractController
 {
     /**
      * @Route("/", name="production_lign_index", methods={"GET"})
+     */
+    /**
+     * @param ProductionLignRepository $productionLignRepository
+     * @return Response
      */
     public function index(ProductionLignRepository $productionLignRepository): Response
     {
@@ -30,6 +39,11 @@ class ProductionLignController extends AbstractController
 
     /**
      * @Route("/new", name="production_lign_new", methods={"GET","POST"})
+     */
+    /**
+     * @param Request $request
+     * @param FactoryRepository $factoryRepository
+     * @return Response
      */
     public function new(Request $request, FactoryRepository $factoryRepository): Response
     {
@@ -78,6 +92,10 @@ class ProductionLignController extends AbstractController
     /**
      * @Route("/{id}", name="production_lign_show", methods={"GET"})
      */
+    /**
+     * @param ProductionLign $productionLign
+     * @return Response
+     */
     public function show(ProductionLign $productionLign): Response
     {
         return $this->render('production_lign/show.html.twig', [
@@ -87,6 +105,11 @@ class ProductionLignController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="production_lign_edit", methods={"GET","POST"})
+     */
+    /**
+     * @param Request $request
+     * @param ProductionLign $productionLign
+     * @return Response
      */
     public function edit(Request $request, ProductionLign $productionLign): Response
     {
@@ -109,6 +132,11 @@ class ProductionLignController extends AbstractController
 
     /**
      * @Route("/{id}", name="production_lign_delete", methods={"DELETE"})
+     */
+    /**
+     * @param Request $request
+     * @param ProductionLign $productionLign
+     * @return Response
      */
     public function delete(Request $request, ProductionLign $productionLign): Response
     {

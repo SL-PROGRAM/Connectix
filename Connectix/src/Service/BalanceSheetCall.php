@@ -9,9 +9,18 @@ use App\Entity\Socity;
 use App\Repository\BalanceSheetRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+/**
+ * Class BalanceSheetCall
+ * @package App\Service
+ */
 class BalanceSheetCall extends AbstractController
 {
-
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
     public function frenchGoodsSale(Socity $socity, $turn, BalanceSheetRepository $balanceSheetRepository){
         $frenchGoodsSale = $balanceSheetRepository->findOneBy([
             'socity' => $socity,
@@ -26,6 +35,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
     public function frenchProductionSoldGoods(Socity $socity, $turn, BalanceSheetRepository $balanceSheetRepository){
         $frenchGoodsSale = $balanceSheetRepository->findOneBy([
             'socity' => $socity,
@@ -40,6 +55,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
     public function stockedProduction(Socity $socity, $turn, BalanceSheetRepository $balanceSheetRepository){
         $stockedProduction = $balanceSheetRepository->findOneBy([
             'socity' => $socity,
@@ -53,6 +74,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return BalanceSheet|int|null
+     */
     public function repaymentOnDepreciationAndProvisions(Socity $socity, $turn, BalanceSheetRepository $balanceSheetRepository){
         $repaymentOnDepreciationAndProvisionsLastTurn =
             $balanceSheetRepository->findOneBy(
@@ -82,6 +109,12 @@ class BalanceSheetCall extends AbstractController
         return $repaymentOnDepreciationAndProvisions - $repaymentOnDepreciationAndProvisionsLastTurn;
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
     public function goodsPurchases(Socity $socity, $turn, BalanceSheetRepository $balanceSheetRepository)
     {
         $goodsPurchases = $balanceSheetRepository->findOneBy([
@@ -95,6 +128,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return BalanceSheet|int|null
+     */
     public function changeInStock(Socity $socity, $turn, BalanceSheetRepository $balanceSheetRepository){
         $changeInStockLastTurn = $balanceSheetRepository->findOneBy(
             [
@@ -122,6 +161,12 @@ class BalanceSheetCall extends AbstractController
         return $changeInStock - $changeInStockLastTurn;
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
     public function purchasesOfRawMaterialsAndSupplies(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $purchasesOfRawMaterialsAndSupplies = $balanceSheetRepository->findOneBy(
             [
@@ -136,6 +181,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
     public  function otherPurchaseAndExternalCharges(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $otherPurchaseAndExternalCharges = $balanceSheetRepository->findOneBy(
             [
@@ -150,6 +201,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
     public function depreciationAndAmortization(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $depreciationAndAmortization = $balanceSheetRepository->findOneBy(
             [
@@ -164,6 +221,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
     public function intestAndSimilarExpenses(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $intestAndSimilarExpenses = $balanceSheetRepository->findOneBy(
             [
@@ -178,6 +241,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return float|int
+     */
     public function payRoll(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $payRoll = $balanceSheetRepository->findOneBy(
             [
@@ -192,6 +261,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
     public function interestAndSimilarExpenses(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $interestAndSimilarExpenses = $balanceSheetRepository->findOneBy(
             [
@@ -206,6 +281,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
     public function grounds(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $grounds = $balanceSheetRepository->findOneBy(
             [
@@ -220,6 +301,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
     public function productionLign(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $productionLign = $balanceSheetRepository->findOneBy(
             [
@@ -234,6 +321,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
     public function factory(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $factory = $balanceSheetRepository->findOneBy(
             [
@@ -248,6 +341,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return float|int|null
+     */
     public function yearResult(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $yearResult = $balanceSheetRepository->findOneBy(
             [
@@ -262,6 +361,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
     public function loanAndDebtsWihCreditInstitutions(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $loanAndDebtsWihCreditInstitutions = $balanceSheetRepository->findOneBy(
             [
@@ -276,6 +381,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return int|null
+     */
      public function shareCapitalOrIndividual(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
             $shareCapitalOrIndividual = $balanceSheetRepository->findOneBy(
                 [
@@ -290,6 +401,12 @@ class BalanceSheetCall extends AbstractController
             }
         }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return float|int|null
+     */
     public function rowMaterial30j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $rowMaterial = $balanceSheetRepository->findOneBy(
             [
@@ -304,6 +421,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return float|int|null
+     */
     public function rowMaterial60j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $rowMaterial = $balanceSheetRepository->findOneBy(
             [
@@ -318,6 +441,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return float|int|null
+     */
     public function salesCashing30j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $rowMaterial = $balanceSheetRepository->findOneBy(
             [
@@ -332,6 +461,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return float|int|null
+     */
     public function salesCashing60j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $rowMaterial = $balanceSheetRepository->findOneBy(
             [
@@ -346,6 +481,12 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return float|int|null
+     */
     public function merchandisePurchase30j(Socity $socity, $turn,BalanceSheetRepository $balanceSheetRepository){
         $rowMaterial = $balanceSheetRepository->findOneBy(
             [
@@ -360,7 +501,10 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
-
+    /**
+     * @param $turn
+     * @return int
+     */
     public function tva($turn){
         $socity = $this->getUser()->getSocity();
         $balanceSheetRepository = $this->getDoctrine()->getRepository(BalanceSheet::class);
@@ -379,6 +523,10 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param $turn
+     * @return int
+     */
     public function availability($turn){
         $socity = $this->getUser()->getSocity();
         $balanceSheetRepository = $this->getDoctrine()->getRepository(BalanceSheet::class);
@@ -396,6 +544,10 @@ class BalanceSheetCall extends AbstractController
         }
     }
 
+    /**
+     * @param $turn
+     * @return int
+     */
     public function taxAndSocialDebts($turn){
         $socity = $this->getUser()->getSocity();
         $balanceSheetRepository = $this->getDoctrine()->getRepository(BalanceSheet::class);

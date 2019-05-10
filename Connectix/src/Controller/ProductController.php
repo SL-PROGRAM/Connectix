@@ -14,6 +14,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * @Route("/product")
  * @ISGranted("ROLE_USER")
+ * Class ProductController
+ * @package App\Controller
  */
 class ProductController extends AbstractController
 {
@@ -21,6 +23,8 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/{id}", name="product_show", methods={"GET"})
+     * @param Product $product
+     * @return Response
      */
     public function showSales(Product $product): Response
     {

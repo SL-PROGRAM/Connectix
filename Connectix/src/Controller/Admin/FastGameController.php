@@ -14,6 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin/fastgame")
+ * Class FastGameController
+ * @package App\Controller\Admin
  */
 class FastGameController extends AbstractController
 {
@@ -21,6 +23,12 @@ class FastGameController extends AbstractController
 
     /**
      * @Route("/new", name="fast_game_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param MakeProduct $makeProduct
+     * @param ProductRepository $productRepository
+     * @param SeasonalityRepository $seasonalityRepository
+     * @return Response
+     * @throws \Exception
      */
     public function new(Request $request, MakeProduct $makeProduct, ProductRepository $productRepository, SeasonalityRepository $seasonalityRepository): Response
     {

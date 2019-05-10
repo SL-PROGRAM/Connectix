@@ -15,11 +15,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
+/**
+ * Class UpSalaryController
+ * @package App\Controller
+ */
 class UpSalaryController extends AbstractController
 {
     /**
      * @Route("/Upsalaryadmin", name="administration_up_salary", methods={"GET","POST"})
+     */
+    /**
+     * @param Request $request
+     * @param AdministrationRepository $repository
+     * @param \App\Service\UpSalary $up_salary
+     * @return Response
      */
     public function up_salaryAdmin(Request $request, AdministrationRepository $repository, \App\Service\UpSalary $up_salary): Response
     {
@@ -47,6 +56,12 @@ class UpSalaryController extends AbstractController
 
     /**
      * @Route("/up_salaryresearcher", name="researcher_up_salary", methods={"GET","POST"})
+     */
+    /**
+     * @param Request $request
+     * @param ResearcherRepository $repository
+     * @param \App\Service\UpSalary $up_salary
+     * @return Response
      */
     public function upSalaryResearcher(Request $request, ResearcherRepository $repository, \App\Service\UpSalary $up_salary): Response
     {
@@ -76,6 +91,12 @@ class UpSalaryController extends AbstractController
     /**
      * @Route("/up_salaryprod", name="production_up_salary", methods={"GET","POST"})
      */
+    /**
+     * @param Request $request
+     * @param ProductionRepository $repository
+     * @param \App\Service\UpSalary $up_salary
+     * @return Response
+     */
     public function upSalaryProd(Request $request, ProductionRepository $repository, \App\Service\UpSalary $up_salary): Response
     {
         $defaultData = ['message' => 'Type your message here'];
@@ -104,6 +125,12 @@ class UpSalaryController extends AbstractController
     /**
      * @Route("/up_salarysales", name="salesman_up_salary", methods={"GET","POST"})
      */
+    /**
+     * @param Request $request
+     * @param SalesManRepository $repository
+     * @param \App\Service\UpSalary $up_salary
+     * @return Response
+     */
     public function upSalarySales(Request $request, SalesManRepository $repository, \App\Service\UpSalary $up_salary): Response
     {
         $defaultData = ['message' => 'Type your message here'];
@@ -131,6 +158,12 @@ class UpSalaryController extends AbstractController
 
     /**
      * @Route("/up_salary", name="all_up_salary", methods={"GET","POST"})
+     */
+    /**
+     * @param Request $request
+     * @param HumanRessourceRepository $repository
+     * @param \App\Service\UpSalary $up_salary
+     * @return Response
      */
     public function upSalaryAll(Request $request, HumanRessourceRepository $repository, \App\Service\UpSalary $up_salary): Response
     {

@@ -5,6 +5,10 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class FooterController
+ * @package App\Controller
+ */
 class FooterController extends AbstractController
 {
     /**

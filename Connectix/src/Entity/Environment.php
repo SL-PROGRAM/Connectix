@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EnvironmentRepository")
+ * Class Environment
+ * @package App\Entity
  */
 class Environment
 {

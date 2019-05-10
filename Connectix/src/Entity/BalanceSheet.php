@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BalanceSheetRepository")
+ * Class BalanceSheet
+ * @package App\Entity
  */
 class BalanceSheet
 {

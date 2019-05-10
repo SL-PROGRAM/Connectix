@@ -14,10 +14,22 @@ use App\Service\BalanceSheetRecord;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class CashFlowController
+ * @package App\Controller
+ */
 class CashFlowController extends AbstractController
 {
     /**
      * @Route("/cashflow", name="cash_flow")
+     * @param ProductionOrderRepository $productionOrderRepository
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRecord $balanceSheetRecord
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @param SalesOrderRepository $salesOrderRepository
+     * @param LoanRepository $loanRepository
+     * @param PurchaseOrderRepository $purchaseOrderRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(ProductionOrderRepository $productionOrderRepository,
                           BalanceSheetCall $balanceSheetCall,
@@ -103,7 +115,12 @@ class CashFlowController extends AbstractController
         ]);
     }
 
-
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param ProductionOrderRepository $repository
+     * @return array
+     */
     private function monthlyRowMaterialHTPurchase(Socity $socity, $turn, ProductionOrderRepository $repository)
     {
         $monthlyProductionCost = [
@@ -144,6 +161,12 @@ class CashFlowController extends AbstractController
         return $monthlyProductionCost;
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param PurchaseOrderRepository $repository
+     * @return array
+     */
     private function monthlyMerchandiseHTPurchase(Socity $socity, $turn, PurchaseOrderRepository $repository)
     {
         $monthlyMerchandiseTTCPurchase = [
@@ -185,6 +208,12 @@ class CashFlowController extends AbstractController
         return $monthlyMerchandiseTTCPurchase;
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param SalesOrderRepository $repository
+     * @return array
+     */
     private function monthlyMerchandiseHTSales(Socity $socity, $turn, SalesOrderRepository $repository)
     {
         $monthlyMerchandiseHTSales = [
@@ -230,6 +259,16 @@ class CashFlowController extends AbstractController
     /*
      * DISBURSEMENTS
      */
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRecord $balanceSheetRecord
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @param $monthlyRowMaterialHTPurchase
+     * @param $tva
+     * @return array
+     */
     private function monthlyRowMaterialTTCPurchase(Socity $socity, $turn, BalanceSheetRecord $balanceSheetRecord, BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository, $monthlyRowMaterialHTPurchase, $tva)
     {
 
@@ -254,6 +293,16 @@ class CashFlowController extends AbstractController
 
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetRecord $balanceSheetRecord
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @param $monthlyMerchandiseHTPurchase
+     * @param $tva
+     * @return array
+     */
     private function monthlyMerchandiseTTCPurchase(Socity $socity, $turn, BalanceSheetRecord $balanceSheetRecord, BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository, $monthlyMerchandiseHTPurchase, $tva)
     {
 
@@ -276,6 +325,13 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @param $socity
+     * @param $turn
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return array
+     */
     private function externalCharges($socity, $turn, BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository)
     {
         $monthlyOtherCharge = round($balanceSheetCall->otherPurchaseAndExternalCharges($socity, $turn, $balanceSheetRepository)
@@ -297,6 +353,13 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @param $socity
+     * @param $turn
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return array
+     */
     private function personnelCostBrut($socity, $turn, BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository)
     {
         $personnelCost = round($balanceSheetCall->payRoll($socity, $turn, $balanceSheetRepository)
@@ -318,6 +381,12 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @param $monthlyMerchandiseHTSales
+     * @param $personnelCostBrut
+     * @param Game $game
+     * @return array
+     */
     private function dueAndTaxes($monthlyMerchandiseHTSales, $personnelCostBrut, Game $game)
     {
         $payTax = $game->getPayTax() / 100;
@@ -351,6 +420,11 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @param $personnelCostBrut
+     * @param Game $game
+     * @return array
+     */
     private function personnelCostNet($personnelCostBrut, Game $game)
     {
         $salaryContributions = $game->getSalaryContributions() / 100;
@@ -371,6 +445,14 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @param $personnelCostBrut
+     * @param Game $game
+     * @param BalanceSheetRecord $balanceSheetRecord
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param $turn
+     * @return array
+     */
     private function socialTaxes($personnelCostBrut, Game $game, BalanceSheetRecord $balanceSheetRecord, BalanceSheetCall $balanceSheetCall, $turn)
     {
         $salaryContributions = $game->getSalaryContributions() / 100;
@@ -395,6 +477,13 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @param $socity
+     * @param $turn
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return array
+     */
     private function financialExpenses($socity, $turn, BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository)
     {
         $interest = $balanceSheetCall->interestAndSimilarExpenses($socity, $turn, $balanceSheetRepository);
@@ -414,6 +503,9 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @return array
+     */
     private function dueTVA()
     {
         return $dueTVA = [
@@ -433,6 +525,14 @@ class CashFlowController extends AbstractController
 
     }
 
+    /**
+     * @param $socity
+     * @param $turn
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @param $tva
+     * @return array
+     */
     private function tangibleInvestments($socity, $turn, BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository, $tva)
     {
         $groundLastTurn = $balanceSheetCall->grounds($socity, $turn - 1, $balanceSheetRepository);
@@ -462,6 +562,11 @@ class CashFlowController extends AbstractController
 
     }
 
+    /**
+     * @param $socity
+     * @param LoanRepository $loanRepository
+     * @return array
+     */
     private function repaymentOfLoan($socity, LoanRepository $loanRepository)
     {
         $annualRepayement = 0;
@@ -490,7 +595,15 @@ class CashFlowController extends AbstractController
     /*
      * CASH INCLUDES
      */
-
+    /**
+     * @param $monthlyMerchandiseHTSales
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @param BalanceSheetRecord $balanceSheetRecord
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param Socity $socity
+     * @param $turn
+     * @return array
+     */
     private function cashingSales($monthlyMerchandiseHTSales, BalanceSheetRepository $balanceSheetRepository, BalanceSheetRecord $balanceSheetRecord, BalanceSheetCall $balanceSheetCall, Socity $socity, $turn)
     {
         $balanceSheet = $balanceSheetRepository->findOneBy(['socity' => $socity, 'turn' => $turn]);
@@ -563,6 +676,13 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return array
+     */
     private function capitalContribution(Socity $socity, $turn, BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository)
     {
         $shareCapitalOrIndividuallastTurn = $balanceSheetCall->shareCapitalOrIndividual($socity, $turn - 1, $balanceSheetRepository);
@@ -588,6 +708,13 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @param Socity $socity
+     * @param $turn
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRepository $balanceSheetRepository
+     * @return array
+     */
     private function mediumAndLongLoan(Socity $socity, $turn, BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository)
     {
         $mediumAndLongLoanLastTurn = $balanceSheetCall->loanAndDebtsWihCreditInstitutions($socity, $turn - 1, $balanceSheetRepository);
@@ -613,6 +740,9 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @return array
+     */
     private function creditTVA()
     {
         return $creditTVA = [
@@ -631,6 +761,9 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @return array
+     */
     private function transfertOfCapital()
     {
         return $transfertOfCapital = [
@@ -653,6 +786,11 @@ class CashFlowController extends AbstractController
     /*
      * VAT CALCULATION
      */
+    /**
+     * @param $monthlyMerchandiseHTSales
+     * @param $tva
+     * @return array
+     */
     private function collectedTVA($monthlyMerchandiseHTSales, $tva)
     {
         return $monthlyCollectedTVA = [
@@ -673,6 +811,14 @@ class CashFlowController extends AbstractController
 
     }
 
+    /**
+     * @param $monthlyRowMaterialHTPurchase
+     * @param $monthlyMerchandiseHTPurchase
+     * @param $externalCharges
+     * @param $tangibleInvestments
+     * @param $tva
+     * @return array
+     */
     private function deductedTVA($monthlyRowMaterialHTPurchase, $monthlyMerchandiseHTPurchase, $externalCharges, $tangibleInvestments, $tva)
     {
         return $deductedTVA = [
@@ -715,6 +861,14 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @param $dueTVA
+     * @param $creditTVA
+     * @param $monthlyCollectedTVA
+     * @param $monthlyDedectibleTVA
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRecord $balanceSheetRecord
+     */
     private function TvaRepartition(&$dueTVA, &$creditTVA, $monthlyCollectedTVA, $monthlyDedectibleTVA, BalanceSheetCall $balanceSheetCall, BalanceSheetRecord $balanceSheetRecord)
     {
 
@@ -732,6 +886,16 @@ class CashFlowController extends AbstractController
         $this->recordTVA($dueTVA, $creditTVA, $monthlyCollectedTVA, $monthlyDedectibleTVA, 'december', 'january1', $balanceSheetCall, $balanceSheetRecord);
     }
 
+    /**
+     * @param $dueTVA
+     * @param $creditTVA
+     * @param $monthlyCollectedTVA
+     * @param $monthlyDedectibleTVA
+     * @param $key
+     * @param $nextMonth
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRecord $balanceSheetRecord
+     */
     private function recordTVA(&$dueTVA, &$creditTVA, $monthlyCollectedTVA, $monthlyDedectibleTVA, $key, $nextMonth,
                                BalanceSheetCall $balanceSheetCall, BalanceSheetRecord $balanceSheetRecord)
     {
@@ -759,7 +923,14 @@ class CashFlowController extends AbstractController
 
     }
 
-
+    /**
+     * @param $cashingSales
+     * @param $capitalContribution
+     * @param $mediumAndLongLoan
+     * @param $creditTVA
+     * @param $transferOfCapital
+     * @return array
+     */
     private function totalCaching($cashingSales, $capitalContribution, $mediumAndLongLoan, $creditTVA, $transferOfCapital)
     {
         return $totalCaching = [
@@ -779,6 +950,15 @@ class CashFlowController extends AbstractController
 
     }
 
+    /**
+     * @param $key
+     * @param $cashingSales
+     * @param $capitalContribution
+     * @param $mediumAndLongLoan
+     * @param $creditTVA
+     * @param $transferOfCapital
+     * @return mixed
+     */
     private function totalCashingCalculation($key, $cashingSales, $capitalContribution, $mediumAndLongLoan, $creditTVA, $transferOfCapital)
     {
         return $cashingSales[$key] +
@@ -790,7 +970,19 @@ class CashFlowController extends AbstractController
 
     }
 
-
+    /**
+     * @param $monthlyRowMaterialTTCPurchase
+     * @param $monthlyMerchandiseTTCPurchase
+     * @param $externalCharges
+     * @param $personnelCostNet
+     * @param $socialTaxes
+     * @param $dueAndTaxes
+     * @param $financialExpenses
+     * @param $dueTVA
+     * @param $tangibleInvestments
+     * @param $repaymentOfLoan
+     * @return array
+     */
     private function totalDisturb($monthlyRowMaterialTTCPurchase, $monthlyMerchandiseTTCPurchase, $externalCharges, $personnelCostNet, $socialTaxes, $dueAndTaxes, $financialExpenses, $dueTVA, $tangibleInvestments, $repaymentOfLoan)
     {
         return $totalDisturb = [
@@ -809,6 +1001,20 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @param $key
+     * @param $monthlyRowMaterialTTCPurchase
+     * @param $monthlyMerchandiseTTCPurchase
+     * @param $externalCharges
+     * @param $personnelCostNet
+     * @param $socialTaxes
+     * @param $dueAndTaxes
+     * @param $financialExpenses
+     * @param $dueTVA
+     * @param $tangibleInvestments
+     * @param $repaymentOfLoan
+     * @return mixed
+     */
     private function totalDisturbCalculation($key, $monthlyRowMaterialTTCPurchase, $monthlyMerchandiseTTCPurchase, $externalCharges, $personnelCostNet, $socialTaxes, $dueAndTaxes, $financialExpenses, $dueTVA, $tangibleInvestments, $repaymentOfLoan)
     {
         return $monthlyRowMaterialTTCPurchase[$key] +
@@ -825,6 +1031,11 @@ class CashFlowController extends AbstractController
 
     }
 
+    /**
+     * @param $totalCashing
+     * @param $totalDisturb
+     * @return array
+     */
     private function totalMonth($totalCashing, $totalDisturb)
     {
         return $totalMonth = [
@@ -843,11 +1054,24 @@ class CashFlowController extends AbstractController
         ];
     }
 
+    /**
+     * @param $totalCashing
+     * @param $totalDisturb
+     * @param $keys
+     * @return float
+     */
     private function totalMonthCalculation($totalCashing, $totalDisturb, $keys)
     {
         return round($totalCashing[$keys] - $totalDisturb[$keys], 2);
     }
 
+    /**
+     * @param $totalMonth
+     * @param BalanceSheetCall $balanceSheetCall
+     * @param BalanceSheetRecord $balanceSheetRecord
+     * @param $turn
+     * @return mixed
+     */
     private function totalEndMonth($totalMonth, BalanceSheetCall $balanceSheetCall, BalanceSheetRecord $balanceSheetRecord, $turn)
     {
 
