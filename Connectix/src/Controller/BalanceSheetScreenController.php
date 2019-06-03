@@ -6,6 +6,7 @@ use App\Entity\Game;
 use App\Entity\Socity;
 use App\Repository\BalanceSheetRepository;
 use App\Repository\FactoryRepository;
+use App\Repository\LoanRepository;
 use App\Repository\ProductionLignRepository;
 use App\Service\BalanceSheetCall;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,14 +28,14 @@ class BalanceSheetScreenController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository, FactoryRepository $factoryRepository,
-                          ProductionLignRepository $productionLignRepository)
+                          ProductionLignRepository $productionLignRepository, LoanRepository $loanRepository)
     {
         $socity = $this->getUser()->getSocity();
         $game = $this->getUser()->getGame();
         $turn = $game->getTurn();
 
 
-        $actualYearActiveBalanceSheetBrut = $this->actualYearActiveBalanceSheetBrut($balanceSheetCall, $balanceSheetRepository, $socity, $turn);
+        $actualYearActiveBalanceSheetBrut = $this->actualYearActiveBalanceSheetBrut($loanRepository, $balanceSheetCall, $balanceSheetRepository, $socity, $turn);
         $actualYearActiveBalanceSheetDepreciationProvision = $this->actualYearActiveBalanceSheetDepreciationProvision($factoryRepository,
                                                                        $productionLignRepository,
                                                                        $game,$socity);
@@ -67,7 +68,7 @@ class BalanceSheetScreenController extends AbstractController
      * @param $turn
      * @return array
      */
-    private function actualYearActiveBalanceSheetBrut(BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository,Socity $socity, $turn)
+    private function actualYearActiveBalanceSheetBrut(LoanRepository $loanRepository, BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository,Socity $socity, $turn)
     {
 
         //TODO RETURN TABLE TO INDEX
@@ -90,15 +91,8 @@ class BalanceSheetScreenController extends AbstractController
                 2)
         ;
 
-        $tva = $balanceSheetCall->tva($turn);
-
-        if($tva < 0){
-            $otherReceivables = -$tva;
-        }
-        else {
-            $otherReceivables = 0;
-        }
-
+        $bank = $this->refund($loanRepository, $socity);
+        $otherReceivables = $this->tva($balanceSheetCall, $turn);
         $availability = $balanceSheetCall->availability($turn);
 
 
@@ -130,7 +124,6 @@ class BalanceSheetScreenController extends AbstractController
 
         $subscribedAndCallCapitalUnpaid = 0;
         $marketableSecurities = 0;
-        $bank = 0;
 
         $prepaidExpenses = 0;
         $subscribedCapitalNotCall = 0;
@@ -177,6 +170,29 @@ class BalanceSheetScreenController extends AbstractController
             $bondRepaymentPremiums,
             $activeConversionDifferences
         );
+    }
+
+    private function refund(LoanRepository $loanRepository, Socity $socity){
+            $bank = 0;
+            $loans = $loanRepository->findBy(['socity' => $socity]);
+            foreach ($loans as $loan){
+                $duration = $loan->getLoanDuration();
+                $borrowAmount = $loan->getBorrowAmount();
+                $bank += $borrowAmount/$duration;
+            }
+            return round($bank, 2);
+    }
+
+    private function tva(BalanceSheetCall $balanceSheetCall, $turn){
+
+        $tva = $balanceSheetCall->tva($turn);
+
+        if($tva < 0){
+            return -$tva;
+        }
+        else {
+            return 0;
+        }
     }
 
     /**

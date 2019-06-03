@@ -659,8 +659,8 @@ class ProfitLossAccountController extends AbstractController
      */
     private function socialCharges($payRoll, Game $game)
     {
-        $employerContributions = $game->getEmployerContributions();
-        return $socialCharges = $payRoll*$employerContributions/100;
+        $employerContributions = $game->getEmployerContributions()/100;
+        return $socialCharges = $payRoll*$employerContributions;
     }
 
     /**
