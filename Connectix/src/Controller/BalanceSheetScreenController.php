@@ -56,7 +56,7 @@ class BalanceSheetScreenController extends AbstractController
             'actualYearPassiveBalanceSheet' => $actualYearPassiveBalanceSheet,
             'lastYearPassiveBalanceSheet' => $lastYearPassiveBalanceSheet,
             'controller_name' => 'BalanceSheetController',
-            'result' => ($actualYearPassiveBalanceSheet['totalGeneralPassiveBalanceSheet'] - $actualYearActiveBalanceSheetBrut['totalGeneralActiveBalanceSheet']),
+            'result' => ($actualYearPassiveBalanceSheet['totalGeneralPassiveBalanceSheet'] - $actualYearActiveBalanceSheetNet['totalGeneralActiveBalanceSheet']),
         ]);
     }
 

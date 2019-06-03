@@ -5,6 +5,7 @@ namespace App\Service;
 
 
 use App\Entity\BalanceSheet;
+use App\Entity\Game;
 use App\Entity\Socity;
 use App\Repository\AdministrationRepository;
 use App\Repository\BalanceSheetRepository;
@@ -89,6 +90,7 @@ class BalanceSheetRecord extends AbstractController
         $this->totalSalary( $socity, $balanceSheetToRecord);
 
 
+
         $frenchGoodsSale = $this->merchandiseSales( $socity, $turn, $salesOrderRepository);
         $productionSales = $this->productionSales( $socity, $turn, $salesOrderRepository);
         $merchandisePurchase = $this->merchandisePurchase($socity, $turn, $purchaseOrderRepository);
@@ -102,6 +104,7 @@ class BalanceSheetRecord extends AbstractController
         $constructions = $this->factory($socity, $factoryRepository);
         $technicalInstallationsEquipment = $this->productionLign($socity, $productionLignRepository);
         $loanAndDebtsWihCreditInstitutions = $this->loanAndDebtsWihCreditInstitutions($socity, $loanRepository);
+        $depreciationAmortization = $this-> depreciationAmortization($socity, $factoryRepository, $productionLignRepository);
 
 
         $balanceSheetToRecord->setMarchendisePurchase($merchandisePurchase)
@@ -117,6 +120,7 @@ class BalanceSheetRecord extends AbstractController
             ->setConstructions($constructions)
             ->setTechnicalInstallationsEquipment($technicalInstallationsEquipment)
             ->setLoanAndDebtsWihCreditInstitutions($loanAndDebtsWihCreditInstitutions)
+            ->setDepreciationAmortization($depreciationAmortization)
         ;
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -464,7 +468,41 @@ class BalanceSheetRecord extends AbstractController
         return $otherPurchase = $publicity+$extenalExpenses;
     }
 
-    private function depreciationAmortization(){
+    private function depreciationAmortization(Socity $socity, FactoryRepository $factoryRepository, ProductionLignRepository $productionLignRepository){
+        $game =$socity->getGame();
+        $factory = $this->factoryAmortization($game, $socity, $factoryRepository);
+        $ligns = $this->productionLignAmortization($socity, $game, $productionLignRepository);
+
+        return $depreciationAmortization = $factory + $ligns;
+    }
+
+
+    /**
+     * @param Game $game
+     * @param Socity $socity
+     * @param FactoryRepository $factoryRepository
+     * @return float
+     */
+    private function factoryAmortization(Game $game, Socity $socity, FactoryRepository $factoryRepository){
+        $factoryAmortization = $game->getFactoryAmortizationTurn();
+        $factoryCost = $game->getFactoryCreationCost();
+        $nbreFactory =  count($factoryRepository->findBy(['socity' => $socity]));
+
+        return $amortization = round($nbreFactory*$factoryCost/$factoryAmortization, 2);
+    }
+
+    /**
+     * @param Socity $socity
+     * @param Game $game
+     * @param ProductionLignRepository $productionLignRepository
+     * @return float
+     */
+    private function productionLignAmortization(Socity $socity, Game $game, ProductionLignRepository $productionLignRepository){
+        $productionLignAAmortization = $game->getProductionLignAmortizationTurn();
+        $productionLignCost = $game->getProductionLignCreationCost();
+        $nbreProductionLign =  count($productionLignRepository->findBy(['socity' => $socity]));
+
+        return $amortization = round($nbreProductionLign*$productionLignCost/$productionLignAAmortization, 2);
     }
 
     /**
@@ -742,42 +780,5 @@ class BalanceSheetRecord extends AbstractController
     }
 
 
-
-
-    //TODO FUNCTION TO CREATE
-
-
-//;
-//$taxes;
-//$repaymentOnDepreciationAndProvisions;
-//$provisions;
-//$provisionOnCurrentAsset;
-//$otherExpenses;
-//$interestAndSimilarProduct;
-//;
-//$capitalExceptionalOperatingProduct;
-//$capitalExceptionalExpense;
-//$researchAndDevelopmentCost;
-//$concessionPatentsAndSimilar;
-
-
-
-//$customersAndRelatedAccounts;
-//$otherReceivables;
-//$availability;
-//$shareCapitalOrIndividual;
-//$premiumIssueMergerContribution;
-//$legalReserve;
-//$statutoryOrContractualReserves;
-//$otherReserves;
-//$reportAgain;
-//$loanAndDebtsWihCreditInstitutions;
-//$tradePayableAndRelatedAccounts;
-//
-//        $taxAndSocialDebts =0;
-//        $otherDebts =0;
-//        $socity =0;
-//        $professionalSalesPart =0;
-//        $particularSalesPart =0;
 
 }

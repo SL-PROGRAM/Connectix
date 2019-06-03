@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Factory;
 use App\Form\FactoryType;
 use App\Repository\FactoryRepository;
+use App\Service\BalanceSheetRecord;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -79,7 +80,7 @@ class FactoryController extends AbstractController
      * @param Factory $factory
      * @return Response
      */
-    public function delete(Request $request, Factory $factory): Response
+    public function delete(Request $request, Factory $factory, BalanceSheetRecord $balanceSheetRecord): Response
     {
         if ($this->isCsrfTokenValid('delete'.$factory->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
