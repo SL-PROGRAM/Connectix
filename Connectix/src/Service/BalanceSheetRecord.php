@@ -262,7 +262,7 @@ class BalanceSheetRecord extends AbstractController
         $payRoll = 0;
         $employees = $socity->getHumanRessourcies();
         foreach ($employees as $employee) {
-            $payRoll += $employee->getSalary()*12;
+            $payRoll += $employee->getSalary();
         }
         $balanceSheetToRecord->setTotalSalary($payRoll);
     }

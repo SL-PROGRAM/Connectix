@@ -366,8 +366,8 @@ class CashFlowController extends AbstractController
      */
     private function personnelCostBrut($socity, $turn, BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository)
     {
-        $personnelCost = round($balanceSheetCall->payRoll($socity, $turn, $balanceSheetRepository)
-            / 12, 2);
+
+        $personnelCost = round($balanceSheetCall->payRoll($socity, $turn, $balanceSheetRepository), 2);
 
         return $personnelCostBrut = [
             'january' => $personnelCost,
@@ -396,32 +396,32 @@ class CashFlowController extends AbstractController
         $payTax = $game->getPayTax() / 100;
         $taxTurnover = $game->getTaxTurnover() / 100;
         $tva = $game->getTva()/100;
-
+        dump($payTax);
         return $dueAndTaxes = [
-            'january' => round(($monthlyMerchandiseHTSales['january'] * $payTax)*(1+$tva), 2) +
-                round($personnelCostBrut['january'] * $taxTurnover, 2),
+            'january' => //round(($monthlyMerchandiseHTSales['january'] * $payTax)*(1+$tva), 2) +
+                round($personnelCostBrut['january'] * $payTax, 2),
             'february' => round($monthlyMerchandiseHTSales['february'] * $payTax*(1+$tva), 2) +
-                round($personnelCostBrut['february'] * $taxTurnover, 2),
+                round($personnelCostBrut['february'] * $payTax, 2),
             'march' => round($monthlyMerchandiseHTSales['march'] * $payTax*(1+$tva), 2) +
-                round($personnelCostBrut['march'] * $taxTurnover, 2),
+                round($personnelCostBrut['march'] * $payTax, 2),
             'april' => round($monthlyMerchandiseHTSales['april'] * $payTax*(1+$tva), 2) +
-                round($personnelCostBrut['april'] * $taxTurnover, 2),
+                round($personnelCostBrut['april'] * $payTax, 2),
             'may' => round($monthlyMerchandiseHTSales['may'] * $payTax*(1+$tva), 2) +
-                round($personnelCostBrut['may'] * $taxTurnover, 2),
+                round($personnelCostBrut['may'] * $payTax, 2),
             'june' => round($monthlyMerchandiseHTSales['june'] * $payTax*(1+$tva), 2) +
-                round($personnelCostBrut['june'] * $taxTurnover, 2),
+                round($personnelCostBrut['june'] * $payTax, 2),
             'july' => round($monthlyMerchandiseHTSales['july'] * $payTax*(1+$tva), 2) +
-                round($personnelCostBrut['july'] * $taxTurnover, 2),
+                round($personnelCostBrut['july'] * $payTax, 2),
             'august' => round($monthlyMerchandiseHTSales['august'] * $payTax*(1+$tva), 2) +
-                round($personnelCostBrut['august'] * $taxTurnover, 2),
+                round($personnelCostBrut['august'] * $payTax, 2),
             'september' => round($monthlyMerchandiseHTSales['september'] * $payTax*(1+$tva), 2) +
-                round($personnelCostBrut['september'] * $taxTurnover, 2),
+                round($personnelCostBrut['september'] * $payTax, 2),
             'october' => round($monthlyMerchandiseHTSales['october'] * $payTax*(1+$tva), 2) +
-                round($personnelCostBrut['october'] * $taxTurnover, 2),
+                round($personnelCostBrut['october'] * $payTax, 2),
             'november' => round($monthlyMerchandiseHTSales['november'] * $payTax*(1+$tva), 2) +
-                round($personnelCostBrut['november'] * $taxTurnover, 2),
+                round($personnelCostBrut['november'] * $payTax, 2),
             'december' => round($monthlyMerchandiseHTSales['december'] * $payTax*(1+$tva), 2) +
-                round($personnelCostBrut['december'] * $taxTurnover, 2),
+                round($personnelCostBrut['december'] * $payTax, 2),
         ];
     }
 

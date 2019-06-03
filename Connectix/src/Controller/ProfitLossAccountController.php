@@ -660,7 +660,7 @@ class ProfitLossAccountController extends AbstractController
     private function socialCharges($payRoll, Game $game)
     {
         $employerContributions = $game->getEmployerContributions()/100;
-        return $socialCharges = $payRoll*$employerContributions;
+        return $socialCharges = round($payRoll*$employerContributions*12,2);
     }
 
     /**
@@ -668,9 +668,9 @@ class ProfitLossAccountController extends AbstractController
      * @param $socialCharges
      * @return mixed
      */
-    private function salariesAndTreatments($payRoll, $socialCharges)
+    private function salariesAndTreatments($payRoll)
     {
-        return $salariesAndTreatments = $payRoll-$socialCharges;
+        return $salariesAndTreatments = $payRoll*12;
     }
 
 

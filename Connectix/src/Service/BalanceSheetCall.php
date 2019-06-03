@@ -259,7 +259,7 @@ class BalanceSheetCall extends AbstractController
             return $payRoll = 0;
         }
         else {
-            return $payRoll->getTotalSalary()*12;
+            return $payRoll->getTotalSalary();
         }
     }
 
