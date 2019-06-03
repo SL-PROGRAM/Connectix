@@ -176,8 +176,5 @@ class FormationController extends AbstractController
             'form' => $form->createView(),
             'people' => 'sales forces'
         ]);
-
     }
-
-
 }

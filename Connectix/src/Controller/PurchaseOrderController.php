@@ -14,22 +14,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/purchaseorder")
- */
-
-/**
  * Class PurchaseOrderController
  * @package App\Controller
  */
 class PurchaseOrderController extends AbstractController
 {
-
-    /**
-     * @Route("/new", name="purchase_order_new", methods={"GET","POST"})
-     */
     /**
      * @param Request $request
      * @param ProductRepository $productRepository
      * @return Response
+     * @Route("/new", name="purchase_order_new", methods={"GET","POST"})
      */
     public function new(Request $request, ProductRepository $productRepository): Response
     {
@@ -49,7 +43,7 @@ class PurchaseOrderController extends AbstractController
             $product = $productRepository->findOneBy(["id" => $_GET["id"]]);
             $purchaseOrder->setProduct($product);
 
-            $purchaseOrder->setPurchasePrice($product->getSalePrice()*0.8);
+            $purchaseOrder->setPurchasePrice($product->getBuyPrice());
 
             $productActivityCost = 10; // $purchaseOrder->getProduct()->getProductionActivityCost();
             $quantity = $purchaseOrder->getProductQuantityPurchase();
@@ -72,14 +66,11 @@ class PurchaseOrderController extends AbstractController
         ]);
     }
 
-
-    /**
-     * @Route("/{id}/edit", name="purchase_order_edit", methods={"GET","POST"})
-     */
     /**
      * @param Request $request
      * @param PurchaseOrder $purchaseOrder
      * @return Response
+     * @Route("/{id}/edit", name="purchase_order_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, PurchaseOrder $purchaseOrder): Response
     {
@@ -101,12 +92,10 @@ class PurchaseOrderController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="purchase_order_delete", methods={"DELETE"})
-     */
-    /**
      * @param Request $request
      * @param PurchaseOrder $purchaseOrder
      * @return Response
+     * @Route("/{id}", name="purchase_order_delete", methods={"DELETE"})
      */
     public function delete(Request $request, PurchaseOrder $purchaseOrder): Response
     {

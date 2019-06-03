@@ -13,9 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/salesmanparticular")
- */
-
-/**
  * Class SalesManParticularController
  * @package App\Controller
  */
@@ -23,8 +20,6 @@ class SalesManParticularController extends AbstractController
 {
     /**
      * @Route("/", name="sales_man_particular_index", methods={"GET"})
-     */
-    /**
      * @param SalesManParticularRepository $salesManParticularRepository
      * @return Response
      */
@@ -38,8 +33,6 @@ class SalesManParticularController extends AbstractController
 
     /**
      * @Route("/new", name="sales_man_particular_new", methods={"NEW", "POST", "GET"})
-     */
-    /**
      * @param Request $request
      * @return Response
      */

@@ -15,9 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/workman")
- */
-
-/**
  * Class WorkManController
  * @package App\Controller
  */
@@ -25,8 +22,6 @@ class WorkManController extends AbstractController
 {
     /**
      * @Route("/", name="work_man_index", methods={"GET"})
-     */
-    /**
      * @param WorkManRepository $workManRepository
      * @return Response
      */
@@ -40,8 +35,6 @@ class WorkManController extends AbstractController
 
     /**
      * @Route("/new", name="work_man_new", methods={"NEW", "POST", "GET"})
-     */
-    /**
      * @param Request $request
      * @return Response
      */

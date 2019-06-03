@@ -13,9 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/technician")
- */
-
-/**
  * Class TechnicianController
  * @package App\Controller
  */
@@ -23,8 +20,6 @@ class TechnicianController extends AbstractController
 {
     /**
      * @Route("/", name="technician_index", methods={"GET"})
-     */
-    /**
      * @param TechnicianRepository $technicianRepository
      * @return Response
      */
@@ -38,8 +33,6 @@ class TechnicianController extends AbstractController
 
     /**
      * @Route("/new", name="technician_new", methods={"NEW", "POST", "GET"})
-     */
-    /**
      * @param Request $request
      * @return Response
      */

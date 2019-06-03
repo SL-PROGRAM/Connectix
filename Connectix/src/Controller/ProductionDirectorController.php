@@ -34,8 +34,6 @@ class ProductionDirectorController extends AbstractController
 
     /**
      * @Route("/new", name="production_director_new", methods={"NEW", "POST", "GET"})
-     */
-    /**
      * @param Request $request
      * @return Response
      */

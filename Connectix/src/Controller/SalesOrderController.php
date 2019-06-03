@@ -13,9 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/salesorder")
- */
-
-/**
  * Class SalesOrderController
  * @package App\Controller
  */
@@ -23,8 +20,6 @@ class SalesOrderController extends AbstractController
 {
     /**
      * @Route("/", name="sales_order_index", methods={"GET"})
-     */
-    /**
      * @param SalesOrderRepository $salesOrderRepository
      * @return Response
      */
@@ -38,8 +33,6 @@ class SalesOrderController extends AbstractController
 
     /**
      * @Route("/new", name="sales_order_new", methods={"GET","POST"})
-     */
-    /**
      * @param Request $request
      * @param ProductRepository $productRepository
      * @return Response
@@ -59,6 +52,7 @@ class SalesOrderController extends AbstractController
 
             $salesOrder->setTurn($turn)
                         ->setStatus(0)
+                        ->setSalesPrice($product->getSalePrice())
                         ->setSalesActivityCost($salesActivityCost)
                         ->setSocity($socity)
                         ->setProduct($product);
@@ -81,8 +75,6 @@ class SalesOrderController extends AbstractController
 
     /**
      * @Route("/{id}", name="sales_order_show", methods={"GET"})
-     */
-    /**
      * @param SalesOrder $salesOrder
      * @return Response
      */
@@ -95,8 +87,6 @@ class SalesOrderController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="sales_order_edit", methods={"GET","POST"})
-     */
-    /**
      * @param Request $request
      * @param SalesOrder $salesOrder
      * @return Response
@@ -122,8 +112,6 @@ class SalesOrderController extends AbstractController
 
     /**
      * @Route("/{id}", name="sales_order_delete", methods={"DELETE"})
-     */
-    /**
      * @param Request $request
      * @param SalesOrder $salesOrder
      * @return Response

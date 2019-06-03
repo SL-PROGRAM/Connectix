@@ -141,24 +141,26 @@ class BalanceSheetCall extends AbstractController
                 'turn' => $turn -1,
                 'status' => 0, ]);
         if ($changeInStockLastTurn === null){
-            $changeInStockLastTurn = 0;
+            $stockLastTurn = $changeInStockLastTurn = 0;
         }
         else {
-            $changeInStockLastTurn->getProductionStock();
+            $stockLastTurn = $changeInStockLastTurn->getMerchandiseStock();
         }
 
         $changeInStock = $balanceSheetRepository->findOneBy(
             [
                 'socity' => $socity,
-                'turn' => $turn -1,
+                'turn' => $turn,
                 'status' => 0, ]);
         if ($changeInStock === null){
-            $changeInStock = 0;
+            $stock = $changeInStock = 0;
         }
         else {
-            $changeInStock->getProductionStock();
+            $stock =$changeInStock->getMerchandiseStock();
         }
-        return $changeInStock - $changeInStockLastTurn;
+
+
+        return -($stock - $stockLastTurn);
     }
 
     /**

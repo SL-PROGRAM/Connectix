@@ -15,9 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/researcher")
- */
-
-/**
  * Class ResearcherController
  * @package App\Controller
  */
@@ -25,8 +22,6 @@ class ResearcherController extends AbstractController
 {
     /**
      * @Route("/", name="researcher_index", methods={"GET"})
-     */
-    /**
      * @param ResearcherRepository $reseacherRepository
      * @return Response
      */
@@ -40,8 +35,6 @@ class ResearcherController extends AbstractController
 
     /**
      * @Route("/new", name="researcher_new", methods={"NEW", "POST", "GET"})
-     */
-    /**
      * @param Request $request
      * @return Response
      */

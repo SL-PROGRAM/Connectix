@@ -15,9 +15,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * @Route("/reseachorder")
  * @ISGranted("ROLE_USER")
- */
-
-/**
  * Class ReseachOrderController
  * @package App\Controller
  */
@@ -25,8 +22,6 @@ class ReseachOrderController extends AbstractController
 {
     /**
      * @Route("/", name="reseach_order_index", methods={"GET"})
-     */
-    /**
      * @param ReseachOrderRepository $reseachOrderRepository
      * @return Response
      */
@@ -41,8 +36,6 @@ class ReseachOrderController extends AbstractController
 
     /**
      * @Route("/new", name="reseach_order_new", methods={"GET","POST"})
-     */
-    /**
      * @param Request $request
      * @param ProductRepository $productRepository
      * @return Response
@@ -85,8 +78,6 @@ class ReseachOrderController extends AbstractController
 
     /**
      * @Route("/{id}", name="reseach_order_show", methods={"GET"})
-     */
-    /**
      * @param ReseachOrder $reseachOrder
      * @return Response
      */
@@ -99,8 +90,6 @@ class ReseachOrderController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="reseach_order_edit", methods={"GET","POST"})
-     */
-    /**
      * @param Request $request
      * @param ReseachOrder $reseachOrder
      * @return Response
@@ -126,8 +115,6 @@ class ReseachOrderController extends AbstractController
 
     /**
      * @Route("/{id}", name="reseach_order_delete", methods={"DELETE"})
-     */
-    /**
      * @param Request $request
      * @param ReseachOrder $reseachOrder
      * @return Response

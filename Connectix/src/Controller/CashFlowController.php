@@ -52,8 +52,7 @@ class CashFlowController extends AbstractController
 
 
         //CASH INCLUDES TTC
-        $cashingSales = $this->cashingSales($monthlyMerchandiseHTSales, $balanceSheetRepository, $balanceSheetRecord, $balanceSheetCall, $socity, $turn);
-
+        $cashingSales = $this->cashingSales($monthlyMerchandiseHTSales, $balanceSheetRepository, $balanceSheetRecord, $balanceSheetCall, $socity, $turn, $tva);
         $capitalContribution = $this->capitalContribution($socity, $turn, $balanceSheetCall, $balanceSheetRepository);
         $mediumAndLongLoan = $this->mediumAndLongLoan($socity, $turn, $balanceSheetCall, $balanceSheetRepository);
         $creditTVA = $this->creditTVA();
@@ -169,7 +168,7 @@ class CashFlowController extends AbstractController
      */
     private function monthlyMerchandiseHTPurchase(Socity $socity, $turn, PurchaseOrderRepository $repository)
     {
-        $monthlyMerchandiseTTCPurchase = [
+        $monthlyMerchandiseHTPurchase = [
             'january' => 0,
             'february' => 0,
             'march' => 0,
@@ -188,24 +187,25 @@ class CashFlowController extends AbstractController
             'socity' => $socity,
             'turn' => $turn,
         ]);
+
         foreach ($orders as $order) {
             $product = $order->getProduct();
             $monthlyAvgCost = ($order->getProductQuantityPurchase() * $order->getPurchasePrice() / 12);
 
-            $monthlyMerchandiseTTCPurchase['january'] += round($monthlyAvgCost * $product->getSeasonality()->getJanuary(), 2);
-            $monthlyMerchandiseTTCPurchase['february'] += round($monthlyAvgCost * $product->getSeasonality()->getFebruary(), 2);
-            $monthlyMerchandiseTTCPurchase['march'] += round($monthlyAvgCost * $product->getSeasonality()->getMarch(), 2);
-            $monthlyMerchandiseTTCPurchase['april'] += round($monthlyAvgCost * $product->getSeasonality()->getApril(), 2);
-            $monthlyMerchandiseTTCPurchase['may'] += round($monthlyAvgCost * $product->getSeasonality()->getMay(), 2);
-            $monthlyMerchandiseTTCPurchase['june'] += round($monthlyAvgCost * $product->getSeasonality()->getJune(), 2);
-            $monthlyMerchandiseTTCPurchase['july'] += round($monthlyAvgCost * $product->getSeasonality()->getJuly(), 2);
-            $monthlyMerchandiseTTCPurchase['august'] += round($monthlyAvgCost * $product->getSeasonality()->getAugust(), 2);
-            $monthlyMerchandiseTTCPurchase['september'] += round($monthlyAvgCost * $product->getSeasonality()->getSeptember(), 2);
-            $monthlyMerchandiseTTCPurchase['october'] += round($monthlyAvgCost * $product->getSeasonality()->getOctober(), 2);
-            $monthlyMerchandiseTTCPurchase['november'] += round($monthlyAvgCost * $product->getSeasonality()->getNovember(), 2);
-            $monthlyMerchandiseTTCPurchase['december'] += round($monthlyAvgCost * $product->getSeasonality()->getDecember(), 2);
+            $monthlyMerchandiseHTPurchase['january'] += round($monthlyAvgCost * $product->getSeasonality()->getJanuary(), 2);
+            $monthlyMerchandiseHTPurchase['february'] += round($monthlyAvgCost * $product->getSeasonality()->getFebruary(), 2);
+            $monthlyMerchandiseHTPurchase['march'] += round($monthlyAvgCost * $product->getSeasonality()->getMarch(), 2);
+            $monthlyMerchandiseHTPurchase['april'] += round($monthlyAvgCost * $product->getSeasonality()->getApril(), 2);
+            $monthlyMerchandiseHTPurchase['may'] += round($monthlyAvgCost * $product->getSeasonality()->getMay(), 2);
+            $monthlyMerchandiseHTPurchase['june'] += round($monthlyAvgCost * $product->getSeasonality()->getJune(), 2);
+            $monthlyMerchandiseHTPurchase['july'] += round($monthlyAvgCost * $product->getSeasonality()->getJuly(), 2);
+            $monthlyMerchandiseHTPurchase['august'] += round($monthlyAvgCost * $product->getSeasonality()->getAugust(), 2);
+            $monthlyMerchandiseHTPurchase['september'] += round($monthlyAvgCost * $product->getSeasonality()->getSeptember(), 2);
+            $monthlyMerchandiseHTPurchase['october'] += round($monthlyAvgCost * $product->getSeasonality()->getOctober(), 2);
+            $monthlyMerchandiseHTPurchase['november'] += round($monthlyAvgCost * $product->getSeasonality()->getNovember(), 2);
+            $monthlyMerchandiseHTPurchase['december'] += round($monthlyAvgCost * $product->getSeasonality()->getDecember(), 2);
         }
-        return $monthlyMerchandiseTTCPurchase;
+        return $monthlyMerchandiseHTPurchase;
     }
 
     /**
@@ -306,22 +306,23 @@ class CashFlowController extends AbstractController
     private function monthlyMerchandiseTTCPurchase(Socity $socity, $turn, BalanceSheetRecord $balanceSheetRecord, BalanceSheetCall $balanceSheetCall, BalanceSheetRepository $balanceSheetRepository, $monthlyMerchandiseHTPurchase, $tva)
     {
 
-        $balanceSheetRecord->merchandisePurchase30j($socity, $turn, $balanceSheetRepository, round($monthlyMerchandiseHTPurchase['december'] * $tva, 2));
+        //Save value of merchandise without TVA
+        $balanceSheetRecord->merchandisePurchase30j($socity, $turn, $balanceSheetRepository, round($monthlyMerchandiseHTPurchase['december'], 2));
 
 
         return $monthlyMerchandiseTTCPurchase = [
-            'january' => $balanceSheetCall->merchandisePurchase30j($socity, $turn-1, $balanceSheetRepository),
-            'february' => round($monthlyMerchandiseHTPurchase['january'] * $tva, 2),
-            'march' => round($monthlyMerchandiseHTPurchase['february'] * $tva, 2),
-            'april' => round($monthlyMerchandiseHTPurchase['march'] * $tva, 2),
-            'may' => round($monthlyMerchandiseHTPurchase['april'] * $tva, 2),
-            'june' => round($monthlyMerchandiseHTPurchase['may'] * $tva, 2),
-            'july' => round($monthlyMerchandiseHTPurchase['june'] * $tva, 2),
-            'august' => round($monthlyMerchandiseHTPurchase['july'] * $tva, 2),
-            'september' => round($monthlyMerchandiseHTPurchase['august'] * $tva, 2),
-            'october' => round($monthlyMerchandiseHTPurchase['september'] * $tva, 2),
-            'november' => round($monthlyMerchandiseHTPurchase['october'] * $tva, 2),
-            'december' => round($monthlyMerchandiseHTPurchase['november'] * $tva, 2),
+            'january' => $balanceSheetCall->merchandisePurchase30j($socity, $turn-1, $balanceSheetRepository)* (1 + $tva),
+            'february' => round($monthlyMerchandiseHTPurchase['january'] * (1+ $tva), 2),
+            'march' => round($monthlyMerchandiseHTPurchase['february'] * (1+ $tva), 2),
+            'april' => round($monthlyMerchandiseHTPurchase['march'] * (1+ $tva), 2),
+            'may' => round($monthlyMerchandiseHTPurchase['april'] * (1+ $tva), 2),
+            'june' => round($monthlyMerchandiseHTPurchase['may'] * (1+ $tva), 2),
+            'july' => round($monthlyMerchandiseHTPurchase['june'] * (1+ $tva), 2),
+            'august' => round($monthlyMerchandiseHTPurchase['july'] * (1+ $tva), 2),
+            'september' => round($monthlyMerchandiseHTPurchase['august'] * (1+ $tva), 2),
+            'october' => round($monthlyMerchandiseHTPurchase['september'] * (1+ $tva), 2),
+            'november' => round($monthlyMerchandiseHTPurchase['october'] * (1+ $tva), 2),
+            'december' => round($monthlyMerchandiseHTPurchase['november'] * (1+ $tva), 2),
         ];
     }
 
@@ -391,31 +392,32 @@ class CashFlowController extends AbstractController
     {
         $payTax = $game->getPayTax() / 100;
         $taxTurnover = $game->getTaxTurnover() / 100;
+        $tva = $game->getTva()/100;
 
         return $dueAndTaxes = [
-            'january' => round($monthlyMerchandiseHTSales['january'] * $payTax, 2) +
+            'january' => round(($monthlyMerchandiseHTSales['january'] * $payTax)*(1+$tva), 2) +
                 round($personnelCostBrut['january'] * $taxTurnover, 2),
-            'february' => round($monthlyMerchandiseHTSales['february'] * $payTax, 2) +
+            'february' => round($monthlyMerchandiseHTSales['february'] * $payTax*(1+$tva), 2) +
                 round($personnelCostBrut['february'] * $taxTurnover, 2),
-            'march' => round($monthlyMerchandiseHTSales['march'] * $payTax, 2) +
+            'march' => round($monthlyMerchandiseHTSales['march'] * $payTax*(1+$tva), 2) +
                 round($personnelCostBrut['march'] * $taxTurnover, 2),
-            'april' => round($monthlyMerchandiseHTSales['april'] * $payTax, 2) +
+            'april' => round($monthlyMerchandiseHTSales['april'] * $payTax*(1+$tva), 2) +
                 round($personnelCostBrut['april'] * $taxTurnover, 2),
-            'may' => round($monthlyMerchandiseHTSales['may'] * $payTax, 2) +
+            'may' => round($monthlyMerchandiseHTSales['may'] * $payTax*(1+$tva), 2) +
                 round($personnelCostBrut['may'] * $taxTurnover, 2),
-            'june' => round($monthlyMerchandiseHTSales['june'] * $payTax, 2) +
+            'june' => round($monthlyMerchandiseHTSales['june'] * $payTax*(1+$tva), 2) +
                 round($personnelCostBrut['june'] * $taxTurnover, 2),
-            'july' => round($monthlyMerchandiseHTSales['july'] * $payTax, 2) +
+            'july' => round($monthlyMerchandiseHTSales['july'] * $payTax*(1+$tva), 2) +
                 round($personnelCostBrut['july'] * $taxTurnover, 2),
-            'august' => round($monthlyMerchandiseHTSales['august'] * $payTax, 2) +
+            'august' => round($monthlyMerchandiseHTSales['august'] * $payTax*(1+$tva), 2) +
                 round($personnelCostBrut['august'] * $taxTurnover, 2),
-            'september' => round($monthlyMerchandiseHTSales['september'] * $payTax, 2) +
+            'september' => round($monthlyMerchandiseHTSales['september'] * $payTax*(1+$tva), 2) +
                 round($personnelCostBrut['september'] * $taxTurnover, 2),
-            'october' => round($monthlyMerchandiseHTSales['october'] * $payTax, 2) +
+            'october' => round($monthlyMerchandiseHTSales['october'] * $payTax*(1+$tva), 2) +
                 round($personnelCostBrut['october'] * $taxTurnover, 2),
-            'november' => round($monthlyMerchandiseHTSales['november'] * $payTax, 2) +
+            'november' => round($monthlyMerchandiseHTSales['november'] * $payTax*(1+$tva), 2) +
                 round($personnelCostBrut['november'] * $taxTurnover, 2),
-            'december' => round($monthlyMerchandiseHTSales['december'] * $payTax, 2) +
+            'december' => round($monthlyMerchandiseHTSales['december'] * $payTax*(1+$tva), 2) +
                 round($personnelCostBrut['december'] * $taxTurnover, 2),
         ];
     }
@@ -604,7 +606,7 @@ class CashFlowController extends AbstractController
      * @param $turn
      * @return array
      */
-    private function cashingSales($monthlyMerchandiseHTSales, BalanceSheetRepository $balanceSheetRepository, BalanceSheetRecord $balanceSheetRecord, BalanceSheetCall $balanceSheetCall, Socity $socity, $turn)
+    private function cashingSales($monthlyMerchandiseHTSales, BalanceSheetRepository $balanceSheetRepository, BalanceSheetRecord $balanceSheetRecord, BalanceSheetCall $balanceSheetCall, Socity $socity, $turn, $tva)
     {
         $balanceSheet = $balanceSheetRepository->findOneBy(['socity' => $socity, 'turn' => $turn]);
         $customer0j = $balanceSheet->getCustomer0j() / 100;
@@ -660,20 +662,22 @@ class CashFlowController extends AbstractController
         $balanceSheetRecord->salesCashing30j($socity, $turn, $balanceSheetRepository, ($monthlyMerchandiseHTSales['december'] * $customer30j + $monthlyMerchandiseHTSales['november'] * $customer60j));
         $balanceSheetRecord->salesCashing60j($socity, $turn, $balanceSheetRepository, ($monthlyMerchandiseHTSales['december'] * $customer60j));
 
-        return $cashingSales = [
-            'january' => round($cashingSales0j['january'] + $cashingSales30j['january'] + $cashingSales60j['january'], 2),
-            'february' => round($cashingSales0j['february'] + $cashingSales30j['february'] + $cashingSales60j['february'], 2),
-            'march' => round($cashingSales0j['march'] + $cashingSales30j['march'] + $cashingSales60j['march'], 2),
-            'april' => round($cashingSales0j['april'] + $cashingSales30j['april'] + $cashingSales60j['april'], 2),
-            'may' => round($cashingSales0j['may'] + $cashingSales30j['may'] + $cashingSales60j['may'], 2),
-            'june' => round($cashingSales0j['june'] + $cashingSales30j['june'] + $cashingSales60j['june'], 2),
-            'july' => round($cashingSales0j['july'] + $cashingSales30j['july'] + $cashingSales60j['july'], 2),
-            'august' => round($cashingSales0j['august'] + $cashingSales30j['august'] + $cashingSales60j['august'], 2),
-            'september' => round($cashingSales0j['september'] + $cashingSales30j['september'] + $cashingSales60j['september'], 2),
-            'october' => round($cashingSales0j['october'] + $cashingSales30j['october'] + $cashingSales60j['october'], 2),
-            'november' => round($cashingSales0j['november'] + $cashingSales30j['november'] + $cashingSales60j['november'], 2),
-            'december' => round($cashingSales0j['december'] + $cashingSales30j['december'] + $cashingSales60j['december'], 2),
+        $cashingSales = [
+            'january' => round(($cashingSales0j['january'] + $cashingSales30j['january'] + $cashingSales60j['january']) *(1 + $tva),2),
+            'february' => round(($cashingSales0j['february'] + $cashingSales30j['february'] + $cashingSales60j['february'] )*(1 + $tva),2),
+            'march' => round(($cashingSales0j['march'] + $cashingSales30j['march'] + $cashingSales60j['march']) *(1 + $tva), 2),
+            'april' => round(($cashingSales0j['april'] + $cashingSales30j['april'] + $cashingSales60j['april'])*(1 + $tva), 2) ,
+            'may' => round(($cashingSales0j['may'] + $cashingSales30j['may'] + $cashingSales60j['may'])*(1 + $tva), 2) ,
+            'june' => round(($cashingSales0j['june'] + $cashingSales30j['june'] + $cashingSales60j['june'])*(1 + $tva), 2),
+            'july' => round(($cashingSales0j['july'] + $cashingSales30j['july'] + $cashingSales60j['july'])*(1 + $tva), 2),
+            'august' => round(($cashingSales0j['august'] + $cashingSales30j['august'] + $cashingSales60j['august'])*(1 + $tva), 2),
+            'september' => round(($cashingSales0j['september'] + $cashingSales30j['september'] + $cashingSales60j['september'])*(1 + $tva), 2),
+            'october' => round(($cashingSales0j['october'] + $cashingSales30j['october'] + $cashingSales60j['october'])*(1 + $tva), 2),
+            'november' => round(($cashingSales0j['november'] + $cashingSales30j['november'] + $cashingSales60j['november'])*(1 + $tva), 2),
+            'december' => round(($cashingSales0j['december'] + $cashingSales30j['december'] + $cashingSales60j['december'])*(1 + $tva), 2),
         ];
+
+        return $cashingSales;
     }
 
     /**
@@ -821,43 +825,45 @@ class CashFlowController extends AbstractController
      */
     private function deductedTVA($monthlyRowMaterialHTPurchase, $monthlyMerchandiseHTPurchase, $externalCharges, $tangibleInvestments, $tva)
     {
+
+
         return $deductedTVA = [
             'january' => round(($monthlyRowMaterialHTPurchase['january'] + $monthlyMerchandiseHTPurchase['january'] +
                     $externalCharges['january'] + $tangibleInvestments['january'])
-                * $tva / (1 + $tva), 2),
+                * $tva , 2),
             'february' => round(($monthlyRowMaterialHTPurchase['february'] + $monthlyMerchandiseHTPurchase['february'] +
                     $externalCharges['february'] + $tangibleInvestments['february'])
-                * $tva / (1 + $tva), 2),
+                * $tva, 2),
             'march' => round(($monthlyRowMaterialHTPurchase['march'] + $monthlyMerchandiseHTPurchase['march'] +
                     $externalCharges['march'] + $tangibleInvestments['march'])
-                * $tva / (1 + $tva), 2),
+                * $tva, 2),
             'april' => round(($monthlyRowMaterialHTPurchase['april'] + $monthlyMerchandiseHTPurchase['april'] +
                     $externalCharges['april'] + $tangibleInvestments['april'])
-                * $tva / (1 + $tva), 2),
+                * $tva, 2),
             'may' => round(($monthlyRowMaterialHTPurchase['may'] + $monthlyMerchandiseHTPurchase['may'] +
                     $externalCharges['may'] + $tangibleInvestments['may'])
-                * $tva / (1 + $tva), 2),
+                * $tva, 2),
             'june' => round(($monthlyRowMaterialHTPurchase['june'] + $monthlyMerchandiseHTPurchase['june'] +
                     $externalCharges['june'] + $tangibleInvestments['june'])
-                * $tva / (1 + $tva), 2),
+                * $tva, 2),
             'july' => round(($monthlyRowMaterialHTPurchase['july'] + $monthlyMerchandiseHTPurchase['july'] +
                     $externalCharges['july'] + $tangibleInvestments['july'])
-                * $tva / (1 + $tva), 2),
+                * $tva, 2),
             'august' => round(($monthlyRowMaterialHTPurchase['august'] + $monthlyMerchandiseHTPurchase['august'] +
                     $externalCharges['august'] + $tangibleInvestments['august'])
-                * $tva / (1 + $tva), 2),
+                * $tva, 2),
             'september' => round(($monthlyRowMaterialHTPurchase['september'] + $monthlyMerchandiseHTPurchase['september'] +
                     $externalCharges['september'] + $tangibleInvestments['september'])
-                * $tva / (1 + $tva), 2),
+                * $tva, 2),
             'october' => round(($monthlyRowMaterialHTPurchase['october'] + $monthlyMerchandiseHTPurchase['october'] +
                     $externalCharges['october'] + $tangibleInvestments['october'])
-                * $tva / (1 + $tva), 2),
+                * $tva, 2),
             'november' => round(($monthlyRowMaterialHTPurchase['november'] + $monthlyMerchandiseHTPurchase['november'] +
                     $externalCharges['november'] + $tangibleInvestments['november'])
-                * $tva / (1 + $tva), 2),
+                * $tva, 2),
             'december' => round(($monthlyRowMaterialHTPurchase['december'] + $monthlyMerchandiseHTPurchase['december'] +
                     $externalCharges['december'] + $tangibleInvestments['december'])
-                * $tva / (1 + $tva), 2),
+                * $tva, 2),
         ];
     }
 
@@ -901,7 +907,7 @@ class CashFlowController extends AbstractController
     {
         $turn = $this->getUser()->getGame()->getTurn();
         if ($key === 'january') {
-            $tva = round($balanceSheetCall->tva($turn-1) - $monthlyDedectibleTVA[$key], 2);
+            $tva = round($balanceSheetCall->tva($turn-1) + $monthlyCollectedTVA[$key] - $monthlyDedectibleTVA[$key], 2);
             if ($tva > 0) {
                 $dueTVA[$nextMonth] = $tva;
             } else {
@@ -910,8 +916,11 @@ class CashFlowController extends AbstractController
         }
 
         if ($key === 'december') {
-            $balanceSheetRecord->tva($monthlyCollectedTVA[$key]);
-        } else {
+            $tva = round($monthlyCollectedTVA[$key] - $monthlyDedectibleTVA[$key], 2);
+            $balanceSheetRecord->tva($tva);
+        }
+
+        else {
             $tva = round($monthlyCollectedTVA[$key] - $monthlyDedectibleTVA[$key], 2);
             if ($tva > 0) {
                 $dueTVA[$nextMonth] = $tva;

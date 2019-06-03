@@ -33,8 +33,6 @@ class ProfitLossAccountController extends AbstractController
     /**
      * @IsGranted("ROLE_USER")
      * @Route("/profitlossaccount", name="profit_loss_account")
-     */
-    /**
      * @param SalesOrderRepository $salesOrderRepository
      * @param PurchaseOrderRepository $purchaseOrderRepository
      * @param BalanceSheetRepository $balanceSheetRepository
@@ -135,12 +133,12 @@ class ProfitLossAccountController extends AbstractController
         $turn = $game->getTurn();
 
 
-        $frenchGoodsSale = $balanceSheetCall->frenchGoodsSale($socity, $turn, $balanceSheetRepository);
+        $frenchGoodsSale = ($balanceSheetCall->frenchGoodsSale($socity, $turn, $balanceSheetRepository));
         $frenchProductionSoldGoods = $balanceSheetCall->frenchProductionSoldGoods($socity, $turn, $balanceSheetRepository);
         $stockedProduction = $balanceSheetCall->stockedProduction($socity, $turn, $balanceSheetRepository);
 
         $repaymentOnDepreciationAndProvisions = $balanceSheetCall->repaymentOnDepreciationAndProvisions($socity, $turn, $balanceSheetRepository);
-        $goodsPurchases = $balanceSheetCall->goodsPurchases($socity, $turn, $balanceSheetRepository);
+        $goodsPurchases = ($balanceSheetCall->goodsPurchases($socity, $turn, $balanceSheetRepository));
         $changeInStock = $balanceSheetCall->changeInStock($socity, $turn, $balanceSheetRepository);
         $purchasesOfRawMaterialsAndSupplies = $balanceSheetCall->purchasesOfRawMaterialsAndSupplies($socity, $turn, $balanceSheetRepository);
         $otherPurchaseAndExternalCharges = $balanceSheetCall->otherPurchaseAndExternalCharges($socity, $turn, $balanceSheetRepository);

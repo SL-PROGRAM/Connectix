@@ -89,10 +89,10 @@ class BalanceSheetRecord extends AbstractController
         $this->totalSalary( $socity, $balanceSheetToRecord);
 
 
-        $frenchGoodsSale = $this->merchandiseSales( $socity, $balanceSheetToRecord, $turn, $salesOrderRepository);
+        $frenchGoodsSale = $this->merchandiseSales( $socity, $turn, $salesOrderRepository);
         $productionSales = $this->productionSales( $socity, $turn, $salesOrderRepository);
         $merchandisePurchase = $this->merchandisePurchase($socity, $turn, $purchaseOrderRepository);
-        $merchandiseStock = $this->merchandiseStock($merchandisePurchase, $frenchGoodsSale, $socity, $turn, $balanceSheetRepository);
+        $merchandiseStock = $this->merchandiseStock($merchandisePurchase, $salesOrderRepository, $socity, $turn, $balanceSheetRepository);
         $productionMake = $this->productionMake($socity, $turn, $productionOrderRepository);
         $productionStock = $this->productionStock($socity, $turn, $balanceSheetRepository, $productionOrderRepository,  $salesOrderRepository);
         $rawPurchase = $this->rawPurchase($socity, $turn, $productionOrderRepository);
@@ -270,7 +270,7 @@ class BalanceSheetRecord extends AbstractController
      * @param SalesOrderRepository $salesOrderRepository
      * @return float|int
      */
-    private function merchandiseSales(Socity $socity, $balanceSheetToRecord, $turn,
+    private function merchandiseSales(Socity $socity, $turn,
                                       SalesOrderRepository $salesOrderRepository){
         $frenchGoodsSale = 0;
         $sales = $salesOrderRepository->findBy(['socity' => $socity, 'turn' => $turn]);
@@ -316,6 +316,7 @@ class BalanceSheetRecord extends AbstractController
         foreach ($purchases as $purchase){
             $merchandisePurchase += $purchase->getProductQuantityPurchase()*$purchase->getPurchasePrice();
         }
+
         return $merchandisePurchase;
     }
 
@@ -327,7 +328,7 @@ class BalanceSheetRecord extends AbstractController
      * @param BalanceSheetRepository $balanceSheetRepository
      * @return int|null
      */
-    private function merchandiseStock($merchandisePurchase, $frenchGoodsSale, Socity $socity, $turn, BalanceSheetRepository $balanceSheetRepository){
+    private function merchandiseStock($merchandisePurchase, SalesOrderRepository $salesOrderRepository, Socity $socity, $turn, BalanceSheetRepository $balanceSheetRepository){
         $merchandiseStockLastYear = $balanceSheetRepository->findOneBy([
             'socity' => $socity,
             'turn' => $turn-1,
@@ -338,7 +339,26 @@ class BalanceSheetRecord extends AbstractController
         } else {
             $merchandiseStockLastYear = $merchandiseStockLastYear->getMerchandiseStock();
         }
-        return $merchandiseStock = $merchandisePurchase - $frenchGoodsSale + $merchandiseStockLastYear;
+        $stockOut = 0;
+        $merchandiseSales = $salesOrderRepository->findBy([
+            'socity' => $socity,
+            'turn' => $turn,
+            'status' => 0
+        ]);
+        if ($merchandiseSales === null){
+            $stockOut = 0;
+        }
+        else{
+            foreach ($merchandiseSales as $merchandiseSale){
+                $quantity = $merchandiseSale->getProductQuantitySales();
+                $buyPrice = $merchandiseSale->getProduct()->getBuyPrice();
+
+                $stockOut += $quantity*$buyPrice;
+            }
+        }
+
+
+        return $merchandiseStock = $merchandisePurchase - $stockOut + $merchandiseStockLastYear;
     }
 
     /**

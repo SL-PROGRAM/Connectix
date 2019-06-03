@@ -23,8 +23,6 @@ class UpSalaryController extends AbstractController
 {
     /**
      * @Route("/Upsalaryadmin", name="administration_up_salary", methods={"GET","POST"})
-     */
-    /**
      * @param Request $request
      * @param AdministrationRepository $repository
      * @param \App\Service\UpSalary $up_salary
@@ -56,8 +54,6 @@ class UpSalaryController extends AbstractController
 
     /**
      * @Route("/up_salaryresearcher", name="researcher_up_salary", methods={"GET","POST"})
-     */
-    /**
      * @param Request $request
      * @param ResearcherRepository $repository
      * @param \App\Service\UpSalary $up_salary
@@ -90,8 +86,6 @@ class UpSalaryController extends AbstractController
 
     /**
      * @Route("/up_salaryprod", name="production_up_salary", methods={"GET","POST"})
-     */
-    /**
      * @param Request $request
      * @param ProductionRepository $repository
      * @param \App\Service\UpSalary $up_salary
@@ -124,8 +118,6 @@ class UpSalaryController extends AbstractController
 
     /**
      * @Route("/up_salarysales", name="salesman_up_salary", methods={"GET","POST"})
-     */
-    /**
      * @param Request $request
      * @param SalesManRepository $repository
      * @param \App\Service\UpSalary $up_salary
@@ -158,8 +150,6 @@ class UpSalaryController extends AbstractController
 
     /**
      * @Route("/up_salary", name="all_up_salary", methods={"GET","POST"})
-     */
-    /**
      * @param Request $request
      * @param HumanRessourceRepository $repository
      * @param \App\Service\UpSalary $up_salary

@@ -13,9 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/productionlign")
- */
-
-/**
  * Class ProductionLignController
  * @package App\Controller
  */
@@ -23,8 +20,6 @@ class ProductionLignController extends AbstractController
 {
     /**
      * @Route("/", name="production_lign_index", methods={"GET"})
-     */
-    /**
      * @param ProductionLignRepository $productionLignRepository
      * @return Response
      */
@@ -39,8 +34,6 @@ class ProductionLignController extends AbstractController
 
     /**
      * @Route("/new", name="production_lign_new", methods={"GET","POST"})
-     */
-    /**
      * @param Request $request
      * @param FactoryRepository $factoryRepository
      * @return Response
@@ -91,8 +84,6 @@ class ProductionLignController extends AbstractController
 
     /**
      * @Route("/{id}", name="production_lign_show", methods={"GET"})
-     */
-    /**
      * @param ProductionLign $productionLign
      * @return Response
      */
@@ -105,8 +96,6 @@ class ProductionLignController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="production_lign_edit", methods={"GET","POST"})
-     */
-    /**
      * @param Request $request
      * @param ProductionLign $productionLign
      * @return Response
@@ -132,8 +121,6 @@ class ProductionLignController extends AbstractController
 
     /**
      * @Route("/{id}", name="production_lign_delete", methods={"DELETE"})
-     */
-    /**
      * @param Request $request
      * @param ProductionLign $productionLign
      * @return Response

@@ -55,6 +55,7 @@ class BalanceSheetScreenController extends AbstractController
             'actualYearPassiveBalanceSheet' => $actualYearPassiveBalanceSheet,
             'lastYearPassiveBalanceSheet' => $lastYearPassiveBalanceSheet,
             'controller_name' => 'BalanceSheetController',
+            'result' => ($actualYearPassiveBalanceSheet['totalGeneralPassiveBalanceSheet'] - $actualYearActiveBalanceSheetBrut['totalGeneralActiveBalanceSheet']),
         ]);
     }
 
@@ -79,13 +80,24 @@ class BalanceSheetScreenController extends AbstractController
         $technicalInstallationsEquipment = $balanceSheetCall->productionLign($socity, $turn, $balanceSheetRepository);
 
         $intermediateAndFinishProduct = $balanceSheetCall->stockedProduction($socity, $turn, $balanceSheetRepository);
-        $merchandise = $balanceSheetCall->goodsPurchases($socity, $turn, $balanceSheetRepository);
+        $merchandise = -($balanceSheetCall->changeInStock($socity, $turn, $balanceSheetRepository));
 
         $customersAndRelatedAccounts =
-            $balanceSheetCall->salesCashing30j($socity,$turn,$balanceSheetRepository)
-            + $balanceSheetCall->salesCashing60j($socity, $turn, $balanceSheetRepository)
+            round(
+                ($balanceSheetCall->salesCashing30j($socity,$turn,$balanceSheetRepository)
+                    + $balanceSheetCall->salesCashing60j($socity, $turn, $balanceSheetRepository))
+                    * (1 + $socity->getGame()->getTva()/100),
+                2)
         ;
-        $otherReceivables = 0;
+
+        $tva = $balanceSheetCall->tva($turn);
+
+        if($tva < 0){
+            $otherReceivables = -$tva;
+        }
+        else {
+            $otherReceivables = 0;
+        }
 
         $availability = $balanceSheetCall->availability($turn);
 
@@ -534,7 +546,7 @@ class BalanceSheetScreenController extends AbstractController
             "activeConversionDifferences" => $activeConversionDifferences,
             "totalFixedAsset" =>$totalFixedAsset,
             "totalActiveCirculating" => $totalActiveCirculating,
-            "totalGeneralActiveBalanceSheet" => $totalGeneralActiveBalanceSheet
+            "totalGeneralActiveBalanceSheet" => round($totalGeneralActiveBalanceSheet)
         ];
     }
 
@@ -591,15 +603,25 @@ class BalanceSheetScreenController extends AbstractController
 
         $loanAndDebtsWihCreditInstitutions = $balanceSheetCall->loanAndDebtsWihCreditInstitutions($socity, $turn,$balanceSheetRepository);
 
-        $tradePayableAndRelatedAccounts = $balanceSheetCall->rowMaterial30j($socity, $turn,$balanceSheetRepository) +
-            $balanceSheetCall->rowMaterial60j($socity, $turn,$balanceSheetRepository) +
-            $balanceSheetCall->merchandisePurchase30j($socity, $turn,$balanceSheetRepository)
+        $tradePayableAndRelatedAccounts =
+            round(
+                $balanceSheetCall->rowMaterial30j($socity, $turn,$balanceSheetRepository) +
+                    $balanceSheetCall->rowMaterial60j($socity, $turn,$balanceSheetRepository) +
+                    $balanceSheetCall->merchandisePurchase30j($socity, $turn,$balanceSheetRepository)
+                    *(1 + $socity->getGame()->getTva()/100),
+                2);
         ;
 
 
         $taxAndSocialDebts = $balanceSheetCall->taxAndSocialDebts($turn);
+        $tva = $balanceSheetCall->tva($turn);
 
-        $otherDebts = $balanceSheetCall->tva($turn);
+        if($tva > 0){
+            $otherDebts = -$tva;
+        }
+        else {
+            $otherDebts = 0;
+        }
 
         //Variable not use
         $revaluationDifferences = 0;
@@ -862,7 +884,7 @@ class BalanceSheetScreenController extends AbstractController
             "totalOtherOwnCapital" => $totalOtherOwnCapital,
             "totalProvisionForRiskAndCharges" => $totalProvisionForRiskAndCharges,
             "totalDebts" => $totalDebts,
-            "totalGeneralPassiveBalanceSheet" => $totalGeneralPassiveBalanceSheet
+            "totalGeneralPassiveBalanceSheet" => round($totalGeneralPassiveBalanceSheet)
             ];
     }
 
